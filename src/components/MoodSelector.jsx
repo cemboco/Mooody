@@ -88,9 +88,9 @@ const MoodSelector = ({ onMoodSelect }) => {
           type="text"
           value={customMood}
           onChange={(e) => setCustomMood(e.target.value)}
-          placeholder={t.newActivityPlaceholder}
+          placeholder={t.customMoodPlaceholder}
         />
-        <Button onClick={handleAddCustomMood}>{t.saveActivity}</Button>
+        <Button onClick={handleAddCustomMood}>{t.addCustomMood}</Button>
       </div>
       {selectedMood && (
         <div className="space-y-4 mt-6">

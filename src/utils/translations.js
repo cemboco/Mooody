@@ -46,6 +46,9 @@ export const translations = {
     moodLabel: 'Stimmung',
     shareExperience: 'Teile deine Erfahrung',
     instagramShareAlert: 'Nachricht für Instagram in die Zwischenablage kopiert. Füge sie in deine Instagram-Story ein!',
+    customMoodPlaceholder: 'Eigene Stimmung eingeben...',
+    addCustomMood: 'Hinzufügen',
+    selectActivity: 'Aktivität wählen',
   },
   en: {
     title: 'Moody',
@@ -94,5 +97,8 @@ export const translations = {
     moodLabel: 'Mood',
     shareExperience: 'Share your experience',
     instagramShareAlert: 'Message for Instagram copied to clipboard. Paste it into your Instagram story!',
+    customMoodPlaceholder: 'Enter custom mood...',
+    addCustomMood: 'Add',
+    selectActivity: 'Select Activity',
   },
 };
