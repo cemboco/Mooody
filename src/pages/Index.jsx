@@ -148,7 +148,7 @@ const Index = () => {
         {!showInitialAssessment && !showMoodSelector && !selectedMood && (
           <>
             <div className="animated-title w-full h-full flex items-center justify-center">
-              <h1 className="text-5xl font-bold relative z-10">Moody</h1>
+              <h1 className="text-5xl font-bold relative z-10 rounded-moody">Moody</h1>
               <div className="ball ball1"></div>
               <div className="ball ball2"></div>
               <div className="ball ball3"></div>
@@ -170,13 +170,13 @@ const Index = () => {
       )}
       {showMoodSelector && !selectedMood && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center p-8 bg-white rounded-lg shadow-md">
-          <h1 className="text-5xl font-bold mb-6">Moody</h1>
+          <h1 className="text-5xl font-bold mb-6 rounded-moody">Moody</h1>
           <MoodSelector onMoodSelect={handleMoodSelect} />
         </div>
       )}
       {selectedMood && !showMoodRating && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center p-8 bg-white rounded-lg shadow-md">
-          <h1 className="text-4xl font-bold mb-6">Moody</h1>
+          <h1 className="text-4xl font-bold mb-6 rounded-moody">Moody</h1>
           <p className="text-2xl mb-4">Du fühlst dich: {selectedMood.emoji} {selectedMood.label}</p>
           {suggestedActivity && (
             <div className="mt-6">
@@ -247,7 +247,7 @@ const Index = () => {
       )}
       {showMoodRating && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center p-4 sm:p-8 bg-white rounded-lg shadow-md w-full max-w-2xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">Moody</h1>
+          <h1 className="text-4xl sm:text-5xl font-bold mb-6 rounded-moody">Moody</h1>
           {positiveMessage ? (
             <div>
               <p className="text-2xl font-bold text-green-600 mb-4">{positiveMessage}</p>
