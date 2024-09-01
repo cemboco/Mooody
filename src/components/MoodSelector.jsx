@@ -7,6 +7,7 @@ const moods = [
   { emoji: "😴", label: "Müde" },
   { emoji: "😠", label: "Wütend" },
   { emoji: "😰", label: "Gestresst" },
+  { emoji: "😨", label: "Ängstlich" },
 ];
 
 const MoodSelector = ({ onMoodSelect }) => {

@@ -1,12 +1,13 @@
 const activities = [
-  { name: "Bubble Wrap zerplatzen", mood: ["Gestresst", "Wütend"] },
-  { name: "Kurze Meditation", mood: ["Gestresst", "Wütend", "Traurig"] },
-  { name: "Lustiges Video schauen", mood: ["Traurig", "Müde"] },
-  { name: "Dankbarkeitstagebuch schreiben", mood: ["Traurig", "Gestresst"] },
-  { name: "Tanzpause einlegen", mood: ["Müde", "Traurig"] },
+  { name: "Bubble Wrap zerplatzen", mood: ["Gestresst", "Wütend", "Ängstlich"] },
+  { name: "Kurze Meditation", mood: ["Gestresst", "Wütend", "Traurig", "Ängstlich"] },
+  { name: "Lustiges Video schauen", mood: ["Traurig", "Müde", "Ängstlich"] },
+  { name: "Dankbarkeitstagebuch schreiben", mood: ["Traurig", "Gestresst", "Ängstlich"] },
+  { name: "Tanzpause einlegen", mood: ["Müde", "Traurig", "Ängstlich"] },
   { name: "Wortspiele lösen", mood: ["Müde", "Glücklich"] },
-  { name: "Positive Affirmationen sprechen", mood: ["Traurig", "Gestresst", "Wütend"] },
+  { name: "Positive Affirmationen sprechen", mood: ["Traurig", "Gestresst", "Wütend", "Ängstlich"] },
   { name: "Schnelles Zeichnen üben", mood: ["Glücklich", "Gestresst"] },
+  { name: "Tiefes Atmen üben", mood: ["Ängstlich", "Gestresst"] },
 ];
 
 export const selectActivity = (mood) => {
