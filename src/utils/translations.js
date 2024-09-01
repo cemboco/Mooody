@@ -49,6 +49,10 @@ export const translations = {
     customMoodPlaceholder: 'Eigene Stimmung eingeben...',
     addCustomMood: 'Hinzufügen',
     selectActivity: 'Aktivität wählen',
+    customActivities: 'Eigene Aktivitäten',
+    customActivityPlaceholder: 'Neue Aktivität eingeben...',
+    addCustomActivity: 'Hinzufügen',
+    select: 'Auswählen',
   },
   en: {
     title: 'Moody',
@@ -100,5 +104,9 @@ export const translations = {
     customMoodPlaceholder: 'Enter custom mood...',
     addCustomMood: 'Add',
     selectActivity: 'Select Activity',
+    customActivities: 'Custom Activities',
+    customActivityPlaceholder: 'Enter new activity...',
+    addCustomActivity: 'Add',
+    select: 'Select',
   },
 };
