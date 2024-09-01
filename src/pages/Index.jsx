@@ -19,14 +19,17 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Share2, Instagram, AtSign, X, UserCircle } from 'lucide-react';
 
-// ... (rest of the imports and code remain the same)
-
 const Index = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const navigate = useNavigate();
 
-  // ... (rest of the state variables and functions remain the same)
+  const [showLanguageToggle, setShowLanguageToggle] = useState(true);
+  const [showInitialAssessment, setShowInitialAssessment] = useState(false);
+  const [showMoodSelector, setShowMoodSelector] = useState(false);
+  const [selectedMood, setSelectedMood] = useState(null);
+
+  // ... (rest of the state variables and functions)
 
   const handleProfileClick = () => {
     navigate('/profile');
