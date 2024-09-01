@@ -42,13 +42,3 @@ export const addCustomMood = (newMood, language) => {
     }
   });
 };
-
-export const addCustomActivity = (activityName, language) => {
-  const newActivity = { name: activityName, mood: ["Custom"] };
-  activities[language].push(newActivity);
-  return newActivity;
-};
-
-export const deleteCustomActivity = (activityToDelete, language) => {
-  activities[language] = activities[language].filter(activity => activity.name !== activityToDelete.name);
-};
