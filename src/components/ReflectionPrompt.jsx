@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 
-const ReflectionPrompt = ({ onComplete }) => {
+const ReflectionPrompt = ({ onComplete, onSkip }) => {
   const { language } = useLanguage();
   const t = translations[language];
   const [reflection, setReflection] = useState('');
@@ -24,7 +24,10 @@ const ReflectionPrompt = ({ onComplete }) => {
         placeholder={t.reflectionPlaceholder}
         rows={4}
       />
-      <Button onClick={handleSubmit}>{t.submitReflection}</Button>
+      <div className="flex justify-between">
+        <Button onClick={handleSubmit}>{t.submitReflection}</Button>
+        <Button onClick={onSkip} variant="outline">{t.skipReflection}</Button>
+      </div>
     </div>
   );
 };

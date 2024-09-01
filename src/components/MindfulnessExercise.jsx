@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 
-const MindfulnessExercise = ({ onComplete }) => {
+const MindfulnessExercise = ({ onComplete, onBack }) => {
   const { language } = useLanguage();
   const t = translations[language];
   const [timeLeft, setTimeLeft] = useState(60);
@@ -44,6 +44,9 @@ const MindfulnessExercise = ({ onComplete }) => {
           {t.skipMindfulness}
         </Button>
       </div>
+      <Button onClick={onBack} variant="outline" className="w-full">
+        {t.backButton}
+      </Button>
     </div>
   );
 };

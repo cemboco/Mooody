@@ -39,6 +39,7 @@ export const translations = {
     reflectionPrompt: 'Reflektiere über deine Aktivität:',
     reflectionPlaceholder: 'Was hast du gelernt? Wie fühlst du dich jetzt?',
     submitReflection: 'Reflexion abschließen',
+    skipReflection: 'Überspringen',
     progressTitle: 'Dein Fortschritt',
     progressDescription: 'Sieh, wie sich deine Stimmung im Laufe der Zeit verbessert!',
     mindfulnessTitle: 'Achtsamkeitsübung',
@@ -46,6 +47,7 @@ export const translations = {
     startMindfulness: 'Übung starten',
     pauseMindfulness: 'Pause',
     skipMindfulness: 'Überspringen',
+    backButton: 'Zurück',
     moodLabel: 'Stimmung',
   },
   en: {
@@ -88,6 +90,7 @@ export const translations = {
     reflectionPrompt: 'Reflect on your activity:',
     reflectionPlaceholder: 'What did you learn? How do you feel now?',
     submitReflection: 'Submit Reflection',
+    skipReflection: 'Skip',
     progressTitle: 'Your Progress',
     progressDescription: 'See how your mood improves over time!',
     mindfulnessTitle: 'Mindfulness Exercise',
@@ -95,6 +98,7 @@ export const translations = {
     startMindfulness: 'Start Exercise',
     pauseMindfulness: 'Pause',
     skipMindfulness: 'Skip',
+    backButton: 'Back',
     moodLabel: 'Mood',
   },
 };

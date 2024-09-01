@@ -94,9 +94,19 @@ const Index = () => {
     // Here you could save the reflection to a database or local storage
   };
 
+  const handleSkipReflection = () => {
+    setShowReflection(false);
+    setShowMindfulness(true);
+  };
+
   const handleMindfulnessComplete = () => {
     setShowMindfulness(false);
     setShowMoodRating(true);
+  };
+
+  const handleBackFromMindfulness = () => {
+    setShowMindfulness(false);
+    setShowReflection(true);
   };
 
   const handleMoodRating = (rating) => {
@@ -297,14 +307,14 @@ const Index = () => {
       {showReflection && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
-            <ReflectionPrompt onComplete={handleReflectionComplete} />
+            <ReflectionPrompt onComplete={handleReflectionComplete} onSkip={handleSkipReflection} />
           </div>
         </div>
       )}
       {showMindfulness && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
-            <MindfulnessExercise onComplete={handleMindfulnessComplete} />
+            <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={handleBackFromMindfulness} />
           </div>
         </div>
       )}
