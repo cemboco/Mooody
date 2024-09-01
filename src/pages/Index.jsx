@@ -7,6 +7,7 @@ import InitialMoodAssessment from '../components/InitialMoodAssessment';
 import { selectActivity } from '../utils/gameSelector';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { X } from 'lucide-react';
 
 const Index = () => {
   const [showInitialAssessment, setShowInitialAssessment] = useState(false);
@@ -75,9 +76,18 @@ const Index = () => {
       const updatedActivities = [...savedActivities, customActivity];
       setSavedActivities(updatedActivities);
       localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
-      setSuggestedActivity({ name: customActivity });
       setCustomActivity('');
     }
+  };
+
+  const handleSelectCustomActivity = (activity) => {
+    setSuggestedActivity({ name: activity });
+  };
+
+  const handleDeleteCustomActivity = (indexToDelete) => {
+    const updatedActivities = savedActivities.filter((_, index) => index !== indexToDelete);
+    setSavedActivities(updatedActivities);
+    localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
   };
 
   return (
@@ -141,15 +151,23 @@ const Index = () => {
                 onChange={(e) => setCustomActivity(e.target.value)}
                 placeholder="Neue Aktivität eingeben"
               />
-              <Button onClick={handleSaveCustomActivity}>Speichern und Auswählen</Button>
+              <Button onClick={handleSaveCustomActivity}>Speichern</Button>
             </div>
           </div>
           {savedActivities.length > 0 && (
             <div className="mt-4">
               <h3 className="text-xl font-bold mb-2">Gespeicherte Aktivitäten:</h3>
-              <ul className="list-disc list-inside">
+              <ul className="space-y-2">
                 {savedActivities.map((activity, index) => (
-                  <li key={index}>{activity}</li>
+                  <li key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded">
+                    <span>{activity}</span>
+                    <div>
+                      <Button onClick={() => handleSelectCustomActivity(activity)} className="mr-2">Auswählen</Button>
+                      <Button onClick={() => handleDeleteCustomActivity(index)} variant="ghost" size="icon">
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </li>
                 ))}
               </ul>
             </div>
