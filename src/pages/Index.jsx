@@ -157,12 +157,6 @@ const Index = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-moody">
       <div className="relative min-h-screen flex flex-col items-center justify-center">
-        {isLoggedIn && !showMoodRating && (
-          <Button onClick={handleLogout} className="absolute bottom-4 right-4">
-            <LogOut className="h-4 w-4 mr-2" />
-            Logout
-          </Button>
-        )}
         {!isLoggedIn && !showInitialAssessment && !showMoodSelector && !selectedMood && (
           <div className="text-center p-8 bg-white rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Login</h2>
@@ -259,7 +253,7 @@ const Index = () => {
         </div>
       )}
       {showMoodRating && (
-        <div className="text-center p-4 sm:p-8 bg-white rounded-lg shadow-md w-full max-w-2xl mx-auto">
+        <div className="text-center p-4 sm:p-8 bg-white rounded-lg shadow-md w-full max-w-2xl mx-auto relative">
           <h1 className="text-4xl sm:text-5xl font-bold mb-6">Moody</h1>
           {positiveMessage ? (
             <div>
