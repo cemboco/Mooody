@@ -4,7 +4,7 @@ import MoodSelector from '../components/MoodSelector';
 import NotificationButton from '../components/NotificationButton';
 import MoodRatingScale from '../components/MoodRatingScale';
 import InitialMoodAssessment from '../components/InitialMoodAssessment';
-import { selectActivity } from '../utils/gameSelector';
+import { selectActivity, addCustomMood } from '../utils/gameSelector';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { X } from 'lucide-react';
@@ -50,6 +50,9 @@ const Index = () => {
 
   const handleMoodSelect = (mood) => {
     setSelectedMood(mood);
+    if (mood.emoji === "🆕") {
+      addCustomMood(mood.label);
+    }
     const activity = selectActivity(mood.label);
     setSuggestedActivity(activity);
   };

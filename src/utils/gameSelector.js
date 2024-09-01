@@ -1,4 +1,4 @@
-const activities = [
+let activities = [
   { name: "Bubble Wrap zerplatzen", mood: ["Gestresst", "Wütend", "Ängstlich"] },
   { name: "Kurze Meditation", mood: ["Gestresst", "Wütend", "Traurig", "Ängstlich"] },
   { name: "Lustiges Video schauen", mood: ["Traurig", "Müde", "Ängstlich"] },
@@ -12,5 +12,16 @@ const activities = [
 
 export const selectActivity = (mood) => {
   const suitableActivities = activities.filter(activity => activity.mood.includes(mood));
+  if (suitableActivities.length === 0) {
+    return { name: "Entspannen und reflektieren", mood: [mood] };
+  }
   return suitableActivities[Math.floor(Math.random() * suitableActivities.length)];
+};
+
+export const addCustomMood = (newMood) => {
+  activities.forEach(activity => {
+    if (Math.random() > 0.5) {
+      activity.mood.push(newMood);
+    }
+  });
 };
