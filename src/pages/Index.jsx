@@ -57,10 +57,10 @@ const Index = () => {
 
     let url;
     switch (platform) {
-      case 'meta':
+      case 'facebook':
         url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(message)}`;
         break;
-      case 'x':
+      case 'twitter':
         url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
         break;
       case 'instagram':
@@ -112,11 +112,11 @@ const Index = () => {
             <h2 className="text-2xl font-bold mb-4">{t.shareExperience}</h2>
             <p className="mb-4">{t.moodImprovement.replace('{initial}', initialMoodRating).replace('{final}', finalMoodRating)}</p>
             <div className="flex justify-center space-x-4">
-              <Button onClick={() => handleShare('meta')} className="bg-blue-600 hover:bg-blue-700">
-                <Facebook className="mr-2" /> Meta
+              <Button onClick={() => handleShare('facebook')} className="bg-blue-600 hover:bg-blue-700">
+                <Facebook className="mr-2" /> Facebook
               </Button>
-              <Button onClick={() => handleShare('x')} className="bg-black hover:bg-gray-800">
-                <Twitter className="mr-2" /> X
+              <Button onClick={() => handleShare('twitter')} className="bg-black hover:bg-gray-800">
+                <Twitter className="mr-2" /> Twitter
               </Button>
               <Button onClick={() => handleShare('instagram')} className="bg-pink-600 hover:bg-pink-700">
                 <Instagram className="mr-2" /> Instagram
