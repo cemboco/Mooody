@@ -8,11 +8,12 @@ import LanguageToggle from '../components/LanguageToggle';
 import ReflectionPrompt from '../components/ReflectionPrompt';
 import ProgressTracker from '../components/ProgressTracker';
 import MindfulnessExercise from '../components/MindfulnessExercise';
-import { selectActivity } from '../utils/gameSelector';
+import { selectActivity, addCustomActivity, deleteCustomActivity } from '../utils/gameSelector';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
-import { Facebook, Twitter, Instagram } from 'lucide-react';
+import { Input } from "@/components/ui/input"
+import { Facebook, Twitter, Instagram, X } from 'lucide-react';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -32,6 +33,15 @@ const Index = () => {
   const [showMindfulness, setShowMindfulness] = useState(false);
   const [showTimer, setShowTimer] = useState(false);
   const [showSocialShare, setShowSocialShare] = useState(false);
+  const [customActivityInput, setCustomActivityInput] = useState('');
+  const [customActivities, setCustomActivities] = useState([]);
+
+  useEffect(() => {
+    const savedActivities = localStorage.getItem('customActivities');
+    if (savedActivities) {
+      setCustomActivities(JSON.parse(savedActivities));
+    }
+  }, []);
 
   const handleNotificationClick = () => {
     setShowInitialAssessment(true);
@@ -118,13 +128,32 @@ const Index = () => {
         url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
         break;
       case 'instagram':
-        // Instagram doesn't have a direct sharing API, so we'll just copy the message to clipboard
         navigator.clipboard.writeText(message);
         alert(t.instagramShareAlert);
         return;
     }
 
     window.open(url, '_blank');
+  };
+
+  const handleAddCustomActivity = () => {
+    if (customActivityInput.trim()) {
+      const newActivity = addCustomActivity(customActivityInput.trim(), language);
+      setCustomActivities([...customActivities, newActivity]);
+      localStorage.setItem('customActivities', JSON.stringify([...customActivities, newActivity]));
+      setCustomActivityInput('');
+    }
+  };
+
+  const handleDeleteCustomActivity = (activityToDelete) => {
+    const updatedActivities = customActivities.filter(activity => activity.name !== activityToDelete.name);
+    setCustomActivities(updatedActivities);
+    localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
+    deleteCustomActivity(activityToDelete, language);
+  };
+
+  const handleSelectCustomActivity = (activity) => {
+    setSuggestedActivity(activity);
   };
 
   const time = new Date();
@@ -171,6 +200,33 @@ const Index = () => {
             <h2 className="text-2xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
             <p className="text-xl mb-4">{suggestedActivity.name}</p>
             <Button onClick={handleStartActivity}>{t.startTimer}</Button>
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold mb-2">{t.customActivities}</h3>
+              <div className="flex space-x-2 mb-2">
+                <Input
+                  type="text"
+                  value={customActivityInput}
+                  onChange={(e) => setCustomActivityInput(e.target.value)}
+                  placeholder={t.customActivityPlaceholder}
+                />
+                <Button onClick={handleAddCustomActivity}>{t.addCustomActivity}</Button>
+              </div>
+              <div className="space-y-2">
+                {customActivities.map((activity, index) => (
+                  <div key={index} className="flex items-center justify-between bg-white p-2 rounded">
+                    <span>{activity.name}</span>
+                    <div>
+                      <Button onClick={() => handleSelectCustomActivity(activity)} className="mr-2">
+                        {t.select}
+                      </Button>
+                      <Button onClick={() => handleDeleteCustomActivity(activity)} variant="outline">
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
         {showTimer && (
