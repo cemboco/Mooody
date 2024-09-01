@@ -76,7 +76,7 @@ const Index = () => {
     console.log(`Initial mood: ${initialMoodRating}, Mood after activity: ${rating}`);
     const moodImprovement = rating - initialMoodRating;
     setFinalMoodRating(rating);
-  
+
     if (moodImprovement >= 3) {
       setPositiveMessage('Du darfst stolz auf dich sein! 😊');
     } else if (moodImprovement === 2) {
@@ -88,16 +88,16 @@ const Index = () => {
     } else {
       setPositiveMessage('Jeder Tag ist anders. Morgen wird besser! 🌈');
     }
+  };
 
-    setTimeout(() => {
-      setPositiveMessage('');
-      setShowMoodRating(false);
-      setSelectedMood(null);
-      setSuggestedActivity(null);
-      setShowMoodSelector(false);
-      setInitialMoodRating(null);
-      setFinalMoodRating(null);
-    }, 5000);
+  const handleEndSession = () => {
+    setPositiveMessage('');
+    setShowMoodRating(false);
+    setSelectedMood(null);
+    setSuggestedActivity(null);
+    setShowMoodSelector(false);
+    setInitialMoodRating(null);
+    setFinalMoodRating(null);
   };
 
   const handleShare = (platform) => {
@@ -272,6 +272,7 @@ const Index = () => {
                 <Button onClick={() => handleShare('facebook')}><Facebook className="h-4 w-4 mr-2" /> Meta</Button>
                 <Button onClick={() => handleShare('threads')}><AtSign className="h-4 w-4 mr-2" /> Threads</Button>
               </div>
+              <Button onClick={handleEndSession} className="mt-4">Neue Sitzung starten</Button>
             </div>
           ) : (
             <MoodRatingScale onRatingSelect={handleMoodRating} />
