@@ -204,7 +204,14 @@
   }
 }
 
-.animate-fade-in {
+.animate-fade-in-delayed {
+  opacity: 0;
   animation: fadeIn 0.5s ease-in forwards;
   animation-delay: 0.5s;
+}
+
+.animate-fade-in-more-delayed {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+  animation-delay: 1s;
 }
