@@ -189,7 +189,6 @@ const Index = () => {
           <>
             <div className="animated-title w-full h-full flex items-center justify-center">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody">{t.title}</h1>
-              <p className="text-lg mt-4 max-w-md text-center">{t.inspirationalQuote}</p>
               <div className="ball ball1"></div>
               <div className="ball ball2"></div>
               <div className="ball ball3"></div>
