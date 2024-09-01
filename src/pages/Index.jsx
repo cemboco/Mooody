@@ -14,7 +14,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Share2, Instagram, AtSign } from 'lucide-react';
+import { Share2, Instagram, AtSign, X } from 'lucide-react';
 
 const motivationalMessages = [
   "Du kannst alles erreichen, was du dir vornimmst!",
@@ -209,9 +209,11 @@ const Index = () => {
     localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
   };
 
+  const showLanguageToggle = !showInitialAssessment && !showMoodSelector && !selectedMood && !showMoodRating && !showReflection && !showMindfulness;
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody overflow-hidden">
-      <LanguageToggle />
+      {showLanguageToggle && <LanguageToggle />}
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
         {!showInitialAssessment && !showMoodSelector && !selectedMood && (
           <>
