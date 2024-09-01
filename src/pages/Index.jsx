@@ -195,10 +195,20 @@ const Index = () => {
         {showMoodSelector && (
           <MoodSelector onMoodSelect={handleMoodSelect} />
         )}
-        {selectedMood && suggestedActivity && !showTimer && (
+        {selectedMood && suggestedActivity && !showTimer && !showMoodRating && (
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
             <p className="text-xl mb-4">{suggestedActivity.name}</p>
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <Input
+                type="number"
+                value={timerMinutes}
+                onChange={(e) => setTimerMinutes(Math.max(1, parseInt(e.target.value) || 1))}
+                className="w-20 text-center"
+                min="1"
+              />
+              <span>{t.timerLabel}</span>
+            </div>
             <Button onClick={handleStartActivity}>{t.startTimer}</Button>
             <div className="mt-4">
               <h3 className="text-lg font-semibold mb-2">{t.customActivities}</h3>
