@@ -30,6 +30,16 @@ const MoodSelector = ({ onMoodSelect }) => {
 
   return (
     <div className="space-y-6">
+      <p className="text-lg mb-4">Wie fühlst du dich gerade?</p>
+      <div className="space-y-4 mb-6">
+        <Slider
+          defaultValue={[5]}
+          max={10}
+          step={1}
+          onValueChange={handleIntensityChange}
+        />
+        <p className="text-center">Intensität: {intensity}</p>
+      </div>
       <div className="flex flex-wrap justify-center gap-4">
         {moods.map((mood) => (
           <Button
@@ -42,16 +52,9 @@ const MoodSelector = ({ onMoodSelect }) => {
         ))}
       </div>
       {selectedMood && (
-        <div className="space-y-4">
-          <p className="text-lg">Wie intensiv fühlst du {selectedMood.label}?</p>
-          <Slider
-            defaultValue={[5]}
-            max={10}
-            step={1}
-            onValueChange={handleIntensityChange}
-          />
-          <p>Intensität: {intensity}</p>
-          <Button onClick={handleSubmit}>Bestätigen</Button>
+        <div className="space-y-4 mt-6">
+          <p className="text-lg">Du fühlst dich {selectedMood.label} mit einer Intensität von {intensity}</p>
+          <Button onClick={handleSubmit} className="w-full">Bestätigen</Button>
         </div>
       )}
     </div>
