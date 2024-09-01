@@ -19,6 +19,7 @@ module.exports = {
     extend: {
       fontFamily: {
         serif: ['Times New Roman', 'serif'],
+        hevilla: ['Hevilla', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
