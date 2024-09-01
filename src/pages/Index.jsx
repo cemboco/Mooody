@@ -14,7 +14,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { X, Share2, Instagram, Twitter, Facebook, AtSign } from 'lucide-react';
+import { X, Share2, Instagram, Facebook, AtSign } from 'lucide-react';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -330,8 +330,8 @@ const Index = () => {
                 <ProgressTracker moodData={moodHistory} />
                 <div className="flex flex-wrap justify-center gap-2 mt-4">
                   <Button onClick={() => handleShare('instagram')}><Instagram className="h-4 w-4 mr-2" /> Instagram</Button>
-                  <Button onClick={() => handleShare('twitter')}><Twitter className="h-4 w-4 mr-2" /> X.com</Button>
-                  <Button onClick={() => handleShare('facebook')}><Facebook className="h-4 w-4 mr-2" /> Meta</Button>
+                  <Button onClick={() => handleShare('twitter')}>X</Button>
+                  <Button onClick={() => handleShare('facebook')}>Meta</Button>
                   <Button onClick={() => handleShare('threads')}><AtSign className="h-4 w-4 mr-2" /> Threads</Button>
                 </div>
                 <Button onClick={handleEndSession} className="mt-4 w-full">{t.newSession}</Button>
