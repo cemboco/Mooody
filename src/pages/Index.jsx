@@ -48,6 +48,9 @@ const Index = () => {
     setShowMoodSelector(false);
     const activity = selectActivity(mood.labelKey, language);
     setSuggestedActivity(activity);
+  };
+
+  const handleStartActivity = () => {
     setShowTimer(true);
   };
 
@@ -163,10 +166,15 @@ const Index = () => {
         {showMoodSelector && (
           <MoodSelector onMoodSelect={handleMoodSelect} />
         )}
-        {selectedMood && suggestedActivity && showTimer && (
+        {selectedMood && suggestedActivity && !showTimer && (
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
             <p className="text-xl mb-4">{suggestedActivity.name}</p>
+            <Button onClick={handleStartActivity}>{t.startTimer}</Button>
+          </div>
+        )}
+        {showTimer && (
+          <div className="text-center">
             <div className="text-4xl mb-4">
               {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
             </div>
