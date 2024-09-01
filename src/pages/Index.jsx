@@ -44,7 +44,7 @@ const Index = () => {
 
   useEffect(() => {
     if (selectedMood && selectedMood.label) {
-      const personalizedActivity = getPersonalizedRecommendation(moodHistory, activities[language]);
+      const personalizedActivity = getPersonalizedRecommendation(moodHistory, selectActivity(selectedMood.label, language));
       setSuggestedActivity(personalizedActivity || selectActivity(selectedMood.label, language));
     }
   }, [selectedMood, language, moodHistory]);
@@ -76,7 +76,7 @@ const Index = () => {
     if (mood.emoji === "🆕") {
       addCustomMood(mood.label, language);
     }
-    const personalizedActivity = getPersonalizedRecommendation(moodHistory, activities[language]);
+    const personalizedActivity = getPersonalizedRecommendation(moodHistory, selectActivity(mood.label, language));
     setSuggestedActivity(personalizedActivity || selectActivity(mood.label, language));
   };
 
