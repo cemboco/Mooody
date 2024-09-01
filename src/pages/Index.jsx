@@ -131,7 +131,7 @@ const Index = () => {
       )}
       {selectedMood && !showMoodRating && (
         <div className="text-center p-8 bg-white rounded-lg shadow-md">
-          <h1 className="text-4xl font-bold mb-6">Stimmungs-Verbesserer</h1>
+          <h1 className="text-4xl font-bold mb-6">Moody</h1>
           <p className="text-2xl mb-4">Du fühlst dich: {selectedMood.emoji} {selectedMood.label}</p>
           {suggestedActivity && (
             <div className="mt-6">
