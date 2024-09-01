@@ -5,7 +5,11 @@ import NotificationButton from '../components/NotificationButton';
 import MoodRatingScale from '../components/MoodRatingScale';
 import InitialMoodAssessment from '../components/InitialMoodAssessment';
 import LanguageToggle from '../components/LanguageToggle';
+import ReflectionPrompt from '../components/ReflectionPrompt';
+import ProgressTracker from '../components/ProgressTracker';
+import MindfulnessExercise from '../components/MindfulnessExercise';
 import { selectActivity, addCustomMood } from '../utils/gameSelector';
+import { getPersonalizedRecommendation } from '../utils/personalizedRecommendations';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
@@ -27,18 +31,23 @@ const Index = () => {
   const [initialMoodRating, setInitialMoodRating] = useState(null);
   const [finalMoodRating, setFinalMoodRating] = useState(null);
   const [positiveMessage, setPositiveMessage] = useState('');
+  const [moodHistory, setMoodHistory] = useState([]);
+  const [showReflection, setShowReflection] = useState(false);
+  const [showMindfulness, setShowMindfulness] = useState(false);
 
   useEffect(() => {
     const storedActivities = JSON.parse(localStorage.getItem('customActivities') || '[]');
     setSavedActivities(storedActivities);
+    const storedMoodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
+    setMoodHistory(storedMoodHistory);
   }, []);
 
   useEffect(() => {
     if (selectedMood && selectedMood.label) {
-      const activity = selectActivity(selectedMood.label, language);
-      setSuggestedActivity(activity);
+      const personalizedActivity = getPersonalizedRecommendation(moodHistory, activities[language]);
+      setSuggestedActivity(personalizedActivity || selectActivity(selectedMood.label, language));
     }
-  }, [selectedMood, language]);
+  }, [selectedMood, language, moodHistory]);
 
   const time = new Date();
   time.setSeconds(time.getSeconds() + 300); // 5 minutes default
@@ -67,8 +76,8 @@ const Index = () => {
     if (mood.emoji === "🆕") {
       addCustomMood(mood.label, language);
     }
-    const activity = selectActivity(mood.label, language);
-    setSuggestedActivity(activity);
+    const personalizedActivity = getPersonalizedRecommendation(moodHistory, activities[language]);
+    setSuggestedActivity(personalizedActivity || selectActivity(mood.label, language));
   };
 
   const handleStartTimer = () => {
@@ -79,6 +88,17 @@ const Index = () => {
 
   const handleEndActivity = () => {
     pause();
+    setShowReflection(true);
+  };
+
+  const handleReflectionComplete = (reflection) => {
+    setShowReflection(false);
+    setShowMindfulness(true);
+    // Here you could save the reflection to a database or local storage
+  };
+
+  const handleMindfulnessComplete = () => {
+    setShowMindfulness(false);
     setShowMoodRating(true);
   };
 
@@ -86,6 +106,10 @@ const Index = () => {
     console.log(`Initial mood: ${initialMoodRating}, Mood after activity: ${rating}`);
     const moodImprovement = rating - initialMoodRating;
     setFinalMoodRating(rating);
+
+    const updatedMoodHistory = [...moodHistory, rating];
+    setMoodHistory(updatedMoodHistory);
+    localStorage.setItem('moodHistory', JSON.stringify(updatedMoodHistory));
 
     if (moodImprovement >= 3) {
       setPositiveMessage(t.positiveMessage1);
@@ -195,7 +219,7 @@ const Index = () => {
           </div>
         </div>
       )}
-      {selectedMood && !showMoodRating && (
+      {selectedMood && !showMoodRating && !showReflection && !showMindfulness && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
             <h1 className="text-3xl sm:text-4xl font-bold mb-6 rounded-moody">{t.title}</h1>
@@ -270,6 +294,20 @@ const Index = () => {
           </div>
         </div>
       )}
+      {showReflection && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
+            <ReflectionPrompt onComplete={handleReflectionComplete} />
+          </div>
+        </div>
+      )}
+      {showMindfulness && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
+            <MindfulnessExercise onComplete={handleMindfulnessComplete} />
+          </div>
+        </div>
+      )}
       {showMoodRating && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
@@ -279,6 +317,7 @@ const Index = () => {
                 <p className="text-xl font-bold text-green-600 mb-4">{positiveMessage}</p>
                 <p className="text-lg mb-4">{t.moodImprovement.replace('{initial}', initialMoodRating).replace('{final}', finalMoodRating)}</p>
                 <p className="text-md mb-4">{t.activityDone.replace('{activity}', suggestedActivity?.name)}</p>
+                <ProgressTracker moodData={moodHistory} />
                 <div className="flex flex-wrap justify-center gap-2 mt-4">
                   <Button onClick={() => handleShare('instagram')}><Instagram className="h-4 w-4 mr-2" /> Instagram</Button>
                   <Button onClick={() => handleShare('twitter')}><Twitter className="h-4 w-4 mr-2" /> X.com</Button>
