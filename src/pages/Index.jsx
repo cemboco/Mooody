@@ -75,8 +75,10 @@ const Index = () => {
       setPositiveMessage('Mach weiter, das schaffst du! 💪');
     } else if (moodImprovement === 1) {
       setPositiveMessage('Das ist ein Erfolg, lass dich nicht entmutigen! 🌟');
+    } else if (moodImprovement === 0) {
+      setPositiveMessage('Du hast durchgehalten. Das ist wichtig! 🌱');
     } else {
-      setPositiveMessage('Jeder Schritt zählt. Bleib dran! 🌈');
+      setPositiveMessage('Jeder Tag ist anders. Morgen wird besser! 🌈');
     }
 
     setTimeout(() => {
@@ -86,7 +88,7 @@ const Index = () => {
       setSuggestedActivity(null);
       setShowMoodSelector(false);
       setInitialMoodRating(null);
-    }, 3000);
+    }, 5000);
   };
 
   const handleSaveCustomActivity = () => {
@@ -120,7 +122,7 @@ const Index = () => {
       )}
       {showMoodSelector && !selectedMood && (
         <div className="text-center p-8 bg-white rounded-lg shadow-md">
-          <h1 className="text-4xl font-bold mb-6">Stimmungs-Verbesserer</h1>
+          <h1 className="text-4xl font-bold mb-6">Moody</h1>
           <MoodSelector onMoodSelect={handleMoodSelect} />
         </div>
       )}
@@ -197,7 +199,7 @@ const Index = () => {
       )}
       {showMoodRating && (
         <div className="text-center p-4 sm:p-8 bg-white rounded-lg shadow-md w-full max-w-2xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-6">Stimmungs-Verbesserer</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-6">Moody</h1>
           {positiveMessage ? (
             <p className="text-2xl font-bold text-green-600 mb-4">{positiveMessage}</p>
           ) : (
