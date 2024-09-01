@@ -178,8 +178,8 @@ const Index = () => {
         </div>
       )}
       {showMoodRating && (
-        <div className="text-center p-8 bg-white rounded-lg shadow-md">
-          <h1 className="text-4xl font-bold mb-6">Stimmungs-Verbesserer</h1>
+        <div className="text-center p-4 sm:p-8 bg-white rounded-lg shadow-md w-full max-w-2xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-6">Stimmungs-Verbesserer</h1>
           <MoodRatingScale onRatingSelect={handleMoodRating} />
         </div>
       )}
