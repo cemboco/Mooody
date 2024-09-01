@@ -12,6 +12,7 @@ import { selectActivity } from '../utils/gameSelector';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
+import { Facebook, Twitter, Instagram } from 'lucide-react';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -30,6 +31,7 @@ const Index = () => {
   const [showReflection, setShowReflection] = useState(false);
   const [showMindfulness, setShowMindfulness] = useState(false);
   const [showTimer, setShowTimer] = useState(false);
+  const [showSocialShare, setShowSocialShare] = useState(false);
 
   const handleNotificationClick = () => {
     setShowInitialAssessment(true);
@@ -75,7 +77,7 @@ const Index = () => {
     };
     setMoodHistory([...moodHistory, newMoodEntry]);
     displayPositiveMessage();
-    resetStates();
+    setShowSocialShare(true);
   };
 
   const displayPositiveMessage = () => {
@@ -94,6 +96,32 @@ const Index = () => {
     setShowReflection(false);
     setShowMindfulness(false);
     setShowTimer(false);
+    setShowSocialShare(false);
+    setPositiveMessage('');
+  };
+
+  const handleShare = (platform) => {
+    const message = t.shareMessage
+      .replace('{initial}', initialMoodRating)
+      .replace('{final}', finalMoodRating)
+      .replace('{activity}', suggestedActivity.name);
+
+    let url;
+    switch (platform) {
+      case 'facebook':
+        url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(message)}`;
+        break;
+      case 'twitter':
+        url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
+        break;
+      case 'instagram':
+        // Instagram doesn't have a direct sharing API, so we'll just copy the message to clipboard
+        navigator.clipboard.writeText(message);
+        alert(t.instagramShareAlert);
+        return;
+    }
+
+    window.open(url, '_blank');
   };
 
   const time = new Date();
@@ -112,7 +140,7 @@ const Index = () => {
     <div className="min-h-screen w-full flex items-center justify-center bg-moody overflow-hidden">
       <LanguageToggle />
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
-        {!showInitialAssessment && !showMoodSelector && !selectedMood && !showTimer && !showMoodRating && !showReflection && !showMindfulness && (
+        {!showInitialAssessment && !showMoodSelector && !selectedMood && !showTimer && !showMoodRating && !showReflection && !showMindfulness && !showSocialShare && (
           <>
             <div className="animated-title w-full h-full flex items-center justify-center">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody">{t.title}</h1>
@@ -162,7 +190,26 @@ const Index = () => {
         {showMindfulness && (
           <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={() => setShowMindfulness(false)} />
         )}
-        {moodHistory.length > 0 && !showInitialAssessment && !showMoodSelector && !selectedMood && !showTimer && !showMoodRating && !showReflection && !showMindfulness && (
+        {showSocialShare && (
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-4">{t.shareExperience}</h2>
+            <p className="mb-4">{t.moodImprovement.replace('{initial}', initialMoodRating).replace('{final}', finalMoodRating)}</p>
+            <p className="mb-4">{t.activityDone.replace('{activity}', suggestedActivity.name)}</p>
+            <div className="flex justify-center space-x-4">
+              <Button onClick={() => handleShare('facebook')} className="bg-blue-600 hover:bg-blue-700">
+                <Facebook className="mr-2" /> Facebook
+              </Button>
+              <Button onClick={() => handleShare('twitter')} className="bg-sky-500 hover:bg-sky-600">
+                <Twitter className="mr-2" /> Twitter
+              </Button>
+              <Button onClick={() => handleShare('instagram')} className="bg-pink-600 hover:bg-pink-700">
+                <Instagram className="mr-2" /> Instagram
+              </Button>
+            </div>
+            <Button onClick={resetStates} className="mt-4">{t.newSession}</Button>
+          </div>
+        )}
+        {moodHistory.length > 0 && !showInitialAssessment && !showMoodSelector && !selectedMood && !showTimer && !showMoodRating && !showReflection && !showMindfulness && !showSocialShare && (
           <ProgressTracker moodData={moodHistory} />
         )}
         {positiveMessage && (
