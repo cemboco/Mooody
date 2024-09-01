@@ -7,11 +7,9 @@ import InitialMoodAssessment from '../components/InitialMoodAssessment';
 import { selectActivity, addCustomMood } from '../utils/gameSelector';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { X, Share2, LogOut, Instagram, Twitter, Facebook, AtSign } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { X, Share2, Instagram, Twitter, Facebook, AtSign } from 'lucide-react';
 
 const Index = () => {
-  const navigate = useNavigate();
   const [showInitialAssessment, setShowInitialAssessment] = useState(false);
   const [showMoodSelector, setShowMoodSelector] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
@@ -23,7 +21,6 @@ const Index = () => {
   const [initialMoodRating, setInitialMoodRating] = useState(null);
   const [finalMoodRating, setFinalMoodRating] = useState(null);
   const [positiveMessage, setPositiveMessage] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const storedActivities = JSON.parse(localStorage.getItem('customActivities') || '[]');
@@ -98,6 +95,7 @@ const Index = () => {
     setShowMoodSelector(false);
     setInitialMoodRating(null);
     setFinalMoodRating(null);
+    setShowInitialAssessment(false);
   };
 
   const handleShare = (platform) => {
@@ -125,16 +123,6 @@ const Index = () => {
     window.open(shareUrl, '_blank');
   };
 
-  const handleLogin = (email, password) => {
-    // Here you would typically validate the credentials with a backend
-    // For this example, we'll just set isLoggedIn to true
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
   const handleSaveCustomActivity = () => {
     if (customActivity.trim() !== '') {
       const updatedActivities = [...savedActivities, customActivity];
@@ -157,16 +145,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-moody">
       <div className="relative min-h-screen flex flex-col items-center justify-center">
-        {!isLoggedIn && !showInitialAssessment && !showMoodSelector && !selectedMood && (
-          <div className="text-center p-8 bg-white rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-4">Login</h2>
-            <Input type="email" placeholder="Email" className="mb-2" />
-            <Input type="password" placeholder="Password" className="mb-2" />
-            <Button onClick={() => handleLogin('test@example.com', 'password')} className="w-full">Log In</Button>
-            <p className="mt-2">Don't have an account? <Button variant="link" onClick={() => navigate('/signup')}>Sign Up</Button></p>
-          </div>
-        )}
-        {isLoggedIn && !showInitialAssessment && !showMoodSelector && !selectedMood && (
+        {!showInitialAssessment && !showMoodSelector && !selectedMood && (
           <NotificationButton onClick={handleNotificationClick} />
         )}
       </div>
@@ -271,10 +250,6 @@ const Index = () => {
           ) : (
             <MoodRatingScale onRatingSelect={handleMoodRating} />
           )}
-          <Button onClick={handleLogout} className="absolute bottom-4 right-4">
-            <LogOut className="h-4 w-4 mr-2" />
-            Logout
-          </Button>
         </div>
       )}
     </div>
