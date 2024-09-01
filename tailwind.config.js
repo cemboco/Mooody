@@ -18,7 +18,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        comic: ['Comic Neue', 'cursive'],
+        comic: ['Bangers', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -67,7 +67,7 @@
 }
  
 @layer base {
-  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
   
   * {
     @apply border-border;
