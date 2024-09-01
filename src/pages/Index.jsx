@@ -157,8 +157,8 @@ const Index = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-moody">
       <div className="relative min-h-screen flex flex-col items-center justify-center">
-        {isLoggedIn && (
-          <Button onClick={handleLogout} className="absolute top-4 right-4">
+        {isLoggedIn && !showMoodRating && (
+          <Button onClick={handleLogout} className="absolute bottom-4 right-4">
             <LogOut className="h-4 w-4 mr-2" />
             Logout
           </Button>
@@ -276,6 +276,10 @@ const Index = () => {
           ) : (
             <MoodRatingScale onRatingSelect={handleMoodRating} />
           )}
+          <Button onClick={handleLogout} className="absolute bottom-4 right-4">
+            <LogOut className="h-4 w-4 mr-2" />
+            Logout
+          </Button>
         </div>
       )}
     </div>
