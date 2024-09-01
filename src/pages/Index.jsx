@@ -25,12 +25,12 @@ const Index = () => {
   const [suggestedActivity, setSuggestedActivity] = useState(null);
   const [timerMinutes, setTimerMinutes] = useState(5);
   const [showMoodRating, setShowMoodRating] = useState(false);
+  const [showReflection, setShowReflection] = useState(false);
+  const [showMindfulness, setShowMindfulness] = useState(false);
   const [initialMoodRating, setInitialMoodRating] = useState(null);
   const [finalMoodRating, setFinalMoodRating] = useState(null);
   const [positiveMessage, setPositiveMessage] = useState('');
   const [moodHistory, setMoodHistory] = useState([]);
-  const [showReflection, setShowReflection] = useState(false);
-  const [showMindfulness, setShowMindfulness] = useState(false);
   const [showTimer, setShowTimer] = useState(false);
   const [showSocialShare, setShowSocialShare] = useState(false);
   const [customActivityInput, setCustomActivityInput] = useState('');
@@ -195,7 +195,7 @@ const Index = () => {
         {showMoodSelector && (
           <MoodSelector onMoodSelect={handleMoodSelect} />
         )}
-        {selectedMood && suggestedActivity && !showTimer && !showMoodRating && !showReflection && (
+        {selectedMood && suggestedActivity && !showTimer && !showMoodRating && !showReflection && !showMindfulness && (
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
             <p className="text-xl mb-4">{suggestedActivity.name}</p>
