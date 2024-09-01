@@ -18,33 +18,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Share2, Instagram, AtSign, X } from 'lucide-react';
 
-const motivationalMessages = [
-  "Du kannst alles erreichen, was du dir vornimmst!",
-  "Glaube an dich und deine Fähigkeiten.",
-  "Jeder Schritt, den du machst, bringt dich näher an dein Ziel.",
-  "Gib niemals auf, auch wenn es schwierig wird.",
-  "Dein Potenzial ist grenzenlos.",
-  "Große Dinge beginnen mit kleinen Schritten.",
-  "Erfolg ist das Ergebnis von harter Arbeit und Durchhaltevermögen.",
-  "Du bist stärker, als du denkst.",
-  "Jeder Tag ist eine neue Chance, dein Bestes zu geben.",
-  "Deine Zukunft beginnt heute, mache das Beste daraus.",
-  "Sei mutig und geh deinen eigenen Weg.",
-  "Fehler sind nur Lektionen auf dem Weg zum Erfolg.",
-  "Dein Wille ist stärker als jedes Hindernis.",
-  "Vertraue dem Prozess und bleibe positiv.",
-  "Arbeite hart und lass dich nicht entmutigen.",
-  "Du bist der Architekt deines Lebens.",
-  "Jede Herausforderung ist eine Chance, zu wachsen.",
-  "Fokussiere dich auf das, was du kontrollieren kannst.",
-  "Deine Stärke liegt in deinem unerschütterlichen Glauben an dich selbst.",
-  "Lebe deinen Traum und lass dich von nichts aufhalten."
-];
-
-const getRandomMotivationalMessage = () => {
-  return motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
-};
-
 const Index = () => {
   const { language } = useLanguage();
   const t = translations[language];
@@ -171,7 +144,7 @@ const Index = () => {
     const newAverageMood = totalMood / updatedMoodHistory.length;
     setAverageMood(newAverageMood);
 
-    setPositiveMessage(getRandomMotivationalMessage());
+    setPositiveMessage(t.motivationalMessages[Math.floor(Math.random() * t.motivationalMessages.length)]);
   };
 
   const handleEndSession = () => {
