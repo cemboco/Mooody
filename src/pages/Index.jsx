@@ -238,7 +238,7 @@ const Index = () => {
               <div className="flex-grow flex items-center justify-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody mb-4 opacity-0 animate-fade-in-delayed">{t.title}</h1>
               </div>
-              <p className="text-lg sm:text-xl md:text-2xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed mb-8">{t.subtitle}</p>
+              <p className="text-lg sm:text-xl md:text-2xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed mb-16">{t.subtitle}</p>
               <div className="ball ball1"></div>
               <div className="ball ball2"></div>
               <div className="ball ball3"></div>
