@@ -52,7 +52,46 @@ const Index = () => {
     setSuggestedActivity(activity);
   };
 
-  // Add other necessary functions here...
+  const handleActivityComplete = () => {
+    setShowMoodRating(true);
+  };
+
+  const handleMoodRating = (rating) => {
+    setFinalMoodRating(rating);
+    setShowMoodRating(false);
+    setShowReflection(true);
+  };
+
+  const handleReflectionComplete = (reflection) => {
+    setShowReflection(false);
+    // Here you can save the reflection if needed
+    setShowMindfulness(true);
+  };
+
+  const handleMindfulnessComplete = () => {
+    setShowMindfulness(false);
+    // Here you can update mood history and show progress
+    const newMoodEntry = {
+      date: new Date(),
+      initialMood: initialMoodRating,
+      finalMood: finalMoodRating,
+      activity: suggestedActivity.name
+    };
+    setMoodHistory([...moodHistory, newMoodEntry]);
+    // Reset states for a new session
+    resetStates();
+  };
+
+  const resetStates = () => {
+    setShowInitialAssessment(false);
+    setShowMoodSelector(false);
+    setSelectedMood(null);
+    setSuggestedActivity(null);
+    setInitialMoodRating(null);
+    setFinalMoodRating(null);
+    setShowReflection(false);
+    setShowMindfulness(false);
+  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody overflow-hidden">
@@ -81,7 +120,25 @@ const Index = () => {
         {showMoodSelector && (
           <MoodSelector onMoodSelect={handleMoodSelect} />
         )}
-        {/* Add other conditional renders here... */}
+        {selectedMood && suggestedActivity && !showMoodRating && !showReflection && !showMindfulness && (
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
+            <p className="text-xl mb-4">{suggestedActivity.name}</p>
+            <Button onClick={handleActivityComplete}>{t.endActivity}</Button>
+          </div>
+        )}
+        {showMoodRating && (
+          <MoodRatingScale onRatingSelect={handleMoodRating} />
+        )}
+        {showReflection && (
+          <ReflectionPrompt onComplete={handleReflectionComplete} onSkip={handleReflectionComplete} />
+        )}
+        {showMindfulness && (
+          <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={() => setShowMindfulness(false)} />
+        )}
+        {moodHistory.length > 0 && !showInitialAssessment && !showMoodSelector && !selectedMood && !showMoodRating && !showReflection && !showMindfulness && (
+          <ProgressTracker moodData={moodHistory} />
+        )}
       </div>
     </div>
   );
