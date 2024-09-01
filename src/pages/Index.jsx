@@ -195,7 +195,7 @@ const Index = () => {
         {showMoodSelector && (
           <MoodSelector onMoodSelect={handleMoodSelect} />
         )}
-        {selectedMood && suggestedActivity && !showTimer && !showMoodRating && (
+        {selectedMood && suggestedActivity && !showTimer && !showMoodRating && !showReflection && (
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
             <p className="text-xl mb-4">{suggestedActivity.name}</p>
