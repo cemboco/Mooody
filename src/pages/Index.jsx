@@ -9,12 +9,9 @@ import ReflectionPrompt from '../components/ReflectionPrompt';
 import ProgressTracker from '../components/ProgressTracker';
 import MindfulnessExercise from '../components/MindfulnessExercise';
 import { selectActivity } from '../utils/gameSelector';
-import { getPersonalizedRecommendation } from '../utils/personalizedRecommendations';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { X, Share2, Instagram, Twitter, Facebook, AtSign } from 'lucide-react';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -26,8 +23,6 @@ const Index = () => {
   const [suggestedActivity, setSuggestedActivity] = useState(null);
   const [timerMinutes, setTimerMinutes] = useState(5);
   const [showMoodRating, setShowMoodRating] = useState(false);
-  const [customActivity, setCustomActivity] = useState('');
-  const [savedActivities, setSavedActivities] = useState([]);
   const [initialMoodRating, setInitialMoodRating] = useState(null);
   const [finalMoodRating, setFinalMoodRating] = useState(null);
   const [positiveMessage, setPositiveMessage] = useState('');
@@ -99,19 +94,6 @@ const Index = () => {
     setShowReflection(false);
     setShowMindfulness(false);
     setShowTimer(false);
-  };
-
-  const handleCustomActivitySubmit = (e) => {
-    e.preventDefault();
-    if (customActivity.trim()) {
-      setSavedActivities([...savedActivities, customActivity]);
-      setCustomActivity('');
-    }
-  };
-
-  const handleSavedActivitySelect = (activity) => {
-    setSuggestedActivity({ name: activity });
-    setShowTimer(true);
   };
 
   const time = new Date();
@@ -186,29 +168,6 @@ const Index = () => {
         {positiveMessage && (
           <div className="mt-4 text-center">
             <p className="text-xl font-bold">{positiveMessage}</p>
-          </div>
-        )}
-        <div className="mt-4">
-          <form onSubmit={handleCustomActivitySubmit} className="flex space-x-2">
-            <Input
-              type="text"
-              value={customActivity}
-              onChange={(e) => setCustomActivity(e.target.value)}
-              placeholder={t.newActivityPlaceholder}
-            />
-            <Button type="submit">{t.saveActivity}</Button>
-          </form>
-        </div>
-        {savedActivities.length > 0 && (
-          <div className="mt-4">
-            <h3 className="text-lg font-bold mb-2">{t.savedActivities}</h3>
-            <div className="flex flex-wrap gap-2">
-              {savedActivities.map((activity, index) => (
-                <Button key={index} onClick={() => handleSavedActivitySelect(activity)}>
-                  {activity}
-                </Button>
-              ))}
-            </div>
           </div>
         )}
       </div>
