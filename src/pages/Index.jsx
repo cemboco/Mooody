@@ -18,6 +18,8 @@ const Index = () => {
   const [showMoodRating, setShowMoodRating] = useState(false);
   const [customActivity, setCustomActivity] = useState('');
   const [savedActivities, setSavedActivities] = useState([]);
+  const [initialMoodRating, setInitialMoodRating] = useState(null);
+  const [positiveMessage, setPositiveMessage] = useState('');
 
   useEffect(() => {
     const storedActivities = JSON.parse(localStorage.getItem('customActivities') || '[]');
@@ -31,7 +33,6 @@ const Index = () => {
     seconds,
     minutes,
     isRunning,
-    start,
     pause,
     resume,
     restart,
@@ -42,6 +43,7 @@ const Index = () => {
   };
 
   const handleInitialAssessmentComplete = (moodValue) => {
+    setInitialMoodRating(moodValue);
     setShowInitialAssessment(false);
     setShowMoodSelector(true);
   };
@@ -63,17 +65,27 @@ const Index = () => {
     setShowMoodRating(true);
   };
 
-  const [positiveMessage, setPositiveMessage] = useState('');
-
   const handleMoodRating = (rating) => {
-    console.log(`Mood after activity: ${rating}`);
-    setPositiveMessage('Du darfst stolz auf dich sein! 😊');
+    console.log(`Initial mood: ${initialMoodRating}, Mood after activity: ${rating}`);
+    const moodImprovement = rating - initialMoodRating;
+    
+    if (moodImprovement >= 3) {
+      setPositiveMessage('Du darfst stolz auf dich sein! 😊');
+    } else if (moodImprovement === 2) {
+      setPositiveMessage('Mach weiter, das schaffst du! 💪');
+    } else if (moodImprovement === 1) {
+      setPositiveMessage('Das ist ein Erfolg, lass dich nicht entmutigen! 🌟');
+    } else {
+      setPositiveMessage('Jeder Schritt zählt. Bleib dran! 🌈');
+    }
+
     setTimeout(() => {
       setPositiveMessage('');
       setShowMoodRating(false);
       setSelectedMood(null);
       setSuggestedActivity(null);
       setShowMoodSelector(false);
+      setInitialMoodRating(null);
     }, 3000);
   };
 
