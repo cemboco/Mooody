@@ -63,12 +63,18 @@ const Index = () => {
     setShowMoodRating(true);
   };
 
+  const [positiveMessage, setPositiveMessage] = useState('');
+
   const handleMoodRating = (rating) => {
     console.log(`Mood after activity: ${rating}`);
-    setShowMoodRating(false);
-    setSelectedMood(null);
-    setSuggestedActivity(null);
-    setShowMoodSelector(false);
+    setPositiveMessage('Du darfst stolz auf dich sein! 😊');
+    setTimeout(() => {
+      setPositiveMessage('');
+      setShowMoodRating(false);
+      setSelectedMood(null);
+      setSuggestedActivity(null);
+      setShowMoodSelector(false);
+    }, 3000);
   };
 
   const handleSaveCustomActivity = () => {
@@ -180,7 +186,11 @@ const Index = () => {
       {showMoodRating && (
         <div className="text-center p-4 sm:p-8 bg-white rounded-lg shadow-md w-full max-w-2xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold mb-6">Stimmungs-Verbesserer</h1>
-          <MoodRatingScale onRatingSelect={handleMoodRating} />
+          {positiveMessage ? (
+            <p className="text-2xl font-bold text-green-600 mb-4">{positiveMessage}</p>
+          ) : (
+            <MoodRatingScale onRatingSelect={handleMoodRating} />
+          )}
         </div>
       )}
     </div>
