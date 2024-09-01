@@ -33,6 +33,13 @@ const Index = () => {
     setSavedActivities(storedActivities);
   }, []);
 
+  useEffect(() => {
+    if (selectedMood) {
+      const activity = selectActivity(selectedMood.label, language);
+      setSuggestedActivity(activity);
+    }
+  }, [selectedMood, language]);
+
   const time = new Date();
   time.setSeconds(time.getSeconds() + 300); // 5 minutes default
 
@@ -58,9 +65,9 @@ const Index = () => {
   const handleMoodSelect = (mood) => {
     setSelectedMood(mood);
     if (mood.emoji === "🆕") {
-      addCustomMood(mood.label);
+      addCustomMood(mood.label, language);
     }
-    const activity = selectActivity(mood.label);
+    const activity = selectActivity(mood.label, language);
     setSuggestedActivity(activity);
   };
 
@@ -168,7 +175,7 @@ const Index = () => {
               <div className="ball ball8"></div>
               <div className="ball ball9"></div>
             </div>
-            <NotificationButton onClick={handleNotificationClick} text={t.notificationButton} />
+            <NotificationButton onClick={handleNotificationClick} />
           </>
         )}
       </div>
@@ -191,7 +198,7 @@ const Index = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
             <h1 className="text-3xl sm:text-4xl font-bold mb-6 rounded-moody">{t.title}</h1>
-            <p className="text-xl mb-4">{t.youFeelLabel} {selectedMood.emoji} {selectedMood.label}</p>
+            <p className="text-xl mb-4">{t.youFeelLabel} {selectedMood.emoji} {t[selectedMood.label.toLowerCase()]}</p>
             {suggestedActivity && (
               <div className="mt-6">
                 <p className="text-lg mb-2">{t.suggestedActivityLabel}</p>
@@ -278,7 +285,7 @@ const Index = () => {
                 <Button onClick={handleEndSession} className="mt-4 w-full">{t.newSession}</Button>
               </div>
             ) : (
-              <MoodRatingScale onRatingSelect={handleMoodRating} question={t.moodRatingQuestion} />
+              <MoodRatingScale onRatingSelect={handleMoodRating} />
             )}
           </div>
         </div>
