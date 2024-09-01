@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
+import { useTimer } from 'react-timer-hook';
 import MoodSelector from '../components/MoodSelector';
 import NotificationButton from '../components/NotificationButton';
 import { selectActivity } from '../utils/gameSelector';
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 const Index = () => {
   const [showMoodSelector, setShowMoodSelector] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
   const [suggestedActivity, setSuggestedActivity] = useState(null);
+  const [timerMinutes, setTimerMinutes] = useState(5);
+
+  const {
+    seconds,
+    minutes,
+    isRunning,
+    start,
+    pause,
+    resume,
+    restart,
+  } = useTimer({ expiryTimestamp: new Date(), autoStart: false });
 
   const handleNotificationClick = () => {
     setShowMoodSelector(true);
@@ -19,10 +32,10 @@ const Index = () => {
     setSuggestedActivity(activity);
   };
 
-  const handleTryAgain = () => {
-    setSelectedMood(null);
-    setSuggestedActivity(null);
-    setShowMoodSelector(false);
+  const handleStartTimer = () => {
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + timerMinutes * 60);
+    restart(time);
   };
 
   return (
@@ -45,9 +58,31 @@ const Index = () => {
                 <div className="mt-6">
                   <p className="text-xl mb-2">Hier ist eine Aufgabe oder Tätigkeit, die dir helfen könnte:</p>
                   <p className="text-3xl font-bold mb-6">{suggestedActivity.name}</p>
-                  <Button onClick={handleTryAgain} className="mt-4">
-                    Andere Aufgabe vorschlagen
-                  </Button>
+                  <div className="flex flex-col items-center space-y-4">
+                    <div className="flex items-center space-x-2">
+                      <Input
+                        type="number"
+                        value={timerMinutes}
+                        onChange={(e) => setTimerMinutes(parseInt(e.target.value))}
+                        className="w-20 text-center"
+                        min="1"
+                      />
+                      <span>Minuten</span>
+                    </div>
+                    {!isRunning ? (
+                      <Button onClick={handleStartTimer}>Timer starten</Button>
+                    ) : (
+                      <div className="text-2xl font-bold">
+                        {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+                      </div>
+                    )}
+                    {isRunning && (
+                      <Button onClick={pause}>Pause</Button>
+                    )}
+                    {!isRunning && seconds > 0 && (
+                      <Button onClick={resume}>Fortsetzen</Button>
+                    )}
+                  </div>
                 </div>
               )}
             </>
