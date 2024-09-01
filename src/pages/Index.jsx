@@ -12,6 +12,9 @@ const Index = () => {
   const [suggestedActivity, setSuggestedActivity] = useState(null);
   const [timerMinutes, setTimerMinutes] = useState(5);
 
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + 300); // 5 minutes default
+
   const {
     seconds,
     minutes,
@@ -20,7 +23,7 @@ const Index = () => {
     pause,
     resume,
     restart,
-  } = useTimer({ expiryTimestamp: new Date(), autoStart: false });
+  } = useTimer({ expiryTimestamp: time, autoStart: false });
 
   const handleNotificationClick = () => {
     setShowMoodSelector(true);
@@ -33,9 +36,9 @@ const Index = () => {
   };
 
   const handleStartTimer = () => {
-    const time = new Date();
-    time.setSeconds(time.getSeconds() + timerMinutes * 60);
-    restart(time);
+    const newTime = new Date();
+    newTime.setSeconds(newTime.getSeconds() + timerMinutes * 60);
+    restart(newTime);
   };
 
   return (
@@ -63,7 +66,7 @@ const Index = () => {
                       <Input
                         type="number"
                         value={timerMinutes}
-                        onChange={(e) => setTimerMinutes(parseInt(e.target.value))}
+                        onChange={(e) => setTimerMinutes(parseInt(e.target.value) || 1)}
                         className="w-20 text-center"
                         min="1"
                       />
@@ -79,7 +82,7 @@ const Index = () => {
                     {isRunning && (
                       <Button onClick={pause}>Pause</Button>
                     )}
-                    {!isRunning && seconds > 0 && (
+                    {!isRunning && (seconds > 0 || minutes > 0) && (
                       <Button onClick={resume}>Fortsetzen</Button>
                     )}
                   </div>
