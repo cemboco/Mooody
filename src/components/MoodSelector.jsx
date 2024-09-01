@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
 const initialMoods = [
   { emoji: "😊", label: "Glücklich" },
@@ -11,10 +12,13 @@ const initialMoods = [
   { emoji: "😨", label: "Ängstlich" },
 ];
 
+const emojiOptions = ["😊", "😢", "😴", "😠", "😰", "😨", "😍", "🤔", "😎", "🙃", "😇", "🤯", "😤", "🥳", "😌", "🤗"];
+
 const MoodSelector = ({ onMoodSelect }) => {
   const [moods, setMoods] = useState(initialMoods);
   const [selectedMood, setSelectedMood] = useState(null);
   const [customMood, setCustomMood] = useState('');
+  const [customEmoji, setCustomEmoji] = useState('😊');
 
   const handleMoodClick = (mood) => {
     setSelectedMood(mood);
@@ -28,9 +32,10 @@ const MoodSelector = ({ onMoodSelect }) => {
 
   const handleAddCustomMood = () => {
     if (customMood.trim() !== '') {
-      const newMood = { emoji: "🆕", label: customMood.trim() };
+      const newMood = { emoji: customEmoji, label: customMood.trim() };
       setMoods([...moods, newMood]);
       setCustomMood('');
+      setCustomEmoji('😊');
     }
   };
 
@@ -49,6 +54,27 @@ const MoodSelector = ({ onMoodSelect }) => {
         ))}
       </div>
       <div className="flex space-x-2">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="outline" className="w-14 text-2xl">
+              {customEmoji}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-64">
+            <div className="grid grid-cols-8 gap-2">
+              {emojiOptions.map((emoji) => (
+                <Button
+                  key={emoji}
+                  variant="ghost"
+                  className="text-2xl p-2"
+                  onClick={() => setCustomEmoji(emoji)}
+                >
+                  {emoji}
+                </Button>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
         <Input
           type="text"
           value={customMood}
@@ -59,7 +85,7 @@ const MoodSelector = ({ onMoodSelect }) => {
       </div>
       {selectedMood && (
         <div className="space-y-4 mt-6">
-          <p className="text-lg">Du fühlst dich {selectedMood.label}</p>
+          <p className="text-lg">Du fühlst dich {selectedMood.emoji} {selectedMood.label}</p>
           <Button onClick={handleSubmit} className="w-full">Bestätigen</Button>
         </div>
       )}
