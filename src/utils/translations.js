@@ -51,7 +51,8 @@ export const translations = {
     backButton: 'Zurück',
     moodLabel: 'Stimmung',
     shareProgressCTA: 'Teile deinen Fortschritt und inspiriere andere!',
-    userStatsMessage: '{userCount} Personen haben heute ihre Stimmung um durchschnittlich {moodImprovement}% verbessert.',
+    userStatsMessageSingular: '{userCount} Person hat heute ihre Stimmung um durchschnittlich {moodImprovement}% verbessert.',
+    userStatsMessagePlural: '{userCount} Personen haben heute ihre Stimmung um durchschnittlich {moodImprovement}% verbessert.',
   },
   en: {
     title: 'Moody',
@@ -105,6 +106,7 @@ export const translations = {
     backButton: 'Back',
     moodLabel: 'Mood',
     shareProgressCTA: 'Share your progress and inspire others!',
-    userStatsMessage: '{userCount} people have improved their mood by an average of {moodImprovement}% today.',
+    userStatsMessageSingular: '{userCount} person has improved their mood by an average of {moodImprovement}% today.',
+    userStatsMessagePlural: '{userCount} people have improved their mood by an average of {moodImprovement}% today.',
   },
 };

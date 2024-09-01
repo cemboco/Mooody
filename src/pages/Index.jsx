@@ -235,8 +235,8 @@ const Index = () => {
         {!showInitialAssessment && !showMoodSelector && !selectedMood && (
           <>
             <div className="animated-title w-full h-full flex flex-col items-center justify-center">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody">{t.title}</h1>
-              <p className="text-lg sm:text-xl md:text-2xl mt-4 text-center max-w-2xl">{t.subtitle}</p>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody mb-4">{t.title}</h1>
+              <p className="text-lg sm:text-xl md:text-2xl mt-2 text-center max-w-2xl">{t.subtitle}</p>
               <UserStats userCount={userCount} averageMoodImprovement={averageMoodImprovement} />
               <div className="ball ball1"></div>
               <div className="ball ball2"></div>
