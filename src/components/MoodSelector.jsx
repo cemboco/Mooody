@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button"
-import { Slider } from "@/components/ui/slider"
 
 const moods = [
   { emoji: "😊", label: "Glücklich" },
@@ -12,34 +11,20 @@ const moods = [
 
 const MoodSelector = ({ onMoodSelect }) => {
   const [selectedMood, setSelectedMood] = useState(null);
-  const [intensity, setIntensity] = useState(5);
 
   const handleMoodClick = (mood) => {
     setSelectedMood(mood);
   };
 
-  const handleIntensityChange = (value) => {
-    setIntensity(value[0]);
-  };
-
   const handleSubmit = () => {
     if (selectedMood) {
-      onMoodSelect(selectedMood, intensity);
+      onMoodSelect(selectedMood);
     }
   };
 
   return (
     <div className="space-y-6">
-      <p className="text-lg mb-4">Wie fühlst du dich gerade?</p>
-      <div className="space-y-4 mb-6">
-        <Slider
-          defaultValue={[5]}
-          max={10}
-          step={1}
-          onValueChange={handleIntensityChange}
-        />
-        <p className="text-center">Intensität: {intensity}</p>
-      </div>
+      <h2 className="text-2xl font-bold">Wähle deine Stimmung</h2>
       <div className="flex flex-wrap justify-center gap-4">
         {moods.map((mood) => (
           <Button
@@ -53,7 +38,7 @@ const MoodSelector = ({ onMoodSelect }) => {
       </div>
       {selectedMood && (
         <div className="space-y-4 mt-6">
-          <p className="text-lg">Du fühlst dich {selectedMood.label} mit einer Intensität von {intensity}</p>
+          <p className="text-lg">Du fühlst dich {selectedMood.label}</p>
           <Button onClick={handleSubmit} className="w-full">Bestätigen</Button>
         </div>
       )}

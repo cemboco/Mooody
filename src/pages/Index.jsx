@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTimer } from 'react-timer-hook';
 import MoodSelector from '../components/MoodSelector';
 import NotificationButton from '../components/NotificationButton';
 import MoodRatingScale from '../components/MoodRatingScale';
+import InitialMoodAssessment from '../components/InitialMoodAssessment';
 import { selectActivity } from '../utils/gameSelector';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
 const Index = () => {
+  const [showInitialAssessment, setShowInitialAssessment] = useState(false);
   const [showMoodSelector, setShowMoodSelector] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
   const [suggestedActivity, setSuggestedActivity] = useState(null);
   const [timerMinutes, setTimerMinutes] = useState(5);
   const [showMoodRating, setShowMoodRating] = useState(false);
+  const [customActivity, setCustomActivity] = useState('');
+  const [savedActivities, setSavedActivities] = useState([]);
+
+  useEffect(() => {
+    const storedActivities = JSON.parse(localStorage.getItem('customActivities') || '[]');
+    setSavedActivities(storedActivities);
+  }, []);
 
   const time = new Date();
   time.setSeconds(time.getSeconds() + 300); // 5 minutes default
@@ -28,11 +37,16 @@ const Index = () => {
   } = useTimer({ expiryTimestamp: time, autoStart: false });
 
   const handleNotificationClick = () => {
+    setShowInitialAssessment(true);
+  };
+
+  const handleInitialAssessmentComplete = (moodValue) => {
+    setShowInitialAssessment(false);
     setShowMoodSelector(true);
   };
 
-  const handleMoodSelect = (mood, intensity) => {
-    setSelectedMood({ ...mood, intensity });
+  const handleMoodSelect = (mood) => {
+    setSelectedMood(mood);
     const activity = selectActivity(mood.label);
     setSuggestedActivity(activity);
   };
@@ -50,29 +64,41 @@ const Index = () => {
 
   const handleMoodRating = (rating) => {
     console.log(`Mood after activity: ${rating}`);
-    // Here you can add logic to handle the mood rating, e.g., storing it or showing a summary
     setShowMoodRating(false);
     setSelectedMood(null);
     setSuggestedActivity(null);
     setShowMoodSelector(false);
   };
 
+  const handleSaveCustomActivity = () => {
+    if (customActivity.trim() !== '') {
+      const updatedActivities = [...savedActivities, customActivity];
+      setSavedActivities(updatedActivities);
+      localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
+      setCustomActivity('');
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      {!showMoodSelector && !selectedMood && (
+      {!showInitialAssessment && !showMoodSelector && !selectedMood && (
         <NotificationButton onClick={handleNotificationClick} />
+      )}
+      {showInitialAssessment && (
+        <div className="text-center p-8 bg-white rounded-lg shadow-md">
+          <InitialMoodAssessment onAssessmentComplete={handleInitialAssessmentComplete} />
+        </div>
       )}
       {showMoodSelector && !selectedMood && (
         <div className="text-center p-8 bg-white rounded-lg shadow-md">
           <h1 className="text-4xl font-bold mb-6">Stimmungs-Verbesserer</h1>
-          <p className="text-xl text-gray-600 mb-6">Wie fühlst du dich gerade?</p>
           <MoodSelector onMoodSelect={handleMoodSelect} />
         </div>
       )}
       {selectedMood && !showMoodRating && (
         <div className="text-center p-8 bg-white rounded-lg shadow-md">
           <h1 className="text-4xl font-bold mb-6">Stimmungs-Verbesserer</h1>
-          <p className="text-2xl mb-4">Du fühlst dich: {selectedMood.emoji} {selectedMood.label} (Intensität: {selectedMood.intensity})</p>
+          <p className="text-2xl mb-4">Du fühlst dich: {selectedMood.emoji} {selectedMood.label}</p>
           {suggestedActivity && (
             <div className="mt-6">
               <p className="text-xl mb-2">Hier ist eine Aufgabe oder Tätigkeit, die dir helfen könnte:</p>
@@ -103,6 +129,28 @@ const Index = () => {
                 )}
                 <Button onClick={handleEndActivity}>Beenden</Button>
               </div>
+            </div>
+          )}
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold mb-4">Eigene Aktivität hinzufügen</h2>
+            <div className="flex space-x-2">
+              <Input
+                type="text"
+                value={customActivity}
+                onChange={(e) => setCustomActivity(e.target.value)}
+                placeholder="Neue Aktivität eingeben"
+              />
+              <Button onClick={handleSaveCustomActivity}>Speichern</Button>
+            </div>
+          </div>
+          {savedActivities.length > 0 && (
+            <div className="mt-4">
+              <h3 className="text-xl font-bold mb-2">Gespeicherte Aktivitäten:</h3>
+              <ul className="list-disc list-inside">
+                {savedActivities.map((activity, index) => (
+                  <li key={index}>{activity}</li>
+                ))}
+              </ul>
             </div>
           )}
         </div>
