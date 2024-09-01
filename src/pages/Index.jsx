@@ -81,15 +81,15 @@ const Index = () => {
     setFinalMoodRating(rating);
 
     if (moodImprovement >= 3) {
-      setPositiveMessage('Du darfst stolz auf dich sein! 😊');
+      setPositiveMessage(t.positiveMessage1);
     } else if (moodImprovement === 2) {
-      setPositiveMessage('Mach weiter, das schaffst du! 💪');
+      setPositiveMessage(t.positiveMessage2);
     } else if (moodImprovement === 1) {
-      setPositiveMessage('Das ist ein Erfolg, lass dich nicht entmutigen! 🌟');
+      setPositiveMessage(t.positiveMessage3);
     } else if (moodImprovement === 0) {
-      setPositiveMessage('Du hast durchgehalten. Das ist wichtig! 🌱');
+      setPositiveMessage(t.positiveMessage4);
     } else {
-      setPositiveMessage('Jeder Tag ist anders. Morgen wird besser! 🌈');
+      setPositiveMessage(t.positiveMessage5);
     }
   };
 

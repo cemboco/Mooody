@@ -9,12 +9,12 @@ const LanguageToggle = () => {
   return (
     <Button
       onClick={toggleLanguage}
-      variant="ghost"
-      size="icon"
-      className="fixed top-4 left-4 z-50"
+      variant="outline"
+      size="sm"
+      className="fixed top-4 left-4 z-50 bg-white"
     >
-      <Globe className="h-5 w-5" />
-      <span className="sr-only">{language === 'de' ? 'Switch to English' : 'Zu Deutsch wechseln'}</span>
+      <Globe className="h-4 w-4 mr-2" />
+      {language === 'de' ? 'DE' : 'EN'}
     </Button>
   );
 };
