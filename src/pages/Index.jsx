@@ -29,7 +29,10 @@ const Index = () => {
   const [showMoodSelector, setShowMoodSelector] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
 
-  // ... (rest of the state variables and functions)
+  const handleNotificationClick = () => {
+    setShowInitialAssessment(true);
+    setShowLanguageToggle(false);
+  };
 
   const handleProfileClick = () => {
     navigate('/profile');
@@ -65,8 +68,23 @@ const Index = () => {
             </Button>
           </>
         )}
+        {showInitialAssessment && (
+          <InitialMoodAssessment onAssessmentComplete={(mood) => {
+            setShowInitialAssessment(false);
+            setShowMoodSelector(true);
+          }} />
+        )}
+        {showMoodSelector && (
+          <MoodSelector onMoodSelect={(mood) => {
+            setSelectedMood(mood);
+            setShowMoodSelector(false);
+          }} />
+        )}
+        {selectedMood && (
+          // Add your logic for what happens after mood selection
+          <div>Mood selected: {selectedMood.emoji}</div>
+        )}
       </div>
-      {/* ... (rest of the JSX remains the same) */}
     </div>
   );
 };
