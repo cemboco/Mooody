@@ -67,12 +67,10 @@
 }
  
 @layer base {
-  @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
-  
   * {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-comic;
+    @apply bg-background text-foreground font-serif;
   }
 }

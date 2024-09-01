@@ -122,7 +122,7 @@ const Index = () => {
       )}
       {showMoodSelector && !selectedMood && (
         <div className="text-center p-8 bg-white rounded-lg shadow-md">
-          <h1 className="text-5xl font-bold mb-6 font-comic tracking-wider">Moody</h1>
+          <h1 className="text-5xl font-bold mb-6">Moody</h1>
           <MoodSelector onMoodSelect={handleMoodSelect} />
         </div>
       )}
@@ -199,7 +199,7 @@ const Index = () => {
       )}
       {showMoodRating && (
         <div className="text-center p-4 sm:p-8 bg-white rounded-lg shadow-md w-full max-w-2xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6 font-comic tracking-wider">Moody</h1>
+          <h1 className="text-4xl sm:text-5xl font-bold mb-6">Moody</h1>
           {positiveMessage ? (
             <p className="text-2xl font-bold text-green-600 mb-4">{positiveMessage}</p>
           ) : (

@@ -18,7 +18,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        comic: ['Bangers', 'cursive'],
+        serif: ['Times New Roman', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
