@@ -64,6 +64,7 @@ const Index = () => {
   const [showMindfulness, setShowMindfulness] = useState(false);
   const [userCount, setUserCount] = useState(0);
   const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
+  const [averageMood, setAverageMood] = useState(0);
 
   useEffect(() => {
     const storedActivities = JSON.parse(localStorage.getItem('customActivities') || '[]');
@@ -164,6 +165,11 @@ const Index = () => {
     localStorage.setItem('userCount', newUserCount.toString());
     localStorage.setItem('totalMoodImprovement', newTotalMoodImprovement.toString());
 
+    // Calculate average mood
+    const totalMood = updatedMoodHistory.reduce((sum, entry) => sum + entry.mood, 0);
+    const newAverageMood = totalMood / updatedMoodHistory.length;
+    setAverageMood(newAverageMood);
+
     setPositiveMessage(getRandomMotivationalMessage());
   };
 
@@ -176,6 +182,7 @@ const Index = () => {
     setInitialMoodRating(null);
     setFinalMoodRating(null);
     setShowInitialAssessment(false);
+    setAverageMood(0);
   };
 
   const handleShare = (platform) => {
@@ -366,6 +373,7 @@ const Index = () => {
                 <p className="text-xl font-bold text-green-600 mb-4">{positiveMessage}</p>
                 <p className="text-lg mb-4">{t.moodImprovement.replace('{initial}', initialMoodRating).replace('{final}', finalMoodRating)}</p>
                 <p className="text-md mb-4">{t.activityDone.replace('{activity}', suggestedActivity?.name)}</p>
+                <p className="text-lg mb-4">{t.averageMood.replace('{average}', averageMood.toFixed(1))}</p>
                 <ProgressTracker moodData={moodHistory} />
                 <UserStats userCount={userCount} averageMoodImprovement={averageMoodImprovement} />
                 <p className="text-lg font-semibold mt-6 mb-2">{t.shareProgressCTA}</p>
