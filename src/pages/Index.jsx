@@ -7,7 +7,7 @@ import InitialMoodAssessment from '../components/InitialMoodAssessment';
 import { selectActivity, addCustomMood } from '../utils/gameSelector';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { X } from 'lucide-react';
+import { X, Share2 } from 'lucide-react';
 
 const Index = () => {
   const [showInitialAssessment, setShowInitialAssessment] = useState(false);
@@ -71,7 +71,7 @@ const Index = () => {
   const handleMoodRating = (rating) => {
     console.log(`Initial mood: ${initialMoodRating}, Mood after activity: ${rating}`);
     const moodImprovement = rating - initialMoodRating;
-    
+  
     if (moodImprovement >= 3) {
       setPositiveMessage('Du darfst stolz auf dich sein! 😊');
     } else if (moodImprovement === 2) {
@@ -92,6 +92,12 @@ const Index = () => {
       setShowMoodSelector(false);
       setInitialMoodRating(null);
     }, 5000);
+  };
+
+  const handleShare = () => {
+    const shareText = `Meine Stimmung hat sich von ${initialMoodRating} auf ${positiveMessage.split('!')[0]} verbessert! #Moody`;
+    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+    window.open(shareUrl, '_blank');
   };
 
   const handleSaveCustomActivity = () => {
@@ -204,7 +210,12 @@ const Index = () => {
         <div className="text-center p-4 sm:p-8 bg-white rounded-lg shadow-md w-full max-w-2xl mx-auto">
           <h1 className="text-4xl sm:text-5xl font-bold mb-6">Moody</h1>
           {positiveMessage ? (
-            <p className="text-2xl font-bold text-green-600 mb-4">{positiveMessage}</p>
+            <div>
+              <p className="text-2xl font-bold text-green-600 mb-4">{positiveMessage}</p>
+              <Button onClick={handleShare} className="mt-4">
+                <Share2 className="mr-2 h-4 w-4" /> Teilen
+              </Button>
+            </div>
           ) : (
             <MoodRatingScale onRatingSelect={handleMoodRating} />
           )}
