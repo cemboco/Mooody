@@ -74,3 +74,56 @@
     @apply bg-background text-foreground font-serif;
   }
 }
+
+.animated-title {
+  position: relative;
+  width: 300px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.animated-title h1 {
+  position: relative;
+  z-index: 2;
+}
+
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: float 10s infinite ease-in-out;
+}
+
+.cloud1 {
+  width: 100px;
+  height: 100px;
+  top: -50px;
+  left: -50px;
+}
+
+.cloud2 {
+  width: 80px;
+  height: 80px;
+  top: 10px;
+  right: -40px;
+  animation-delay: 1s;
+}
+
+.cloud3 {
+  width: 60px;
+  height: 60px;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(100px);
+  }
+}

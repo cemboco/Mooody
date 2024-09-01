@@ -146,7 +146,15 @@ const Index = () => {
     <div className="min-h-screen flex items-center justify-center bg-moody">
       <div className="relative min-h-screen flex flex-col items-center justify-center">
         {!showInitialAssessment && !showMoodSelector && !selectedMood && (
-          <NotificationButton onClick={handleNotificationClick} />
+          <>
+            <div className="animated-title">
+              <h1 className="text-5xl font-bold mb-6">Moody</h1>
+              <div className="cloud cloud1"></div>
+              <div className="cloud cloud2"></div>
+              <div className="cloud cloud3"></div>
+            </div>
+            <NotificationButton onClick={handleNotificationClick} />
+          </>
         )}
       </div>
       {showInitialAssessment && (
