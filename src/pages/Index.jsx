@@ -125,20 +125,23 @@ const Index = () => {
                   />
                   <span>Minuten</span>
                 </div>
-                {!isRunning ? (
-                  <Button onClick={handleStartTimer}>Timer starten</Button>
-                ) : (
-                  <div className="text-2xl font-bold">
-                    {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+                <div className="flex flex-col items-center space-y-4">
+                  {!isRunning ? (
+                    <Button onClick={handleStartTimer} className="w-full">Timer starten</Button>
+                  ) : (
+                    <div className="text-2xl font-bold mb-4">
+                      {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+                    </div>
+                  )}
+                  <div className="flex space-x-2">
+                    {isRunning ? (
+                      <Button onClick={pause}>Pause</Button>
+                    ) : (
+                      <Button onClick={resume} disabled={seconds === 0 && minutes === 0}>Fortsetzen</Button>
+                    )}
+                    <Button onClick={handleEndActivity}>Beenden</Button>
                   </div>
-                )}
-                {isRunning && (
-                  <Button onClick={pause}>Pause</Button>
-                )}
-                {!isRunning && (seconds > 0 || minutes > 0) && (
-                  <Button onClick={resume}>Fortsetzen</Button>
-                )}
-                <Button onClick={handleEndActivity}>Beenden</Button>
+                </div>
               </div>
             </div>
           )}
