@@ -144,14 +144,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-moody">
-      <div className="relative min-h-screen flex flex-col items-center justify-center">
+      <div className="relative min-h-screen flex flex-col items-center justify-center w-full">
         {!showInitialAssessment && !showMoodSelector && !selectedMood && (
           <>
-            <div className="animated-title">
-              <h1 className="text-5xl font-bold mb-6">Moody</h1>
-              <div className="cloud cloud1"></div>
-              <div className="cloud cloud2"></div>
-              <div className="cloud cloud3"></div>
+            <div className="animated-title w-full h-full flex items-center justify-center">
+              <h1 className="text-5xl font-bold mb-6 relative z-10">Moody</h1>
+              <div className="ball ball1"></div>
+              <div className="ball ball2"></div>
+              <div className="ball ball3"></div>
             </div>
             <NotificationButton onClick={handleNotificationClick} />
           </>
