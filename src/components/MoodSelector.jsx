@@ -6,12 +6,12 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 
 const initialMoods = [
-  { emoji: "😊", label: "Glücklich" },
-  { emoji: "😢", label: "Traurig" },
-  { emoji: "😴", label: "Müde" },
-  { emoji: "😠", label: "Wütend" },
-  { emoji: "😰", label: "Gestresst" },
-  { emoji: "😨", label: "Ängstlich" },
+  { emoji: "😊", labelKey: "happy" },
+  { emoji: "😢", labelKey: "sad" },
+  { emoji: "😴", labelKey: "tired" },
+  { emoji: "😠", labelKey: "angry" },
+  { emoji: "😰", labelKey: "stressed" },
+  { emoji: "😨", labelKey: "anxious" },
 ];
 
 const emojiOptions = [
@@ -41,7 +41,7 @@ const MoodSelector = ({ onMoodSelect }) => {
 
   const handleAddCustomMood = () => {
     if (customMood.trim() !== '') {
-      const newMood = { emoji: customEmoji, label: customMood.trim() };
+      const newMood = { emoji: customEmoji, labelKey: customMood.trim() };
       setMoods([...moods, newMood]);
       setCustomMood('');
       setCustomEmoji('😊');
@@ -54,7 +54,7 @@ const MoodSelector = ({ onMoodSelect }) => {
       <div className="flex flex-wrap justify-center gap-4">
         {moods.map((mood) => (
           <Button
-            key={mood.label}
+            key={mood.labelKey}
             onClick={() => handleMoodClick(mood)}
             className={`text-2xl p-4 ${selectedMood === mood ? 'ring-2 ring-blue-500' : ''}`}
           >
@@ -94,7 +94,7 @@ const MoodSelector = ({ onMoodSelect }) => {
       </div>
       {selectedMood && (
         <div className="space-y-4 mt-6">
-          <p className="text-lg">{t.youFeelLabel} {selectedMood.emoji} {selectedMood.label}</p>
+          <p className="text-lg">{t.youFeelLabel} {selectedMood.emoji} {t[selectedMood.labelKey]}</p>
           <Button onClick={handleSubmit} className="w-full">{t.selectActivity}</Button>
         </div>
       )}
