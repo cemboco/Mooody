@@ -357,7 +357,7 @@ const Index = () => {
       )}
       {showMoodRating && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full h-full sm:h-auto overflow-y-auto">
+          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full max-h-[90vh] overflow-y-auto">
             <h1 className="text-3xl sm:text-4xl font-bold mb-6 rounded-moody">{t.title}</h1>
             {positiveMessage ? (
               <div>
