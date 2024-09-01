@@ -156,24 +156,26 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-moody">
-      {isLoggedIn && (
-        <Button onClick={handleLogout} className="absolute top-4 right-4">
-          <LogOut className="h-4 w-4 mr-2" />
-          Logout
-        </Button>
-      )}
-      {!isLoggedIn && !showInitialAssessment && !showMoodSelector && !selectedMood && (
-        <div className="text-center p-8 bg-white rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold mb-4">Login</h2>
-          <Input type="email" placeholder="Email" className="mb-2" />
-          <Input type="password" placeholder="Password" className="mb-2" />
-          <Button onClick={() => handleLogin('test@example.com', 'password')} className="w-full">Log In</Button>
-          <p className="mt-2">Don't have an account? <Button variant="link" onClick={() => navigate('/signup')}>Sign Up</Button></p>
-        </div>
-      )}
-      {isLoggedIn && !showInitialAssessment && !showMoodSelector && !selectedMood && (
-        <NotificationButton onClick={handleNotificationClick} />
-      )}
+      <div className="relative min-h-screen flex flex-col items-center justify-center">
+        {isLoggedIn && (
+          <Button onClick={handleLogout} className="absolute top-4 right-4">
+            <LogOut className="h-4 w-4 mr-2" />
+            Logout
+          </Button>
+        )}
+        {!isLoggedIn && !showInitialAssessment && !showMoodSelector && !selectedMood && (
+          <div className="text-center p-8 bg-white rounded-lg shadow-md">
+            <h2 className="text-2xl font-bold mb-4">Login</h2>
+            <Input type="email" placeholder="Email" className="mb-2" />
+            <Input type="password" placeholder="Password" className="mb-2" />
+            <Button onClick={() => handleLogin('test@example.com', 'password')} className="w-full">Log In</Button>
+            <p className="mt-2">Don't have an account? <Button variant="link" onClick={() => navigate('/signup')}>Sign Up</Button></p>
+          </div>
+        )}
+        {isLoggedIn && !showInitialAssessment && !showMoodSelector && !selectedMood && (
+          <NotificationButton onClick={handleNotificationClick} />
+        )}
+      </div>
       {showInitialAssessment && (
         <div className="text-center p-8 bg-white rounded-lg shadow-md">
           <InitialMoodAssessment onAssessmentComplete={handleInitialAssessmentComplete} />
