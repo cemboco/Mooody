@@ -75,6 +75,7 @@ const Index = () => {
       const updatedActivities = [...savedActivities, customActivity];
       setSavedActivities(updatedActivities);
       localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
+      setSuggestedActivity({ name: customActivity });
       setCustomActivity('');
     }
   };
@@ -140,7 +141,7 @@ const Index = () => {
                 onChange={(e) => setCustomActivity(e.target.value)}
                 placeholder="Neue Aktivität eingeben"
               />
-              <Button onClick={handleSaveCustomActivity}>Speichern</Button>
+              <Button onClick={handleSaveCustomActivity}>Speichern und Auswählen</Button>
             </div>
           </div>
           {savedActivities.length > 0 && (
