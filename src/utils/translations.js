@@ -25,6 +25,11 @@ export const translations = {
     positiveMessage3: 'Das ist ein Erfolg, lass dich nicht entmutigen! 🌟',
     positiveMessage4: 'Du hast durchgehalten. Das ist wichtig! 🌱',
     positiveMessage5: 'Jeder Tag ist anders. Morgen wird besser! 🌈',
+    initialMoodQuestion: 'Wie ist dein Gemütszustand?',
+    moodVeryBad: 'Sehr schlecht (1)',
+    moodExcellent: 'Hervorragend (10)',
+    yourMood: 'Dein Gemütszustand',
+    continue: 'Weiter',
   },
   en: {
     title: 'Moody',
@@ -52,5 +57,10 @@ export const translations = {
     positiveMessage3: 'That\'s a success, don\'t get discouraged! 🌟',
     positiveMessage4: 'You persevered. That\'s important! 🌱',
     positiveMessage5: 'Every day is different. Tomorrow will be better! 🌈',
+    initialMoodQuestion: 'How is your mood?',
+    moodVeryBad: 'Very bad (1)',
+    moodExcellent: 'Excellent (10)',
+    yourMood: 'Your mood',
+    continue: 'Continue',
   },
 };

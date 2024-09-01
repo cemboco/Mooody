@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../utils/translations';
 
 const initialMoods = [
   { emoji: "😊", label: "Glücklich" },
@@ -19,6 +21,9 @@ const emojiOptions = [
 ];
 
 const MoodSelector = ({ onMoodSelect }) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [moods, setMoods] = useState(initialMoods);
   const [selectedMood, setSelectedMood] = useState(null);
   const [customMood, setCustomMood] = useState('');
@@ -45,7 +50,7 @@ const MoodSelector = ({ onMoodSelect }) => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Wähle deine Stimmung</h2>
+      <h2 className="text-2xl font-bold">{t.moodSelectorTitle}</h2>
       <div className="flex flex-wrap justify-center gap-4">
         {moods.map((mood) => (
           <Button
@@ -83,14 +88,14 @@ const MoodSelector = ({ onMoodSelect }) => {
           type="text"
           value={customMood}
           onChange={(e) => setCustomMood(e.target.value)}
-          placeholder="Eigene Stimmung eingeben"
+          placeholder={t.newActivityPlaceholder}
         />
-        <Button onClick={handleAddCustomMood}>Hinzufügen</Button>
+        <Button onClick={handleAddCustomMood}>{t.saveActivity}</Button>
       </div>
       {selectedMood && (
         <div className="space-y-4 mt-6">
-          <p className="text-lg">Du fühlst dich {selectedMood.emoji} {selectedMood.label}</p>
-          <Button onClick={handleSubmit} className="w-full">Bestätigen</Button>
+          <p className="text-lg">{t.youFeelLabel} {selectedMood.emoji} {selectedMood.label}</p>
+          <Button onClick={handleSubmit} className="w-full">{t.selectActivity}</Button>
         </div>
       )}
     </div>

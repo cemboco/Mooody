@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../utils/translations';
 
 const InitialMoodAssessment = ({ onAssessmentComplete }) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [moodValue, setMoodValue] = useState(5);
 
   const handleSliderChange = (value) => {
@@ -15,7 +20,7 @@ const InitialMoodAssessment = ({ onAssessmentComplete }) => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Wie ist dein Gemütszustand?</h2>
+      <h2 className="text-2xl font-bold">{t.initialMoodQuestion}</h2>
       <div className="space-y-4">
         <Slider
           defaultValue={[5]}
@@ -24,12 +29,12 @@ const InitialMoodAssessment = ({ onAssessmentComplete }) => {
           onValueChange={handleSliderChange}
         />
         <div className="flex justify-between text-sm">
-          <span>Sehr schlecht (1)</span>
-          <span>Hervorragend (10)</span>
+          <span>{t.moodVeryBad}</span>
+          <span>{t.moodExcellent}</span>
         </div>
-        <p className="text-center">Dein Gemütszustand: {moodValue}</p>
+        <p className="text-center">{t.yourMood}: {moodValue}</p>
       </div>
-      <Button onClick={handleSubmit} className="w-full">Weiter</Button>
+      <Button onClick={handleSubmit} className="w-full">{t.continue}</Button>
     </div>
   );
 };
