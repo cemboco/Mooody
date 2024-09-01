@@ -34,6 +34,7 @@ const Index = () => {
   const [moodHistory, setMoodHistory] = useState([]);
   const [showReflection, setShowReflection] = useState(false);
   const [showMindfulness, setShowMindfulness] = useState(false);
+  const [showTimer, setShowTimer] = useState(false);
 
   const handleNotificationClick = () => {
     setShowInitialAssessment(true);
@@ -50,9 +51,11 @@ const Index = () => {
     setShowMoodSelector(false);
     const activity = selectActivity(mood.labelKey, language);
     setSuggestedActivity(activity);
+    setShowTimer(true);
   };
 
-  const handleActivityComplete = () => {
+  const handleTimerComplete = () => {
+    setShowTimer(false);
     setShowMoodRating(true);
   };
 
@@ -64,13 +67,11 @@ const Index = () => {
 
   const handleReflectionComplete = (reflection) => {
     setShowReflection(false);
-    // Here you can save the reflection if needed
     setShowMindfulness(true);
   };
 
   const handleMindfulnessComplete = () => {
     setShowMindfulness(false);
-    // Here you can update mood history and show progress
     const newMoodEntry = {
       date: new Date(),
       initialMood: initialMoodRating,
@@ -78,8 +79,14 @@ const Index = () => {
       activity: suggestedActivity.name
     };
     setMoodHistory([...moodHistory, newMoodEntry]);
-    // Reset states for a new session
+    displayPositiveMessage();
     resetStates();
+  };
+
+  const displayPositiveMessage = () => {
+    const messages = [t.positiveMessage1, t.positiveMessage2, t.positiveMessage3, t.positiveMessage4, t.positiveMessage5];
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    setPositiveMessage(randomMessage);
   };
 
   const resetStates = () => {
@@ -91,13 +98,39 @@ const Index = () => {
     setFinalMoodRating(null);
     setShowReflection(false);
     setShowMindfulness(false);
+    setShowTimer(false);
   };
+
+  const handleCustomActivitySubmit = (e) => {
+    e.preventDefault();
+    if (customActivity.trim()) {
+      setSavedActivities([...savedActivities, customActivity]);
+      setCustomActivity('');
+    }
+  };
+
+  const handleSavedActivitySelect = (activity) => {
+    setSuggestedActivity({ name: activity });
+    setShowTimer(true);
+  };
+
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + timerMinutes * 60);
+  const {
+    seconds,
+    minutes,
+    isRunning,
+    start,
+    pause,
+    resume,
+    restart,
+  } = useTimer({ expiryTimestamp: time, onExpire: handleTimerComplete });
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody overflow-hidden">
       <LanguageToggle />
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
-        {!showInitialAssessment && !showMoodSelector && !selectedMood && (
+        {!showInitialAssessment && !showMoodSelector && !selectedMood && !showTimer && !showMoodRating && !showReflection && !showMindfulness && (
           <>
             <div className="animated-title w-full h-full flex items-center justify-center">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody">{t.title}</h1>
@@ -120,11 +153,22 @@ const Index = () => {
         {showMoodSelector && (
           <MoodSelector onMoodSelect={handleMoodSelect} />
         )}
-        {selectedMood && suggestedActivity && !showMoodRating && !showReflection && !showMindfulness && (
+        {selectedMood && suggestedActivity && showTimer && (
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
             <p className="text-xl mb-4">{suggestedActivity.name}</p>
-            <Button onClick={handleActivityComplete}>{t.endActivity}</Button>
+            <div className="text-4xl mb-4">
+              {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+            </div>
+            {!isRunning ? (
+              <Button onClick={start}>{t.startTimer}</Button>
+            ) : (
+              <Button onClick={pause}>{t.pauseTimer}</Button>
+            )}
+            {!isRunning && seconds !== 0 && (
+              <Button onClick={resume} className="ml-2">{t.resumeTimer}</Button>
+            )}
+            <Button onClick={handleTimerComplete} className="ml-2">{t.endActivity}</Button>
           </div>
         )}
         {showMoodRating && (
@@ -136,8 +180,36 @@ const Index = () => {
         {showMindfulness && (
           <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={() => setShowMindfulness(false)} />
         )}
-        {moodHistory.length > 0 && !showInitialAssessment && !showMoodSelector && !selectedMood && !showMoodRating && !showReflection && !showMindfulness && (
+        {moodHistory.length > 0 && !showInitialAssessment && !showMoodSelector && !selectedMood && !showTimer && !showMoodRating && !showReflection && !showMindfulness && (
           <ProgressTracker moodData={moodHistory} />
+        )}
+        {positiveMessage && (
+          <div className="mt-4 text-center">
+            <p className="text-xl font-bold">{positiveMessage}</p>
+          </div>
+        )}
+        <div className="mt-4">
+          <form onSubmit={handleCustomActivitySubmit} className="flex space-x-2">
+            <Input
+              type="text"
+              value={customActivity}
+              onChange={(e) => setCustomActivity(e.target.value)}
+              placeholder={t.newActivityPlaceholder}
+            />
+            <Button type="submit">{t.saveActivity}</Button>
+          </form>
+        </div>
+        {savedActivities.length > 0 && (
+          <div className="mt-4">
+            <h3 className="text-lg font-bold mb-2">{t.savedActivities}</h3>
+            <div className="flex flex-wrap gap-2">
+              {savedActivities.map((activity, index) => (
+                <Button key={index} onClick={() => handleSavedActivitySelect(activity)}>
+                  {activity}
+                </Button>
+              ))}
+            </div>
+          </div>
         )}
       </div>
     </div>
