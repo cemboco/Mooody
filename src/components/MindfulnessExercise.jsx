@@ -26,14 +26,24 @@ const MindfulnessExercise = ({ onComplete }) => {
     setIsActive(!isActive);
   };
 
+  const handleSkip = () => {
+    setIsActive(false);
+    onComplete();
+  };
+
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-semibold">{t.mindfulnessTitle}</h3>
       <p>{t.mindfulnessInstruction}</p>
       <div className="text-3xl font-bold text-center">{timeLeft}s</div>
-      <Button onClick={toggleTimer} className="w-full">
-        {isActive ? t.pauseMindfulness : t.startMindfulness}
-      </Button>
+      <div className="flex space-x-2">
+        <Button onClick={toggleTimer} className="flex-1">
+          {isActive ? t.pauseMindfulness : t.startMindfulness}
+        </Button>
+        <Button onClick={handleSkip} variant="outline" className="flex-1">
+          {t.skipMindfulness}
+        </Button>
+      </div>
     </div>
   );
 };

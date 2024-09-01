@@ -36,7 +36,6 @@ export const translations = {
     angry: 'Wütend',
     stressed: 'Gestresst',
     anxious: 'Ängstlich',
-    inspirationalQuote: 'Deine Stimmung ist wie das Wetter: Sie ändert sich ständig. Mit Moody hast du den Regenschirm und die Sonnenbrille immer dabei.',
     reflectionPrompt: 'Reflektiere über deine Aktivität:',
     reflectionPlaceholder: 'Was hast du gelernt? Wie fühlst du dich jetzt?',
     submitReflection: 'Reflexion abschließen',
@@ -46,6 +45,7 @@ export const translations = {
     mindfulnessInstruction: 'Atme tief ein und aus. Konzentriere dich auf den gegenwärtigen Moment.',
     startMindfulness: 'Übung starten',
     pauseMindfulness: 'Pause',
+    skipMindfulness: 'Überspringen',
   },
   en: {
     title: 'Moody',
@@ -84,7 +84,6 @@ export const translations = {
     angry: 'Angry',
     stressed: 'Stressed',
     anxious: 'Anxious',
-    inspirationalQuote: 'Your mood is like the weather: it\'s always changing. With Moody, you always have both an umbrella and sunglasses.',
     reflectionPrompt: 'Reflect on your activity:',
     reflectionPlaceholder: 'What did you learn? How do you feel now?',
     submitReflection: 'Submit Reflection',
@@ -94,5 +93,6 @@ export const translations = {
     mindfulnessInstruction: 'Take deep breaths. Focus on the present moment.',
     startMindfulness: 'Start Exercise',
     pauseMindfulness: 'Pause',
+    skipMindfulness: 'Skip',
   },
 };
