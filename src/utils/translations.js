@@ -36,6 +36,7 @@ export const translations = {
     angry: 'Wütend',
     stressed: 'Gestresst',
     anxious: 'Ängstlich',
+    inspirationalQuote: 'Deine Stimmung ist wie das Wetter: Sie ändert sich ständig. Mit Moody hast du den Regenschirm und die Sonnenbrille immer dabei.',
   },
   en: {
     title: 'Moody',
@@ -74,5 +75,6 @@ export const translations = {
     angry: 'Angry',
     stressed: 'Stressed',
     anxious: 'Anxious',
+    inspirationalQuote: 'Your mood is like the weather: it\'s always changing. With Moody, you always have both an umbrella and sunglasses.',
   },
 };
