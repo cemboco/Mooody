@@ -14,7 +14,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { X, Share2, Instagram, Facebook, AtSign } from 'lucide-react';
+import { Share2, Instagram, AtSign } from 'lucide-react';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -320,7 +320,7 @@ const Index = () => {
       )}
       {showMoodRating && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
+          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full h-full sm:h-auto overflow-y-auto">
             <h1 className="text-3xl sm:text-4xl font-bold mb-6 rounded-moody">{t.title}</h1>
             {positiveMessage ? (
               <div>
