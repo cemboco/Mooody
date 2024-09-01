@@ -49,6 +49,7 @@ export const translations = {
     skipMindfulness: 'Überspringen',
     backButton: 'Zurück',
     moodLabel: 'Stimmung',
+    shareProgressCTA: 'Teile deinen Fortschritt und inspiriere andere!',
   },
   en: {
     title: 'Moody',
@@ -100,5 +101,6 @@ export const translations = {
     skipMindfulness: 'Skip',
     backButton: 'Back',
     moodLabel: 'Mood',
+    shareProgressCTA: 'Share your progress and inspire others!',
   },
 };

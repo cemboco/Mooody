@@ -347,6 +347,7 @@ const Index = () => {
                 <p className="text-lg mb-4">{t.moodImprovement.replace('{initial}', initialMoodRating).replace('{final}', finalMoodRating)}</p>
                 <p className="text-md mb-4">{t.activityDone.replace('{activity}', suggestedActivity?.name)}</p>
                 <ProgressTracker moodData={moodHistory} />
+                <p className="text-lg font-semibold mt-6 mb-2">{t.shareProgressCTA}</p>
                 <div className="flex flex-wrap justify-center gap-2 mt-4">
                   <Button onClick={() => handleShare('instagram')}><Instagram className="h-4 w-4 mr-2" /> Instagram</Button>
                   <Button onClick={() => handleShare('twitter')}>X</Button>
