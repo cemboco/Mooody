@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import MoodSelector from '../components/MoodSelector';
 import NotificationButton from '../components/NotificationButton';
-import { selectGame } from '../utils/gameSelector';
+import { selectActivity } from '../utils/gameSelector';
 import { Button } from "@/components/ui/button"
 
 const Index = () => {
   const [showMoodSelector, setShowMoodSelector] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
-  const [suggestedGame, setSuggestedGame] = useState(null);
+  const [suggestedActivity, setSuggestedActivity] = useState(null);
 
   const handleNotificationClick = () => {
     setShowMoodSelector(true);
@@ -15,13 +15,13 @@ const Index = () => {
 
   const handleMoodSelect = (mood) => {
     setSelectedMood(mood);
-    const game = selectGame(mood.label);
-    setSuggestedGame(game);
+    const activity = selectActivity(mood.label);
+    setSuggestedActivity(activity);
   };
 
-  const handlePlayAgain = () => {
+  const handleTryAgain = () => {
     setSelectedMood(null);
-    setSuggestedGame(null);
+    setSuggestedActivity(null);
     setShowMoodSelector(false);
   };
 
@@ -41,12 +41,12 @@ const Index = () => {
           ) : selectedMood && (
             <>
               <p className="text-2xl mb-4">Du fühlst dich: {selectedMood.emoji} {selectedMood.label}</p>
-              {suggestedGame && (
+              {suggestedActivity && (
                 <div className="mt-6">
-                  <p className="text-xl mb-2">Hier ist ein Spiel, das dir helfen könnte:</p>
-                  <p className="text-3xl font-bold mb-6">{suggestedGame.name}</p>
-                  <Button onClick={handlePlayAgain} className="mt-4">
-                    Nochmal spielen
+                  <p className="text-xl mb-2">Hier ist eine Aufgabe oder Tätigkeit, die dir helfen könnte:</p>
+                  <p className="text-3xl font-bold mb-6">{suggestedActivity.name}</p>
+                  <Button onClick={handleTryAgain} className="mt-4">
+                    Andere Aufgabe vorschlagen
                   </Button>
                 </div>
               )}
