@@ -46,6 +46,7 @@ export const translations = {
     startMindfulness: 'Übung starten',
     pauseMindfulness: 'Pause',
     skipMindfulness: 'Überspringen',
+    moodLabel: 'Stimmung',
   },
   en: {
     title: 'Moody',
@@ -94,5 +95,6 @@ export const translations = {
     startMindfulness: 'Start Exercise',
     pauseMindfulness: 'Pause',
     skipMindfulness: 'Skip',
+    moodLabel: 'Mood',
   },
 };

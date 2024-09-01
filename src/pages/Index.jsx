@@ -8,7 +8,7 @@ import LanguageToggle from '../components/LanguageToggle';
 import ReflectionPrompt from '../components/ReflectionPrompt';
 import ProgressTracker from '../components/ProgressTracker';
 import MindfulnessExercise from '../components/MindfulnessExercise';
-import { selectActivity, addCustomMood } from '../utils/gameSelector';
+import { selectActivity } from '../utils/gameSelector';
 import { getPersonalizedRecommendation } from '../utils/personalizedRecommendations';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
@@ -73,9 +73,6 @@ const Index = () => {
 
   const handleMoodSelect = (mood) => {
     setSelectedMood(mood);
-    if (mood.emoji === "🆕") {
-      addCustomMood(mood.label, language);
-    }
     const personalizedActivity = getPersonalizedRecommendation(moodHistory, selectActivity(mood.label, language));
     setSuggestedActivity(personalizedActivity || selectActivity(mood.label, language));
   };
@@ -107,7 +104,11 @@ const Index = () => {
     const moodImprovement = rating - initialMoodRating;
     setFinalMoodRating(rating);
 
-    const updatedMoodHistory = [...moodHistory, rating];
+    const newMoodEntry = {
+      date: new Date().toISOString(),
+      mood: rating
+    };
+    const updatedMoodHistory = [...moodHistory, newMoodEntry];
     setMoodHistory(updatedMoodHistory);
     localStorage.setItem('moodHistory', JSON.stringify(updatedMoodHistory));
 
