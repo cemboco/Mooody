@@ -34,7 +34,7 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedMood) {
+    if (selectedMood && selectedMood.label) {
       const activity = selectActivity(selectedMood.label, language);
       setSuggestedActivity(activity);
     }
@@ -198,7 +198,9 @@ const Index = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
             <h1 className="text-3xl sm:text-4xl font-bold mb-6 rounded-moody">{t.title}</h1>
-            <p className="text-xl mb-4">{t.youFeelLabel} {selectedMood.emoji} {t[selectedMood.label.toLowerCase()]}</p>
+            <p className="text-xl mb-4">
+              {t.youFeelLabel} {selectedMood.emoji} {selectedMood.label && t[selectedMood.label.toLowerCase()]}
+            </p>
             {suggestedActivity && (
               <div className="mt-6">
                 <p className="text-lg mb-2">{t.suggestedActivityLabel}</p>
