@@ -8,6 +8,7 @@ import LanguageToggle from '../components/LanguageToggle';
 import ReflectionPrompt from '../components/ReflectionPrompt';
 import ProgressTracker from '../components/ProgressTracker';
 import MindfulnessExercise from '../components/MindfulnessExercise';
+import UserStats from '../components/UserStats';
 import { selectActivity } from '../utils/gameSelector';
 import { getPersonalizedRecommendation } from '../utils/personalizedRecommendations';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -61,12 +62,18 @@ const Index = () => {
   const [moodHistory, setMoodHistory] = useState([]);
   const [showReflection, setShowReflection] = useState(false);
   const [showMindfulness, setShowMindfulness] = useState(false);
+  const [userCount, setUserCount] = useState(0);
+  const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
 
   useEffect(() => {
     const storedActivities = JSON.parse(localStorage.getItem('customActivities') || '[]');
     setSavedActivities(storedActivities);
     const storedMoodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
     setMoodHistory(storedMoodHistory);
+    const storedUserCount = parseInt(localStorage.getItem('userCount') || '0');
+    setUserCount(storedUserCount);
+    const storedTotalMoodImprovement = parseFloat(localStorage.getItem('totalMoodImprovement') || '0');
+    setTotalMoodImprovement(storedTotalMoodImprovement);
   }, []);
 
   useEffect(() => {
@@ -149,6 +156,14 @@ const Index = () => {
     setMoodHistory(updatedMoodHistory);
     localStorage.setItem('moodHistory', JSON.stringify(updatedMoodHistory));
 
+    // Update user count and total mood improvement
+    const newUserCount = userCount + 1;
+    const newTotalMoodImprovement = totalMoodImprovement + moodImprovement;
+    setUserCount(newUserCount);
+    setTotalMoodImprovement(newTotalMoodImprovement);
+    localStorage.setItem('userCount', newUserCount.toString());
+    localStorage.setItem('totalMoodImprovement', newTotalMoodImprovement.toString());
+
     setPositiveMessage(getRandomMotivationalMessage());
   };
 
@@ -211,6 +226,8 @@ const Index = () => {
 
   const showLanguageToggle = !showInitialAssessment && !showMoodSelector && !selectedMood && !showMoodRating && !showReflection && !showMindfulness;
 
+  const averageMoodImprovement = userCount > 0 ? (totalMoodImprovement / userCount) * 10 : 0;
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody overflow-hidden">
       {showLanguageToggle && <LanguageToggle />}
@@ -220,6 +237,7 @@ const Index = () => {
             <div className="animated-title w-full h-full flex flex-col items-center justify-center">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody">{t.title}</h1>
               <p className="text-lg sm:text-xl md:text-2xl mt-4 text-center max-w-2xl">{t.subtitle}</p>
+              <UserStats userCount={userCount} averageMoodImprovement={averageMoodImprovement} />
               <div className="ball ball1"></div>
               <div className="ball ball2"></div>
               <div className="ball ball3"></div>
@@ -348,6 +366,7 @@ const Index = () => {
                 <p className="text-lg mb-4">{t.moodImprovement.replace('{initial}', initialMoodRating).replace('{final}', finalMoodRating)}</p>
                 <p className="text-md mb-4">{t.activityDone.replace('{activity}', suggestedActivity?.name)}</p>
                 <ProgressTracker moodData={moodHistory} />
+                <UserStats userCount={userCount} averageMoodImprovement={averageMoodImprovement} />
                 <p className="text-lg font-semibold mt-6 mb-2">{t.shareProgressCTA}</p>
                 <div className="flex flex-wrap justify-center gap-2 mt-4">
                   <Button onClick={() => handleShare('instagram')}><Instagram className="h-4 w-4 mr-2" /> Instagram</Button>
