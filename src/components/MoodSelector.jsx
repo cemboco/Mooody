@@ -12,7 +12,11 @@ const initialMoods = [
   { emoji: "😨", label: "Ängstlich" },
 ];
 
-const emojiOptions = ["😊", "😢", "😴", "😠", "😰", "😨", "😍", "🤔", "😎", "🙃", "😇", "🤯", "😤", "🥳", "😌", "🤗"];
+const emojiOptions = [
+  "😊", "😢", "😴", "😠", "😰", "😨", "😍", "🤔", "😎", "🙃",
+  "😇", "🤯", "😤", "🥳", "😌", "🤗", "😂", "🥰", "😋", "😒",
+  "😩", "😭", "🥺", "😳", "🤩", "🤪", "😵", "🤓", "😏", "😑"
+];
 
 const MoodSelector = ({ onMoodSelect }) => {
   const [moods, setMoods] = useState(initialMoods);
@@ -61,7 +65,7 @@ const MoodSelector = ({ onMoodSelect }) => {
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-64">
-            <div className="grid grid-cols-8 gap-2">
+            <div className="grid grid-cols-6 gap-2">
               {emojiOptions.map((emoji) => (
                 <Button
                   key={emoji}
