@@ -39,7 +39,20 @@ const Index = () => {
     setShowInitialAssessment(true);
   };
 
-  // ... (rest of the component logic remains unchanged)
+  const handleInitialAssessmentComplete = (rating) => {
+    setInitialMoodRating(rating);
+    setShowInitialAssessment(false);
+    setShowMoodSelector(true);
+  };
+
+  const handleMoodSelect = (mood) => {
+    setSelectedMood(mood);
+    setShowMoodSelector(false);
+    const activity = selectActivity(mood.labelKey, language);
+    setSuggestedActivity(activity);
+  };
+
+  // Add other necessary functions here...
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody overflow-hidden">
@@ -62,8 +75,14 @@ const Index = () => {
             <NotificationButton onClick={handleNotificationClick} />
           </>
         )}
+        {showInitialAssessment && (
+          <InitialMoodAssessment onAssessmentComplete={handleInitialAssessmentComplete} />
+        )}
+        {showMoodSelector && (
+          <MoodSelector onMoodSelect={handleMoodSelect} />
+        )}
+        {/* Add other conditional renders here... */}
       </div>
-      {/* ... (rest of the JSX remains unchanged) */}
     </div>
   );
 };
