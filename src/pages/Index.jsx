@@ -165,9 +165,9 @@ const Index = () => {
     localStorage.setItem('userCount', newUserCount.toString());
     localStorage.setItem('totalMoodImprovement', newTotalMoodImprovement.toString());
 
-    // Calculate average mood
-    const totalMood = updatedMoodHistory.reduce((sum, entry) => sum + entry.mood, 0);
-    const newAverageMood = totalMood / updatedMoodHistory.length;
+    // Calculate average mood including the current rating
+    const totalMood = updatedMoodHistory.reduce((sum, entry) => sum + entry.mood, 0) + rating;
+    const newAverageMood = totalMood / (updatedMoodHistory.length + 1);
     setAverageMood(newAverageMood);
 
     setPositiveMessage(getRandomMotivationalMessage());
