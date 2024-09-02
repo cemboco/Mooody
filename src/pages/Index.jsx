@@ -235,11 +235,14 @@ const Index = () => {
               <div className="ball ball9"></div>
               <p className="text-lg sm:text-xl md:text-2xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed mb-16 relative z-10 absolute bottom-8">{t.subtitle}</p>
             </div>
+            <div className="absolute top-8 left-[calc(50%-130px)] sm:left-[calc(50%-135px)] transform -translate-x-1/2 translate-y-4">
+              <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" className="pointer-events-none">
+                <path d="M25 45C36.0457 45 45 36.0457 45 25C45 13.9543 36.0457 5 25 5C13.9543 5 5 13.9543 5 25C5 36.0457 13.9543 45 25 45Z" stroke="black" strokeWidth="2"/>
+                <path d="M25 35V15M25 15L15 25M25 15L35 25" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
             <div className="absolute top-8 left-[calc(50%+125px)] sm:left-[calc(50%+130px)] transform -translate-x-1/2 translate-y-4">
               <NotificationButton onClick={handleNotificationClick} />
-            </div>
-            <div className="absolute top-8 left-[calc(50%+205px)] sm:left-[calc(50%+210px)] transform -translate-x-1/2 translate-y-4 text-4xl animate-bounce">
-              👈
             </div>
           </>
         )}
