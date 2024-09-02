@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import AnimatedBackground from '../components/AnimatedBackground';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-moody">
+    <AnimatedBackground>
       <div className="text-center p-8 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
         <form onSubmit={handleSignUp}>
@@ -41,7 +42,7 @@ const SignUp = () => {
         </form>
         <p className="mt-2">Already have an account? <Button variant="link" onClick={() => navigate('/')}>Log In</Button></p>
       </div>
-    </div>
+    </AnimatedBackground>
   );
 };
 
