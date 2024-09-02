@@ -238,6 +238,8 @@ const Index = () => {
     navigate('/');
   };
 
+  const showBackButton = showInitialAssessment || showMoodSelector || selectedMood || showMoodRating || showReflection || showMindfulness;
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody text-moodyText overflow-hidden">
       {showLanguageToggle && <LanguageToggle />}
@@ -249,14 +251,16 @@ const Index = () => {
       >
         <Home className="h-4 w-4" />
       </Button>
-      <Button
-        onClick={handleGoBack}
-        className="fixed bottom-4 left-4 z-[60]"
-        variant="outline"
-        size="icon"
-      >
-        <ArrowLeft className="h-4 w-4" />
-      </Button>
+      {showBackButton && (
+        <Button
+          onClick={handleGoBack}
+          className="fixed bottom-4 left-4 z-[60]"
+          variant="outline"
+          size="icon"
+        >
+          <ArrowLeft className="h-4 w-4" />
+        </Button>
+      )}
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
         {!showInitialAssessment && !showMoodSelector && !selectedMood && (
           <>
