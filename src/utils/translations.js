@@ -75,7 +75,7 @@ export const translations = {
   },
   en: {
     title: 'Moody',
-    subtitle: 'Experience how easy it can be to lift your mood and gain new strength!',
+    subtitle: "I'm here to ask how you feel, not how you're doing.",
     notificationButton: 'How are you feeling right now?',
     moodSelectorTitle: 'Choose your mood',
     youFeelLabel: 'You feel',
