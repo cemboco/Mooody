@@ -41,6 +41,7 @@ const Index = () => {
   const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
   const [averageMood, setAverageMood] = useState(0);
   const [typedSubtitle, setTypedSubtitle] = useState('');
+  const [showBackButton, setShowBackButton] = useState(false);
 
   useEffect(() => {
     const subtitle = "Weil 'Wie geht's?' oft nicht ausreicht";
@@ -57,11 +58,39 @@ const Index = () => {
     return () => clearInterval(typingInterval);
   }, []);
 
-  // ... rest of the component code remains unchanged
+  const handleNotificationClick = () => {
+    setShowInitialAssessment(true);
+  };
+
+  const handleGoHome = () => {
+    // Reset all states here
+    setShowInitialAssessment(false);
+    setShowMoodSelector(false);
+    setSelectedMood(null);
+    setSuggestedActivity(null);
+    setShowMoodRating(false);
+    setShowReflection(false);
+    setShowMindfulness(false);
+    setTypedSubtitle('');
+    // Add any other state resets as needed
+  };
+
+  const handleGoBack = () => {
+    // Implement your back logic here
+    // For example:
+    if (showMoodRating) {
+      setShowMoodRating(false);
+      setSelectedMood(null);
+    } else if (showReflection) {
+      setShowReflection(false);
+      setShowMoodRating(true);
+    }
+    // Add more conditions as needed
+  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody text-moodyText overflow-hidden">
-      {showLanguageToggle && <LanguageToggle />}
+      <LanguageToggle />
       <Button
         onClick={handleGoHome}
         className="fixed top-4 right-4 z-[60]"
@@ -103,8 +132,62 @@ const Index = () => {
             </div>
           </>
         )}
+        {showInitialAssessment && (
+          <InitialMoodAssessment onAssessmentComplete={(rating) => {
+            setInitialMoodRating(rating);
+            setShowInitialAssessment(false);
+            setShowMoodSelector(true);
+          }} />
+        )}
+        {showMoodSelector && (
+          <MoodSelector onMoodSelect={(mood) => {
+            setSelectedMood(mood);
+            setShowMoodSelector(false);
+            // Here you would typically call a function to suggest an activity based on the mood
+            const activity = selectActivity(mood.labelKey, language);
+            setSuggestedActivity(activity);
+            setShowBackButton(true);
+          }} />
+        )}
+        {selectedMood && suggestedActivity && !showMoodRating && !showReflection && !showMindfulness && (
+          <div className="text-center">
+            <h2 className="text-xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
+            <p className="text-lg mb-4">{suggestedActivity.name}</p>
+            <Button onClick={() => setShowMoodRating(true)}>{t.endActivity}</Button>
+          </div>
+        )}
+        {showMoodRating && (
+          <MoodRatingScale onRatingSelect={(rating) => {
+            setFinalMoodRating(rating);
+            setShowMoodRating(false);
+            setShowReflection(true);
+          }} />
+        )}
+        {showReflection && (
+          <ReflectionPrompt
+            onComplete={(reflection) => {
+              // Handle the reflection submission
+              setShowReflection(false);
+              setShowMindfulness(true);
+            }}
+            onSkip={() => {
+              setShowReflection(false);
+              setShowMindfulness(true);
+            }}
+          />
+        )}
+        {showMindfulness && (
+          <MindfulnessExercise
+            onComplete={() => {
+              // Handle mindfulness exercise completion
+              setShowMindfulness(false);
+              // Show final results or return to home screen
+              handleGoHome();
+            }}
+            onBack={handleGoBack}
+          />
+        )}
       </div>
-      {/* ... rest of the JSX remains unchanged */}
     </div>
   );
 };
