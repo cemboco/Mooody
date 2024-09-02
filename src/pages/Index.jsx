@@ -41,10 +41,6 @@ const Index = () => {
   const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
   const [averageMood, setAverageMood] = useState(0);
 
-  const handleNotificationClick = () => {
-    setShowInitialAssessment(true);
-  };
-
   // ... (rest of the component logic remains unchanged)
 
   const showLanguageToggle = !showInitialAssessment && !showMoodSelector && !selectedMood && !showMoodRating && !showReflection && !showMindfulness;
