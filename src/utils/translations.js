@@ -1,7 +1,7 @@
 export const translations = {
   de: {
     title: 'Moody',
-    subtitle: 'Erlebe, wie einfach es sein kann, deine Stimmung zu heben und neue Kraft zu schöpfen!',
+    subtitle: 'Ich bin hier um dich zu fragen wie du dich fühlst und nicht wie es dir geht.',
     notificationButton: 'Wie fühlst du dich gerade?',
     moodSelectorTitle: 'Wähle deine Stimmung',
     youFeelLabel: 'Du fühlst dich',
