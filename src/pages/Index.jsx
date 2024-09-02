@@ -40,40 +40,6 @@ const Index = () => {
   const [userCount, setUserCount] = useState(0);
   const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
   const [averageMood, setAverageMood] = useState(0);
-  const [showLanguageToggle, setShowLanguageToggle] = useState(true);
-  const [showBackButton, setShowBackButton] = useState(false);
-
-  const handleNotificationClick = () => {
-    setShowInitialAssessment(true);
-    setShowLanguageToggle(false);
-  };
-
-  const handleGoHome = () => {
-    setShowInitialAssessment(false);
-    setShowMoodSelector(false);
-    setSelectedMood(null);
-    setSuggestedActivity(null);
-    setShowMoodRating(false);
-    setShowReflection(false);
-    setShowMindfulness(false);
-    setShowLanguageToggle(true);
-    setShowBackButton(false);
-  };
-
-  const handleGoBack = () => {
-    if (showMoodRating) {
-      setShowMoodRating(false);
-      setSuggestedActivity(null);
-    } else if (showReflection) {
-      setShowReflection(false);
-      setShowMoodRating(true);
-    } else if (showMindfulness) {
-      setShowMindfulness(false);
-      setShowReflection(true);
-    } else {
-      handleGoHome();
-    }
-  };
 
   // ... (rest of the component logic remains unchanged)
 
@@ -119,8 +85,8 @@ const Index = () => {
             </div>
           </>
         )}
-        {/* ... (rest of the JSX remains unchanged) */}
       </div>
+      {/* ... (rest of the JSX remains unchanged) */}
     </div>
   );
 };
