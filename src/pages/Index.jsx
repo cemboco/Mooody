@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTimer } from 'react-timer-hook';
+import { Link, useNavigate } from 'react-router-dom';
 import MoodSelector from '../components/MoodSelector';
 import NotificationButton from '../components/NotificationButton';
 import MoodRatingScale from '../components/MoodRatingScale';
@@ -16,11 +17,11 @@ import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Share2, Instagram, AtSign, X, Home } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 const Index = () => {
   const { language } = useLanguage();
   const t = translations[language];
+  const navigate = useNavigate();
 
   const [showInitialAssessment, setShowInitialAssessment] = useState(false);
   const [showMoodSelector, setShowMoodSelector] = useState(false);
@@ -212,11 +213,14 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody overflow-hidden">
       {showLanguageToggle && <LanguageToggle />}
-      <Link to="/" className="fixed top-4 right-4 z-50">
-        <Button variant="outline" size="icon">
-          <Home className="h-4 w-4" />
-        </Button>
-      </Link>
+      <Button
+        onClick={() => navigate('/')}
+        className="fixed top-4 right-4 z-50"
+        variant="outline"
+        size="icon"
+      >
+        <Home className="h-4 w-4" />
+      </Button>
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
         {!showInitialAssessment && !showMoodSelector && !selectedMood && (
           <>
