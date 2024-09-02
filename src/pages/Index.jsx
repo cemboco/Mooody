@@ -282,14 +282,14 @@ const Index = () => {
         )}
       </div>
       {showInitialAssessment && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-sm w-full">
             <InitialMoodAssessment onAssessmentComplete={handleInitialAssessmentComplete} />
           </div>
         </div>
       )}
       {showMoodSelector && !selectedMood && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-sm w-full">
             <h1 className="text-3xl sm:text-4xl font-bold mb-6 rounded-moody">{t.title}</h1>
             <MoodSelector onMoodSelect={handleMoodSelect} title={t.moodSelectorTitle} />
@@ -297,7 +297,7 @@ const Index = () => {
         </div>
       )}
       {selectedMood && !showMoodRating && !showReflection && !showMindfulness && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
             <h1 className="text-3xl sm:text-4xl font-bold mb-6 rounded-moody">{t.title}</h1>
             <p className="text-xl mb-4">
@@ -372,21 +372,21 @@ const Index = () => {
         </div>
       )}
       {showReflection && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
             <ReflectionPrompt onComplete={handleReflectionComplete} onSkip={handleSkipReflection} />
           </div>
         </div>
       )}
       {showMindfulness && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
             <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={handleBackFromMindfulness} />
           </div>
         </div>
       )}
       {showMoodRating && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full max-h-[90vh] overflow-y-auto">
             <h1 className="text-3xl sm:text-4xl font-bold mb-6 rounded-moody">{t.title}</h1>
             {positiveMessage ? (
