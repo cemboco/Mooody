@@ -224,6 +224,12 @@
   animation-delay: 1s;
 }
 
+.animate-fade-in-button {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+  animation-delay: 1.2s;
+}
+
 .mooody-title {
   font-family: 'Julius Sans One', sans-serif;
   font-size: 56px;

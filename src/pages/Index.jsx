@@ -281,7 +281,9 @@ const Index = () => {
               <div className="ball ball8"></div>
               <div className="ball ball9"></div>
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-16" style={{ marginLeft: '-120px' }}>
-                <NotificationButton onClick={handleNotificationClick} />
+                <div className="animate-fade-in-button">
+                  <NotificationButton onClick={handleNotificationClick} />
+                </div>
               </div>
             </div>
           </>
