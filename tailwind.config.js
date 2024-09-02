@@ -20,6 +20,7 @@ module.exports = {
       fontFamily: {
         serif: ['Times New Roman', 'serif'],
         hevilla: ['Hevilla', 'sans-serif'],
+        'julius': ['Julius Sans One', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
