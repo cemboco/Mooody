@@ -238,9 +238,6 @@ const Index = () => {
             <div className="absolute top-8 left-[calc(50%+125px)] sm:left-[calc(50%+130px)] transform -translate-x-1/2 translate-y-4">
               <NotificationButton onClick={handleNotificationClick} />
             </div>
-            <div className="absolute top-8 left-[calc(50%+205px)] sm:left-[calc(50%+210px)] transform -translate-x-1/2 translate-y-4 text-4xl animate-bounce">
-              👈
-            </div>
           </>
         )}
       </div>
