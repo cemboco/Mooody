@@ -266,7 +266,7 @@ const Index = () => {
           <>
             <div className="animated-title w-full h-full flex flex-col items-center justify-between">
               <div className="flex-grow flex items-center justify-center flex-col">
-                <h1 className="mooody-title text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody mb-4 opacity-0 animate-fade-in-delayed">MOOODY</h1>
+                <h1 className="mooody-title text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody mb-4 opacity-0 animate-fade-in-delayed" style={{ marginTop: '-5cm' }}>MOOODY</h1>
               </div>
               <div className="ball ball1"></div>
               <div className="ball ball2"></div>
