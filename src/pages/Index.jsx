@@ -231,16 +231,6 @@ const Index = () => {
               <p className="text-lg sm:text-xl md:text-2xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed mb-16 relative z-10 absolute bottom-8">{t.subtitle}</p>
             </div>
             <NotificationButton onClick={handleNotificationClick} />
-            <svg className="absolute w-full h-full pointer-events-none" style={{ zIndex: 40 }}>
-              <path
-                d="M 50% 40% Q 70% 60%, 90% 90%"
-                fill="none"
-                stroke="white"
-                strokeWidth="2"
-                strokeDasharray="5,5"
-              />
-              <polygon points="88,92 92,92 90,88" fill="white" />
-            </svg>
           </>
         )}
       </div>
