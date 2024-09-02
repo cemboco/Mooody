@@ -9,7 +9,6 @@ import ReflectionPrompt from '../components/ReflectionPrompt';
 import ProgressTracker from '../components/ProgressTracker';
 import MindfulnessExercise from '../components/MindfulnessExercise';
 import UserStats from '../components/UserStats';
-import WeeklyMoodChart from '../components/WeeklyMoodChart';
 import { selectActivity } from '../utils/gameSelector';
 import { getPersonalizedRecommendation } from '../utils/personalizedRecommendations';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -357,7 +356,6 @@ const Index = () => {
                 <p className="text-md mb-4">{t.activityDone.replace('{activity}', suggestedActivity?.name)}</p>
                 <p className="text-lg mb-4">{t.averageMood.replace('{average}', averageMood.toFixed(1))}</p>
                 <ProgressTracker moodData={moodHistory} />
-                <WeeklyMoodChart moodData={moodHistory} />
                 <UserStats userCount={userCount} averageMoodImprovement={averageMoodImprovement} />
                 <p className="text-lg font-semibold mt-6 mb-2">{t.shareProgressCTA}</p>
                 <div className="flex flex-wrap justify-center gap-2 mt-4">
