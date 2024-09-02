@@ -267,7 +267,7 @@ const Index = () => {
             <div className="animated-title w-full h-full flex flex-col items-center justify-between">
               <div className="flex-grow flex items-center justify-center flex-col">
                 <h1 className="mooody-title text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody mb-4 opacity-0 animate-fade-in-delayed" style={{ marginTop: '-5cm' }}>MOOODY</h1>
-                <p className="text-lg sm:text-xl md:text-2xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed relative z-10" style={{ marginTop: '-5rem' }}>{t.subtitle}</p>
+                <p className="text-lg sm:text-xl md:text-2xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed relative z-10" style={{ marginTop: '-7rem' }}>Weil 'Wie geht's?' oft nicht ausreicht</p>
               </div>
               <div className="ball ball1"></div>
               <div className="ball ball2"></div>
@@ -278,7 +278,7 @@ const Index = () => {
               <div className="ball ball7"></div>
               <div className="ball ball8"></div>
               <div className="ball ball9"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-16" style={{ marginLeft: '-10px' }}>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-16" style={{ marginLeft: '-20px' }}>
                 <NotificationButton onClick={handleNotificationClick} />
               </div>
             </div>
