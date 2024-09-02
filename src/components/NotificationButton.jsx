@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from "@/components/ui/button"
+import { Bell } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 
@@ -10,9 +11,12 @@ const NotificationButton = ({ onClick }) => {
   return (
     <Button
       onClick={onClick}
-      className="fixed top-4 right-4 bg-white text-black shadow-lg rounded-full p-3 flex items-center space-x-2"
+      variant="outline"
+      size="sm"
+      className="fixed top-4 right-4 z-[60] bg-white text-black hover:text-green-500 transition-colors"
     >
-      <span>{t.notificationButton}</span>
+      <Bell className="h-4 w-4 mr-2" />
+      {t.notificationButton}
     </Button>
   );
 };
