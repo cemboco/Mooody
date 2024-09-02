@@ -10,7 +10,7 @@ const NotificationButton = ({ onClick }) => {
   return (
     <Button
       onClick={onClick}
-      className="fixed top-4 right-4 bg-white text-black shadow-lg rounded-full p-4 text-lg font-semibold"
+      className="bg-white text-black shadow-lg rounded-full px-6 py-3 text-xl font-semibold"
     >
       {t.notificationButton}
     </Button>
