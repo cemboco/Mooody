@@ -17,6 +17,7 @@ import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Share2, Instagram, AtSign, X, Home, ArrowLeft } from 'lucide-react';
+import relaxingPerson from '../assets/relaxing-person.png';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -266,7 +267,7 @@ const Index = () => {
           <>
             <div className="animated-title w-full h-full flex flex-col items-center justify-between">
               <div className="flex-grow flex items-center justify-center flex-col">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody mb-4 opacity-0 animate-fade-in-delayed">{t.title}</h1>
+                <h1 className="mooody-title text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody mb-4 opacity-0 animate-fade-in-delayed">MOOODY</h1>
               </div>
               <div className="ball ball1"></div>
               <div className="ball ball2"></div>
@@ -295,7 +296,7 @@ const Index = () => {
       {showMoodSelector && !selectedMood && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-sm w-full">
-            <h1 className="text-3xl sm:text-4xl font-bold mb-6 rounded-moody">{t.title}</h1>
+            <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
             <MoodSelector onMoodSelect={handleMoodSelect} title={t.moodSelectorTitle} />
           </div>
         </div>
@@ -303,7 +304,7 @@ const Index = () => {
       {selectedMood && !showMoodRating && !showReflection && !showMindfulness && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
-            <h1 className="text-3xl sm:text-4xl font-bold mb-6 rounded-moody">{t.title}</h1>
+            <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
             <p className="text-xl mb-4">
               {t.youFeelLabel} {selectedMood.emoji} {selectedMood.label && t[selectedMood.label.toLowerCase()]}
             </p>
@@ -392,7 +393,7 @@ const Index = () => {
       {showMoodRating && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold mb-6 rounded-moody">{t.title}</h1>
+            <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
             {positiveMessage ? (
               <div>
                 <p className="text-xl font-bold text-green-600 mb-4">{positiveMessage}</p>
