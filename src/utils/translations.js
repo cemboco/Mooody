@@ -22,7 +22,7 @@ export const translations = {
     moodImprovement: 'Deine Stimmung hat sich von {initial} auf {final} verbessert!',
     activityDone: 'Du hast "{activity}" gemacht.',
     averageMood: 'Dein durchschnittlicher Gemütszustand: {average}',
-    initialMoodQuestion: 'Bemerke etwas, das dich stört. Es kann ein Gefühl in deinem Körper oder ein bestimmter Gedanke in deinem Kopf sein. Um dieser Übung willen, nennen wir dein lästiges Problem "Stress". Bewerte nun die Intensität auf einer Skala von 0-10 (wobei 10 den höchsten Stresslevel darstellt). Wie intensiv ist dieser besondere Stress?',
+    initialMoodQuestion: 'Auf einer Skala von 1-10 fühle ich mich...',
     moodVeryBad: 'Sehr schlecht (1)',
     moodExcellent: 'Hervorragend (10)',
     yourMood: 'Dein Gemütszustand',
