@@ -420,6 +420,9 @@ const Index = () => {
           </div>
         </div>
       )}
+      <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic">
+        Diese App ersetzt keine professionelle psychologische oder medizinische Beratung. Bei ernsthaften mentalen Problemen oder Krisen suchen Sie bitte einen Spezialisten oder Therapeuten auf.
+      </div>
     </div>
   );
 };
