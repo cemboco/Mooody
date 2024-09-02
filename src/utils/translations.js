@@ -2,7 +2,7 @@ export const translations = {
   de: {
     title: 'Moody',
     subtitle: 'Ich bin hier um dich zu fragen wie du dich fühlst und nicht wie es dir geht.',
-    notificationButton: 'Wie fühlst du dich gerade?',
+    notificationButton: 'Wie fühlst du dich?',
     moodSelectorTitle: 'Wähle deine Stimmung',
     youFeelLabel: 'Du fühlst dich',
     suggestedActivityLabel: 'Vorgeschlagene Aktivität:',
@@ -76,7 +76,7 @@ export const translations = {
   en: {
     title: 'Moody',
     subtitle: 'Experience how easy it can be to lift your mood and gain new strength!',
-    notificationButton: 'How are you feeling right now?',
+    notificationButton: 'How are you feeling?',
     moodSelectorTitle: 'Choose your mood',
     youFeelLabel: 'You feel',
     suggestedActivityLabel: 'Suggested activity:',
