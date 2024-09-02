@@ -264,6 +264,15 @@ const Index = () => {
         </Button>
       )}
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
+        <div className="ball ball1"></div>
+        <div className="ball ball2"></div>
+        <div className="ball ball3"></div>
+        <div className="ball ball4"></div>
+        <div className="ball ball5"></div>
+        <div className="ball ball6"></div>
+        <div className="ball ball7"></div>
+        <div className="ball ball8"></div>
+        <div className="ball ball9"></div>
         {!showInitialAssessment && !showMoodSelector && !selectedMood && (
           <>
             <div className="animated-title w-full h-full flex flex-col items-center justify-between">
@@ -273,15 +282,6 @@ const Index = () => {
                   {t.subtitle}
                 </p>
               </div>
-              <div className="ball ball1"></div>
-              <div className="ball ball2"></div>
-              <div className="ball ball3"></div>
-              <div className="ball ball4"></div>
-              <div className="ball ball5"></div>
-              <div className="ball ball6"></div>
-              <div className="ball ball7"></div>
-              <div className="ball ball8"></div>
-              <div className="ball ball9"></div>
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-16" style={{ marginLeft: '-120px' }}>
                 <div className="animate-fade-in-button">
                   <NotificationButton onClick={handleNotificationClick} />
@@ -303,15 +303,6 @@ const Index = () => {
               <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
               <MoodSelector onMoodSelect={handleMoodSelect} title={t.moodSelectorTitle} />
             </div>
-            <div className="ball ball1"></div>
-            <div className="ball ball2"></div>
-            <div className="ball ball3"></div>
-            <div className="ball ball4"></div>
-            <div className="ball ball5"></div>
-            <div className="ball ball6"></div>
-            <div className="ball ball7"></div>
-            <div className="ball ball8"></div>
-            <div className="ball ball9"></div>
           </div>
         )}
         {selectedMood && !showMoodRating && !showReflection && !showMindfulness && (
