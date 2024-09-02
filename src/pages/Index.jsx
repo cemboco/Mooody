@@ -233,11 +233,16 @@ const Index = () => {
     }
   };
 
+  const handleGoHome = () => {
+    handleEndSession();
+    navigate('/');
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody overflow-hidden">
       {showLanguageToggle && <LanguageToggle />}
       <Button
-        onClick={() => navigate('/')}
+        onClick={handleGoHome}
         className="fixed top-4 right-4 z-[60]"
         variant="outline"
         size="icon"
