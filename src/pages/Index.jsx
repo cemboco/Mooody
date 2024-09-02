@@ -242,6 +242,8 @@ const Index = () => {
 
   const showBackButton = showInitialAssessment || showMoodSelector || selectedMood || showMoodRating || showReflection || showMindfulness;
 
+  const showDisclaimer = !showInitialAssessment && !showMoodSelector && !selectedMood && !showMoodRating && !showReflection && !showMindfulness;
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody text-moodyText overflow-hidden">
       {showLanguageToggle && <LanguageToggle />}
@@ -420,9 +422,11 @@ const Index = () => {
           </div>
         </div>
       )}
-      <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic">
-        Diese App ersetzt keine professionelle psychologische oder medizinische Beratung. Bei ernsthaften mentalen Problemen oder Krisen suchen Sie bitte einen Spezialisten oder Therapeuten auf.
-      </div>
+      {showDisclaimer && (
+        <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic">
+          {t.disclaimer}
+        </div>
+      )}
     </div>
   );
 };
