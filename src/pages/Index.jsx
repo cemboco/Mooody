@@ -17,7 +17,6 @@ import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Share2, Instagram, AtSign, X, Home, ArrowLeft } from 'lucide-react';
-import relaxingPerson from '../assets/relaxing-person.png';
 
 const Index = () => {
   const { language } = useLanguage();
