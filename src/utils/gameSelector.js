@@ -1,4 +1,4 @@
-import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from './translations';
 
 const activities = {
   de: [
@@ -29,7 +29,7 @@ export const selectActivity = (mood, language) => {
   const languageActivities = activities[language] || activities.en;
   const suitableActivities = languageActivities.filter(activity => activity.mood.includes(mood));
   if (suitableActivities.length === 0) {
-    return { name: language === 'de' ? "Entspannen und reflektieren" : "Relax and reflect", mood: [mood] };
+    return { name: translations[language].defaultActivity || "Relax and reflect", mood: [mood] };
   }
   return suitableActivities[Math.floor(Math.random() * suitableActivities.length)];
 };

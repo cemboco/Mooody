@@ -94,7 +94,7 @@ const MoodSelector = ({ onMoodSelect }) => {
       </div>
       {selectedMood && (
         <div className="space-y-4 mt-6">
-          <p className="text-lg">{t.youFeelLabel} {selectedMood.emoji} {t[selectedMood.labelKey]}</p>
+          <p className="text-lg">{t.youFeelLabel} {selectedMood.emoji} {t[selectedMood.labelKey] || selectedMood.labelKey}</p>
           <Button onClick={handleSubmit} className="w-full">{t.selectActivity}</Button>
         </div>
       )}
