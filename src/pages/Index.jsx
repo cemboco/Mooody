@@ -269,7 +269,7 @@ const Index = () => {
             <div className="animated-title w-full h-full flex flex-col items-center justify-between">
               <div className="flex-grow flex items-center justify-center flex-col">
                 <h1 className="mooody-title text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody mb-4 opacity-0 animate-fade-in-delayed" style={{ marginTop: '-5cm' }}>MOOODY</h1>
-                <p className="text-lg sm:text-xl md:text-2xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed relative z-10" style={{ marginTop: '-7rem' }}>Weil 'Wie geht's?' oft nicht ausreicht</p>
+                <p className="text-lg sm:text-xl md:text-2xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed relative z-10" style={{ marginTop: '-7rem' }}>{t.subtitle}</p>
               </div>
               <div className="ball ball1"></div>
               <div className="ball ball2"></div>
@@ -421,7 +421,7 @@ const Index = () => {
         </div>
       )}
       <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic">
-        Diese App ersetzt keine professionelle psychologische oder medizinische Beratung. Bei ernsthaften mentalen Problemen oder Krisen suchen Sie bitte einen Spezialisten oder Therapeuten auf.
+        {t.disclaimer}
       </div>
     </div>
   );
