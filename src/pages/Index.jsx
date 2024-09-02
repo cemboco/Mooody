@@ -290,138 +290,147 @@ const Index = () => {
             </div>
           </>
         )}
-      </div>
-      {showInitialAssessment && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-sm w-full">
-            <InitialMoodAssessment onAssessmentComplete={handleInitialAssessmentComplete} />
+        {showInitialAssessment && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-sm w-full">
+              <InitialMoodAssessment onAssessmentComplete={handleInitialAssessmentComplete} />
+            </div>
           </div>
-        </div>
-      )}
-      {showMoodSelector && !selectedMood && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-sm w-full">
-            <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
-            <MoodSelector onMoodSelect={handleMoodSelect} title={t.moodSelectorTitle} />
+        )}
+        {showMoodSelector && !selectedMood && (
+          <div className="fixed inset-0 flex items-center justify-center bg-moody z-50 overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-sm w-full relative">
+              <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
+              <MoodSelector onMoodSelect={handleMoodSelect} title={t.moodSelectorTitle} />
+            </div>
+            <div className="ball ball1"></div>
+            <div className="ball ball2"></div>
+            <div className="ball ball3"></div>
+            <div className="ball ball4"></div>
+            <div className="ball ball5"></div>
+            <div className="ball ball6"></div>
+            <div className="ball ball7"></div>
+            <div className="ball ball8"></div>
+            <div className="ball ball9"></div>
           </div>
-        </div>
-      )}
-      {selectedMood && !showMoodRating && !showReflection && !showMindfulness && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
-            <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
-            <p className="text-xl mb-4">
-              {t.youFeelLabel} {selectedMood.emoji} {selectedMood.label && t[selectedMood.label.toLowerCase()]}
-            </p>
-            {suggestedActivity && (
-              <div className="mt-6">
-                <p className="text-lg mb-2">{t.suggestedActivityLabel}</p>
-                <p className="text-2xl font-bold mb-6">{suggestedActivity.name}</p>
-                <div className="flex flex-col items-center space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <Input
-                      type="number"
-                      value={timerMinutes}
-                      onChange={(e) => setTimerMinutes(parseInt(e.target.value) || 1)}
-                      className="w-20 text-center"
-                      min="1"
-                    />
-                    <span>{t.timerLabel}</span>
-                  </div>
+        )}
+        {selectedMood && !showMoodRating && !showReflection && !showMindfulness && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
+              <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
+              <p className="text-xl mb-4">
+                {t.youFeelLabel} {selectedMood.emoji} {selectedMood.label && t[selectedMood.label.toLowerCase()]}
+              </p>
+              {suggestedActivity && (
+                <div className="mt-6">
+                  <p className="text-lg mb-2">{t.suggestedActivityLabel}</p>
+                  <p className="text-2xl font-bold mb-6">{suggestedActivity.name}</p>
                   <div className="flex flex-col items-center space-y-4">
-                    {!isRunning ? (
-                      <Button onClick={handleStartTimer} className="w-full">{t.startTimer}</Button>
-                    ) : (
-                      <div className="text-2xl font-bold mb-4">
-                        {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
-                      </div>
-                    )}
-                    <div className="flex space-x-2">
-                      {isRunning ? (
-                        <Button onClick={pause}>{t.pauseTimer}</Button>
+                    <div className="flex items-center space-x-2">
+                      <Input
+                        type="number"
+                        value={timerMinutes}
+                        onChange={(e) => setTimerMinutes(parseInt(e.target.value) || 1)}
+                        className="w-20 text-center"
+                        min="1"
+                      />
+                      <span>{t.timerLabel}</span>
+                    </div>
+                    <div className="flex flex-col items-center space-y-4">
+                      {!isRunning ? (
+                        <Button onClick={handleStartTimer} className="w-full">{t.startTimer}</Button>
                       ) : (
-                        <Button onClick={resume} disabled={seconds === 0 && minutes === 0}>{t.resumeTimer}</Button>
+                        <div className="text-2xl font-bold mb-4">
+                          {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+                        </div>
                       )}
-                      <Button onClick={handleEndActivity}>{t.endActivity}</Button>
+                      <div className="flex space-x-2">
+                        {isRunning ? (
+                          <Button onClick={pause}>{t.pauseTimer}</Button>
+                        ) : (
+                          <Button onClick={resume} disabled={seconds === 0 && minutes === 0}>{t.resumeTimer}</Button>
+                        )}
+                        <Button onClick={handleEndActivity}>{t.endActivity}</Button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
-            <div className="mt-8">
-              <h2 className="text-xl font-bold mb-4">{t.addCustomActivity}</h2>
-              <div className="flex space-x-2">
-                <Input
-                  type="text"
-                  value={customActivity}
-                  onChange={(e) => setCustomActivity(e.target.value)}
-                  placeholder={t.newActivityPlaceholder}
-                />
-                <Button onClick={handleSaveCustomActivity}>{t.saveActivity}</Button>
-              </div>
-            </div>
-            {savedActivities.length > 0 && (
-              <div className="mt-4">
-                <h3 className="text-lg font-bold mb-2">{t.savedActivities}</h3>
-                <ul className="space-y-2">
-                  {savedActivities.map((activity, index) => (
-                    <li key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded">
-                      <span className="text-sm">{activity}</span>
-                      <div>
-                        <Button onClick={() => handleSelectCustomActivity(activity)} className="mr-2 text-xs">{t.selectActivity}</Button>
-                        <Button onClick={() => handleDeleteCustomActivity(index)} variant="ghost" size="icon">
-                          <X className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-      {showReflection && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
-            <ReflectionPrompt onComplete={handleReflectionComplete} onSkip={handleSkipReflection} />
-          </div>
-        </div>
-      )}
-      {showMindfulness && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
-            <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={handleBackFromMindfulness} />
-          </div>
-        </div>
-      )}
-      {showMoodRating && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
-          <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
-            {positiveMessage ? (
-              <div>
-                <p className="text-xl font-bold text-green-600 mb-4">{positiveMessage}</p>
-                <p className="text-lg mb-4">{t.moodImprovement.replace('{initial}', initialMoodRating).replace('{final}', finalMoodRating)}</p>
-                <p className="text-md mb-4">{t.activityDone.replace('{activity}', suggestedActivity?.name)}</p>
-                <p className="text-lg mb-4">{t.averageMood.replace('{average}', averageMood.toFixed(1))}</p>
-                <ProgressTracker moodData={moodHistory} />
-                <UserStats userCount={userCount} averageMoodImprovement={averageMoodImprovement} />
-                <p className="text-lg font-semibold mt-6 mb-2">{t.shareProgressCTA}</p>
-                <div className="flex flex-wrap justify-center gap-2 mt-4">
-                  <Button onClick={() => handleShare('instagram')}><Instagram className="h-4 w-4 mr-2" /> Instagram</Button>
-                  <Button onClick={() => handleShare('twitter')}>X</Button>
-                  <Button onClick={() => handleShare('facebook')}>Meta</Button>
-                  <Button onClick={() => handleShare('threads')}><AtSign className="h-4 w-4 mr-2" /> Threads</Button>
+              )}
+              <div className="mt-8">
+                <h2 className="text-xl font-bold mb-4">{t.addCustomActivity}</h2>
+                <div className="flex space-x-2">
+                  <Input
+                    type="text"
+                    value={customActivity}
+                    onChange={(e) => setCustomActivity(e.target.value)}
+                    placeholder={t.newActivityPlaceholder}
+                  />
+                  <Button onClick={handleSaveCustomActivity}>{t.saveActivity}</Button>
                 </div>
-                <Button onClick={handleEndSession} className="mt-4 w-full">{t.newSession}</Button>
               </div>
-            ) : (
-              <MoodRatingScale onRatingSelect={handleMoodRating} />
-            )}
+              {savedActivities.length > 0 && (
+                <div className="mt-4">
+                  <h3 className="text-lg font-bold mb-2">{t.savedActivities}</h3>
+                  <ul className="space-y-2">
+                    {savedActivities.map((activity, index) => (
+                      <li key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded">
+                        <span className="text-sm">{activity}</span>
+                        <div>
+                          <Button onClick={() => handleSelectCustomActivity(activity)} className="mr-2 text-xs">{t.selectActivity}</Button>
+                          <Button onClick={() => handleDeleteCustomActivity(index)} variant="ghost" size="icon">
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+        {showReflection && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
+              <ReflectionPrompt onComplete={handleReflectionComplete} onSkip={handleSkipReflection} />
+            </div>
+          </div>
+        )}
+        {showMindfulness && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
+              <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={handleBackFromMindfulness} />
+            </div>
+          </div>
+        )}
+        {showMoodRating && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full max-h-[90vh] overflow-y-auto">
+              <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
+              {positiveMessage ? (
+                <div>
+                  <p className="text-xl font-bold text-green-600 mb-4">{positiveMessage}</p>
+                  <p className="text-lg mb-4">{t.moodImprovement.replace('{initial}', initialMoodRating).replace('{final}', finalMoodRating)}</p>
+                  <p className="text-md mb-4">{t.activityDone.replace('{activity}', suggestedActivity?.name)}</p>
+                  <p className="text-lg mb-4">{t.averageMood.replace('{average}', averageMood.toFixed(1))}</p>
+                  <ProgressTracker moodData={moodHistory} />
+                  <UserStats userCount={userCount} averageMoodImprovement={averageMoodImprovement} />
+                  <p className="text-lg font-semibold mt-6 mb-2">{t.shareProgressCTA}</p>
+                  <div className="flex flex-wrap justify-center gap-2 mt-4">
+                    <Button onClick={() => handleShare('instagram')}><Instagram className="h-4 w-4 mr-2" /> Instagram</Button>
+                    <Button onClick={() => handleShare('twitter')}>X</Button>
+                    <Button onClick={() => handleShare('facebook')}>Meta</Button>
+                    <Button onClick={() => handleShare('threads')}><AtSign className="h-4 w-4 mr-2" /> Threads</Button>
+                  </div>
+                  <Button onClick={handleEndSession} className="mt-4 w-full">{t.newSession}</Button>
+                </div>
+              ) : (
+                <MoodRatingScale onRatingSelect={handleMoodRating} />
+              )}
+            </div>
+          </div>
+        )}
+      </div>
       <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic">
         {language === 'de' ? 
           "Diese App ersetzt keine professionelle psychologische oder medizinische Beratung. Bei ernsthaften mentalen Problemen oder Krisen suchen Sie bitte einen Spezialisten oder Therapeuten auf." :
