@@ -56,6 +56,26 @@ const Index = () => {
     restart,
   } = useTimer({ expiryTimestamp: time, onExpire: () => handleEndActivity() });
 
+  const handleGoHome = () => {
+    // Reset the app state to its initial condition
+    setShowInitialAssessment(false);
+    setShowMoodSelector(false);
+    setSelectedMood(null);
+    setSuggestedActivity(null);
+    setShowMoodRating(false);
+    setInitialMoodRating(null);
+    setFinalMoodRating(null);
+    setShowReflection(false);
+    setShowMindfulness(false);
+    // Add any other state resets as needed
+  };
+
+  const handleGoBack = () => {
+    // Implement the logic to go back to the previous step
+    // This is a placeholder and should be implemented based on your app's flow
+    console.log("Go back functionality to be implemented");
+  };
+
   // ... (rest of the component logic)
 
   return (
