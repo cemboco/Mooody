@@ -95,7 +95,6 @@
 
 .ball {
   position: absolute;
-  background: white;
   border-radius: 50%;
   opacity: 0.8;
   animation: float 20s infinite ease-in-out;
@@ -106,6 +105,7 @@
   height: 100px;
   top: 20%;
   left: 20%;
+  background-color: #FFD700; /* Yellow for happiness */
 }
 
 .ball2 {
@@ -113,6 +113,7 @@
   height: 80px;
   top: 60%;
   left: 60%;
+  background-color: #4169E1; /* Royal Blue for sadness */
   animation-delay: -5s;
 }
 
@@ -121,6 +122,7 @@
   height: 60px;
   top: 40%;
   left: 80%;
+  background-color: #FF6347; /* Tomato for anger */
   animation-delay: -10s;
 }
 
@@ -129,6 +131,7 @@
   height: 120px;
   top: 10%;
   left: 70%;
+  background-color: #32CD32; /* Lime Green for excitement */
   animation-delay: -7s;
 }
 
@@ -137,6 +140,7 @@
   height: 70px;
   top: 80%;
   left: 30%;
+  background-color: #9370DB; /* Medium Purple for fear */
   animation-delay: -3s;
 }
 
@@ -145,6 +149,7 @@
   height: 90px;
   top: 50%;
   left: 10%;
+  background-color: #FF69B4; /* Hot Pink for love */
   animation-delay: -15s;
 }
 
@@ -153,6 +158,7 @@
   height: 110px;
   top: 30%;
   left: 40%;
+  background-color: #20B2AA; /* Light Sea Green for calmness */
   animation-delay: -8s;
 }
 
@@ -161,6 +167,7 @@
   height: 75px;
   top: 70%;
   left: 50%;
+  background-color: #FFA500; /* Orange for enthusiasm */
   animation-delay: -12s;
 }
 
@@ -169,6 +176,7 @@
   height: 95px;
   top: 15%;
   left: 85%;
+  background-color: #8B4513; /* Saddle Brown for confusion */
   animation-delay: -6s;
 }
 
