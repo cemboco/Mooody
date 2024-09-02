@@ -43,11 +43,30 @@ const Index = () => {
   const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
   const [averageMood, setAverageMood] = useState(0);
 
-  // ... (rest of the component code remains unchanged)
+  const handleNotificationClick = () => {
+    // Implement notification logic here
+    console.log('Notification clicked');
+    // For example, you could toggle a state to show/hide notifications
+    // setShowNotifications(prev => !prev);
+  };
 
   const handleHomeClick = () => {
     navigate('/');
     handleEndSession();
+  };
+
+  const handleEndSession = () => {
+    // Reset all states here
+    setShowInitialAssessment(false);
+    setShowMoodSelector(false);
+    setSelectedMood(null);
+    setSuggestedActivity(null);
+    setShowMoodRating(false);
+    setInitialMoodRating(null);
+    setFinalMoodRating(null);
+    setPositiveMessage('');
+    setShowReflection(false);
+    setShowMindfulness(false);
   };
 
   return (
@@ -84,7 +103,7 @@ const Index = () => {
           <Home className="h-5 w-5" />
         </Button>
       </div>
-      {/* ... (rest of the JSX remains unchanged) */}
+      {/* Add other components and logic here */}
     </div>
   );
 };
