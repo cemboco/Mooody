@@ -235,7 +235,7 @@ const Index = () => {
               <div className="ball ball9"></div>
               <p className="text-lg sm:text-xl md:text-2xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed mb-16 relative z-10 absolute bottom-8">{t.subtitle}</p>
             </div>
-            <div className="absolute top-8 left-[calc(50%+125px)] sm:left-[calc(50%+130px)] transform -translate-x-1/2 translate-y-4">
+            <div className="absolute top-[calc(50%+144px)] sm:top-[calc(50%+149px)] transform -translate-x-1/2 translate-y-4">
               <NotificationButton onClick={handleNotificationClick} />
             </div>
           </>
