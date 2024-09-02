@@ -24,6 +24,7 @@ const Index = () => {
   const t = translations[language];
   const navigate = useNavigate();
 
+  const [showLanguageToggle, setShowLanguageToggle] = useState(true);
   const [showInitialAssessment, setShowInitialAssessment] = useState(false);
   const [showMoodSelector, setShowMoodSelector] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
