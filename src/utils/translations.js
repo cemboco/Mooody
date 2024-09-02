@@ -1,7 +1,7 @@
 export const translations = {
   de: {
     title: 'Moody',
-    subtitle: 'Ich bin hier um dich zu fragen wie du dich fühlst und nicht wie es dir geht.',
+    subtitle: 'Weil "Wie geht´s?" oft nicht ausreicht.',
     notificationButton: 'Wie fühlst du dich?',
     moodSelectorTitle: 'Wähle deine Stimmung',
     youFeelLabel: 'Du fühlst dich',
@@ -75,7 +75,7 @@ export const translations = {
   },
   en: {
     title: 'Moody',
-    subtitle: 'Experience how easy it can be to lift your mood and gain new strength!',
+    subtitle: 'Because "How are you?" is often not enough.',
     notificationButton: 'How are you feeling?',
     moodSelectorTitle: 'Choose your mood',
     youFeelLabel: 'You feel',
