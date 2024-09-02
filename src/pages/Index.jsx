@@ -41,8 +41,43 @@ const Index = () => {
   const [userCount, setUserCount] = useState(0);
   const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
   const [averageMood, setAverageMood] = useState(0);
+  const [showLanguageToggle, setShowLanguageToggle] = useState(true);
+  const [showBackButton, setShowBackButton] = useState(false);
 
   // ... (rest of the component code remains unchanged)
+
+  const handleGoHome = () => {
+    setShowInitialAssessment(false);
+    setShowMoodSelector(false);
+    setSelectedMood(null);
+    setSuggestedActivity(null);
+    setShowMoodRating(false);
+    setShowReflection(false);
+    setShowMindfulness(false);
+    setShowLanguageToggle(true);
+    setShowBackButton(false);
+  };
+
+  const handleGoBack = () => {
+    if (showMoodRating) {
+      setShowMoodRating(false);
+      setSelectedMood(null);
+      setSuggestedActivity(null);
+      setShowMoodSelector(true);
+    } else if (showReflection) {
+      setShowReflection(false);
+      setShowMoodRating(true);
+    } else if (showMindfulness) {
+      setShowMindfulness(false);
+      setShowReflection(true);
+    }
+  };
+
+  const handleNotificationClick = () => {
+    setShowInitialAssessment(true);
+    setShowLanguageToggle(false);
+    setShowBackButton(true);
+  };
 
   return (
     <AnimatedBackground>
