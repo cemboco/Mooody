@@ -212,17 +212,6 @@
   }
 }
 
-@keyframes fadeInFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 .animate-fade-in-delayed {
   opacity: 0;
   animation: fadeIn 0.5s ease-in forwards;
@@ -231,8 +220,8 @@
 
 .animate-fade-in-more-delayed {
   opacity: 0;
-  animation: fadeInFromLeft 1.3s ease-in forwards;
-  animation-delay: 0.5s;
+  animation: fadeIn 0.5s ease-in forwards;
+  animation-delay: 1.2s;
 }
 
 .animate-fade-in-button {
