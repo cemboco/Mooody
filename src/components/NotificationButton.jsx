@@ -10,9 +10,7 @@ const NotificationButton = ({ onClick }) => {
   return (
     <Button
       onClick={onClick}
-      variant="outline"
-      size="lg"
-      className="fixed top-4 left-[calc(50%+120px)] transform -translate-x-1/2 z-[60] bg-white text-black hover:text-moodyText transition-colors text-xl px-6 py-3"
+      className="fixed top-4 left-[calc(50%+120px)] transform -translate-x-1/2 z-[60] bg-[#9AE66E] hover:bg-[#8AD65E] text-black font-hevilla text-xl px-6 py-3 rounded-full transition-colors"
     >
       {t.notificationButton}
     </Button>
