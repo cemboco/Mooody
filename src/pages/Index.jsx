@@ -235,6 +235,8 @@ const Index = () => {
 
   const handleGoHome = () => {
     handleEndSession();
+    setShowReflection(false);
+    setShowMindfulness(false);
     navigate('/');
   };
 
