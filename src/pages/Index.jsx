@@ -16,7 +16,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Share2, Instagram, AtSign, X, Home } from 'lucide-react';
+import { Share2, Instagram, AtSign, X, Home, ArrowLeft } from 'lucide-react';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -210,16 +210,47 @@ const Index = () => {
 
   const averageMoodImprovement = userCount > 0 ? (totalMoodImprovement / userCount) * 10 : 0;
 
+  const handleGoBack = () => {
+    if (showMoodRating) {
+      setShowMoodRating(false);
+      setShowMindfulness(true);
+    } else if (showMindfulness) {
+      setShowMindfulness(false);
+      setShowReflection(true);
+    } else if (showReflection) {
+      setShowReflection(false);
+      setSelectedMood(null);
+      setSuggestedActivity(null);
+    } else if (selectedMood) {
+      setSelectedMood(null);
+      setSuggestedActivity(null);
+      setShowMoodSelector(true);
+    } else if (showMoodSelector) {
+      setShowMoodSelector(false);
+      setShowInitialAssessment(true);
+    } else if (showInitialAssessment) {
+      setShowInitialAssessment(false);
+    }
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody overflow-hidden">
       {showLanguageToggle && <LanguageToggle />}
       <Button
         onClick={() => navigate('/')}
-        className="fixed top-4 right-4 z-50"
+        className="fixed top-4 right-4 z-[60]"
         variant="outline"
         size="icon"
       >
         <Home className="h-4 w-4" />
+      </Button>
+      <Button
+        onClick={handleGoBack}
+        className="fixed bottom-4 left-4 z-[60]"
+        variant="outline"
+        size="icon"
+      >
+        <ArrowLeft className="h-4 w-4" />
       </Button>
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
         {!showInitialAssessment && !showMoodSelector && !selectedMood && (
