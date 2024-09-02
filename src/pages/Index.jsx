@@ -239,7 +239,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-moody overflow-hidden">
+    <div className="min-h-screen w-full flex items-center justify-center bg-customBackground text-customText overflow-hidden">
       {showLanguageToggle && <LanguageToggle />}
       <Button
         onClick={handleGoHome}
