@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTimer } from 'react-timer-hook';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MoodSelector from '../components/MoodSelector';
 import NotificationButton from '../components/NotificationButton';
 import MoodRatingScale from '../components/MoodRatingScale';
@@ -23,6 +23,7 @@ const Index = () => {
   const t = translations[language];
   const navigate = useNavigate();
 
+  const [showLanguageToggle, setShowLanguageToggle] = useState(true);
   const [showInitialAssessment, setShowInitialAssessment] = useState(false);
   const [showMoodSelector, setShowMoodSelector] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
@@ -40,8 +41,88 @@ const Index = () => {
   const [userCount, setUserCount] = useState(0);
   const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
   const [averageMood, setAverageMood] = useState(0);
+  const [showBackButton, setShowBackButton] = useState(false);
 
-  // ... (rest of the component logic remains unchanged)
+  const handleNotificationClick = () => {
+    setShowInitialAssessment(true);
+    setShowLanguageToggle(false);
+  };
+
+  const handleInitialAssessmentComplete = (rating) => {
+    setInitialMoodRating(rating);
+    setShowInitialAssessment(false);
+    setShowMoodSelector(true);
+    setShowBackButton(true);
+  };
+
+  const handleMoodSelect = (mood) => {
+    setSelectedMood(mood);
+    const activity = selectActivity(mood.labelKey, language);
+    setSuggestedActivity(activity);
+    setShowMoodSelector(false);
+  };
+
+  const handleTimerComplete = () => {
+    setShowMoodRating(true);
+  };
+
+  const handleMoodRating = (rating) => {
+    setFinalMoodRating(rating);
+    setShowMoodRating(false);
+    setShowReflection(true);
+
+    const improvement = rating - initialMoodRating;
+    setTotalMoodImprovement(prev => prev + improvement);
+    setUserCount(prev => prev + 1);
+
+    const newMoodEntry = { date: new Date().toISOString(), mood: rating };
+    setMoodHistory(prev => [...prev, newMoodEntry]);
+
+    const avgMood = moodHistory.reduce((sum, entry) => sum + entry.mood, 0) / moodHistory.length;
+    setAverageMood(avgMood);
+  };
+
+  const handleReflectionComplete = (reflection) => {
+    setShowReflection(false);
+    setShowMindfulness(true);
+    // Here you could save the reflection to a database or state if needed
+  };
+
+  const handleMindfulnessComplete = () => {
+    setShowMindfulness(false);
+    // Reset the app state or navigate to a summary screen
+    resetAppState();
+  };
+
+  const resetAppState = () => {
+    setShowLanguageToggle(true);
+    setShowInitialAssessment(false);
+    setShowMoodSelector(false);
+    setSelectedMood(null);
+    setSuggestedActivity(null);
+    setShowMoodRating(false);
+    setInitialMoodRating(null);
+    setFinalMoodRating(null);
+    setShowReflection(false);
+    setShowMindfulness(false);
+    setShowBackButton(false);
+  };
+
+  const handleGoHome = () => {
+    resetAppState();
+  };
+
+  const handleGoBack = () => {
+    if (showMoodSelector) {
+      setShowMoodSelector(false);
+      setShowInitialAssessment(true);
+    } else if (selectedMood) {
+      setSelectedMood(null);
+      setSuggestedActivity(null);
+      setShowMoodSelector(true);
+    }
+    // Add more conditions as needed for other states
+  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody text-moodyText overflow-hidden">
@@ -93,7 +174,45 @@ const Index = () => {
             </div>
           </>
         )}
-        {/* ... (rest of the JSX remains unchanged) */}
+        {showInitialAssessment && (
+          <InitialMoodAssessment onAssessmentComplete={handleInitialAssessmentComplete} />
+        )}
+        {showMoodSelector && (
+          <MoodSelector onMoodSelect={handleMoodSelect} />
+        )}
+        {selectedMood && suggestedActivity && !showMoodRating && !showReflection && !showMindfulness && (
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
+            <p className="text-xl mb-4">{suggestedActivity.name}</p>
+            <Input
+              type="number"
+              value={timerMinutes}
+              onChange={(e) => setTimerMinutes(Number(e.target.value))}
+              className="mb-4"
+            />
+            <Button onClick={() => {
+              const time = new Date();
+              time.setSeconds(time.getSeconds() + timerMinutes * 60);
+              // Start the timer (implementation not shown)
+              // When timer completes, call handleTimerComplete
+            }}>
+              {t.startTimer}
+            </Button>
+          </div>
+        )}
+        {showMoodRating && (
+          <MoodRatingScale onRatingSelect={handleMoodRating} />
+        )}
+        {showReflection && (
+          <ReflectionPrompt onComplete={handleReflectionComplete} onSkip={() => setShowReflection(false)} />
+        )}
+        {showMindfulness && (
+          <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={() => setShowMindfulness(false)} />
+        )}
+        {moodHistory.length > 0 && (
+          <ProgressTracker moodData={moodHistory} />
+        )}
+        <UserStats userCount={userCount} averageMoodImprovement={totalMoodImprovement / userCount} />
       </div>
       <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic">
         {t.disclaimer}
