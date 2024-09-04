@@ -1,7 +1,7 @@
 export const translations = {
   de: {
-    title: 'Moody',
-    subtitle: 'Weil "Wie geht´s?" oft nicht ausreicht.',
+    title: 'Revolutioniere dein Gedächtnis mit Remind.',
+    subtitle: 'Erfasse mühelos deine digitale Aktivität und nutze sie als Gedächtnis mit fortschrittlicher KI-Technologie.',
     notificationButton: 'Wie fühlst du dich?',
     moodSelectorTitle: 'Wähle deine Stimmung',
     youFeelLabel: 'Du fühlst dich',
@@ -22,7 +22,7 @@ export const translations = {
     moodImprovement: 'Deine Stimmung hat sich von {initial} auf {final} verbessert!',
     activityDone: 'Du hast "{activity}" gemacht.',
     averageMood: 'Dein durchschnittlicher Gemütszustand: {average}',
-    initialMoodQuestion: 'Bemerke etwas, das dich stört. Es kann ein Gefühl in deinem Körper oder ein bestimmter Gedanke in deinem Kopf sein. Bewerte die Intensität auf einer Skala von 0-10 (wobei 10 die höchste Intensität darstellt).',
+    initialMoodQuestion: 'Bemerke etwas, das dich stört. Bewerte die Intensität auf einer Skala von 0-10.',
     moodVeryBad: 'Sehr schlecht (1)',
     moodExcellent: 'Hervorragend (10)',
     yourMood: 'Dein Gemütszustand',
@@ -50,6 +50,7 @@ export const translations = {
     userStatsMessageSingular: '{userCount} Person hat heute ihre Stimmung um durchschnittlich {moodImprovement}% verbessert.',
     userStatsMessagePlural: '{userCount} Personen haben heute ihre Stimmung um durchschnittlich {moodImprovement}% verbessert.',
     weeklyMoodChart: 'Wöchentliche Stimmungsübersicht',
+    disclaimer: 'Diese App ersetzt keine professionelle psychologische oder medizinische Beratung. Bei ernsthaften mentalen Problemen oder Krisen suchen Sie bitte einen Spezialisten oder Therapeuten auf.',
     motivationalMessages: [
       "Du kannst alles erreichen, was du dir vornimmst!",
       "Glaube an dich und deine Fähigkeiten.",
@@ -74,8 +75,8 @@ export const translations = {
     ]
   },
   en: {
-    title: 'Moody',
-    subtitle: 'Because "How are you?" is often not enough.',
+    title: 'Revolutionize Your Memory with Remind.',
+    subtitle: 'Effortlessly capture your digital activity and use it as memory, using advanced AI technology.',
     notificationButton: 'How are you feeling?',
     moodSelectorTitle: 'Choose your mood',
     youFeelLabel: 'You feel',
@@ -96,7 +97,7 @@ export const translations = {
     moodImprovement: 'Your mood improved from {initial} to {final}!',
     activityDone: 'You did "{activity}".',
     averageMood: 'Your average mood: {average}',
-    initialMoodQuestion: 'Notice something that bothers you. It can be a feeling in your body or a specific thought in your head. Rate the intensity on a scale of 0-10 (where 10 represents the highest intensity).',
+    initialMoodQuestion: 'Notice something that bothers you. Rate the intensity on a scale of 0-10.',
     moodVeryBad: 'Very bad (1)',
     moodExcellent: 'Excellent (10)',
     yourMood: 'Your mood',
@@ -124,6 +125,7 @@ export const translations = {
     userStatsMessageSingular: '{userCount} person has improved their mood by an average of {moodImprovement}% today.',
     userStatsMessagePlural: '{userCount} people have improved their mood by an average of {moodImprovement}% today.',
     weeklyMoodChart: 'Weekly Mood Overview',
+    disclaimer: 'This app does not replace professional psychological or medical advice. For serious mental health issues or crises, please consult a specialist or therapist.',
     motivationalMessages: [
       "You can achieve anything you set your mind to!",
       "Believe in yourself and your abilities.",
