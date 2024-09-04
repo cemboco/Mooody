@@ -23,6 +23,7 @@ const Index = () => {
   const t = translations[language];
   const navigate = useNavigate();
 
+  const [currentPage, setCurrentPage] = useState(1);
   const [showInitialAssessment, setShowInitialAssessment] = useState(false);
   const [showMoodSelector, setShowMoodSelector] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
@@ -73,50 +74,58 @@ const Index = () => {
 
   const handleNotificationClick = () => {
     setShowInitialAssessment(true);
+    setCurrentPage(2);
   };
 
   const handleInitialAssessmentComplete = (moodValue) => {
     setInitialMoodRating(moodValue);
     setShowInitialAssessment(false);
     setShowMoodSelector(true);
+    setCurrentPage(3);
   };
 
   const handleMoodSelect = (mood) => {
     setSelectedMood(mood);
     const personalizedActivity = getPersonalizedRecommendation(moodHistory, selectActivity(mood.label, language));
     setSuggestedActivity(personalizedActivity || selectActivity(mood.label, language));
+    setCurrentPage(4);
   };
 
   const handleStartTimer = () => {
     const newTime = new Date();
     newTime.setSeconds(newTime.getSeconds() + timerMinutes * 60);
     restart(newTime);
+    setCurrentPage(5);
   };
 
   const handleEndActivity = () => {
     pause();
     setShowReflection(true);
+    setCurrentPage(6);
   };
 
   const handleReflectionComplete = (reflection) => {
     setShowReflection(false);
     setShowMindfulness(true);
-    // Here you could save the reflection to a database or local storage
+    setCurrentPage(7);
   };
 
   const handleSkipReflection = () => {
     setShowReflection(false);
     setShowMindfulness(true);
+    setCurrentPage(7);
   };
 
   const handleMindfulnessComplete = () => {
     setShowMindfulness(false);
     setShowMoodRating(true);
+    setCurrentPage(8);
   };
 
   const handleBackFromMindfulness = () => {
     setShowMindfulness(false);
     setShowReflection(true);
+    setCurrentPage(6);
   };
 
   const handleMoodRating = (rating) => {
@@ -132,7 +141,6 @@ const Index = () => {
     setMoodHistory(updatedMoodHistory);
     localStorage.setItem('moodHistory', JSON.stringify(updatedMoodHistory));
 
-    // Update user count and total mood improvement
     const newUserCount = userCount + 1;
     const newTotalMoodImprovement = totalMoodImprovement + moodImprovement;
     setUserCount(newUserCount);
@@ -140,7 +148,6 @@ const Index = () => {
     localStorage.setItem('userCount', newUserCount.toString());
     localStorage.setItem('totalMoodImprovement', newTotalMoodImprovement.toString());
 
-    // Calculate average mood including the current rating
     const totalMood = updatedMoodHistory.reduce((sum, entry) => sum + entry.mood, 0);
     const newAverageMood = totalMood / updatedMoodHistory.length;
     setAverageMood(newAverageMood);
@@ -158,6 +165,7 @@ const Index = () => {
     setFinalMoodRating(null);
     setShowInitialAssessment(false);
     setAverageMood(0);
+    setCurrentPage(1);
   };
 
   const handleShare = (platform) => {
@@ -206,30 +214,32 @@ const Index = () => {
     localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
   };
 
-  const showLanguageToggle = !showInitialAssessment && !showMoodSelector && !selectedMood && !showMoodRating && !showReflection && !showMindfulness;
-
-  const averageMoodImprovement = userCount > 0 ? (totalMoodImprovement / userCount) * 10 : 0;
-
   const handleGoBack = () => {
     if (showMoodRating) {
       setShowMoodRating(false);
       setShowMindfulness(true);
+      setCurrentPage(7);
     } else if (showMindfulness) {
       setShowMindfulness(false);
       setShowReflection(true);
+      setCurrentPage(6);
     } else if (showReflection) {
       setShowReflection(false);
       setSelectedMood(null);
       setSuggestedActivity(null);
+      setCurrentPage(3);
     } else if (selectedMood) {
       setSelectedMood(null);
       setSuggestedActivity(null);
       setShowMoodSelector(true);
+      setCurrentPage(3);
     } else if (showMoodSelector) {
       setShowMoodSelector(false);
       setShowInitialAssessment(true);
+      setCurrentPage(2);
     } else if (showInitialAssessment) {
       setShowInitialAssessment(false);
+      setCurrentPage(1);
     }
   };
 
@@ -238,9 +248,13 @@ const Index = () => {
     setShowReflection(false);
     setShowMindfulness(false);
     navigate('/');
+    setCurrentPage(1);
   };
 
-  const showBackButton = showInitialAssessment || showMoodSelector || selectedMood || showMoodRating || showReflection || showMindfulness;
+  const showBackButton = currentPage > 1;
+  const showLanguageToggle = currentPage === 1;
+
+  const averageMoodImprovement = userCount > 0 ? (totalMoodImprovement / userCount) * 10 : 0;
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody text-moodyText overflow-hidden">
@@ -273,7 +287,10 @@ const Index = () => {
         <div className="ball ball7"></div>
         <div className="ball ball8"></div>
         <div className="ball ball9"></div>
-        {!showInitialAssessment && !showMoodSelector && !selectedMood && (
+        <div className="fixed top-4 left-4 z-[70] bg-white px-2 py-1 rounded-full text-sm font-bold">
+          {currentPage}/8
+        </div>
+        {currentPage === 1 && (
           <>
             <div className="animated-title w-full h-full flex flex-col items-center justify-between">
               <div className="flex-grow flex items-center justify-center flex-col">
