@@ -14,7 +14,6 @@ import { getPersonalizedRecommendation } from '../utils/personalizedRecommendati
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Share2, Instagram, AtSign, X, Home, ArrowLeft } from 'lucide-react';
 
 const Index = () => {
@@ -70,7 +69,7 @@ const Index = () => {
   };
 
   const handleMindfulnessComplete = () => {
-    setCurrentPage(7);
+    setCurrentPage(3);
   };
 
   const handleMoodRating = (rating) => {
@@ -159,6 +158,14 @@ const Index = () => {
         );
       case 2:
         return (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
+              <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={handleGoBack} />
+            </div>
+          </div>
+        );
+      case 3:
+        return (
           <div className="fixed inset-0 flex items-center justify-center bg-moody z-50 overflow-y-auto">
             <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-sm w-full relative">
               <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
@@ -166,7 +173,7 @@ const Index = () => {
             </div>
           </div>
         );
-      case 3:
+      case 4:
         return (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
             <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-sm w-full">
@@ -174,7 +181,7 @@ const Index = () => {
             </div>
           </div>
         );
-      case 4:
+      case 5:
         return (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
             <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
@@ -184,19 +191,11 @@ const Index = () => {
             </div>
           </div>
         );
-      case 5:
-        return (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
-            <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
-              <ReflectionPrompt onComplete={handleReflectionComplete} onSkip={handleReflectionComplete} />
-            </div>
-          </div>
-        );
       case 6:
         return (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
             <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
-              <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={handleGoBack} />
+              <ReflectionPrompt onComplete={handleReflectionComplete} onSkip={handleReflectionComplete} />
             </div>
           </div>
         );
