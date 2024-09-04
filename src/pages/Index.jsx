@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useTimer } from 'react-timer-hook';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MoodSelector from '../components/MoodSelector';
 import NotificationButton from '../components/NotificationButton';
 import MoodRatingScale from '../components/MoodRatingScale';
@@ -14,8 +13,7 @@ import { getPersonalizedRecommendation } from '../utils/personalizedRecommendati
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Share2, Instagram, AtSign, X, Home, ArrowLeft } from 'lucide-react';
+import { Home, ArrowLeft } from 'lucide-react';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -23,26 +21,18 @@ const Index = () => {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [showMoodSelector, setShowMoodSelector] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
   const [suggestedActivity, setSuggestedActivity] = useState(null);
-  const [timerMinutes, setTimerMinutes] = useState(5);
   const [showMoodRating, setShowMoodRating] = useState(false);
-  const [customActivity, setCustomActivity] = useState('');
-  const [savedActivities, setSavedActivities] = useState([]);
   const [initialMoodRating, setInitialMoodRating] = useState(null);
   const [finalMoodRating, setFinalMoodRating] = useState(null);
-  const [positiveMessage, setPositiveMessage] = useState('');
   const [moodHistory, setMoodHistory] = useState([]);
   const [showReflection, setShowReflection] = useState(false);
   const [showMindfulness, setShowMindfulness] = useState(false);
   const [userCount, setUserCount] = useState(0);
   const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
-  const [averageMood, setAverageMood] = useState(0);
 
   useEffect(() => {
-    const storedActivities = JSON.parse(localStorage.getItem('customActivities') || '[]');
-    setSavedActivities(storedActivities);
     const storedMoodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
     setMoodHistory(storedMoodHistory);
     const storedUserCount = parseInt(localStorage.getItem('userCount') || '0');
@@ -58,49 +48,16 @@ const Index = () => {
     }
   }, [selectedMood, language, moodHistory]);
 
-  const time = new Date();
-  time.setSeconds(time.getSeconds() + 300); // 5 minutes default
-
-  const {
-    seconds,
-    minutes,
-    isRunning,
-    pause,
-    resume,
-    restart,
-  } = useTimer({ expiryTimestamp: time, autoStart: false });
-
   const handleNotificationClick = () => {
     setCurrentPage(2);
   };
 
   const handleMoodSelect = (mood) => {
     setSelectedMood(mood);
-    const personalizedActivity = getPersonalizedRecommendation(moodHistory, selectActivity(mood.label, language));
-    setSuggestedActivity(personalizedActivity || selectActivity(mood.label, language));
     setCurrentPage(4);
   };
 
-  const handleStartTimer = () => {
-    const newTime = new Date();
-    newTime.setSeconds(newTime.getSeconds() + timerMinutes * 60);
-    restart(newTime);
-    setCurrentPage(5);
-  };
-
-  const handleEndActivity = () => {
-    pause();
-    setShowReflection(true);
-    setCurrentPage(6);
-  };
-
-  const handleReflectionComplete = (reflection) => {
-    setShowReflection(false);
-    setShowMindfulness(true);
-    setCurrentPage(7);
-  };
-
-  const handleSkipReflection = () => {
+  const handleReflectionComplete = () => {
     setShowReflection(false);
     setShowMindfulness(true);
     setCurrentPage(7);
@@ -112,136 +69,41 @@ const Index = () => {
     setCurrentPage(8);
   };
 
-  const handleBackFromMindfulness = () => {
-    setShowMindfulness(false);
-    setShowReflection(true);
-    setCurrentPage(6);
-  };
-
   const handleMoodRating = (rating) => {
-    console.log(`Initial mood: ${initialMoodRating}, Mood after activity: ${rating}`);
-    const moodImprovement = rating - initialMoodRating;
     setFinalMoodRating(rating);
-
-    const newMoodEntry = {
-      date: new Date().toISOString(),
-      mood: rating
-    };
+    const newMoodEntry = { date: new Date().toISOString(), mood: rating };
     const updatedMoodHistory = [...moodHistory, newMoodEntry];
     setMoodHistory(updatedMoodHistory);
     localStorage.setItem('moodHistory', JSON.stringify(updatedMoodHistory));
 
     const newUserCount = userCount + 1;
+    const moodImprovement = rating - initialMoodRating;
     const newTotalMoodImprovement = totalMoodImprovement + moodImprovement;
     setUserCount(newUserCount);
     setTotalMoodImprovement(newTotalMoodImprovement);
     localStorage.setItem('userCount', newUserCount.toString());
     localStorage.setItem('totalMoodImprovement', newTotalMoodImprovement.toString());
-
-    const totalMood = updatedMoodHistory.reduce((sum, entry) => sum + entry.mood, 0);
-    const newAverageMood = totalMood / updatedMoodHistory.length;
-    setAverageMood(newAverageMood);
-
-    setPositiveMessage(t.motivationalMessages[Math.floor(Math.random() * t.motivationalMessages.length)]);
   };
 
   const handleEndSession = () => {
-    setPositiveMessage('');
-    setShowMoodRating(false);
+    setCurrentPage(1);
     setSelectedMood(null);
     setSuggestedActivity(null);
-    setShowMoodSelector(false);
+    setShowMoodRating(false);
     setInitialMoodRating(null);
     setFinalMoodRating(null);
-    setAverageMood(0);
-    setCurrentPage(1);
-  };
-
-  const handleShare = (platform) => {
-    const shareText = t.shareMessage
-      .replace('{initial}', initialMoodRating)
-      .replace('{final}', finalMoodRating)
-      .replace('{activity}', suggestedActivity.name);
-    let shareUrl;
-
-    switch (platform) {
-      case 'instagram':
-        shareUrl = `https://www.instagram.com/share?url=${encodeURIComponent(window.location.href)}&caption=${encodeURIComponent(shareText)}`;
-        break;
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-        break;
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(shareText)}`;
-        break;
-      case 'threads':
-        shareUrl = `https://www.threads.net/`;
-        break;
-      default:
-        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-    }
-
-    window.open(shareUrl, '_blank');
-  };
-
-  const handleSaveCustomActivity = () => {
-    if (customActivity.trim() !== '') {
-      const updatedActivities = [...savedActivities, customActivity];
-      setSavedActivities(updatedActivities);
-      localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
-      setCustomActivity('');
-    }
-  };
-
-  const handleSelectCustomActivity = (activity) => {
-    setSuggestedActivity({ name: activity });
-  };
-
-  const handleDeleteCustomActivity = (indexToDelete) => {
-    const updatedActivities = savedActivities.filter((_, index) => index !== indexToDelete);
-    setSavedActivities(updatedActivities);
-    localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
   };
 
   const handleGoBack = () => {
-    if (showMoodRating) {
-      setShowMoodRating(false);
-      setShowMindfulness(true);
-      setCurrentPage(7);
-    } else if (showMindfulness) {
-      setShowMindfulness(false);
-      setShowReflection(true);
-      setCurrentPage(6);
-    } else if (showReflection) {
-      setShowReflection(false);
-      setSelectedMood(null);
-      setSuggestedActivity(null);
-      setCurrentPage(3);
-    } else if (selectedMood) {
-      setSelectedMood(null);
-      setSuggestedActivity(null);
-      setShowMoodSelector(true);
-      setCurrentPage(3);
-    } else if (showMoodSelector) {
-      setShowMoodSelector(false);
-      setCurrentPage(2);
-    } else if (currentPage === 2) {
-      setCurrentPage(1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
   const handleGoHome = () => {
     handleEndSession();
-    setShowReflection(false);
-    setShowMindfulness(false);
     navigate('/');
-    setCurrentPage(1);
   };
-
-  const showBackButton = currentPage > 1;
-  const showLanguageToggle = currentPage === 1;
-
-  const averageMoodImprovement = userCount > 0 ? (totalMoodImprovement / userCount) * 10 : 0;
 
   const renderPage = () => {
     switch (currentPage) {
@@ -264,7 +126,11 @@ const Index = () => {
       case 2:
         return (
           <div className="w-full h-full flex items-center justify-center">
-            <img src="https://i.ibb.co/K0cJ96h/mood-assessment.png" alt="Mood Assessment" className="max-w-full max-h-full object-contain" />
+            <img 
+              src="https://i.ibb.co/K0cJ96h/mood-assessment.png" 
+              alt="Mood Assessment" 
+              className="max-w-[90%] max-h-[90%] object-contain rounded-xl shadow-lg" 
+            />
           </div>
         );
       case 3:
@@ -276,7 +142,6 @@ const Index = () => {
             </div>
           </div>
         );
-      // Add cases for other pages...
       default:
         return null;
     }
@@ -284,7 +149,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody text-moodyText overflow-hidden">
-      {showLanguageToggle && <LanguageToggle />}
+      {currentPage === 1 && <LanguageToggle />}
       <Button
         onClick={handleGoHome}
         className="fixed top-4 right-4 z-[60]"
@@ -293,7 +158,7 @@ const Index = () => {
       >
         <Home className="h-4 w-4" />
       </Button>
-      {showBackButton && (
+      {currentPage > 1 && (
         <Button
           onClick={handleGoBack}
           className="fixed bottom-4 left-4 z-[60]"
@@ -304,15 +169,9 @@ const Index = () => {
         </Button>
       )}
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
-        <div className="ball ball1"></div>
-        <div className="ball ball2"></div>
-        <div className="ball ball3"></div>
-        <div className="ball ball4"></div>
-        <div className="ball ball5"></div>
-        <div className="ball ball6"></div>
-        <div className="ball ball7"></div>
-        <div className="ball ball8"></div>
-        <div className="ball ball9"></div>
+        {[...Array(9)].map((_, i) => (
+          <div key={i} className={`ball ball${i + 1}`}></div>
+        ))}
         <div className="fixed top-4 left-4 z-[70] bg-white px-2 py-1 rounded-full text-sm font-bold">
           {currentPage}/8
         </div>
