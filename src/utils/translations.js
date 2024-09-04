@@ -121,10 +121,11 @@ export const translations = {
       "Believe in yourself and your abilities.",
       "Every step you take brings you closer to your goal.",
       "Never give up, even when it gets tough.",
-      
       "Your potential is limitless.",
       "Great things start with small steps.",
-      "Success is the result of hard work and perseverance.",
+      "Success is the result of hard work and pers
+
+everance.",
       "You are stronger than you think.",
       "Every day is a new chance to give your best.",
       "Your future starts today, make the most of it."
