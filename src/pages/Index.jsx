@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTimer } from 'react-timer-hook';
+import { useNavigate } from 'react-router-dom';
 import MoodSelector from '../components/MoodSelector';
 import MoodRatingScale from '../components/MoodRatingScale';
 import InitialMoodAssessment from '../components/InitialMoodAssessment';
@@ -21,6 +22,7 @@ import MoodBalls from '../components/MoodBalls';
 const Index = () => {
   const { language } = useLanguage();
   const t = translations[language];
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [showInitialAssessment, setShowInitialAssessment] = useState(false);
@@ -242,6 +244,14 @@ const Index = () => {
     }
   };
 
+  const handleGoHome = () => {
+    handleEndSession();
+    setShowReflection(false);
+    setShowMindfulness(false);
+    navigate('/');
+    setCurrentPage(1);
+  };
+
   const showBackButton = currentPage > 1;
   const showLanguageToggle = currentPage === 1;
 
@@ -250,6 +260,14 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody text-moodyText overflow-hidden">
       {showLanguageToggle && <LanguageToggle />}
+      <Button
+        onClick={handleGoHome}
+        className="fixed top-4 right-4 z-[60]"
+        variant="outline"
+        size="icon"
+      >
+        <Home className="h-4 w-4" />
+      </Button>
       {showBackButton && (
         <Button
           onClick={handleGoBack}
