@@ -17,7 +17,6 @@ import { Input } from "@/components/ui/input"
 import { Share2, Instagram, AtSign, X, Home, ArrowLeft } from 'lucide-react';
 import AnimatedTitle from '../components/AnimatedTitle';
 import MoodBalls from '../components/MoodBalls';
-import AudioPlayer from '../components/AudioPlayer';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -270,8 +269,6 @@ const Index = () => {
         
         {renderPage()}
       </div>
-      
-      <AudioPlayer />
       
       <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic">
         {language === 'de' ? 
