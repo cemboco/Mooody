@@ -100,26 +100,37 @@ const Index = () => {
   };
 
   const renderPage = () => {
-    const pages = {
-      1: <LandingPage onNotificationClick={() => handlePageChange(2)} />,
-      2: <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={() => handlePageChange(1)} />,
-      3: <MoodSelector onMoodSelect={handleMoodSelect} title={t.moodSelectorTitle} />,
-      4: <InitialMoodAssessment onAssessmentComplete={handleInitialAssessmentComplete} />,
-      5: <SuggestedActivity activity={suggestedActivity} onComplete={handleActivityComplete} />,
-      6: <ReflectionPrompt onComplete={handleReflectionComplete} onSkip={handleReflectionComplete} />,
-      7: <MoodRatingScale onRatingSelect={handleMoodRating} />,
-      8: <ResultsPage
-           initialMoodRating={initialMoodRating}
-           finalMoodRating={finalMoodRating}
-           suggestedActivity={suggestedActivity}
-           moodHistory={moodHistory}
-           userCount={userCount}
-           averageMoodImprovement={(userCount > 0 ? (totalMoodImprovement / userCount) * 10 : 0)}
-           onShare={handleShare}
-           onNewSession={handleEndSession}
-         />
-    };
-    return pages[currentPage] || null;
+    switch (currentPage) {
+      case 1:
+        return <LandingPage onNotificationClick={() => handlePageChange(2)} />;
+      case 2:
+        return <MindfulnessExercise onComplete={handleMindfulnessComplete} onBack={() => handlePageChange(1)} />;
+      case 3:
+        return <MoodSelector onMoodSelect={handleMoodSelect} title={t.moodSelectorTitle} />;
+      case 4:
+        return <InitialMoodAssessment onAssessmentComplete={handleInitialAssessmentComplete} />;
+      case 5:
+        return <SuggestedActivity activity={suggestedActivity} onComplete={handleActivityComplete} />;
+      case 6:
+        return <ReflectionPrompt onComplete={handleReflectionComplete} onSkip={handleReflectionComplete} />;
+      case 7:
+        return <MoodRatingScale onRatingSelect={handleMoodRating} />;
+      case 8:
+        return (
+          <ResultsPage
+            initialMoodRating={initialMoodRating}
+            finalMoodRating={finalMoodRating}
+            suggestedActivity={suggestedActivity}
+            moodHistory={moodHistory}
+            userCount={userCount}
+            averageMoodImprovement={(userCount > 0 ? (totalMoodImprovement / userCount) * 10 : 0)}
+            onShare={handleShare}
+            onNewSession={handleEndSession}
+          />
+        );
+      default:
+        return null;
+    }
   };
 
   return (
@@ -149,29 +160,39 @@ const Index = () => {
   );
 };
 
-const LandingPage = ({ onNotificationClick }) => (
-  <div className="animated-title w-full h-full flex flex-col items-center justify-between">
-    <div className="flex-grow flex items-center justify-center flex-col">
-      <h1 className="mooody-title text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody mb-4 opacity-0 animate-fade-in-delayed" style={{ marginTop: '-5cm' }}>MOOODY</h1>
-      <p className="text-2xl sm:text-3xl md:text-4xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed relative z-10 font-hevilla" style={{ marginTop: '-7rem' }}>
-        {translations[useLanguage().language].subtitle}
-      </p>
-    </div>
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-16" style={{ marginLeft: '-120px' }}>
-      <div className="animate-fade-in-button">
-        <NotificationButton onClick={onNotificationClick} />
+const LandingPage = ({ onNotificationClick }) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  return (
+    <div className="animated-title w-full h-full flex flex-col items-center justify-between">
+      <div className="flex-grow flex items-center justify-center flex-col">
+        <h1 className="mooody-title text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody mb-4 opacity-0 animate-fade-in-delayed" style={{ marginTop: '-5cm' }}>MOOODY</h1>
+        <p className="text-2xl sm:text-3xl md:text-4xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed relative z-10 font-hevilla" style={{ marginTop: '-7rem' }}>
+          {t.subtitle}
+        </p>
+      </div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-16" style={{ marginLeft: '-120px' }}>
+        <div className="animate-fade-in-button">
+          <NotificationButton onClick={onNotificationClick} />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-const SuggestedActivity = ({ activity, onComplete }) => (
-  <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
-    <h2 className="text-2xl font-bold mb-4">{translations[useLanguage().language].suggestedActivityLabel}</h2>
-    <p className="text-xl mb-6">{activity?.name}</p>
-    <Button onClick={onComplete} className="w-full">{translations[useLanguage().language].endActivity}</Button>
-  </div>
-);
+const SuggestedActivity = ({ activity, onComplete }) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
+      <h2 className="text-2xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
+      <p className="text-xl mb-6">{activity?.name}</p>
+      <Button onClick={onComplete} className="w-full">{t.endActivity}</Button>
+    </div>
+  );
+};
 
 const ResultsPage = ({ initialMoodRating, finalMoodRating, suggestedActivity, moodHistory, userCount, averageMoodImprovement, onShare, onNewSession }) => {
   const { language } = useLanguage();
@@ -187,7 +208,7 @@ const ResultsPage = ({ initialMoodRating, finalMoodRating, suggestedActivity, mo
       <p className="text-lg font-semibold mt-6 mb-2">{t.shareProgressCTA}</p>
       <div className="flex flex-wrap justify-center gap-2 mt-4">
         <Button onClick={() => onShare('instagram')}><Instagram className="h-4 w-4 mr-2" /> Instagram</Button>
-        <Button onClick={() => onShare('twitter')}>X</Button>
+        <Button onClick={() => onShare('twitter')}><X className="h-4 w-4 mr-2" /> X</Button>
         <Button onClick={() => onShare('facebook')}>Meta</Button>
         <Button onClick={() => onShare('threads')}><AtSign className="h-4 w-4 mr-2" /> Threads</Button>
       </div>
