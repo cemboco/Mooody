@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useTimer } from 'react-timer-hook';
 import { useNavigate } from 'react-router-dom';
 import MoodSelector from '../components/MoodSelector';
-import NotificationButton from '../components/NotificationButton';
 import MoodRatingScale from '../components/MoodRatingScale';
 import InitialMoodAssessment from '../components/InitialMoodAssessment';
 import LanguageToggle from '../components/LanguageToggle';
@@ -10,14 +9,15 @@ import ReflectionPrompt from '../components/ReflectionPrompt';
 import ProgressTracker from '../components/ProgressTracker';
 import MindfulnessExercise from '../components/MindfulnessExercise';
 import UserStats from '../components/UserStats';
-import Settings from '../components/Settings';
 import { selectActivity } from '../utils/gameSelector';
 import { getPersonalizedRecommendation } from '../utils/personalizedRecommendations';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Share2, Instagram, AtSign, X, Home, ArrowLeft, Settings as SettingsIcon } from 'lucide-react';
+import { Share2, Instagram, AtSign, X, Home, ArrowLeft } from 'lucide-react';
+import AnimatedTitle from '../components/AnimatedTitle';
+import MoodBalls from '../components/MoodBalls';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -42,7 +42,6 @@ const Index = () => {
   const [userCount, setUserCount] = useState(0);
   const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
   const [averageMood, setAverageMood] = useState(0);
-  const [showSettings, setShowSettings] = useState(false);
 
   useEffect(() => {
     const storedActivities = JSON.parse(localStorage.getItem('customActivities') || '[]');
@@ -253,14 +252,6 @@ const Index = () => {
     setCurrentPage(1);
   };
 
-  const handleOpenSettings = () => {
-    setShowSettings(true);
-  };
-
-  const handleCloseSettings = () => {
-    setShowSettings(false);
-  };
-
   const showBackButton = currentPage > 1;
   const showLanguageToggle = currentPage === 1;
 
@@ -277,14 +268,6 @@ const Index = () => {
       >
         <Home className="h-4 w-4" />
       </Button>
-      <Button
-        onClick={handleOpenSettings}
-        className="fixed top-4 right-16 z-[60]"
-        variant="outline"
-        size="icon"
-      >
-        <SettingsIcon className="h-4 w-4" />
-      </Button>
       {showBackButton && (
         <Button
           onClick={handleGoBack}
@@ -296,16 +279,7 @@ const Index = () => {
         </Button>
       )}
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
-        {/* Mood balls */}
-        <div className="ball ball1"></div>
-        <div className="ball ball2"></div>
-        <div className="ball ball3"></div>
-        <div className="ball ball4"></div>
-        <div className="ball ball5"></div>
-        <div className="ball ball6"></div>
-        <div className="ball ball7"></div>
-        <div className="ball ball8"></div>
-        <div className="ball ball9"></div>
+        <MoodBalls />
         
         <div className="fixed top-4 left-4 z-[70] bg-white px-2 py-1 rounded-full text-sm font-bold">
           {currentPage}/8
@@ -313,12 +287,6 @@ const Index = () => {
         
         {renderPage()}
       </div>
-      
-      {showSettings && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-[80]">
-          <Settings onClose={handleCloseSettings} />
-        </div>
-      )}
       
       <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic">
         {language === 'de' ? 
@@ -332,21 +300,7 @@ const Index = () => {
   function renderPage() {
     switch (currentPage) {
       case 1:
-        return (
-          <div className="animated-title w-full h-full flex flex-col items-center justify-between">
-            <div className="flex-grow flex items-center justify-center flex-col">
-              <h1 className="mooody-title text-4xl sm:text-5xl md:text-6xl font-bold relative z-10 rounded-moody mb-4 opacity-0 animate-fade-in-delayed" style={{ marginTop: '-5cm' }}>MOOODY</h1>
-              <p className="text-2xl sm:text-3xl md:text-4xl mt-4 text-center max-w-2xl opacity-0 animate-fade-in-more-delayed relative z-10 font-hevilla" style={{ marginTop: '-7rem' }}>
-                {t.subtitle}
-              </p>
-            </div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-16" style={{ marginLeft: '-120px' }}>
-              <div className="animate-fade-in-button">
-                <NotificationButton onClick={handleNotificationClick} />
-              </div>
-            </div>
-          </div>
-        );
+        return <AnimatedTitle onNotificationClick={handleNotificationClick} />;
       case 2:
         return (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
