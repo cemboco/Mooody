@@ -264,7 +264,7 @@ const Index = () => {
       case 2:
         return (
           <div className="w-full h-full flex items-center justify-center">
-            <img src="https://ibb.co/K0cJ96h" alt="Mood Assessment" className="max-w-full max-h-full object-contain" />
+            <img src="https://i.ibb.co/K0cJ96h/mood-assessment.png" alt="Mood Assessment" className="max-w-full max-h-full object-contain" />
           </div>
         );
       case 3:
