@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useTimer } from 'react-timer-hook';
 import { useNavigate } from 'react-router-dom';
 import MoodSelector from '../components/MoodSelector';
 import NotificationButton from '../components/NotificationButton';
@@ -24,26 +23,15 @@ const Index = () => {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [showMoodSelector, setShowMoodSelector] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
   const [suggestedActivity, setSuggestedActivity] = useState(null);
-  const [timerMinutes, setTimerMinutes] = useState(5);
-  const [showMoodRating, setShowMoodRating] = useState(false);
-  const [customActivity, setCustomActivity] = useState('');
-  const [savedActivities, setSavedActivities] = useState([]);
   const [initialMoodRating, setInitialMoodRating] = useState(null);
   const [finalMoodRating, setFinalMoodRating] = useState(null);
-  const [positiveMessage, setPositiveMessage] = useState('');
   const [moodHistory, setMoodHistory] = useState([]);
-  const [showReflection, setShowReflection] = useState(false);
-  const [showMindfulness, setShowMindfulness] = useState(false);
   const [userCount, setUserCount] = useState(0);
   const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
-  const [averageMood, setAverageMood] = useState(0);
 
   useEffect(() => {
-    const storedActivities = JSON.parse(localStorage.getItem('customActivities') || '[]');
-    setSavedActivities(storedActivities);
     const storedMoodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
     setMoodHistory(storedMoodHistory);
     const storedUserCount = parseInt(localStorage.getItem('userCount') || '0');
@@ -59,58 +47,29 @@ const Index = () => {
     }
   }, [selectedMood, language, moodHistory]);
 
-  const time = new Date();
-  time.setSeconds(time.getSeconds() + 300); // 5 minutes default
-
-  const {
-    seconds,
-    minutes,
-    isRunning,
-    pause,
-    resume,
-    restart,
-  } = useTimer({ expiryTimestamp: time, autoStart: false });
-
   const handleNotificationClick = () => {
-    setShowMoodSelector(true);
     setCurrentPage(2);
   };
 
   const handleMoodSelect = (mood) => {
     setSelectedMood(mood);
-    const personalizedActivity = getPersonalizedRecommendation(moodHistory, selectActivity(mood.label, language));
-    setSuggestedActivity(personalizedActivity || selectActivity(mood.label, language));
     setCurrentPage(3);
   };
 
   const handleInitialAssessmentComplete = (moodValue) => {
     setInitialMoodRating(moodValue);
-    setShowMoodSelector(true);
-    setCurrentPage(2);
-  };
-
-  const handleStartTimer = () => {
-    const newTime = new Date();
-    newTime.setSeconds(newTime.getSeconds() + timerMinutes * 60);
-    restart(newTime);
     setCurrentPage(4);
   };
 
-  const handleEndActivity = () => {
-    pause();
-    setShowReflection(true);
+  const handleActivityComplete = () => {
     setCurrentPage(5);
   };
 
   const handleReflectionComplete = () => {
-    setShowReflection(false);
-    setShowMindfulness(true);
     setCurrentPage(6);
   };
 
   const handleMindfulnessComplete = () => {
-    setShowMindfulness(false);
-    setShowMoodRating(true);
     setCurrentPage(7);
   };
 
@@ -133,11 +92,6 @@ const Index = () => {
     localStorage.setItem('userCount', newUserCount.toString());
     localStorage.setItem('totalMoodImprovement', newTotalMoodImprovement.toString());
 
-    const totalMood = updatedMoodHistory.reduce((sum, entry) => sum + entry.mood, 0);
-    const newAverageMood = totalMood / updatedMoodHistory.length;
-    setAverageMood(newAverageMood);
-
-    setPositiveMessage(t.motivationalMessages[Math.floor(Math.random() * t.motivationalMessages.length)]);
     setCurrentPage(8);
   };
 
@@ -147,14 +101,10 @@ const Index = () => {
   };
 
   const resetState = () => {
-    setPositiveMessage('');
-    setShowMoodRating(false);
     setSelectedMood(null);
     setSuggestedActivity(null);
-    setShowMoodSelector(false);
     setInitialMoodRating(null);
     setFinalMoodRating(null);
-    setAverageMood(0);
   };
 
   const handleShare = (platform) => {
@@ -173,25 +123,6 @@ const Index = () => {
     }
 
     window.open(shareUrl, '_blank');
-  };
-
-  const handleSaveCustomActivity = () => {
-    if (customActivity.trim() !== '') {
-      const updatedActivities = [...savedActivities, customActivity];
-      setSavedActivities(updatedActivities);
-      localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
-      setCustomActivity('');
-    }
-  };
-
-  const handleSelectCustomActivity = (activity) => {
-    setSuggestedActivity({ name: activity });
-  };
-
-  const handleDeleteCustomActivity = (indexToDelete) => {
-    const updatedActivities = savedActivities.filter((_, index) => index !== indexToDelete);
-    setSavedActivities(updatedActivities);
-    localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
   };
 
   const handleGoBack = () => {
@@ -247,30 +178,9 @@ const Index = () => {
         return (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
             <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full">
-              <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
-              <p className="text-xl mb-4">
-                {t.youFeelLabel} {selectedMood.emoji} {selectedMood.label && t[selectedMood.label.toLowerCase()]}
-              </p>
-              {suggestedActivity && (
-                <div className="mt-6">
-                  <p className="text-lg mb-2">{t.suggestedActivityLabel}</p>
-                  <p className="text-2xl font-bold mb-6">{suggestedActivity.name}</p>
-                  <div className="flex flex-col items-center space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <Input
-                        type="number"
-                        value={timerMinutes}
-                        onChange={(e) => setTimerMinutes(parseInt(e.target.value) || 1)}
-                        className="w-20 text-center"
-                        min="1"
-                      />
-                      <span>{t.timerLabel}</span>
-                    </div>
-                    <Button onClick={handleStartTimer} className="w-full">{t.startTimer}</Button>
-                  </div>
-                </div>
-              )}
-              {renderCustomActivities()}
+              <h2 className="text-2xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
+              <p className="text-xl mb-6">{suggestedActivity?.name}</p>
+              <Button onClick={handleActivityComplete} className="w-full">{t.endActivity}</Button>
             </div>
           </div>
         );
@@ -299,66 +209,29 @@ const Index = () => {
           </div>
         );
       case 8:
-        return renderFinalPage();
+        return (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full max-h-[90vh] overflow-y-auto">
+              <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
+              <p className="text-xl mb-4">{t.moodImprovement.replace('{initial}', initialMoodRating).replace('{final}', finalMoodRating)}</p>
+              <p className="text-md mb-4">{t.activityDone.replace('{activity}', suggestedActivity?.name)}</p>
+              <ProgressTracker moodData={moodHistory} />
+              <UserStats userCount={userCount} averageMoodImprovement={averageMoodImprovement} />
+              <p className="text-lg font-semibold mt-6 mb-2">{t.shareProgressCTA}</p>
+              <div className="flex flex-wrap justify-center gap-2 mt-4">
+                <Button onClick={() => handleShare('instagram')}><Instagram className="h-4 w-4 mr-2" /> Instagram</Button>
+                <Button onClick={() => handleShare('twitter')}>X</Button>
+                <Button onClick={() => handleShare('facebook')}>Meta</Button>
+                <Button onClick={() => handleShare('threads')}><AtSign className="h-4 w-4 mr-2" /> Threads</Button>
+              </div>
+              <Button onClick={handleEndSession} className="mt-4 w-full">{t.newSession}</Button>
+            </div>
+          </div>
+        );
       default:
         return null;
     }
   };
-
-  const renderCustomActivities = () => (
-    <div className="mt-8">
-      <h2 className="text-xl font-bold mb-4">{t.addCustomActivity}</h2>
-      <div className="flex space-x-2">
-        <Input
-          type="text"
-          value={customActivity}
-          onChange={(e) => setCustomActivity(e.target.value)}
-          placeholder={t.newActivityPlaceholder}
-        />
-        <Button onClick={handleSaveCustomActivity}>{t.saveActivity}</Button>
-      </div>
-      {savedActivities.length > 0 && (
-        <div className="mt-4">
-          <h3 className="text-lg font-bold mb-2">{t.savedActivities}</h3>
-          <ul className="space-y-2">
-            {savedActivities.map((activity, index) => (
-              <li key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded">
-                <span className="text-sm">{activity}</span>
-                <div>
-                  <Button onClick={() => handleSelectCustomActivity(activity)} className="mr-2 text-xs">{t.selectActivity}</Button>
-                  <Button onClick={() => handleDeleteCustomActivity(index)} variant="ghost" size="icon">
-                    <X className="h-4 w-4" />
-                  </Button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
-
-  const renderFinalPage = () => (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 overflow-y-auto">
-      <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-md w-full max-h-[90vh] overflow-y-auto">
-        <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
-        <p className="text-xl font-bold text-green-600 mb-4">{positiveMessage}</p>
-        <p className="text-lg mb-4">{t.moodImprovement.replace('{initial}', initialMoodRating).replace('{final}', finalMoodRating)}</p>
-        <p className="text-md mb-4">{t.activityDone.replace('{activity}', suggestedActivity?.name)}</p>
-        <p className="text-lg mb-4">{t.averageMood.replace('{average}', averageMood.toFixed(1))}</p>
-        <ProgressTracker moodData={moodHistory} />
-        <UserStats userCount={userCount} averageMoodImprovement={averageMoodImprovement} />
-        <p className="text-lg font-semibold mt-6 mb-2">{t.shareProgressCTA}</p>
-        <div className="flex flex-wrap justify-center gap-2 mt-4">
-          <Button onClick={() => handleShare('instagram')}><Instagram className="h-4 w-4 mr-2" /> Instagram</Button>
-          <Button onClick={() => handleShare('twitter')}>X</Button>
-          <Button onClick={() => handleShare('facebook')}>Meta</Button>
-          <Button onClick={() => handleShare('threads')}><AtSign className="h-4 w-4 mr-2" /> Threads</Button>
-        </div>
-        <Button onClick={handleEndSession} className="mt-4 w-full">{t.newSession}</Button>
-      </div>
-    </div>
-  );
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody text-moodyText overflow-hidden">
