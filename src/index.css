@@ -8,60 +8,43 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
- 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
- 
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
- 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
- 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
- 
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
- 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
- 
     --radius: 0.5rem;
   }
  
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
- 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
- 
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
- 
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
- 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
- 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
- 
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
- 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
- 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -75,6 +58,11 @@
   body {
     @apply bg-background text-foreground font-hevilla;
     font-variant-alternates: stylistic(alt1);
+    background-image: url('https://i.ibb.co/10kPtfV/background-image.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 }
 
@@ -100,99 +88,21 @@
   animation: float 20s infinite ease-in-out;
 }
 
-.ball1 {
-  width: 100px;
-  height: 100px;
-  top: 20%;
-  left: 20%;
-  background-color: #FFD700; /* Yellow for happiness */
-}
-
-.ball2 {
-  width: 80px;
-  height: 80px;
-  top: 60%;
-  left: 60%;
-  background-color: #4169E1; /* Royal Blue for sadness */
-  animation-delay: -5s;
-}
-
-.ball3 {
-  width: 60px;
-  height: 60px;
-  top: 40%;
-  left: 80%;
-  background-color: #FF6347; /* Tomato for anger */
-  animation-delay: -10s;
-}
-
-.ball4 {
-  width: 120px;
-  height: 120px;
-  top: 10%;
-  left: 70%;
-  background-color: #32CD32; /* Lime Green for excitement */
-  animation-delay: -7s;
-}
-
-.ball5 {
-  width: 70px;
-  height: 70px;
-  top: 80%;
-  left: 30%;
-  background-color: #9370DB; /* Medium Purple for fear */
-  animation-delay: -3s;
-}
-
-.ball6 {
-  width: 90px;
-  height: 90px;
-  top: 50%;
-  left: 10%;
-  background-color: #FF69B4; /* Hot Pink for love */
-  animation-delay: -15s;
-}
-
-.ball7 {
-  width: 110px;
-  height: 110px;
-  top: 30%;
-  left: 40%;
-  background-color: #20B2AA; /* Light Sea Green for calmness */
-  animation-delay: -8s;
-}
-
-.ball8 {
-  width: 75px;
-  height: 75px;
-  top: 70%;
-  left: 50%;
-  background-color: #FFA500; /* Orange for enthusiasm */
-  animation-delay: -12s;
-}
-
-.ball9 {
-  width: 95px;
-  height: 95px;
-  top: 15%;
-  left: 85%;
-  background-color: #8B4513; /* Saddle Brown for confusion */
-  animation-delay: -6s;
-}
+.ball1 { width: 100px; height: 100px; top: 20%; left: 20%; background-color: #FFD700; }
+.ball2 { width: 80px; height: 80px; top: 60%; left: 60%; background-color: #4169E1; animation-delay: -5s; }
+.ball3 { width: 60px; height: 60px; top: 40%; left: 80%; background-color: #FF6347; animation-delay: -10s; }
+.ball4 { width: 120px; height: 120px; top: 10%; left: 70%; background-color: #32CD32; animation-delay: -7s; }
+.ball5 { width: 70px; height: 70px; top: 80%; left: 30%; background-color: #9370DB; animation-delay: -3s; }
+.ball6 { width: 90px; height: 90px; top: 50%; left: 10%; background-color: #FF69B4; animation-delay: -15s; }
+.ball7 { width: 110px; height: 110px; top: 30%; left: 40%; background-color: #20B2AA; animation-delay: -8s; }
+.ball8 { width: 75px; height: 75px; top: 70%; left: 50%; background-color: #FFA500; animation-delay: -12s; }
+.ball9 { width: 95px; height: 95px; top: 15%; left: 85%; background-color: #8B4513; animation-delay: -6s; }
 
 @keyframes float {
-  0%, 100% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(100px, -100px);
-  }
-  50% {
-    transform: translate(200px, 0);
-  }
-  75% {
-    transform: translate(100px, 100px);
-  }
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(100px, -100px); }
+  50% { transform: translate(200px, 0); }
+  75% { transform: translate(100px, 100px); }
 }
 
 @font-face {
@@ -204,31 +114,13 @@
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.animate-fade-in-delayed {
-  opacity: 0;
-  animation: fadeIn 0.5s ease-in forwards;
-  animation-delay: 0.5s;
-}
-
-.animate-fade-in-more-delayed {
-  opacity: 0;
-  animation: fadeIn 1.3s ease-in forwards;
-  animation-delay: 0.5s;
-}
-
-.animate-fade-in-button {
-  opacity: 0;
-  animation: fadeIn 0.5s ease-in forwards;
-  animation-delay: 1s;
-}
+.animate-fade-in-delayed { opacity: 0; animation: fadeIn 0.5s ease-in forwards; animation-delay: 0.5s; }
+.animate-fade-in-more-delayed { opacity: 0; animation: fadeIn 1.3s ease-in forwards; animation-delay: 0.5s; }
+.animate-fade-in-button { opacity: 0; animation: fadeIn 0.5s ease-in forwards; animation-delay: 1s; }
 
 .mooody-title {
   font-family: 'Julius Sans One', sans-serif;
