@@ -48,13 +48,6 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedMood && selectedMood.label) {
-      const personalizedActivity = getPersonalizedRecommendation(moodHistory, selectActivity(selectedMood.label, language));
-      setSuggestedActivity(personalizedActivity || selectActivity(selectedMood.label, language));
-    }
-  }, [selectedMood, language, moodHistory]);
-
-  useEffect(() => {
     if (currentPage === 2) {
       const timer = setTimeout(() => {
         setShowContinueButton(true);
