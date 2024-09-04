@@ -13,8 +13,7 @@ import { getPersonalizedRecommendation } from '../utils/personalizedRecommendati
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Share2, Instagram, AtSign, X, Home, ArrowLeft } from 'lucide-react';
+import { Home, ArrowLeft } from 'lucide-react';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -24,114 +23,45 @@ const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedMood, setSelectedMood] = useState(null);
   const [suggestedActivity, setSuggestedActivity] = useState(null);
-  const [showMoodRating, setShowMoodRating] = useState(false);
-  const [initialMoodRating, setInitialMoodRating] = useState(null);
-  const [finalMoodRating, setFinalMoodRating] = useState(null);
-  const [positiveMessage, setPositiveMessage] = useState('');
   const [moodHistory, setMoodHistory] = useState([]);
-  const [showReflection, setShowReflection] = useState(false);
-  const [showMindfulness, setShowMindfulness] = useState(false);
-  const [userCount, setUserCount] = useState(0);
-  const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
-  const [averageMood, setAverageMood] = useState(0);
-  const [showContinueButton, setShowContinueButton] = useState(false);
 
   useEffect(() => {
     const storedMoodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
     setMoodHistory(storedMoodHistory);
-    const storedUserCount = parseInt(localStorage.getItem('userCount') || '0');
-    setUserCount(storedUserCount);
-    const storedTotalMoodImprovement = parseFloat(localStorage.getItem('totalMoodImprovement') || '0');
-    setTotalMoodImprovement(storedTotalMoodImprovement);
   }, []);
 
   useEffect(() => {
-    if (currentPage === 2) {
-      const timer = setTimeout(() => {
-        setShowContinueButton(true);
-      }, 1000);
-      return () => clearTimeout(timer);
+    if (selectedMood && selectedMood.label) {
+      const personalizedActivity = getPersonalizedRecommendation(moodHistory, selectActivity(selectedMood.label, language));
+      setSuggestedActivity(personalizedActivity || selectActivity(selectedMood.label, language));
     }
-  }, [currentPage]);
+  }, [selectedMood, language, moodHistory]);
 
   const handleNotificationClick = () => {
     setCurrentPage(2);
   };
 
-  const handleContinueClick = () => {
-    setCurrentPage(3);
-  };
-
   const handleMoodSelect = (mood) => {
     setSelectedMood(mood);
-    const personalizedActivity = getPersonalizedRecommendation(moodHistory, selectActivity(mood.label, language));
-    setSuggestedActivity(personalizedActivity || selectActivity(mood.label, language));
     setCurrentPage(4);
   };
 
-  const handleMoodRating = (rating) => {
-    const moodImprovement = rating - initialMoodRating;
-    setFinalMoodRating(rating);
-
-    const newMoodEntry = {
-      date: new Date().toISOString(),
-      mood: rating
-    };
-    const updatedMoodHistory = [...moodHistory, newMoodEntry];
-    setMoodHistory(updatedMoodHistory);
-    localStorage.setItem('moodHistory', JSON.stringify(updatedMoodHistory));
-
-    const newUserCount = userCount + 1;
-    const newTotalMoodImprovement = totalMoodImprovement + moodImprovement;
-    setUserCount(newUserCount);
-    setTotalMoodImprovement(newTotalMoodImprovement);
-    localStorage.setItem('userCount', newUserCount.toString());
-    localStorage.setItem('totalMoodImprovement', newTotalMoodImprovement.toString());
-
-    const totalMood = updatedMoodHistory.reduce((sum, entry) => sum + entry.mood, 0);
-    const newAverageMood = totalMood / updatedMoodHistory.length;
-    setAverageMood(newAverageMood);
-
-    setPositiveMessage(t.motivationalMessages[Math.floor(Math.random() * t.motivationalMessages.length)]);
-  };
-
   const handleEndSession = () => {
-    setPositiveMessage('');
-    setShowMoodRating(false);
+    setCurrentPage(1);
     setSelectedMood(null);
     setSuggestedActivity(null);
-    setInitialMoodRating(null);
-    setFinalMoodRating(null);
-    setAverageMood(0);
-    setCurrentPage(1);
-  };
-
-  const handleShare = (platform) => {
-    const shareText = t.shareMessage
-      .replace('{initial}', initialMoodRating)
-      .replace('{final}', finalMoodRating)
-      .replace('{activity}', suggestedActivity.name);
-    let shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-    if (platform === 'instagram') {
-      shareUrl = `https://www.instagram.com/share?url=${encodeURIComponent(window.location.href)}&caption=${encodeURIComponent(shareText)}`;
-    }
-    window.open(shareUrl, '_blank');
   };
 
   const handleGoBack = () => {
-    setCurrentPage(prevPage => prevPage > 1 ? prevPage - 1 : 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   const handleGoHome = () => {
     handleEndSession();
     navigate('/');
-    setCurrentPage(1);
   };
-
-  const showBackButton = currentPage > 1;
-  const showLanguageToggle = currentPage === 1;
-
-  const averageMoodImprovement = userCount > 0 ? (totalMoodImprovement / userCount) * 10 : 0;
 
   const renderPage = () => {
     switch (currentPage) {
@@ -153,82 +83,23 @@ const Index = () => {
         );
       case 2:
         return (
-          <div className="flex flex-col items-center justify-center h-full p-4">
-            <h2 className="text-2xl font-bold mb-4 opacity-0 animate-fade-in">{language === 'de' ? 'Atme tief durch' : 'Take a deep breath'}</h2>
-            {showContinueButton && (
-              <Button onClick={handleContinueClick} className="mt-4 opacity-0 animate-fade-in">
-                {t.continue}
-              </Button>
-            )}
+          <div className="w-full h-full flex items-center justify-center p-4">
+            <div className="max-w-3xl w-full h-auto relative">
+              <img 
+                src="https://i.ibb.co/K0cJ96h/mood-assessment.png" 
+                alt="Mood Assessment" 
+                className="w-full h-auto object-contain rounded-xl shadow-lg" 
+              />
+            </div>
           </div>
         );
       case 3:
         return (
-          <div className="flex flex-col items-center justify-center h-full p-4">
-            <h2 className="text-2xl font-bold mb-4">{t.moodSelectorTitle}</h2>
-            <MoodSelector onMoodSelect={handleMoodSelect} />
-          </div>
-        );
-      case 4:
-        return (
-          <div className="flex flex-col items-center justify-center h-full p-4">
-            <h2 className="text-2xl font-bold mb-4">{t.suggestedActivityLabel}</h2>
-            {suggestedActivity && (
-              <>
-                <p className="text-xl mb-4">{suggestedActivity.name}</p>
-                <Button onClick={() => setCurrentPage(5)}>{t.startActivity}</Button>
-              </>
-            )}
-          </div>
-        );
-      case 5:
-        return (
-          <div className="flex flex-col items-center justify-center h-full p-4">
-            <h2 className="text-2xl font-bold mb-4">{suggestedActivity.name}</h2>
-            <Button onClick={() => setShowReflection(true)}>{t.endActivity}</Button>
-          </div>
-        );
-      case 6:
-        return showReflection ? (
-          <ReflectionPrompt 
-            onComplete={() => {
-              setShowReflection(false);
-              setShowMindfulness(true);
-            }} 
-            onSkip={() => {
-              setShowReflection(false);
-              setShowMindfulness(true);
-            }}
-          />
-        ) : showMindfulness ? (
-          <MindfulnessExercise 
-            onComplete={() => {
-              setShowMindfulness(false);
-              setShowMoodRating(true);
-            }}
-            onBack={() => {
-              setShowMindfulness(false);
-              setShowReflection(true);
-            }}
-          />
-        ) : (
-          <MoodRatingScale onRatingSelect={handleMoodRating} />
-        );
-      case 7:
-        return (
-          <div className="flex flex-col items-center justify-center h-full p-4">
-            <p className="text-xl font-bold text-green-600 mb-4">{positiveMessage}</p>
-            <p className="text-lg mb-4">{t.moodImprovement.replace('{initial}', initialMoodRating).replace('{final}', finalMoodRating)}</p>
-            <p className="text-md mb-4">{t.activityDone.replace('{activity}', suggestedActivity?.name)}</p>
-            <p className="text-lg mb-4">{t.averageMood.replace('{average}', averageMood.toFixed(1))}</p>
-            <ProgressTracker moodData={moodHistory} />
-            <UserStats userCount={userCount} averageMoodImprovement={averageMoodImprovement} />
-            <p className="text-lg font-semibold mt-6 mb-2">{t.shareProgressCTA}</p>
-            <div className="flex space-x-2 mt-4">
-              <Button onClick={() => handleShare('instagram')}><Instagram className="h-4 w-4 mr-2" /> Instagram</Button>
-              <Button onClick={() => handleShare('twitter')}>Twitter</Button>
+          <div className="fixed inset-0 flex items-center justify-center bg-moody z-50 overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-md p-6 m-4 max-w-sm w-full relative">
+              <h1 className="mooody-title text-3xl sm:text-4xl font-bold mb-6 rounded-moody">MOOODY</h1>
+              <MoodSelector onMoodSelect={handleMoodSelect} title={t.moodSelectorTitle} />
             </div>
-            <Button onClick={handleEndSession} className="mt-4">{t.newSession}</Button>
           </div>
         );
       default:
@@ -238,7 +109,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-moody text-moodyText overflow-hidden">
-      {showLanguageToggle && <LanguageToggle />}
+      {currentPage === 1 && <LanguageToggle />}
       <Button
         onClick={handleGoHome}
         className="fixed top-4 right-4 z-[60]"
@@ -247,7 +118,7 @@ const Index = () => {
       >
         <Home className="h-4 w-4" />
       </Button>
-      {showBackButton && (
+      {currentPage > 1 && (
         <Button
           onClick={handleGoBack}
           className="fixed bottom-4 left-4 z-[60]"
@@ -258,10 +129,19 @@ const Index = () => {
         </Button>
       )}
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
+        {[...Array(9)].map((_, i) => (
+          <div key={i} className={`ball ball${i + 1}`}></div>
+        ))}
         <div className="fixed top-4 left-4 z-[70] bg-white px-2 py-1 rounded-full text-sm font-bold">
-          {currentPage}/7
+          {currentPage}/8
         </div>
         {renderPage()}
+      </div>
+      <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic">
+        {language === 'de' ? 
+          "Diese App ersetzt keine professionelle psychologische oder medizinische Beratung. Bei ernsthaften mentalen Problemen oder Krisen suchen Sie bitte einen Spezialisten oder Therapeuten auf." :
+          "This app does not replace professional psychological or medical advice. For serious mental health issues or crises, please consult a specialist or therapist."
+        }
       </div>
     </div>
   );
