@@ -23,22 +23,11 @@ const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedMood, setSelectedMood] = useState(null);
   const [suggestedActivity, setSuggestedActivity] = useState(null);
-  const [showMoodRating, setShowMoodRating] = useState(false);
-  const [initialMoodRating, setInitialMoodRating] = useState(null);
-  const [finalMoodRating, setFinalMoodRating] = useState(null);
   const [moodHistory, setMoodHistory] = useState([]);
-  const [showReflection, setShowReflection] = useState(false);
-  const [showMindfulness, setShowMindfulness] = useState(false);
-  const [userCount, setUserCount] = useState(0);
-  const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
 
   useEffect(() => {
     const storedMoodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
     setMoodHistory(storedMoodHistory);
-    const storedUserCount = parseInt(localStorage.getItem('userCount') || '0');
-    setUserCount(storedUserCount);
-    const storedTotalMoodImprovement = parseFloat(localStorage.getItem('totalMoodImprovement') || '0');
-    setTotalMoodImprovement(storedTotalMoodImprovement);
   }, []);
 
   useEffect(() => {
@@ -57,41 +46,10 @@ const Index = () => {
     setCurrentPage(4);
   };
 
-  const handleReflectionComplete = () => {
-    setShowReflection(false);
-    setShowMindfulness(true);
-    setCurrentPage(7);
-  };
-
-  const handleMindfulnessComplete = () => {
-    setShowMindfulness(false);
-    setShowMoodRating(true);
-    setCurrentPage(8);
-  };
-
-  const handleMoodRating = (rating) => {
-    setFinalMoodRating(rating);
-    const newMoodEntry = { date: new Date().toISOString(), mood: rating };
-    const updatedMoodHistory = [...moodHistory, newMoodEntry];
-    setMoodHistory(updatedMoodHistory);
-    localStorage.setItem('moodHistory', JSON.stringify(updatedMoodHistory));
-
-    const newUserCount = userCount + 1;
-    const moodImprovement = rating - initialMoodRating;
-    const newTotalMoodImprovement = totalMoodImprovement + moodImprovement;
-    setUserCount(newUserCount);
-    setTotalMoodImprovement(newTotalMoodImprovement);
-    localStorage.setItem('userCount', newUserCount.toString());
-    localStorage.setItem('totalMoodImprovement', newTotalMoodImprovement.toString());
-  };
-
   const handleEndSession = () => {
     setCurrentPage(1);
     setSelectedMood(null);
     setSuggestedActivity(null);
-    setShowMoodRating(false);
-    setInitialMoodRating(null);
-    setFinalMoodRating(null);
   };
 
   const handleGoBack = () => {
@@ -125,12 +83,14 @@ const Index = () => {
         );
       case 2:
         return (
-          <div className="w-full h-full flex items-center justify-center">
-            <img 
-              src="https://i.ibb.co/K0cJ96h/mood-assessment.png" 
-              alt="Mood Assessment" 
-              className="max-w-[90%] max-h-[90%] object-contain rounded-xl shadow-lg" 
-            />
+          <div className="w-full h-full flex items-center justify-center p-4">
+            <div className="max-w-3xl w-full h-auto relative">
+              <img 
+                src="https://i.ibb.co/K0cJ96h/mood-assessment.png" 
+                alt="Mood Assessment" 
+                className="w-full h-auto object-contain rounded-xl shadow-lg" 
+              />
+            </div>
           </div>
         );
       case 3:
