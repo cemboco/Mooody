@@ -27,8 +27,6 @@ const Index = () => {
   const [suggestedActivity, setSuggestedActivity] = useState(null);
   const [timerMinutes, setTimerMinutes] = useState(5);
   const [showMoodRating, setShowMoodRating] = useState(false);
-  const [customActivity, setCustomActivity] = useState('');
-  const [savedActivities, setSavedActivities] = useState([]);
   const [initialMoodRating, setInitialMoodRating] = useState(null);
   const [finalMoodRating, setFinalMoodRating] = useState(null);
   const [positiveMessage, setPositiveMessage] = useState('');
@@ -38,10 +36,9 @@ const Index = () => {
   const [userCount, setUserCount] = useState(0);
   const [totalMoodImprovement, setTotalMoodImprovement] = useState(0);
   const [averageMood, setAverageMood] = useState(0);
+  const [showContinueButton, setShowContinueButton] = useState(false);
 
   useEffect(() => {
-    const storedActivities = JSON.parse(localStorage.getItem('customActivities') || '[]');
-    setSavedActivities(storedActivities);
     const storedMoodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
     setMoodHistory(storedMoodHistory);
     const storedUserCount = parseInt(localStorage.getItem('userCount') || '0');
@@ -56,6 +53,15 @@ const Index = () => {
       setSuggestedActivity(personalizedActivity || selectActivity(selectedMood.label, language));
     }
   }, [selectedMood, language, moodHistory]);
+
+  useEffect(() => {
+    if (currentPage === 2) {
+      const timer = setTimeout(() => {
+        setShowContinueButton(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [currentPage]);
 
   const time = new Date();
   time.setSeconds(time.getSeconds() + 300); // 5 minutes default
@@ -73,8 +79,7 @@ const Index = () => {
     setCurrentPage(2);
   };
 
-  const handleInitialAssessmentComplete = (moodValue) => {
-    setInitialMoodRating(moodValue);
+  const handleContinueClick = () => {
     setCurrentPage(3);
   };
 
@@ -187,25 +192,6 @@ const Index = () => {
     window.open(shareUrl, '_blank');
   };
 
-  const handleSaveCustomActivity = () => {
-    if (customActivity.trim() !== '') {
-      const updatedActivities = [...savedActivities, customActivity];
-      setSavedActivities(updatedActivities);
-      localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
-      setCustomActivity('');
-    }
-  };
-
-  const handleSelectCustomActivity = (activity) => {
-    setSuggestedActivity({ name: activity });
-  };
-
-  const handleDeleteCustomActivity = (indexToDelete) => {
-    const updatedActivities = savedActivities.filter((_, index) => index !== indexToDelete);
-    setSavedActivities(updatedActivities);
-    localStorage.setItem('customActivities', JSON.stringify(updatedActivities));
-  };
-
   const handleGoBack = () => {
     setCurrentPage(prevPage => prevPage > 1 ? prevPage - 1 : 1);
   };
@@ -242,8 +228,12 @@ const Index = () => {
       case 2:
         return (
           <div className="flex flex-col items-center justify-center h-full p-4">
-            <h2 className="text-2xl font-bold mb-4">{t.initialMoodQuestion}</h2>
-            <MoodRatingScale onRatingSelect={handleInitialAssessmentComplete} />
+            <h2 className="text-2xl font-bold mb-4 opacity-0 animate-fade-in">{language === 'de' ? 'Atme tief durch' : 'Take a deep breath'}</h2>
+            {showContinueButton && (
+              <Button onClick={handleContinueClick} className="mt-4 opacity-0 animate-fade-in">
+                {t.continue}
+              </Button>
+            )}
           </div>
         );
       case 3:
