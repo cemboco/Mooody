@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Home, Check } from 'lucide-react';
+import { Home, Check, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -14,14 +14,20 @@ const SelectedMood = () => {
   const t = translations[language];
   const selectedEmotions = location.state?.selectedEmotions || [];
   const [userInput, setUserInput] = useState('');
+  const [currentEmotionIndex, setCurrentEmotionIndex] = useState(0);
 
-  const firstEmotion = selectedEmotions[0] || t.defaultMood;
+  const currentEmotion = selectedEmotions[currentEmotionIndex] || t.defaultMood;
 
   const handleSubmit = () => {
-    // Here you can add the logic to handle the submission of the user's response
     console.log("User input submitted:", userInput);
-    // For now, we'll just navigate back to the mood selection page
-    navigate('/mood');
+    
+    if (currentEmotionIndex < selectedEmotions.length - 1) {
+      setCurrentEmotionIndex(currentEmotionIndex + 1);
+      setUserInput('');
+    } else {
+      // Here you can add logic to save all responses before navigating
+      navigate('/mood');
+    }
   };
 
   return (
@@ -36,9 +42,9 @@ const SelectedMood = () => {
         <Home className="h-4 w-4" />
       </Button>
       <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16">
-        <h1 className="text-3xl font-bold mb-8">{t[firstEmotion] || firstEmotion}</h1>
+        <h1 className="text-3xl font-bold mb-8">{t[currentEmotion] || currentEmotion}</h1>
         <h2 className="text-2xl font-bold mb-4 text-center">
-          {t.whatsMakingYouFeel.replace('[emotion]', t[firstEmotion] || firstEmotion)}
+          {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
         </h2>
         <Textarea
           value={userInput}
@@ -49,7 +55,9 @@ const SelectedMood = () => {
         <div className="mt-8 flex items-center justify-between w-full max-w-md">
           <Button
             onClick={() => navigate('/mood')}
+            className="flex items-center"
           >
+            <ArrowLeft className="h-4 w-4 mr-2" />
             {t.backToMoodSelection}
           </Button>
           <Button
