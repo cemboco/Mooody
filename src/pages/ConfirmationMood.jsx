@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Home } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
-import Calendar from '../components/Calendar';
 
 const ConfirmationMood = () => {
   const location = useLocation();
@@ -15,7 +14,7 @@ const ConfirmationMood = () => {
 
   const { date, emotions, texts } = location.state || {};
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (date && emotions && texts) {
       const entries = JSON.parse(localStorage.getItem('moodEntries') || '{}');
       const formattedDate = new Date(date).toISOString().split('T')[0];
@@ -57,10 +56,15 @@ const ConfirmationMood = () => {
           ))}
         </div>
       )}
-      <Calendar />
+      <Button
+        onClick={() => navigate('/calendar')}
+        className="mt-4"
+      >
+        {t.viewCalendar}
+      </Button>
       <Button
         onClick={() => navigate('/')}
-        className="mt-8"
+        className="mt-4"
       >
         {t.backToHome}
       </Button>
