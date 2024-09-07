@@ -1,7 +1,7 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
 
-const MoodBalls = ({ showText = false, textColor = 'text-gray-300', selectedEmotions, onEmotionClick, onCustomEmotionClick }) => {
+const MoodBalls = ({ showText = false, textColor = 'text-gray-300', selectedEmotions = [], onEmotionClick, onCustomEmotionClick }) => {
   const emotions = [
     "angry", "confident", "optimistic", "numb", "tired",
     "happy", "sad", "anxious", "calm", "worried"
