@@ -4,7 +4,6 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
-import { Home } from 'lucide-react';
 import MoodSelectionPage from '../components/MoodSelectionPage';
 
 const Index = () => {
@@ -23,14 +22,6 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
-      <Button
-        onClick={handleHomeClick}
-        className="fixed top-4 right-4 z-[60]"
-        variant="outline"
-        size="icon"
-      >
-        <Home className="h-4 w-4" />
-      </Button>
       <div className={`relative w-full h-screen flex flex-col items-center justify-center p-4 transition-transform duration-500 ${showMoodSelection ? 'translate-x-[-100%]' : ''}`}>
         <MoodBalls />
         <div className="container text-center max-w-2xl relative z-10">

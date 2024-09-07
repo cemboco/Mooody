@@ -4,16 +4,16 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 
 const moods = [
-  {text: "wütend", color: "#FF5733"},
-  {text: "selbstbewusst", color: "#FFC300"},
-  {text: "optimistisch", color: "#DAF7A6"},
+  {text: "wütend", color: "#FFC300"},
+  {text: "selbstbewusst", color: "#DAF7A6"},
+  {text: "optimistisch", color: "#FF5733"},
   {text: "taub", color: "#C70039"},
   {text: "müde", color: "#900C3F"},
-  {text: "glücklich", color: "#FF5733"},
-  {text: "traurig", color: "#3498DB"},
-  {text: "ängstlich", color: "#8E44AD"},
-  {text: "ruhig", color: "#2ECC71"},
-  {text: "besorgt", color: "#F39C12"},
+  {text: "glücklich", color: "#581845"},
+  {text: "traurig", color: "#FF8C00"},
+  {text: "ängstlich", color: "#008080"},
+  {text: "ruhig", color: "#FFA07A"},
+  {text: "besorgt", color: "#20B2AA"},
   {text: "+", color: "#FFFFFF"}
 ];
 
@@ -44,7 +44,6 @@ const MoodSelectionPage = ({ show, onHomeClick }) => {
 
   return (
     <div className={`absolute top-0 left-0 w-full h-full bg-mooody-yellow transition-transform duration-500 ${show ? 'translate-x-0' : 'translate-x-[100%]'}`}>
-      <Button onClick={onHomeClick} className="absolute top-4 right-4 z-50">🏠</Button>
       <div className="relative w-full h-full">
         {moods.map((mood, index) => (
           <div
@@ -57,7 +56,7 @@ const MoodSelectionPage = ({ show, onHomeClick }) => {
             }}
             onClick={() => toggleMood(mood)}
           >
-            {mood.text}
+            <span className="text-gray-200">{mood.text}</span>
           </div>
         ))}
       </div>
