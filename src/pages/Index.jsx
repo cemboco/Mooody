@@ -15,6 +15,10 @@ const Index = () => {
     setShowMoodSelection(true);
   };
 
+  const handleHomeClick = () => {
+    setShowMoodSelection(false);
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
@@ -31,7 +35,7 @@ const Index = () => {
           </Button>
         </div>
       </div>
-      <MoodSelectionPage show={showMoodSelection} />
+      <MoodSelectionPage show={showMoodSelection} onHomeClick={handleHomeClick} />
     </div>
   );
 };

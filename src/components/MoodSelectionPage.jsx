@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
+import { Home } from 'lucide-react';
 
 const moods = [
   {text: "wütend", color: "#FFC300", size: 80},
@@ -17,7 +18,7 @@ const moods = [
   {text: "+", color: "#FFFFFF", size: 100},
 ];
 
-const MoodSelectionPage = ({ show }) => {
+const MoodSelectionPage = ({ show, onHomeClick }) => {
   const { language } = useLanguage();
   const t = translations[language];
   const [selectedMoods, setSelectedMoods] = useState([]);
@@ -46,7 +47,7 @@ const MoodSelectionPage = ({ show }) => {
             }}
             onClick={() => toggleMood(mood)}
           >
-            <span className={`text-gray-200 ${mood.text === '+' ? 'text-4xl' : ''}`}>{mood.text}</span>
+            <span className={`text-gray-200 ${mood.text === '+' ? 'text-5xl' : ''}`}>{mood.text}</span>
           </div>
         ))}
       </div>
@@ -58,6 +59,12 @@ const MoodSelectionPage = ({ show }) => {
           </Button>
         )}
       </div>
+      <Button
+        className="absolute top-4 left-4 bg-mooody-green hover:bg-mooody-dark-green text-white rounded-full p-2"
+        onClick={onHomeClick}
+      >
+        <Home size={24} />
+      </Button>
     </div>
   );
 };
