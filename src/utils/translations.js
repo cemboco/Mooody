@@ -63,9 +63,9 @@ export const translations = {
     selectedMoods: 'Ausgewählte Stimmungen',
     backToMoodSelection: 'Zurück zur Stimmungsauswahl',
     whatsMakingYouFeel: 'Was lässt dich [emotion] fühlen?',
+    tapAnywhereToType: 'Tippe irgendwo, um zu schreiben.',
     typeHere: 'Schreibe hier...',
     defaultMood: 'Stimmung',
-    voiceInputNotSupported: 'Spracherkennung wird von deinem Browser nicht unterstützt.',
   },
   en: {
     title: 'Moody',
@@ -131,8 +131,8 @@ export const translations = {
     selectedMoods: 'Selected Moods',
     backToMoodSelection: 'Back to Mood Selection',
     whatsMakingYouFeel: "What's making you feel [emotion]?",
+    tapAnywhereToType: 'Tap anywhere to type.',
     typeHere: 'Type here...',
     defaultMood: 'Mood',
-    voiceInputNotSupported: 'Voice recognition is not supported by your browser.',
   }
 };
