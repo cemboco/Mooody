@@ -16,6 +16,14 @@ const CheckIn = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const navigationTimer = setTimeout(() => {
+      navigate('/home');
+    }, 5000); // Navigate after 5 seconds
+
+    return () => clearTimeout(navigationTimer);
+  }, [navigate]);
+
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
@@ -27,7 +35,7 @@ const CheckIn = () => {
           {t.checkInSubtitle}
         </p>
         <Button
-          onClick={() => navigate('/mood')}
+          onClick={() => navigate('/home')}
           className="bg-mooody-green hover:bg-mooody-dark-green text-white text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-colors shadow-lg"
         >
           {t.getStarted}
