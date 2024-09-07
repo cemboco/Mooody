@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Home } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
+import Calendar from '../components/Calendar';
 
 const ConfirmationMood = () => {
   const location = useLocation();
@@ -12,19 +13,20 @@ const ConfirmationMood = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
-  const { date, emotions, texts } = location.state || {};
+  const { date, emotions, texts, images } = location.state || {};
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (date && emotions && texts) {
       const entries = JSON.parse(localStorage.getItem('moodEntries') || '{}');
       const formattedDate = new Date(date).toISOString().split('T')[0];
       entries[formattedDate] = emotions.map((emotion, index) => ({
         emotion,
-        text: texts[index]
+        text: texts[index],
+        image: images[index] ? URL.createObjectURL(images[index]) : null,
       }));
       localStorage.setItem('moodEntries', JSON.stringify(entries));
     }
-  }, [date, emotions, texts]);
+  }, [date, emotions, texts, images]);
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -52,19 +54,21 @@ const ConfirmationMood = () => {
                 {t[emotion] || emotion}
               </h3>
               <p className="text-base">{texts[index]}</p>
+              {images[index] && (
+                <img
+                  src={URL.createObjectURL(images[index])}
+                  alt={`Image for ${emotion}`}
+                  className="mt-2 max-w-full h-auto rounded"
+                />
+              )}
             </div>
           ))}
         </div>
       )}
-      <Button
-        onClick={() => navigate('/calendar')}
-        className="mt-4"
-      >
-        {t.viewCalendar}
-      </Button>
+      <Calendar />
       <Button
         onClick={() => navigate('/')}
-        className="mt-4"
+        className="mt-8"
       >
         {t.backToHome}
       </Button>

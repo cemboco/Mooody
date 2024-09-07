@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { ChevronLeft, ChevronRight, Home } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Edit } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
-import LanguageToggle from '../components/LanguageToggle';
-import { useNavigate } from 'react-router-dom';
+import { Textarea } from "@/components/ui/textarea";
+import ImageUpload from '../components/ImageUpload';
 
 const Calendar = () => {
   const { language } = useLanguage();
   const t = translations[language];
-  const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [entries, setEntries] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [editedEntry, setEditedEntry] = useState('');
+  const [editedEntry, setEditedEntry] = useState(null);
 
   useEffect(() => {
     const storedEntries = localStorage.getItem('moodEntries');
@@ -28,7 +26,6 @@ const Calendar = () => {
 
   const saveEntriesToLocalStorage = (newEntries) => {
     localStorage.setItem('moodEntries', JSON.stringify(newEntries));
-    setEntries(newEntries);
   };
 
   const getDaysInMonth = (date) => {
@@ -54,22 +51,29 @@ const Calendar = () => {
     setEditMode(false);
   };
 
-  const handleEditClick = () => {
+  const handleEdit = () => {
     setEditMode(true);
-    const dateKey = selectedDate.toISOString().split('T')[0];
-    setEditedEntry(entries[dateKey]?.[0]?.text || '');
+    setEditedEntry(entries[selectedDate.toISOString().split('T')[0]]);
   };
 
-  const handleSaveEdit = () => {
-    const dateKey = selectedDate.toISOString().split('T')[0];
+  const handleSave = () => {
     const newEntries = { ...entries };
-    if (!newEntries[dateKey]) {
-      newEntries[dateKey] = [{ emotion: 'custom', text: editedEntry }];
-    } else {
-      newEntries[dateKey][0].text = editedEntry;
-    }
+    newEntries[selectedDate.toISOString().split('T')[0]] = editedEntry;
+    setEntries(newEntries);
     saveEntriesToLocalStorage(newEntries);
     setEditMode(false);
+  };
+
+  const handleInputChange = (index, field, value) => {
+    const updatedEntry = [...editedEntry];
+    updatedEntry[index] = { ...updatedEntry[index], [field]: value };
+    setEditedEntry(updatedEntry);
+  };
+
+  const handleImageUpload = (index, file) => {
+    const updatedEntry = [...editedEntry];
+    updatedEntry[index] = { ...updatedEntry[index], image: URL.createObjectURL(file) };
+    setEditedEntry(updatedEntry);
   };
 
   const renderCalendar = () => {
@@ -99,39 +103,27 @@ const Calendar = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-start bg-mooody-yellow text-mooody-green overflow-hidden p-4">
-      <LanguageToggle />
-      <Button
-        onClick={() => navigate('/')}
-        className="fixed top-4 right-4 z-[60]"
-        variant="outline"
-        size="icon"
-      >
-        <Home className="h-4 w-4" />
-      </Button>
-      <h1 className="text-3xl font-bold mb-8">{t.calendar}</h1>
-      <div className="w-full max-w-md">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">
-            {currentDate.toLocaleString(language === 'de' ? 'de-DE' : 'en-US', { month: 'long', year: 'numeric' })}
-          </h2>
-          <div>
-            <Button onClick={handlePrevMonth} className="mr-2">
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button onClick={handleNextMonth}>
-              <ChevronRight className="h-4 w-4" />
-            </Button>
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold">
+          {currentDate.toLocaleString(language === 'de' ? 'de-DE' : 'en-US', { month: 'long', year: 'numeric' })}
+        </h2>
+        <div>
+          <Button onClick={handlePrevMonth} className="mr-2">
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <Button onClick={handleNextMonth}>
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+      <div className="grid grid-cols-7 gap-1">
+        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+          <div key={day} className="font-bold text-center p-2">
+            {day}
           </div>
-        </div>
-        <div className="grid grid-cols-7 gap-1">
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-            <div key={day} className="font-bold text-center p-2">
-              {day}
-            </div>
-          ))}
-          {renderCalendar()}
-        </div>
+        ))}
+        {renderCalendar()}
       </div>
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent>
@@ -139,34 +131,52 @@ const Calendar = () => {
             <DialogTitle>{selectedDate?.toLocaleDateString(language === 'de' ? 'de-DE' : 'en-US')}</DialogTitle>
           </DialogHeader>
           <DialogDescription>
-            {editMode ? (
-              <Input
-                value={editedEntry}
-                onChange={(e) => setEditedEntry(e.target.value)}
-                placeholder={t.typeHere}
-              />
+            {selectedDate && entries[selectedDate.toISOString().split('T')[0]] ? (
+              editMode ? (
+                <div>
+                  {editedEntry.map((entry, index) => (
+                    <div key={index} className="mb-4">
+                      <h3 className="font-bold mb-2">{t[entry.emotion] || entry.emotion}</h3>
+                      <Textarea
+                        value={entry.text}
+                        onChange={(e) => handleInputChange(index, 'text', e.target.value)}
+                        className="mb-2"
+                      />
+                      <ImageUpload
+                        onImageUpload={(file) => handleImageUpload(index, file)}
+                        currentImage={entry.image}
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div>
+                  <h3 className="font-bold mb-2">{t.entries}</h3>
+                  {entries[selectedDate.toISOString().split('T')[0]].map((entry, index) => (
+                    <div key={index} className="mb-2">
+                      <p><strong>{t[entry.emotion] || entry.emotion}:</strong> {entry.text}</p>
+                      {entry.image && (
+                        <img src={entry.image} alt={`Image for ${entry.emotion}`} className="mt-2 max-w-full h-auto rounded" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )
             ) : (
-              <div>
-                {selectedDate && entries[selectedDate.toISOString().split('T')[0]] ? (
-                  <div>
-                    <h3 className="font-bold mb-2">{t.entries}</h3>
-                    {entries[selectedDate.toISOString().split('T')[0]].map((entry, index) => (
-                      <div key={index} className="mb-2">
-                        <p><strong>{t[entry.emotion] || entry.emotion}:</strong> {entry.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p>{t.noEntriesForThisDay}</p>
-                )}
-              </div>
+              <p>{t.noEntriesForThisDay}</p>
             )}
           </DialogDescription>
           <DialogFooter>
-            {editMode ? (
-              <Button onClick={handleSaveEdit}>{t.save}</Button>
-            ) : (
-              <Button onClick={handleEditClick}>{t.edit}</Button>
+            {!editMode && entries[selectedDate?.toISOString().split('T')[0]] && (
+              <Button onClick={handleEdit} className="mr-2">
+                <Edit className="h-4 w-4 mr-2" />
+                {t.edit}
+              </Button>
+            )}
+            {editMode && (
+              <Button onClick={handleSave}>
+                {t.save}
+              </Button>
             )}
           </DialogFooter>
         </DialogContent>
