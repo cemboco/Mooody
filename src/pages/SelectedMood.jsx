@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Home } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
@@ -13,12 +12,9 @@ const SelectedMood = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const selectedEmotions = location.state?.selectedEmotions || [];
-  const [inputText, setInputText] = useState('');
-
-  const primaryEmotion = selectedEmotions[0] || '';
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-start bg-mooody-yellow text-mooody-green overflow-hidden p-4">
+    <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
       <Button
         onClick={() => navigate('/')}
@@ -28,31 +24,20 @@ const SelectedMood = () => {
       >
         <Home className="h-4 w-4" />
       </Button>
-      <h1 className="text-4xl font-bold mt-16 mb-8">{t[primaryEmotion] || primaryEmotion}</h1>
-      <h2 className="text-2xl text-center mb-4">
-        {t.whatsMakingYouFeel.replace('[emotion]', t[primaryEmotion] || primaryEmotion)}
-      </h2>
-      <p className="text-lg mb-8">{t.tapAnywhereToType}</p>
-      <Textarea
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-        placeholder={t.typeYourThoughtsHere}
-        className="w-full max-w-2xl h-64 p-4 text-lg"
-      />
-      <div className="mt-8">
-        <h3 className="text-xl mb-4">{t.allSelectedMoods}</h3>
+      <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
+        <h2 className="text-2xl mb-6 z-10">{t.selectedMoods}</h2>
         <ul className="list-disc list-inside">
           {selectedEmotions.map((emotion, index) => (
-            <li key={index} className="text-lg mb-2">{t[emotion] || emotion}</li>
+            <li key={index} className="text-xl mb-2">{t[emotion] || emotion}</li>
           ))}
         </ul>
+        <Button
+          onClick={() => navigate('/mood')}
+          className="mt-8"
+        >
+          {t.backToMoodSelection}
+        </Button>
       </div>
-      <Button
-        onClick={() => navigate('/mood')}
-        className="mt-8"
-      >
-        {t.backToMoodSelection}
-      </Button>
     </div>
   );
 };
