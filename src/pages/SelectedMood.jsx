@@ -20,14 +20,23 @@ const SelectedMood = () => {
 
   const handleSubmit = () => {
     if (userInput.trim()) {
+      console.log('User input:', userInput); // Log user input to console
       const currentDate = new Date().toISOString();
-      navigate('/confirmation-mood', {
-        state: {
-          date: currentDate,
-          emotion: currentEmotion,
-          text: userInput,
-        },
-      });
+      
+      if (currentEmotionIndex < selectedEmotions.length - 1) {
+        // Move to the next emotion
+        setCurrentEmotionIndex(prevIndex => prevIndex + 1);
+        setUserInput(''); // Clear input for the next emotion
+      } else {
+        // Navigate to ConfirmationMood with all emotions and inputs
+        navigate('/confirmation-mood', {
+          state: {
+            date: currentDate,
+            emotions: selectedEmotions,
+            texts: [...(location.state?.texts || []), userInput],
+          },
+        });
+      }
     }
   };
 
@@ -63,7 +72,8 @@ const SelectedMood = () => {
           </Button>
           <Button
             onClick={handleSubmit}
-            className="rounded-full w-10 h-10 flex items-center justify-center bg-mooody-green hover:bg-mooody-dark-green"
+            className="rounded-full w-12 h-12 flex items-center justify-center bg-mooody-green hover:bg-mooody-dark-green"
+            disabled={!userInput.trim()}
           >
             <Check className="h-6 w-6 text-white" />
           </Button>

@@ -12,7 +12,7 @@ const ConfirmationMood = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
-  const { date, emotion, text } = location.state || {};
+  const { date, emotions, texts } = location.state || {};
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -34,8 +34,14 @@ const ConfirmationMood = () => {
         <h1 className="text-3xl font-bold mb-8">{t.entries}</h1>
         <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold mb-4">{formatDate(date)}</h2>
-          <h3 className="text-xl font-semibold mb-2">{t.whatsMakingYouFeel.replace('[emotion]', t[emotion] || emotion)}</h3>
-          <p className="text-base">{text}</p>
+          {emotions.map((emotion, index) => (
+            <div key={index} className="mb-4">
+              <h3 className="text-xl font-semibold mb-2">
+                {t.whatsMakingYouFeel.replace('[emotion]', t[emotion] || emotion)}
+              </h3>
+              <p className="text-base">{texts[index]}</p>
+            </div>
+          ))}
         </div>
         <Button
           onClick={() => navigate('/')}
