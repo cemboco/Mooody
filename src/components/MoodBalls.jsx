@@ -7,7 +7,7 @@ const MoodBalls = ({ showText = false, selectedEmotions = [], onEmotionSelect, o
   const t = translations[language];
 
   const emotions = [
-    "angry", "confident", "angry", "numb", "tired",
+    "optimistic", "confident", "angry", "numb", "tired",
     "happy", "sad", "anxious", "calm", "worried"
   ];
 
@@ -28,7 +28,7 @@ const MoodBalls = ({ showText = false, selectedEmotions = [], onEmotionSelect, o
             onClick={() => handleClick(emotion)}
           >
             {showText && (
-              <span className={`text-sm ${isSelected ? 'text-white font-bold' : 'text-black'}`}>
+              <span className={`text-sm ${isSelected ? 'text-white' : 'text-black'}`}>
                 {t[emotion]}
               </span>
             )}
