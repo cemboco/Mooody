@@ -36,7 +36,7 @@ const ConfirmationMood = () => {
     <div className="min-h-screen w-full flex flex-col items-center justify-start bg-mooody-yellow text-mooody-green overflow-hidden p-4">
       <LanguageToggle />
       <Button
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/home')}
         className="fixed top-4 right-4 z-[60]"
         variant="outline"
         size="icon"
@@ -59,7 +59,7 @@ const ConfirmationMood = () => {
       )}
       <Calendar />
       <Button
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/home')}
         className="mt-8"
       >
         {t.backToHome}
