@@ -42,6 +42,9 @@ const MoodBalls = ({ showText = false, selectedEmotions = [], onEmotionSelect, o
       >
         {showText && <span className="text-black text-2xl">+</span>}
       </div>
+      <div className="ball floating-happy-ball flex items-center justify-center">
+        <span className="text-sm text-black">{t.happy}</span>
+      </div>
     </div>
   );
 };

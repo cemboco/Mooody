@@ -118,6 +118,16 @@
   z-index: 0;
 }
 
+.floating-happy-ball {
+  width: 85px;
+  height: 85px;
+  top: calc(10% + 220px);
+  left: 15%;
+  background-color: #FFD700;
+  animation-delay: -24s;
+  z-index: 2;
+}
+
 @keyframes float-reverse {
   0%, 100% { transform: translate(0, 0); }
   25% { transform: translate(-50px, 50px); }
@@ -125,6 +135,6 @@
   75% { transform: translate(-50px, -50px); }
 }
 
-.ball2, .ball4, .ball6, .ball8, .ball10, .happy-ball {
+.ball2, .ball4, .ball6, .ball8, .ball10, .happy-ball, .floating-happy-ball {
   animation-name: float-reverse;
 }
