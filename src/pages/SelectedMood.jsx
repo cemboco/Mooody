@@ -33,7 +33,6 @@ const SelectedMood = () => {
         <h2 className="text-2xl font-bold mb-4 text-center">
           {t.whatsMakingYouFeel.replace('[emotion]', t[firstEmotion] || firstEmotion)}
         </h2>
-        <p className="text-lg mb-8">{t.tapAnywhereToType}</p>
         <Textarea
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
