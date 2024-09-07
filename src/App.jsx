@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { navItems } from "./nav-items";
 import { LanguageProvider } from './contexts/LanguageContext';
 import Mood from './pages/Mood';
+import SelectedMood from './pages/SelectedMood';
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
               <Route key={to} path={to} element={page} />
             ))}
             <Route path="/mood" element={<Mood />} />
+            <Route path="/selected-mood" element={<SelectedMood />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

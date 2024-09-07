@@ -60,6 +60,8 @@ export const translations = {
     enterCustomEmotion: 'Gib eine eigene Emotion ein',
     cancel: 'Abbrechen',
     add: 'Hinzufügen',
+    selectedMoods: 'Ausgewählte Stimmungen',
+    backToMoodSelection: 'Zurück zur Stimmungsauswahl',
     motivationalMessages: [
       "Du kannst alles erreichen, was du dir vornimmst!",
       "Glaube an dich und deine Fähigkeiten.",
@@ -144,6 +146,8 @@ export const translations = {
     enterCustomEmotion: 'Enter a custom emotion',
     cancel: 'Cancel',
     add: 'Add',
+    selectedMoods: 'Selected Moods',
+    backToMoodSelection: 'Back to Mood Selection',
     motivationalMessages: [
       "You can achieve anything you set your mind to!",
       "Believe in yourself and your abilities.",

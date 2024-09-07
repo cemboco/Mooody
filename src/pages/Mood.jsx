@@ -4,7 +4,7 @@ import CustomEmotionModal from '../components/CustomEmotionModal';
 import LanguageToggle from '../components/LanguageToggle';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
-import { Home } from 'lucide-react';
+import { Home, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 
@@ -24,7 +24,6 @@ const Mood = () => {
   };
 
   const handleCustomEmotionAdd = (newEmotion) => {
-    // Here you would typically update your emotions list in a global state or context
     console.log('New custom emotion added:', newEmotion);
     setIsModalOpen(false);
   };
@@ -51,6 +50,15 @@ const Mood = () => {
           showHappyText={true}
         />
       </div>
+      {selectedEmotions.length > 0 && (
+        <Button
+          onClick={() => navigate('/selected-mood', { state: { selectedEmotions } })}
+          className="fixed bottom-4 right-4 z-[60] rounded-full"
+          size="icon"
+        >
+          <ArrowRight className="h-4 w-4" />
+        </Button>
+      )}
       <CustomEmotionModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
