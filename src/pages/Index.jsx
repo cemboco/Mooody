@@ -23,7 +23,7 @@ const Index = () => {
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
       <div className={`relative w-full h-screen flex flex-col items-center justify-center p-4 transition-transform duration-500 ${showMoodSelection ? 'translate-x-[-100%]' : ''}`}>
-        <MoodBalls />
+        {!showMoodSelection && <MoodBalls />}
         <div className="container text-center max-w-2xl relative z-10">
           <h1 className="mooody-title text-5xl sm:text-6xl md:text-7xl font-bold mb-6">MOOODY</h1>
           <p className="text-xl sm:text-2xl mb-8">{t.subtitle}</p>
