@@ -36,16 +36,16 @@ const Index = () => {
           <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8">{t.subtitle}</p>
           <div className="flex justify-center space-x-4">
             <Button 
-              className="bg-mooody-green hover:bg-mooody-dark-green text-white text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-colors shadow-lg relative z-20"
-              onClick={() => navigate('/mood')}
-            >
-              {t.notificationButton}
-            </Button>
-            <Button 
               className="bg-white hover:bg-gray-100 text-mooody-green text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-colors shadow-lg relative z-20"
               onClick={() => navigate('/')}
             >
               {t.beforeJumpingIn}
+            </Button>
+            <Button 
+              className="bg-mooody-green hover:bg-mooody-dark-green text-white text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-colors shadow-lg relative z-20"
+              onClick={() => navigate('/mood')}
+            >
+              {t.notificationButton}
             </Button>
           </div>
           <p className="text-xs sm:text-sm mt-4 sm:mt-8 mx-auto" style={{ fontFamily: 'SUSE, sans-serif', fontSize: '14px', maxWidth: '80ch', lineHeight: '1.6' }}>
