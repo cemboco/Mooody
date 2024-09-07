@@ -6,6 +6,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import Calendar from '../components/Calendar';
+import FloatingBalls from '../components/FloatingBalls';
 
 const ConfirmationMood = () => {
   const location = useLocation();
@@ -34,6 +35,7 @@ const ConfirmationMood = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-start bg-mooody-yellow text-mooody-green overflow-hidden p-4">
+      <FloatingBalls />
       <LanguageToggle />
       <Button
         onClick={() => navigate('/')}
