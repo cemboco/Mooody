@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Home, Check, ArrowLeft } from 'lucide-react';
+import { Home, Check, ArrowLeft, Upload } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
+import ImageUpload from '../components/ImageUpload';
 
 const SelectedMood = () => {
   const location = useLocation();
@@ -15,24 +16,22 @@ const SelectedMood = () => {
   const selectedEmotions = location.state?.selectedEmotions || [];
   const [userInputs, setUserInputs] = useState(Array(selectedEmotions.length).fill(''));
   const [currentEmotionIndex, setCurrentEmotionIndex] = useState(0);
+  const [uploadedImages, setUploadedImages] = useState(Array(selectedEmotions.length).fill(null));
 
   const currentEmotion = selectedEmotions[currentEmotionIndex] || t.defaultMood;
 
   const handleSubmit = () => {
     if (userInputs[currentEmotionIndex].trim()) {
-      console.log('User input:', userInputs[currentEmotionIndex]); // Log user input to console
-      
       if (currentEmotionIndex < selectedEmotions.length - 1) {
-        // Move to the next emotion
         setCurrentEmotionIndex(prevIndex => prevIndex + 1);
       } else {
-        // Navigate to ConfirmationMood with all emotions and inputs
         const currentDate = new Date().toISOString();
         navigate('/confirmation-mood', {
           state: {
             date: currentDate,
             emotions: selectedEmotions,
             texts: userInputs,
+            images: uploadedImages,
           },
         });
       }
@@ -43,6 +42,12 @@ const SelectedMood = () => {
     const newInputs = [...userInputs];
     newInputs[currentEmotionIndex] = e.target.value;
     setUserInputs(newInputs);
+  };
+
+  const handleImageUpload = (file) => {
+    const newImages = [...uploadedImages];
+    newImages[currentEmotionIndex] = file;
+    setUploadedImages(newImages);
   };
 
   return (
@@ -65,8 +70,9 @@ const SelectedMood = () => {
           value={userInputs[currentEmotionIndex]}
           onChange={handleInputChange}
           placeholder={t.typeHere}
-          className="w-full h-64 text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green"
+          className="w-full h-64 text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green mb-4"
         />
+        <ImageUpload onImageUpload={handleImageUpload} currentImage={uploadedImages[currentEmotionIndex]} />
         <div className="mt-8 flex items-center justify-between w-full max-w-md">
           <Button
             onClick={() => navigate('/mood')}
