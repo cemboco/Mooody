@@ -30,7 +30,7 @@ const Index = () => {
           <p className="text-xl sm:text-2xl mb-8">{t.subtitle}</p>
           <Button 
             className="bg-mooody-green hover:bg-mooody-dark-green text-white text-xl px-6 py-3 rounded-full transition-colors shadow-lg relative z-20"
-            onClick={() => navigate('/emotions')}
+            onClick={() => navigate('/mood')}
           >
             {t.notificationButton}
           </Button>
