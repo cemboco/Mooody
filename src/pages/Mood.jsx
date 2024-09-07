@@ -48,6 +48,7 @@ const Mood = () => {
           selectedEmotions={selectedEmotions}
           onEmotionSelect={handleEmotionSelect}
           onCustomEmotionClick={() => setIsModalOpen(true)}
+          showHappyText={true}
         />
       </div>
       <CustomEmotionModal

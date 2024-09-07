@@ -128,6 +128,16 @@
   z-index: 2;
 }
 
+.floating-angry-ball {
+  width: 75px;
+  height: 75px;
+  top: calc(10% + 180px);
+  left: 20%;
+  background-color: #FF4500;
+  animation-delay: -26s;
+  z-index: 3;
+}
+
 @keyframes float-reverse {
   0%, 100% { transform: translate(0, 0); }
   25% { transform: translate(-50px, 50px); }
@@ -135,6 +145,6 @@
   75% { transform: translate(-50px, -50px); }
 }
 
-.ball2, .ball4, .ball6, .ball8, .ball10, .happy-ball, .floating-happy-ball {
+.ball2, .ball4, .ball6, .ball8, .ball10, .happy-ball, .floating-happy-ball, .floating-angry-ball {
   animation-name: float-reverse;
 }
