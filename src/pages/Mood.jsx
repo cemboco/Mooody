@@ -20,7 +20,7 @@ const Mood = () => {
         <Home className="h-4 w-4" />
       </Button>
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
-        <MoodBalls showText={true} />
+        <MoodBalls showText={true} textColor="text-gray-700" />
       </div>
     </div>
   );
