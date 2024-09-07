@@ -27,7 +27,7 @@ const CheckIn = () => {
           {t.checkInSubtitle}
         </p>
         <Button
-          onClick={() => navigate('/home')}
+          onClick={() => navigate('/explore-reason')}
           className="bg-mooody-green hover:bg-mooody-dark-green text-white text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-colors shadow-lg"
         >
           {t.getStarted}

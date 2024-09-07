@@ -9,6 +9,7 @@ import SelectedMood from './pages/SelectedMood';
 import ConfirmationMood from './pages/ConfirmationMood';
 import Calendar from './components/Calendar';
 import CheckIn from './pages/CheckIn';
+import ExploreReason from './pages/ExploreReason';
 import Index from './pages/Index';
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<CheckIn />} />
+            <Route path="/explore-reason" element={<ExploreReason />} />
             <Route path="/home" element={<Index />} />
             {navItems.map(({ to, page }) => (
               <Route key={to} path={to} element={page} />
