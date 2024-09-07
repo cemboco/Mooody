@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Home } from 'lucide-react';
+import { Home, Check } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -16,6 +16,13 @@ const SelectedMood = () => {
   const [userInput, setUserInput] = useState('');
 
   const firstEmotion = selectedEmotions[0] || t.defaultMood;
+
+  const handleSubmit = () => {
+    // Here you can add the logic to handle the submission of the user's response
+    console.log("User input submitted:", userInput);
+    // For now, we'll just navigate back to the mood selection page
+    navigate('/mood');
+  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
@@ -39,12 +46,19 @@ const SelectedMood = () => {
           placeholder={t.typeHere}
           className="w-full h-64 text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green"
         />
-        <Button
-          onClick={() => navigate('/mood')}
-          className="mt-8"
-        >
-          {t.backToMoodSelection}
-        </Button>
+        <div className="mt-8 flex items-center justify-between w-full max-w-md">
+          <Button
+            onClick={() => navigate('/mood')}
+          >
+            {t.backToMoodSelection}
+          </Button>
+          <Button
+            onClick={handleSubmit}
+            className="rounded-full w-10 h-10 flex items-center justify-center bg-mooody-green hover:bg-mooody-dark-green"
+          >
+            <Check className="h-6 w-6 text-white" />
+          </Button>
+        </div>
       </div>
     </div>
   );
