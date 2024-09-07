@@ -68,6 +68,7 @@ export const translations = {
     defaultMood: 'Stimmung',
     entries: 'Einträge',
     backToHome: 'Zurück zur Startseite',
+    noEntriesForThisDay: 'Keine Einträge für diesen Tag',
   },
   en: {
     title: 'Moody',
@@ -138,5 +139,6 @@ export const translations = {
     defaultMood: 'Mood',
     entries: 'Entries',
     backToHome: 'Back to Home',
+    noEntriesForThisDay: 'No entries for this day',
   }
 };
