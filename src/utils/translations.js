@@ -51,6 +51,10 @@ export const translations = {
     userStatsMessagePlural: '{userCount} Personen haben heute ihre Stimmung um durchschnittlich {moodImprovement}% verbessert.',
     weeklyMoodChart: 'Wöchentliche Stimmungsübersicht',
     selectUpToThreeMoods: 'Wähle bis zu 3 Stimmungen aus',
+    addCustomEmotion: 'Eigene Emotion hinzufügen',
+    enterCustomEmotion: 'Gib eine eigene Emotion ein',
+    cancel: 'Abbrechen',
+    add: 'Hinzufügen',
     motivationalMessages: [
       "Du kannst alles erreichen, was du dir vornimmst!",
       "Glaube an dich und deine Fähigkeiten.",
@@ -126,6 +130,10 @@ export const translations = {
     userStatsMessagePlural: '{userCount} people have improved their mood by an average of {moodImprovement}% today.',
     weeklyMoodChart: 'Weekly Mood Overview',
     selectUpToThreeMoods: 'Select up to 3 moods',
+    addCustomEmotion: 'Add Custom Emotion',
+    enterCustomEmotion: 'Enter a custom emotion',
+    cancel: 'Cancel',
+    add: 'Add',
     motivationalMessages: [
       "You can achieve anything you set your mind to!",
       "Believe in yourself and your abilities.",

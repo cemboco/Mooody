@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MoodBalls = ({ showText = false, textColor = 'text-gray-300', selectedEmotions = [], onEmotionSelect }) => {
+const MoodBalls = ({ showText = false, textColor = 'text-gray-300', selectedEmotions = [], onEmotionSelect, onCustomEmotionClick }) => {
   const emotions = [
     "angry", "confident", "optimistic", "numb", "tired",
     "happy", "sad", "anxious", "calm", "worried"
@@ -30,7 +30,10 @@ const MoodBalls = ({ showText = false, textColor = 'text-gray-300', selectedEmot
           </div>
         );
       })}
-      <div className="ball ball11 flex items-center justify-center bg-white">
+      <div 
+        className="ball ball11 flex items-center justify-center bg-white cursor-pointer"
+        onClick={onCustomEmotionClick}
+      >
         {showText && <span className={`${textColor} text-2xl`}>+</span>}
       </div>
     </div>

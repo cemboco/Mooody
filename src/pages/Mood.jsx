@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MoodBalls from '../components/MoodBalls';
+import CustomEmotionModal from '../components/CustomEmotionModal';
 import LanguageToggle from '../components/LanguageToggle';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +13,7 @@ const Mood = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const [selectedEmotions, setSelectedEmotions] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEmotionSelect = (emotion) => {
     if (selectedEmotions.includes(emotion)) {
@@ -19,6 +21,12 @@ const Mood = () => {
     } else if (selectedEmotions.length < 3) {
       setSelectedEmotions([...selectedEmotions, emotion]);
     }
+  };
+
+  const handleCustomEmotionAdd = (newEmotion) => {
+    // Here you would typically update your emotions list in a global state or context
+    console.log('New custom emotion added:', newEmotion);
+    setIsModalOpen(false);
   };
 
   return (
@@ -39,8 +47,14 @@ const Mood = () => {
           textColor="text-gray-700" 
           selectedEmotions={selectedEmotions}
           onEmotionSelect={handleEmotionSelect}
+          onCustomEmotionClick={() => setIsModalOpen(true)}
         />
       </div>
+      <CustomEmotionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAdd={handleCustomEmotionAdd}
+      />
     </div>
   );
 };
