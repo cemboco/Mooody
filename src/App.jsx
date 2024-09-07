@@ -7,7 +7,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import Mood from './pages/Mood';
 import SelectedMood from './pages/SelectedMood';
 import ConfirmationMood from './pages/ConfirmationMood';
-import Calendar from './pages/Calendar';
+import Calendar from './components/Calendar';
 
 const queryClient = new QueryClient();
 
