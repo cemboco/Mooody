@@ -15,10 +15,6 @@ const Index = () => {
     setShowMoodSelection(true);
   };
 
-  const handleHomeClick = () => {
-    setShowMoodSelection(false);
-  };
-
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
@@ -35,13 +31,7 @@ const Index = () => {
           </Button>
         </div>
       </div>
-      <MoodSelectionPage show={showMoodSelection} onHomeClick={handleHomeClick} />
-      <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic z-30">
-        {language === 'de' ? 
-          "Diese App ersetzt keine professionelle psychologische oder medizinische Beratung. Bei ernsthaften mentalen Problemen oder Krisen suchen Sie bitte einen Spezialisten oder Therapeuten auf." :
-          "This app does not replace professional psychological or medical advice. For serious mental health issues or crises, please consult a specialist or therapist."
-        }
-      </div>
+      <MoodSelectionPage show={showMoodSelection} />
     </div>
   );
 };

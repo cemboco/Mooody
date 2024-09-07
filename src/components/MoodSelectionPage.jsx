@@ -17,7 +17,7 @@ const moods = [
   {text: "+", color: "#FFFFFF", size: 100},
 ];
 
-const MoodSelectionPage = ({ show, onHomeClick }) => {
+const MoodSelectionPage = ({ show }) => {
   const { language } = useLanguage();
   const t = translations[language];
   const [selectedMoods, setSelectedMoods] = useState([]);
@@ -46,7 +46,7 @@ const MoodSelectionPage = ({ show, onHomeClick }) => {
             }}
             onClick={() => toggleMood(mood)}
           >
-            <span className={`text-gray-200 ${mood.text === '+' ? 'text-3xl' : ''}`}>{mood.text}</span>
+            <span className={`text-gray-200 ${mood.text === '+' ? 'text-4xl' : ''}`}>{mood.text}</span>
           </div>
         ))}
       </div>
