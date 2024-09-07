@@ -1,3 +1,4 @@
+import React from 'react';
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -11,7 +12,6 @@ import Calendar from './components/Calendar';
 import CheckIn from './pages/CheckIn';
 import ExploreReason from './pages/ExploreReason';
 import Index from './pages/Index';
-import React from 'react';
 
 const queryClient = new QueryClient();
 
