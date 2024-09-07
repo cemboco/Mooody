@@ -4,7 +4,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
-import EditEntryModal from './EditEntryModal';
 
 const Calendar = () => {
   const { language } = useLanguage();
@@ -13,7 +12,6 @@ const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [entries, setEntries] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
     const storedEntries = localStorage.getItem('moodEntries');
@@ -24,7 +22,6 @@ const Calendar = () => {
 
   const saveEntriesToLocalStorage = (newEntries) => {
     localStorage.setItem('moodEntries', JSON.stringify(newEntries));
-    setEntries(newEntries);
   };
 
   const getDaysInMonth = (date) => {
@@ -47,18 +44,6 @@ const Calendar = () => {
     const clickedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
     setSelectedDate(clickedDate);
     setIsModalOpen(true);
-  };
-
-  const handleEditEntry = () => {
-    setIsModalOpen(false);
-    setIsEditModalOpen(true);
-  };
-
-  const handleSaveEdit = (editedEntries) => {
-    const dateKey = selectedDate.toISOString().split('T')[0];
-    const updatedEntries = { ...entries, [dateKey]: editedEntries };
-    saveEntriesToLocalStorage(updatedEntries);
-    setIsEditModalOpen(false);
   };
 
   const renderCalendar = () => {
@@ -124,7 +109,6 @@ const Calendar = () => {
                     <p><strong>{t[entry.emotion] || entry.emotion}:</strong> {entry.text}</p>
                   </div>
                 ))}
-                <Button onClick={handleEditEntry} className="mt-4">{t.edit}</Button>
               </div>
             ) : (
               <p>{t.noEntriesForThisDay}</p>
@@ -132,15 +116,6 @@ const Calendar = () => {
           </DialogDescription>
         </DialogContent>
       </Dialog>
-      {selectedDate && (
-        <EditEntryModal
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-          onSave={handleSaveEdit}
-          entries={entries[selectedDate.toISOString().split('T')[0]] || []}
-          date={selectedDate}
-        />
-      )}
     </div>
   );
 };
