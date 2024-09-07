@@ -8,60 +8,43 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
- 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
- 
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
- 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
- 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
- 
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
- 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
- 
     --radius: 0.5rem;
   }
  
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
- 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
- 
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
- 
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
- 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
- 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
- 
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
- 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
- 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -78,161 +61,43 @@
   }
 }
 
-.animated-title {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+.mooody-title {
+  font-family: 'Julius Sans One', sans-serif;
+  text-transform: uppercase;
 }
 
-.animated-title h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+.bg-mooody-yellow {
+  background-color: #FCEEB5;
+}
+
+.text-mooody-green {
+  color: #4CAF50;
+}
+
+.bg-mooody-green {
+  background-color: #4CAF50;
+}
+
+.bg-mooody-dark-green:hover {
+  background-color: #45a049;
 }
 
 .ball {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.8;
+  opacity: 0.5;
   animation: float 20s infinite ease-in-out;
 }
 
-.ball1 {
-  width: 100px;
-  height: 100px;
-  top: 20%;
-  left: 20%;
-  background-color: #FFD700; /* Yellow for happiness */
-}
-
-.ball2 {
-  width: 80px;
-  height: 80px;
-  top: 60%;
-  left: 60%;
-  background-color: #4169E1; /* Royal Blue for sadness */
-  animation-delay: -5s;
-}
-
-.ball3 {
-  width: 60px;
-  height: 60px;
-  top: 40%;
-  left: 80%;
-  background-color: #FF6347; /* Tomato for anger */
-  animation-delay: -10s;
-}
-
-.ball4 {
-  width: 120px;
-  height: 120px;
-  top: 10%;
-  left: 70%;
-  background-color: #32CD32; /* Lime Green for excitement */
-  animation-delay: -7s;
-}
-
-.ball5 {
-  width: 70px;
-  height: 70px;
-  top: 80%;
-  left: 30%;
-  background-color: #9370DB; /* Medium Purple for fear */
-  animation-delay: -3s;
-}
-
-.ball6 {
-  width: 90px;
-  height: 90px;
-  top: 50%;
-  left: 10%;
-  background-color: #FF69B4; /* Hot Pink for love */
-  animation-delay: -15s;
-}
-
-.ball7 {
-  width: 110px;
-  height: 110px;
-  top: 30%;
-  left: 40%;
-  background-color: #20B2AA; /* Light Sea Green for calmness */
-  animation-delay: -8s;
-}
-
-.ball8 {
-  width: 75px;
-  height: 75px;
-  top: 70%;
-  left: 50%;
-  background-color: #FFA500; /* Orange for enthusiasm */
-  animation-delay: -12s;
-}
-
-.ball9 {
-  width: 95px;
-  height: 95px;
-  top: 15%;
-  left: 85%;
-  background-color: #8B4513; /* Saddle Brown for confusion */
-  animation-delay: -6s;
-}
-
 @keyframes float {
-  0%, 100% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(100px, -100px);
-  }
-  50% {
-    transform: translate(200px, 0);
-  }
-  75% {
-    transform: translate(100px, 100px);
-  }
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(50px, -50px); }
+  50% { transform: translate(100px, 0); }
+  75% { transform: translate(50px, 50px); }
 }
 
-@font-face {
-  font-family: 'Hevilla';
-  src: url('https://fonts.googleapis.com/css2?family=Hevilla:wght@400;700&display=swap');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.animate-fade-in-delayed {
-  opacity: 0;
-  animation: fadeIn 0.5s ease-in forwards;
-  animation-delay: 0.5s;
-}
-
-.animate-fade-in-more-delayed {
-  opacity: 0;
-  animation: fadeIn 1.3s ease-in forwards;
-  animation-delay: 0.5s;
-}
-
-.animate-fade-in-button {
-  opacity: 0;
-  animation: fadeIn 0.5s ease-in forwards;
-  animation-delay: 1s;
-}
-
-.mooody-title {
-  font-family: 'Julius Sans One', sans-serif;
-  font-size: 56px;
-  font-weight: 400;
-  text-transform: uppercase;
-}
+.ball1 { width: 100px; height: 100px; top: 10%; left: 10%; background-color: #FFC300; }
+.ball2 { width: 80px; height: 80px; top: 20%; right: 15%; background-color: #DAF7A6; }
+.ball3 { width: 60px; height: 60px; bottom: 15%; left: 20%; background-color: #FF5733; }
+.ball4 { width: 70px; height: 70px; bottom: 10%; right: 10%; background-color: #C70039; }
+.ball5 { width: 90px; height: 90px; top: 40%; left: 30%; background-color: #900C3F; }
