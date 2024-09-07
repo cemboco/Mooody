@@ -29,11 +29,14 @@ const Index = () => {
           <h1 className="mooody-title text-5xl sm:text-6xl md:text-7xl font-bold mb-6">MOOODY</h1>
           <p className="text-xl sm:text-2xl mb-8">{t.subtitle}</p>
           <Button 
-            className="bg-mooody-green hover:bg-mooody-dark-green text-white text-xl px-6 py-3 rounded-full transition-colors shadow-lg relative z-20"
+            className="bg-mooody-green hover:bg-mooody-dark-green text-white text-xl px-6 py-3 rounded-full transition-colors shadow-lg relative z-20 mb-8"
             onClick={() => navigate('/mood')}
           >
             {t.notificationButton}
           </Button>
+          <p className="text-sm sm:text-base mt-8 max-w-xl mx-auto" style={{ fontFamily: 'SUSE, sans-serif', fontSize: '17px' }}>
+            Your feelings are more than fleeting moments of emotion; they are the whispers of your inner self, guiding you toward your truest path. In a world that often encourages us to think, analyze, and rationalize, we sometimes forget to pause and listen to the quiet voice of our hearts. But your feelings—whether they are of joy, sadness, fear, or excitement—are powerful messengers, each carrying a truth that your mind alone cannot comprehend.
+          </p>
         </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic z-30">
