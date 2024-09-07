@@ -138,6 +138,7 @@
   z-index: 3;
 }
 
+.ball.selected,
 .floating-happy-ball.selected,
 .floating-angry-ball.selected {
   opacity: 0.8;

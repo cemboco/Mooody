@@ -21,7 +21,7 @@ const MoodBalls = ({ showText = false, selectedEmotions = [], onEmotionSelect, o
     <div className="circles">
       {emotions.map((emotion, index) => {
         const isSelected = selectedEmotions.includes(emotion);
-        const ballClass = `ball ball${index + 1} flex items-center justify-center cursor-pointer transition-all duration-300 ${isSelected ? 'scale-110' : ''}`;
+        const ballClass = `ball ball${index + 1} flex items-center justify-center cursor-pointer transition-all duration-300 ${isSelected ? 'selected' : ''}`;
         return (
           <div 
             key={emotion} 
