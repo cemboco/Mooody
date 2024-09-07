@@ -57,7 +57,6 @@ const SelectedMood = () => {
         <Home className="h-4 w-4" />
       </Button>
       <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16">
-        <h1 className="text-3xl font-bold mb-8">{t[currentEmotion] || currentEmotion}</h1>
         <h2 className="text-2xl font-bold mb-4 text-center">
           {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
         </h2>
