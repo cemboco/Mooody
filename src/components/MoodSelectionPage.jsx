@@ -47,7 +47,7 @@ const MoodSelectionPage = ({ show, onHomeClick }) => {
             }}
             onClick={() => toggleMood(mood)}
           >
-            <span className={`text-gray-200 ${mood.text === '+' ? 'text-5xl' : ''}`}>{mood.text}</span>
+            <span className={`${mood.text === '+' ? 'text-5xl text-black' : 'text-gray-200'}`}>{mood.text}</span>
           </div>
         ))}
       </div>
@@ -60,7 +60,7 @@ const MoodSelectionPage = ({ show, onHomeClick }) => {
         )}
       </div>
       <Button
-        className="absolute top-4 left-4 bg-mooody-green hover:bg-mooody-dark-green text-white rounded-full p-2"
+        className="absolute top-4 right-4 bg-mooody-green hover:bg-mooody-dark-green text-white rounded-full p-2"
         onClick={onHomeClick}
       >
         <Home size={24} />
