@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Home } from 'lucide-react';
+import { Home, Mic } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -16,6 +16,20 @@ const SelectedMood = () => {
   const [userInput, setUserInput] = useState('');
 
   const firstEmotion = selectedEmotions[0] || t.defaultMood;
+
+  const handleVoiceInput = () => {
+    if ('webkitSpeechRecognition' in window) {
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.lang = language === 'de' ? 'de-DE' : 'en-US';
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setUserInput(prevInput => prevInput + ' ' + transcript);
+      };
+      recognition.start();
+    } else {
+      alert(t.voiceInputNotSupported);
+    }
+  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
@@ -46,6 +60,13 @@ const SelectedMood = () => {
           {t.backToMoodSelection}
         </Button>
       </div>
+      <Button
+        onClick={handleVoiceInput}
+        className="fixed bottom-4 left-4 z-[60] rounded-full bg-green-500 hover:bg-green-600"
+        size="icon"
+      >
+        <Mic className="h-6 w-6 text-white" />
+      </Button>
     </div>
   );
 };
