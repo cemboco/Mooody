@@ -5,6 +5,7 @@ import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
 import MoodSelectionPage from '../components/MoodSelectionPage';
+import { Home } from 'lucide-react';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -22,6 +23,12 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
+      <Button
+        className="fixed top-4 right-4 bg-mooody-green hover:bg-mooody-dark-green text-white rounded-full p-2 z-50"
+        onClick={handleHomeClick}
+      >
+        <Home size={24} />
+      </Button>
       <div className={`relative w-full h-screen flex flex-col items-center justify-center p-4 transition-transform duration-500 ${showMoodSelection ? 'translate-x-[-100%]' : ''}`}>
         {!showMoodSelection && <MoodBalls />}
         <div className="container text-center max-w-2xl relative z-10">
