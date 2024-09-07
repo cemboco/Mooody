@@ -16,14 +16,6 @@ const CheckIn = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    const navigationTimer = setTimeout(() => {
-      navigate('/home');
-    }, 5000); // Navigate after 5 seconds
-
-    return () => clearTimeout(navigationTimer);
-  }, [navigate]);
-
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
