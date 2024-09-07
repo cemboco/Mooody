@@ -62,28 +62,6 @@ export const translations = {
     add: 'Hinzufügen',
     selectedMoods: 'Ausgewählte Stimmungen',
     backToMoodSelection: 'Zurück zur Stimmungsauswahl',
-    motivationalMessages: [
-      "Du kannst alles erreichen, was du dir vornimmst!",
-      "Glaube an dich und deine Fähigkeiten.",
-      "Jeder Schritt, den du machst, bringt dich näher an dein Ziel.",
-      "Gib niemals auf, auch wenn es schwierig wird.",
-      "Dein Potenzial ist grenzenlos.",
-      "Große Dinge beginnen mit kleinen Schritten.",
-      "Erfolg ist das Ergebnis von harter Arbeit und Durchhaltevermögen.",
-      "Du bist stärker, als du denkst.",
-      "Jeder Tag ist eine neue Chance, dein Bestes zu geben.",
-      "Deine Zukunft beginnt heute, mache das Beste daraus.",
-      "Sei mutig und geh deinen eigenen Weg.",
-      "Fehler sind nur Lektionen auf dem Weg zum Erfolg.",
-      "Dein Wille ist stärker als jedes Hindernis.",
-      "Vertraue dem Prozess und bleibe positiv.",
-      "Arbeite hart und lass dich nicht entmutigen.",
-      "Du bist der Architekt deines Lebens.",
-      "Jede Herausforderung ist eine Chance, zu wachsen.",
-      "Fokussiere dich auf das, was du kontrollieren kannst.",
-      "Deine Stärke liegt in deinem unerschütterlichen Glauben an dich selbst.",
-      "Lebe deinen Traum und lass dich von nichts aufhalten."
-    ]
   },
   en: {
     title: 'Moody',
@@ -148,27 +126,5 @@ export const translations = {
     add: 'Add',
     selectedMoods: 'Selected Moods',
     backToMoodSelection: 'Back to Mood Selection',
-    motivationalMessages: [
-      "You can achieve anything you set your mind to!",
-      "Believe in yourself and your abilities.",
-      "Every step you take brings you closer to your goal.",
-      "Never give up, even when it gets tough.",
-      "Your potential is limitless.",
-      "Great things start with small steps.",
-      "Success is the result of hard work and perseverance.",
-      "You are stronger than you think.",
-      "Every day is a new chance to give your best.",
-      "Your future starts today, make the most of it.",
-      "Be brave and go your own way.",
-      "Mistakes are just lessons on the path to success.",
-      "Your will is stronger than any obstacle.",
-      "Trust the process and stay positive.",
-      "Work hard and don't let yourself be discouraged.",
-      "You are the architect of your life.",
-      "Every challenge is an opportunity to grow.",
-      "Focus on what you can control.",
-      "Your strength lies in your unwavering belief in yourself.",
-      "Live your dream and don't let anything stop you."
-    ]
   }
 };

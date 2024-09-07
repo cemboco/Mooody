@@ -14,9 +14,12 @@ const Mood = () => {
   const t = translations[language];
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [customEmotion, setCustomEmotion] = useState(null);
 
   const handleEmotionSelect = (emotion) => {
-    if (selectedEmotions.includes(emotion)) {
+    if (emotion === 'custom' && !customEmotion) {
+      setIsModalOpen(true);
+    } else if (selectedEmotions.includes(emotion)) {
       setSelectedEmotions(selectedEmotions.filter(e => e !== emotion));
     } else if (selectedEmotions.length < 3) {
       setSelectedEmotions([...selectedEmotions, emotion]);
@@ -24,7 +27,8 @@ const Mood = () => {
   };
 
   const handleCustomEmotionAdd = (newEmotion) => {
-    console.log('New custom emotion added:', newEmotion);
+    setCustomEmotion(newEmotion);
+    setSelectedEmotions([...selectedEmotions, newEmotion]);
     setIsModalOpen(false);
   };
 
@@ -47,7 +51,7 @@ const Mood = () => {
           selectedEmotions={selectedEmotions}
           onEmotionSelect={handleEmotionSelect}
           onCustomEmotionClick={() => setIsModalOpen(true)}
-          showHappyText={true}
+          customEmotion={customEmotion}
         />
       </div>
       {selectedEmotions.length > 0 && (
