@@ -49,7 +49,7 @@ const SelectedMood = () => {
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
       <Button
-        onClick={() => navigate('/mood')}
+        onClick={() => navigate('/')}
         className="fixed top-4 right-4 z-[60]"
         variant="outline"
         size="icon"
