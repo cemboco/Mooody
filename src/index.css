@@ -86,17 +86,36 @@
   position: absolute;
   border-radius: 50%;
   opacity: 0.5;
-  transition: transform 0.3s ease-out;
+  animation: float 20s infinite ease-in-out;
+  z-index: 1;
 }
 
-.ball1 { width: 100px; height: 100px; background-color: #FFC300; }
-.ball2 { width: 80px; height: 80px; background-color: #DAF7A6; }
-.ball3 { width: 60px; height: 60px; background-color: #FF5733; }
-.ball4 { width: 70px; height: 70px; background-color: #C70039; }
-.ball5 { width: 90px; height: 90px; background-color: #900C3F; }
-.ball6 { width: 110px; height: 110px; background-color: #581845; }
-.ball7 { width: 75px; height: 75px; background-color: #FF8C00; }
-.ball8 { width: 85px; height: 85px; background-color: #008080; }
-.ball9 { width: 95px; height: 95px; background-color: #4B0082; }
-.ball10 { width: 65px; height: 65px; background-color: #00CED1; }
-.ball11 { width: 105px; height: 105px; background-color: #FFFFFF; }
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(50px, -50px); }
+  50% { transform: translate(100px, 0); }
+  75% { transform: translate(50px, 50px); }
+}
+
+.ball1 { width: 100px; height: 100px; top: 10%; left: 10%; background-color: #FFC300; animation-delay: -2s; }
+.ball2 { width: 80px; height: 80px; top: 20%; right: 15%; background-color: #DAF7A6; animation-delay: -4s; }
+.ball3 { width: 60px; height: 60px; bottom: 15%; left: 20%; background-color: #FF5733; animation-delay: -6s; }
+.ball4 { width: 70px; height: 70px; bottom: 10%; right: 10%; background-color: #C70039; animation-delay: -8s; }
+.ball5 { width: 90px; height: 90px; top: 40%; left: 30%; background-color: #900C3F; animation-delay: -10s; }
+.ball6 { width: 110px; height: 110px; top: 60%; right: 25%; background-color: #581845; animation-delay: -12s; }
+.ball7 { width: 75px; height: 75px; bottom: 30%; left: 40%; background-color: #FF8C00; animation-delay: -14s; }
+.ball8 { width: 85px; height: 85px; top: 70%; left: 60%; background-color: #008080; animation-delay: -16s; }
+.ball9 { width: 95px; height: 95px; top: 30%; right: 40%; background-color: #4B0082; animation-delay: -18s; }
+.ball10 { width: 65px; height: 65px; bottom: 20%; right: 30%; background-color: #00CED1; animation-delay: -20s; }
+.ball11 { width: 105px; height: 105px; top: 50%; left: 50%; background-color: #FFFFFF; animation-delay: -22s; }
+
+@keyframes float-reverse {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-50px, 50px); }
+  50% { transform: translate(-100px, 0); }
+  75% { transform: translate(-50px, -50px); }
+}
+
+.ball2, .ball4, .ball6, .ball8, .ball10 {
+  animation-name: float-reverse;
+}
