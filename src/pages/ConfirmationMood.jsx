@@ -13,7 +13,7 @@ const ConfirmationMood = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
-  const { date, emotions, texts, images } = location.state || {};
+  const { date, emotions, texts } = location.state || {};
 
   useEffect(() => {
     if (date && emotions && texts) {
@@ -21,12 +21,11 @@ const ConfirmationMood = () => {
       const formattedDate = new Date(date).toISOString().split('T')[0];
       entries[formattedDate] = emotions.map((emotion, index) => ({
         emotion,
-        text: texts[index],
-        image: images[index] ? URL.createObjectURL(images[index]) : null,
+        text: texts[index]
       }));
       localStorage.setItem('moodEntries', JSON.stringify(entries));
     }
-  }, [date, emotions, texts, images]);
+  }, [date, emotions, texts]);
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -54,13 +53,6 @@ const ConfirmationMood = () => {
                 {t[emotion] || emotion}
               </h3>
               <p className="text-base">{texts[index]}</p>
-              {images[index] && (
-                <img
-                  src={URL.createObjectURL(images[index])}
-                  alt={`Image for ${emotion}`}
-                  className="mt-2 max-w-full h-auto rounded"
-                />
-              )}
             </div>
           ))}
         </div>
