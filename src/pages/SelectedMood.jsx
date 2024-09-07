@@ -13,31 +13,36 @@ const SelectedMood = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const selectedEmotions = location.state?.selectedEmotions || [];
-  const [userInput, setUserInput] = useState('');
+  const [userInputs, setUserInputs] = useState(Array(selectedEmotions.length).fill(''));
   const [currentEmotionIndex, setCurrentEmotionIndex] = useState(0);
 
   const currentEmotion = selectedEmotions[currentEmotionIndex] || t.defaultMood;
 
   const handleSubmit = () => {
-    if (userInput.trim()) {
-      console.log('User input:', userInput); // Log user input to console
-      const currentDate = new Date().toISOString();
+    if (userInputs[currentEmotionIndex].trim()) {
+      console.log('User input:', userInputs[currentEmotionIndex]); // Log user input to console
       
       if (currentEmotionIndex < selectedEmotions.length - 1) {
         // Move to the next emotion
         setCurrentEmotionIndex(prevIndex => prevIndex + 1);
-        setUserInput(''); // Clear input for the next emotion
       } else {
         // Navigate to ConfirmationMood with all emotions and inputs
+        const currentDate = new Date().toISOString();
         navigate('/confirmation-mood', {
           state: {
             date: currentDate,
             emotions: selectedEmotions,
-            texts: [...(location.state?.texts || []), userInput],
+            texts: userInputs,
           },
         });
       }
     }
+  };
+
+  const handleInputChange = (e) => {
+    const newInputs = [...userInputs];
+    newInputs[currentEmotionIndex] = e.target.value;
+    setUserInputs(newInputs);
   };
 
   return (
@@ -57,8 +62,8 @@ const SelectedMood = () => {
           {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
         </h2>
         <Textarea
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
+          value={userInputs[currentEmotionIndex]}
+          onChange={handleInputChange}
           placeholder={t.typeHere}
           className="w-full h-64 text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green"
         />
@@ -73,7 +78,7 @@ const SelectedMood = () => {
           <Button
             onClick={handleSubmit}
             className="rounded-full w-12 h-12 flex items-center justify-center bg-mooody-green hover:bg-mooody-dark-green"
-            disabled={!userInput.trim()}
+            disabled={!userInputs[currentEmotionIndex].trim()}
           >
             <Check className="h-6 w-6 text-white" />
           </Button>
