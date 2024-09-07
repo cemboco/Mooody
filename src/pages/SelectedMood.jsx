@@ -6,7 +6,6 @@ import { Home, Check, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
-import FloatingBalls from '../components/FloatingBalls';
 
 const SelectedMood = () => {
   const location = useLocation();
@@ -48,7 +47,6 @@ const SelectedMood = () => {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
-      <FloatingBalls />
       <LanguageToggle />
       <Button
         onClick={() => navigate('/')}

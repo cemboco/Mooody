@@ -4,7 +4,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
-import FloatingBalls from './FloatingBalls';
 
 const Calendar = () => {
   const { language } = useLanguage();
@@ -74,8 +73,7 @@ const Calendar = () => {
   };
 
   return (
-    <div className="p-4 relative">
-      <FloatingBalls />
+    <div className="p-4">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">
           {currentDate.toLocaleString(language === 'de' ? 'de-DE' : 'en-US', { month: 'long', year: 'numeric' })}
