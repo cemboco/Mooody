@@ -21,7 +21,7 @@ const Index = () => {
       <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50">
         <LanguageToggle />
         <Button
-          onClick={() => {/* Handle home button click */}}
+          onClick={() => navigate('/home')}
           variant="outline"
           size="icon"
           className="ml-auto"
