@@ -50,6 +50,7 @@ export const translations = {
     userStatsMessageSingular: '{userCount} Person hat heute ihre Stimmung um durchschnittlich {moodImprovement}% verbessert.',
     userStatsMessagePlural: '{userCount} Personen haben heute ihre Stimmung um durchschnittlich {moodImprovement}% verbessert.',
     weeklyMoodChart: 'Wöchentliche Stimmungsübersicht',
+    footerText: 'Alle Rechte vorbehalten.',
     motivationalMessages: [
       "Du kannst alles erreichen, was du dir vornimmst!",
       "Glaube an dich und deine Fähigkeiten.",
@@ -124,6 +125,7 @@ export const translations = {
     userStatsMessageSingular: '{userCount} person has improved their mood by an average of {moodImprovement}% today.',
     userStatsMessagePlural: '{userCount} people have improved their mood by an average of {moodImprovement}% today.',
     weeklyMoodChart: 'Weekly Mood Overview',
+    footerText: 'All rights reserved.',
     motivationalMessages: [
       "You can achieve anything you set your mind to!",
       "Believe in yourself and your abilities.",

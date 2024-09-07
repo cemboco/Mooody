@@ -5,6 +5,7 @@ import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
 import MoodSelectionPage from '../components/MoodSelectionPage';
+import Footer from '../components/Footer';
 import { Home } from 'lucide-react';
 
 const Index = () => {
@@ -41,6 +42,7 @@ const Index = () => {
             {t.notificationButton}
           </Button>
         </div>
+        {!showMoodSelection && <Footer />}
       </div>
       <MoodSelectionPage show={showMoodSelection} onHomeClick={handleHomeClick} />
     </div>
