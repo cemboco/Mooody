@@ -9,6 +9,7 @@ import SelectedMood from './pages/SelectedMood';
 import ConfirmationMood from './pages/ConfirmationMood';
 import Calendar from './components/Calendar';
 import CheckIn from './pages/CheckIn';
+import Index from './pages/Index';
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Navigate to="/check-in" replace />} />
             <Route path="/check-in" element={<CheckIn />} />
+            <Route path="/home" element={<Index />} />
             {navItems.map(({ to, page }) => (
               <Route key={to} path={to} element={page} />
             ))}
