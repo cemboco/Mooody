@@ -69,6 +69,9 @@ export const translations = {
     entries: 'Einträge',
     backToHome: 'Zurück zur Startseite',
     noEntriesForThisDay: 'Keine Einträge für diesen Tag',
+    checkInTitle: 'Hi und willkommen bei Mooody!',
+    checkInSubtitle: 'Bevor wir loslegen, lass uns erkunden, warum du hier bist.',
+    getStarted: 'Los geht\'s',
   },
   en: {
     title: 'Moody',
@@ -140,5 +143,8 @@ export const translations = {
     entries: 'Entries',
     backToHome: 'Back to Home',
     noEntriesForThisDay: 'No entries for this day',
+    checkInTitle: 'Hi and welcome to Mooody!',
+    checkInSubtitle: 'Before jumping in, let\'s explore why you\'re here.',
+    getStarted: 'Get Started',
   }
 };

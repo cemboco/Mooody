@@ -154,3 +154,19 @@
 .ball2, .ball4, .ball6, .ball8, .ball10, .happy-ball, .floating-happy-ball, .floating-angry-ball {
   animation-name: float-reverse;
 }
+
+.check-in-title {
+  font-family: 'SUSE', sans-serif;
+  font-size: 25px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.check-in-title.fade-in {
+  opacity: 1;
+}
+
+.check-in-subtitle {
+  font-family: 'SUSE', sans-serif;
+  font-size: 18px;
+}
