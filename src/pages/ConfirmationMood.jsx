@@ -34,8 +34,7 @@ const ConfirmationMood = () => {
         <h1 className="text-3xl font-bold mb-8">{t.entries}</h1>
         <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold mb-4">{formatDate(date)}</h2>
-          <h3 className="text-xl font-semibold mb-2">{t.moodCheck}</h3>
-          <p className="text-lg mb-4">{t[emotion] || emotion}</p>
+          <h3 className="text-xl font-semibold mb-2">{t.whatsMakingYouFeel.replace('[emotion]', t[emotion] || emotion)}</h3>
           <p className="text-base">{text}</p>
         </div>
         <Button

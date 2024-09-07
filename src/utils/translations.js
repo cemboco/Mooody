@@ -66,6 +66,8 @@ export const translations = {
     tapAnywhereToType: 'Tippe irgendwo, um zu schreiben.',
     typeHere: 'Schreibe hier...',
     defaultMood: 'Stimmung',
+    entries: 'Einträge',
+    backToHome: 'Zurück zur Startseite',
   },
   en: {
     title: 'Moody',
@@ -134,5 +136,7 @@ export const translations = {
     tapAnywhereToType: 'Tap anywhere to type.',
     typeHere: 'Type here...',
     defaultMood: 'Mood',
+    entries: 'Entries',
+    backToHome: 'Back to Home',
   }
 };
