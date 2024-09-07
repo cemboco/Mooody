@@ -6,6 +6,7 @@ import { Home, Check, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
+import FloatingBalls from '../components/FloatingBalls';
 
 const SelectedMood = () => {
   const location = useLocation();
@@ -47,6 +48,7 @@ const SelectedMood = () => {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
+      <FloatingBalls />
       <LanguageToggle />
       <Button
         onClick={() => navigate('/')}
@@ -56,7 +58,7 @@ const SelectedMood = () => {
       >
         <Home className="h-4 w-4" />
       </Button>
-      <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16">
+      <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16 z-10">
         <h1 className="text-3xl font-bold mb-8">{t[currentEmotion] || currentEmotion}</h1>
         <h2 className="text-2xl font-bold mb-4 text-center">
           {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}

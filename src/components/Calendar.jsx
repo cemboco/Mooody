@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
+import FloatingBalls from './FloatingBalls';
 
 const Calendar = () => {
   const { language } = useLanguage();
@@ -73,49 +74,52 @@ const Calendar = () => {
   };
 
   return (
-    <div className="p-4">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">
-          {currentDate.toLocaleString(language === 'de' ? 'de-DE' : 'en-US', { month: 'long', year: 'numeric' })}
-        </h2>
-        <div>
-          <Button onClick={handlePrevMonth} className="mr-2">
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button onClick={handleNextMonth}>
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
-      <div className="grid grid-cols-7 gap-1">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-          <div key={day} className="font-bold text-center p-2">
-            {day}
+    <div className="p-4 relative">
+      <FloatingBalls />
+      <div className="relative z-10">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold">
+            {currentDate.toLocaleString(language === 'de' ? 'de-DE' : 'en-US', { month: 'long', year: 'numeric' })}
+          </h2>
+          <div>
+            <Button onClick={handlePrevMonth} className="mr-2">
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <Button onClick={handleNextMonth}>
+              <ChevronRight className="h-4 w-4" />
+            </Button>
           </div>
-        ))}
-        {renderCalendar()}
+        </div>
+        <div className="grid grid-cols-7 gap-1">
+          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+            <div key={day} className="font-bold text-center p-2">
+              {day}
+            </div>
+          ))}
+          {renderCalendar()}
+        </div>
+        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{selectedDate?.toLocaleDateString(language === 'de' ? 'de-DE' : 'en-US')}</DialogTitle>
+            </DialogHeader>
+            <DialogDescription>
+              {selectedDate && entries[selectedDate.toISOString().split('T')[0]] ? (
+                <div>
+                  <h3 className="font-bold mb-2">{t.entries}</h3>
+                  {entries[selectedDate.toISOString().split('T')[0]].map((entry, index) => (
+                    <div key={index} className="mb-2">
+                      <p><strong>{t[entry.emotion] || entry.emotion}:</strong> {entry.text}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p>{t.noEntriesForThisDay}</p>
+              )}
+            </DialogDescription>
+          </DialogContent>
+        </Dialog>
       </div>
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{selectedDate?.toLocaleDateString(language === 'de' ? 'de-DE' : 'en-US')}</DialogTitle>
-          </DialogHeader>
-          <DialogDescription>
-            {selectedDate && entries[selectedDate.toISOString().split('T')[0]] ? (
-              <div>
-                <h3 className="font-bold mb-2">{t.entries}</h3>
-                {entries[selectedDate.toISOString().split('T')[0]].map((entry, index) => (
-                  <div key={index} className="mb-2">
-                    <p><strong>{t[entry.emotion] || entry.emotion}:</strong> {entry.text}</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p>{t.noEntriesForThisDay}</p>
-            )}
-          </DialogDescription>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
