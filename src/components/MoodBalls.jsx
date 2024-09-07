@@ -1,6 +1,11 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../utils/translations';
 
 const MoodBalls = ({ showText = false, textColor = 'text-gray-300', selectedEmotions = [], onEmotionSelect, onCustomEmotionClick }) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const emotions = [
     "angry", "confident", "optimistic", "numb", "tired",
     "happy", "sad", "anxious", "calm", "worried"
@@ -24,7 +29,7 @@ const MoodBalls = ({ showText = false, textColor = 'text-gray-300', selectedEmot
           >
             {showText && (
               <span className={`${isSelected ? 'text-white font-bold' : textColor} text-sm`}>
-                {emotion}
+                {t[emotion]}
               </span>
             )}
           </div>
