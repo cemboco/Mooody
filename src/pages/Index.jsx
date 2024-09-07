@@ -24,6 +24,7 @@ const Index = () => {
           onClick={() => {/* Handle home button click */}}
           variant="outline"
           size="icon"
+          className="ml-auto"
         >
           <Home className="h-4 w-4" />
         </Button>
@@ -31,15 +32,15 @@ const Index = () => {
       <div className="relative w-full min-h-screen flex flex-col items-center justify-center p-4">
         <MoodBalls showText={false} showHappyText={false} />
         <div className="container text-center max-w-4xl relative z-10 px-4 sm:px-6 lg:px-8 mt-16 sm:mt-0">
-          <h1 className="mooody-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6">MOOODY</h1>
-          <p className="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8">{t.subtitle}</p>
+          <h1 className="mooody-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">MOOODY</h1>
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8">{t.subtitle}</p>
           <Button 
-            className="bg-mooody-green hover:bg-mooody-dark-green text-white text-lg sm:text-xl px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-colors shadow-lg relative z-20 mb-6 sm:mb-8"
+            className="bg-mooody-green hover:bg-mooody-dark-green text-white text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-colors shadow-lg relative z-20 mb-6 sm:mb-8"
             onClick={() => navigate('/mood')}
           >
             {t.notificationButton}
           </Button>
-          <p className="text-sm sm:text-base mt-4 sm:mt-8 mx-auto" style={{ fontFamily: 'SUSE, sans-serif', fontSize: '15px', maxWidth: '80ch', lineHeight: '1.6' }}>
+          <p className="text-xs sm:text-sm mt-4 sm:mt-8 mx-auto" style={{ fontFamily: 'SUSE, sans-serif', fontSize: '14px', maxWidth: '80ch', lineHeight: '1.6' }}>
             {language === 'de' ? germanText : englishText}
           </p>
         </div>
