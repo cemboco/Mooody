@@ -107,7 +107,16 @@
 .ball8 { width: 85px; height: 85px; top: 70%; left: 60%; background-color: #008080; animation-delay: -16s; }
 .ball9 { width: 95px; height: 95px; top: 30%; right: 40%; background-color: #4B0082; animation-delay: -18s; }
 .ball10 { width: 65px; height: 65px; bottom: 20%; right: 30%; background-color: #00CED1; animation-delay: -20s; }
-.ball11 { width: 105px; height: 105px; top: 50%; left: 50%; background-color: #FFFFFF; animation-delay: -22s; }
+
+.happy-ball {
+  width: 105px;
+  height: 105px;
+  top: calc(10% + 110px);
+  left: 10%;
+  background-color: #FFFFFF;
+  animation-delay: -22s;
+  z-index: 0;
+}
 
 @keyframes float-reverse {
   0%, 100% { transform: translate(0, 0); }
@@ -116,6 +125,6 @@
   75% { transform: translate(-50px, -50px); }
 }
 
-.ball2, .ball4, .ball6, .ball8, .ball10 {
+.ball2, .ball4, .ball6, .ball8, .ball10, .happy-ball {
   animation-name: float-reverse;
 }

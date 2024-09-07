@@ -7,8 +7,8 @@ const MoodBalls = ({ showText = false, selectedEmotions = [], onEmotionSelect, o
   const t = translations[language];
 
   const emotions = [
-    "optimistic", "confident", "angry", "numb", "tired",
-    "happy", "sad", "anxious", "calm", "worried"
+    "optimistic", "confident", "happy", "numb", "tired",
+    "sad", "anxious", "calm", "worried"
   ];
 
   const handleClick = (emotion) => {
@@ -21,10 +21,11 @@ const MoodBalls = ({ showText = false, selectedEmotions = [], onEmotionSelect, o
     <div className="circles">
       {emotions.map((emotion, index) => {
         const isSelected = selectedEmotions.includes(emotion);
+        const ballClass = `ball ball${index + 1} ${emotion === 'happy' ? 'happy-ball' : ''} flex items-center justify-center cursor-pointer transition-all duration-300 ${isSelected ? 'scale-110' : ''}`;
         return (
           <div 
             key={emotion} 
-            className={`ball ball${index + 1} flex items-center justify-center cursor-pointer transition-all duration-300 ${isSelected ? 'scale-110' : ''}`}
+            className={ballClass}
             onClick={() => handleClick(emotion)}
           >
             {showText && (
@@ -36,7 +37,7 @@ const MoodBalls = ({ showText = false, selectedEmotions = [], onEmotionSelect, o
         );
       })}
       <div 
-        className="ball ball11 flex items-center justify-center bg-white cursor-pointer"
+        className="ball ball10 flex items-center justify-center bg-white cursor-pointer"
         onClick={onCustomEmotionClick}
       >
         {showText && <span className="text-black text-2xl">+</span>}
