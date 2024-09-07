@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 
-const MoodBalls = ({ showText = false, selectedEmotions = [], onEmotionSelect, onCustomEmotionClick }) => {
+const MoodBalls = ({ showText = false, selectedEmotions = [], onEmotionSelect, onCustomEmotionClick, showHappyText = true }) => {
   const { language } = useLanguage();
   const t = translations[language];
 
@@ -43,7 +43,7 @@ const MoodBalls = ({ showText = false, selectedEmotions = [], onEmotionSelect, o
         {showText && <span className="text-black text-2xl">+</span>}
       </div>
       <div className="ball floating-happy-ball flex items-center justify-center">
-        <span className="text-sm text-black">{t.happy}</span>
+        {showText && showHappyText && <span className="text-sm text-black">{t.happy}</span>}
       </div>
     </div>
   );
