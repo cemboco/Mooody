@@ -24,7 +24,7 @@ const Index = () => {
         <Home className="h-4 w-4" />
       </Button>
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
-        <MoodBalls />
+        <MoodBalls showText={false} />
         <div className="container text-center max-w-2xl relative z-10">
           <h1 className="mooody-title text-5xl sm:text-6xl md:text-7xl font-bold mb-6">MOOODY</h1>
           <p className="text-xl sm:text-2xl mb-8">{t.subtitle}</p>
