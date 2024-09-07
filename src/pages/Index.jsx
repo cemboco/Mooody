@@ -5,16 +5,10 @@ import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
 import { Home } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const { language } = useLanguage();
   const t = translations[language];
-  const navigate = useNavigate();
-
-  const handleMoodButtonClick = () => {
-    navigate('/mood');
-  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
@@ -34,7 +28,7 @@ const Index = () => {
           <p className="text-xl sm:text-2xl mb-8">{t.subtitle}</p>
           <Button 
             className="bg-mooody-green hover:bg-mooody-dark-green text-white text-xl px-6 py-3 rounded-full transition-colors shadow-lg relative z-20"
-            onClick={handleMoodButtonClick}
+            onClick={() => {/* Handle button click */}}
           >
             {t.notificationButton}
           </Button>
