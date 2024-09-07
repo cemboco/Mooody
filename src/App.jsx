@@ -6,6 +6,7 @@ import { navItems } from "./nav-items";
 import { LanguageProvider } from './contexts/LanguageContext';
 import Mood from './pages/Mood';
 import SelectedMood from './pages/SelectedMood';
+import ConfirmationMood from './pages/ConfirmationMood';
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
             ))}
             <Route path="/mood" element={<Mood />} />
             <Route path="/selected-mood" element={<SelectedMood />} />
+            <Route path="/confirmation-mood" element={<ConfirmationMood />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

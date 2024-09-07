@@ -19,14 +19,15 @@ const SelectedMood = () => {
   const currentEmotion = selectedEmotions[currentEmotionIndex] || t.defaultMood;
 
   const handleSubmit = () => {
-    console.log("User input submitted:", userInput);
-    
-    if (currentEmotionIndex < selectedEmotions.length - 1) {
-      setCurrentEmotionIndex(currentEmotionIndex + 1);
-      setUserInput('');
-    } else {
-      // Here you can add logic to save all responses before navigating
-      navigate('/mood');
+    if (userInput.trim()) {
+      const currentDate = new Date().toISOString();
+      navigate('/confirmation-mood', {
+        state: {
+          date: currentDate,
+          emotion: currentEmotion,
+          text: userInput,
+        },
+      });
     }
   };
 
