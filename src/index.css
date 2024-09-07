@@ -85,9 +85,9 @@
 .ball {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.5;
+  opacity: 0.15;
   animation: float 20s infinite ease-in-out;
-  z-index: 1;
+  z-index: -1;
 }
 
 @keyframes float {
@@ -115,7 +115,7 @@
   left: 10%;
   background-color: #FFFFFF;
   animation-delay: -22s;
-  z-index: 0;
+  z-index: -1;
 }
 
 .floating-happy-ball {
@@ -125,7 +125,7 @@
   left: 15%;
   background-color: #FFD700;
   animation-delay: -24s;
-  z-index: 2;
+  z-index: -1;
 }
 
 .floating-angry-ball {
@@ -135,13 +135,13 @@
   left: 25%;
   background-color: #FF4500;
   animation-delay: -26s;
-  z-index: 3;
+  z-index: -1;
 }
 
 .ball.selected,
 .floating-happy-ball.selected,
 .floating-angry-ball.selected {
-  opacity: 0.8;
+  opacity: 0.3;
 }
 
 @keyframes float-reverse {
