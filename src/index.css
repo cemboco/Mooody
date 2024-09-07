@@ -116,3 +116,7 @@
 .ball2, .ball4, .ball6, .ball8 {
   animation-name: float-reverse;
 }
+
+.mood-circle {
+  transition: all 0.5s ease-in-out;
+}
