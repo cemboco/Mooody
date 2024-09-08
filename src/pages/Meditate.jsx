@@ -65,17 +65,17 @@ const Meditate = () => {
         <Home className="h-4 w-4" />
       </Button>
       
-      {/* New left side content */}
+      {/* Left side content */}
       <div className="w-1/2 p-8 flex items-center justify-center">
         <p className="text-lg leading-relaxed">
-          To hear your feelings is to honor your authentic self. They are a compass, pointing you toward what nourishes your soul and away from what drains it. They remind you of your deepest desires, your hidden wounds, and your innate capacity for growth. When you listen to your feelings, you open the door to self-awareness, healing, and transformation.
+          {t.meditationLeftSideText}
         </p>
       </div>
 
       {/* Right side with meditation controls */}
       <div className="w-1/2 flex flex-col items-center justify-center p-8">
-        <h1 className="text-4xl font-bold mb-6">{t.meditateTitle || 'Meditate'}</h1>
-        <p className="text-xl mb-8">{t.meditateDescription || 'Take a moment to breathe and relax.'}</p>
+        <h1 className="text-4xl font-bold mb-6">{t.meditateTitle}</h1>
+        <p className="text-xl mb-8">{t.meditateDescription}</p>
         <div className="mb-4">
           <Select onValueChange={handleDurationChange} defaultValue="300">
             <SelectTrigger className="w-[180px]">
@@ -99,7 +99,7 @@ const Meditate = () => {
             className="bg-mooody-green hover:bg-mooody-dark-green text-white"
           >
             <Play className="h-4 w-4 mr-2" />
-            {t.startMeditation || 'Start'}
+            {t.startMeditation}
           </Button>
           <Button
             onClick={handleStopMeditation}
@@ -107,17 +107,17 @@ const Meditate = () => {
             className="bg-red-500 hover:bg-red-600 text-white"
           >
             <Square className="h-4 w-4 mr-2" />
-            {t.stopMeditation || 'Stop'}
+            {t.stopMeditation}
           </Button>
         </div>
         {isMeditating && (
-          <p className="text-lg mb-8">{t.meditationInProgress || 'Meditation in progress...'}</p>
+          <p className="text-lg mb-8">{t.meditationInProgress}</p>
         )}
         <Button
           onClick={handleBackToMood}
           className="mt-8"
         >
-          {t.backToMood || 'Back to Mood'}
+          {t.backToMood}
         </Button>
       </div>
     </div>

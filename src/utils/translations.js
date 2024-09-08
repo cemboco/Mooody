@@ -73,6 +73,14 @@ export const translations = {
     checkInTitle: 'Hi und willkommen bei Mooody!',
     checkInSubtitle: 'Bevor wir loslegen, lass uns erkunden, warum du hier bist.',
     getStarted: 'Los geht\'s',
+    meditateTitle: 'Meditieren',
+    meditateDescription: 'Nimm dir einen Moment zum Atmen und Entspannen.',
+    minutes: 'Minuten',
+    startMeditation: 'Starten',
+    stopMeditation: 'Stoppen',
+    meditationInProgress: 'Meditation läuft...',
+    backToMood: 'Zurück zur Stimmung',
+    meditationLeftSideText: 'Deine Gefühle zu hören bedeutet, dein authentisches Selbst zu ehren. Sie sind ein Kompass, der dich zu dem führt, was deine Seele nährt, und von dem wegführt, was sie erschöpft. Sie erinnern dich an deine tiefsten Wünsche, deine verborgenen Wunden und deine angeborene Fähigkeit zu wachsen. Wenn du auf deine Gefühle hörst, öffnest du die Tür zur Selbsterkenntnis, Heilung und Transformation.'
   },
   en: {
     title: 'Moody',
@@ -148,5 +156,13 @@ export const translations = {
     checkInTitle: 'Hi and welcome to Mooody!',
     checkInSubtitle: 'Before jumping in, let\'s explore why you\'re here.',
     getStarted: 'Get Started',
+    meditateTitle: 'Meditate',
+    meditateDescription: 'Take a moment to breathe and relax.',
+    minutes: 'minutes',
+    startMeditation: 'Start',
+    stopMeditation: 'Stop',
+    meditationInProgress: 'Meditation in progress...',
+    backToMood: 'Back to Mood',
+    meditationLeftSideText: 'To hear your feelings is to honor your authentic self. They are a compass, pointing you toward what nourishes your soul and away from what drains it. They remind you of your deepest desires, your hidden wounds, and your innate capacity for growth. When you listen to your feelings, you open the door to self-awareness, healing, and transformation.'
   }
 };
