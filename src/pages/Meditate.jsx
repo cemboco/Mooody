@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
-import { Home } from 'lucide-react';
+import { Home, Play, Square } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -10,9 +10,20 @@ const Meditate = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
+  const [isMeditating, setIsMeditating] = useState(false);
 
   const handleBackToMood = () => {
-    navigate(-1); // This will navigate back to the previous page (SelectedMood)
+    navigate(-1);
+  };
+
+  const handleStartMeditation = () => {
+    setIsMeditating(true);
+    // Add meditation start logic here
+  };
+
+  const handleStopMeditation = () => {
+    setIsMeditating(false);
+    // Add meditation stop logic here
   };
 
   return (
@@ -29,7 +40,27 @@ const Meditate = () => {
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-6">{t.meditateTitle || 'Meditate'}</h1>
         <p className="text-xl mb-8">{t.meditateDescription || 'Take a moment to breathe and relax.'}</p>
-        {/* Add meditation content or components here */}
+        <div className="flex justify-center space-x-4 mb-8">
+          <Button
+            onClick={handleStartMeditation}
+            disabled={isMeditating}
+            className="bg-mooody-green hover:bg-mooody-dark-green text-white"
+          >
+            <Play className="h-4 w-4 mr-2" />
+            {t.startMeditation || 'Start'}
+          </Button>
+          <Button
+            onClick={handleStopMeditation}
+            disabled={!isMeditating}
+            className="bg-red-500 hover:bg-red-600 text-white"
+          >
+            <Square className="h-4 w-4 mr-2" />
+            {t.stopMeditation || 'Stop'}
+          </Button>
+        </div>
+        {isMeditating && (
+          <p className="text-lg mb-8">{t.meditationInProgress || 'Meditation in progress...'}</p>
+        )}
       </div>
       <Button
         onClick={handleBackToMood}
