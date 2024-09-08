@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Home, Check, ArrowLeft } from 'lucide-react';
+import { Home, Check, ArrowLeft, Lotus } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -45,6 +45,11 @@ const SelectedMood = () => {
     setUserInputs(newInputs);
   };
 
+  const handleMeditate = () => {
+    // TODO: Implement meditation feature
+    console.log('Meditation feature clicked');
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
@@ -73,6 +78,13 @@ const SelectedMood = () => {
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             {t.backToMoodSelection}
+          </Button>
+          <Button
+            onClick={handleMeditate}
+            className="flex items-center bg-mooody-green hover:bg-mooody-dark-green text-white"
+          >
+            <Lotus className="h-4 w-4 mr-2" />
+            {t.meditate}
           </Button>
           <Button
             onClick={handleSubmit}
