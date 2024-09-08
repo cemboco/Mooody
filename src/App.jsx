@@ -28,11 +28,7 @@ const HomeButton = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="fixed top-4 right-4 z-[60] bg-white hover:bg-black hover:text-white transition-colors"
-        >
+        <Button variant="outline" size="icon" className="fixed top-4 right-4 z-[60]">
           <Home className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
