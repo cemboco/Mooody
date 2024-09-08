@@ -30,6 +30,12 @@ const Meditate = () => {
     return () => clearInterval(timer);
   }, [isMeditating, timeLeft]);
 
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
+
   const handleBackToMood = () => {
     navigate(-1);
   };
@@ -38,7 +44,10 @@ const Meditate = () => {
     setIsMeditating(true);
     setTimeLeft(duration);
     if (audioRef.current) {
-      audioRef.current.play();
+      audioRef.current.play().catch(error => console.error('Error playing audio:', error));
+      console.log('Attempting to play audio');
+    } else {
+      console.error('Audio element not found');
     }
   };
 
@@ -48,6 +57,7 @@ const Meditate = () => {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
+      console.log('Audio stopped');
     }
   };
 
@@ -60,9 +70,7 @@ const Meditate = () => {
   const handleVolumeChange = (value) => {
     const newVolume = value[0];
     setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
-    }
+    console.log('Volume changed to:', newVolume);
   };
 
   const formatTime = (seconds) => {
@@ -140,7 +148,7 @@ const Meditate = () => {
         {t.backToMood || 'Back to Mood'}
       </Button>
       <audio ref={audioRef} loop>
-        <source src="/path/to/zen-music.mp3" type="audio/mpeg" />
+        <source src="/zen-music.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
     </div>
