@@ -11,6 +11,19 @@ import Calendar from './components/Calendar';
 import CheckIn from './pages/CheckIn';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
+import React from 'react';
+import WanderingSound from './components/WanderingSound'; // Adjust the path if necessary
+
+function App() {
+  return (
+    <div className="App">
+      {/* Other components */}
+      <WanderingSound />
+    </div>
+  );
+}
+
+export default App;
 
 const queryClient = new QueryClient();
 
