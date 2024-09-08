@@ -33,7 +33,7 @@ const ConfirmationMood = () => {
       date,
       moods
     }));
-    setEntries(formattedEntries);
+    setEntries(formattedEntries.sort((a, b) => new Date(b.date) - new Date(a.date)));
   }, [date, emotions, texts]);
 
   const formatDate = (dateString) => {
