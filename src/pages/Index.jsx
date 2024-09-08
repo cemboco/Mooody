@@ -37,7 +37,7 @@ const Index = () => {
           <div className="flex justify-center space-x-4">
             <Button 
               className="bg-white hover:bg-gray-100 text-mooody-green text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-colors shadow-lg relative z-20"
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/check-in')}
             >
               {t.beforeJumpingIn}
             </Button>
