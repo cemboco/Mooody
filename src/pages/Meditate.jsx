@@ -68,6 +68,7 @@ const Meditate = () => {
     setSelectedAudio(value);
     if (audioRef.current) {
       audioRef.current.src = value;
+      audioRef.current.loop = true;
       if (isMeditating) audioRef.current.play();
     }
   };
