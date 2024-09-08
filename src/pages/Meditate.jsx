@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Slider } from "@/components/ui/slider";
 import { useNavigate } from 'react-router-dom';
-import { Home, Play, Square } from 'lucide-react';
+import { Home, Play, Square, Volume2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -15,6 +16,7 @@ const Meditate = () => {
   const [isMeditating, setIsMeditating] = useState(false);
   const [duration, setDuration] = useState(300); // Default to 5 minutes (300 seconds)
   const [timeLeft, setTimeLeft] = useState(duration);
+  const [volume, setVolume] = useState(0.5);
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -58,6 +60,14 @@ const Meditate = () => {
     const newDuration = parseInt(value, 10);
     setDuration(newDuration);
     setTimeLeft(newDuration);
+  };
+
+  const handleVolumeChange = (value) => {
+    const newVolume = value[0];
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
   };
 
   const formatTime = (seconds) => {
@@ -136,6 +146,16 @@ const Meditate = () => {
         {isMeditating && (
           <p className="text-lg mb-8">{t.meditationInProgress}</p>
         )}
+        <div className="flex items-center space-x-2 mb-8">
+          <Volume2 className="h-4 w-4" />
+          <Slider
+            value={[volume]}
+            onValueChange={handleVolumeChange}
+            max={1}
+            step={0.01}
+            className="w-32"
+          />
+        </div>
         <Button
           onClick={handleBackToMood}
           className="mt-8"
@@ -143,7 +163,7 @@ const Meditate = () => {
           {t.backToMood}
         </Button>
       </div>
-      <audio ref={audioRef} src="/meditation.mp3" loop />
+      <audio ref={audioRef} src="/wandering-6394.mp3" loop />
     </div>
   );
 };
