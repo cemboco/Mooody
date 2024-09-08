@@ -39,6 +39,15 @@ const Mood = () => {
 
   return (
     <div className={`min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden ${fadeIn ? 'fade-in' : ''}`}>
+      <style jsx>{`
+        @keyframes clarify {
+          from { filter: blur(5px); opacity: 0; }
+          to { filter: blur(0); opacity: 1; }
+        }
+        .clarify-text {
+          animation: clarify 1s ease-out forwards;
+        }
+      `}</style>
       <LanguageToggle />
       <Button
         onClick={() => navigate('/home')}
@@ -49,7 +58,7 @@ const Mood = () => {
         <Home className="h-4 w-4" />
       </Button>
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
-        <h2 className="text-xl mb-4 z-10">{t.selectUpToThreeMoods}</h2>
+        <h2 className={`text-xl mb-4 z-10 ${fadeIn ? 'clarify-text' : ''}`}>{t.selectUpToThreeMoods}</h2>
         <MoodBalls 
           showText={true} 
           textColor="text-gray-700" 
