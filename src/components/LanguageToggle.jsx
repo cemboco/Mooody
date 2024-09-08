@@ -11,7 +11,7 @@ const LanguageToggle = () => {
       onClick={toggleLanguage}
       variant="outline"
       size="sm"
-      className="fixed top-4 left-4 z-50 bg-transparent text-mooody-green hover:bg-black hover:text-white transition-colors"
+      className="fixed top-4 left-4 z-50 bg-white"
     >
       <Globe className="h-4 w-4 mr-2" />
       {language === 'de' ? 'DE' : 'EN'}
