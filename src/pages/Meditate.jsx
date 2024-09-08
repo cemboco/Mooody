@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Slider } from "@/components/ui/slider";
 import { useNavigate } from 'react-router-dom';
-import { Home, Play, Square } from 'lucide-react';
+import { Home, Play, Pause, Square, Volume2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -13,8 +14,20 @@ const Meditate = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const [isMeditating, setIsMeditating] = useState(false);
-  const [duration, setDuration] = useState(300); // Default to 5 minutes (300 seconds)
+  const [duration, setDuration] = useState(300);
   const [timeLeft, setTimeLeft] = useState(duration);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio('/meditation.mp3');
+    audioRef.current.loop = true;
+    return () => {
+      audioRef.current.pause();
+      audioRef.current = null;
+    };
+  }, []);
 
   useEffect(() => {
     let timer;
@@ -24,9 +37,16 @@ const Meditate = () => {
       }, 1000);
     } else if (timeLeft === 0) {
       setIsMeditating(false);
+      handleStopSound();
     }
     return () => clearInterval(timer);
   }, [isMeditating, timeLeft]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
 
   const handleBackToMood = () => {
     navigate(-1);
@@ -35,17 +55,39 @@ const Meditate = () => {
   const handleStartMeditation = () => {
     setIsMeditating(true);
     setTimeLeft(duration);
+    handlePlaySound();
   };
 
   const handleStopMeditation = () => {
     setIsMeditating(false);
     setTimeLeft(duration);
+    handleStopSound();
   };
 
   const handleDurationChange = (value) => {
     const newDuration = parseInt(value, 10);
     setDuration(newDuration);
     setTimeLeft(newDuration);
+  };
+
+  const handlePlaySound = () => {
+    audioRef.current.play();
+    setIsPlaying(true);
+  };
+
+  const handlePauseSound = () => {
+    audioRef.current.pause();
+    setIsPlaying(false);
+  };
+
+  const handleStopSound = () => {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    setIsPlaying(false);
+  };
+
+  const handleVolumeChange = (value) => {
+    setVolume(value[0]);
   };
 
   const formatTime = (seconds) => {
@@ -124,6 +166,31 @@ const Meditate = () => {
         {isMeditating && (
           <p className="text-lg mb-8">{t.meditationInProgress}</p>
         )}
+        <div className="flex flex-col items-center space-y-4 mb-8">
+          <h2 className="text-2xl font-semibold">Wandering Sound</h2>
+          <div className="flex space-x-2">
+            <Button onClick={handlePlaySound} disabled={isPlaying}>
+              Play Sound
+            </Button>
+            <Button onClick={handlePauseSound} disabled={!isPlaying}>
+              Pause Sound
+            </Button>
+            <Button onClick={handleStopSound}>
+              Stop Sound
+            </Button>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Volume2 className="h-4 w-4" />
+            <Slider
+              className="w-32"
+              value={[volume]}
+              min={0}
+              max={1}
+              step={0.01}
+              onValueChange={handleVolumeChange}
+            />
+          </div>
+        </div>
         <Button
           onClick={handleBackToMood}
           className="mt-8"
