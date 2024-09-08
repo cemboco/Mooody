@@ -19,6 +19,7 @@ const Meditate = () => {
   const [volume, setVolume] = useState(0.5);
   const [selectedAudio, setSelectedAudio] = useState('/wandering-6394.mp3');
   const audioRef = useRef(null);
+  const bellAudioRef = useRef(null);
 
   const audioOptions = [
     { value: '/birds-in-forest-on-sunny-day-14444.mp3', label: 'Birds' },
@@ -35,6 +36,7 @@ const Meditate = () => {
       setIsMeditating(false);
       audioRef.current?.pause();
       audioRef.current.currentTime = 0;
+      bellAudioRef.current?.play();
     }
     return () => clearInterval(timer);
   }, [isMeditating, timeLeft]);
@@ -98,7 +100,7 @@ const Meditate = () => {
             <SelectValue placeholder="Select duration" />
           </SelectTrigger>
           <SelectContent>
-            {[5, 10, 20, 30, 45, 60].map(min => (
+            {[1, 5, 10, 20, 30, 45, 60].map(min => (
               <SelectItem key={min} value={String(min * 60)}>{min} {t.minutes}</SelectItem>
             ))}
           </SelectContent>
@@ -127,6 +129,7 @@ const Meditate = () => {
         <Button onClick={() => navigate(-1)}>{t.backToMood}</Button>
       </div>
       <audio ref={audioRef} src={selectedAudio} loop />
+      <audio ref={bellAudioRef} src="/bell-222490.mp3" />
     </div>
   );
 };
