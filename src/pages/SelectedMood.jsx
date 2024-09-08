@@ -19,8 +19,9 @@ const SelectedMood = () => {
   const currentEmotion = selectedEmotions[currentEmotionIndex] || t.defaultMood;
 
   const handleSubmit = () => {
-    if (userInputs[currentEmotionIndex].trim()) {
-      console.log('User input:', userInputs[currentEmotionIndex]); // Log user input to console
+    const currentInput = userInputs[currentEmotionIndex];
+    if (currentInput && currentInput.trim()) {
+      console.log('User input:', currentInput); // Log user input to console
       
       if (currentEmotionIndex < selectedEmotions.length - 1) {
         // Move to the next emotion
@@ -65,7 +66,7 @@ const SelectedMood = () => {
           {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
         </h2>
         <Textarea
-          value={userInputs[currentEmotionIndex]}
+          value={userInputs[currentEmotionIndex] || ''}
           onChange={handleInputChange}
           placeholder={t.typeHere}
           className="w-full h-64 text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green"
@@ -87,7 +88,7 @@ const SelectedMood = () => {
           <Button
             onClick={handleSubmit}
             className="rounded-full w-12 h-12 flex items-center justify-center bg-mooody-green hover:bg-mooody-dark-green"
-            disabled={!userInputs[currentEmotionIndex].trim()}
+            disabled={!userInputs[currentEmotionIndex] || !userInputs[currentEmotionIndex].trim()}
           >
             <Check className="h-6 w-6 text-white" />
           </Button>
