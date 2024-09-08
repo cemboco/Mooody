@@ -17,13 +17,13 @@ const Meditate = () => {
   const [duration, setDuration] = useState(300);
   const [timeLeft, setTimeLeft] = useState(duration);
   const [volume, setVolume] = useState(0.5);
-  const [selectedAudio, setSelectedAudio] = useState('/wandering-6394.mp3');
+  const [selectedAudio, setSelectedAudio] = useState('/wandering.mp3');
   const audioRef = useRef(null);
   const bellAudioRef = useRef(null);
 
   const audioOptions = [
     { value: '/birds-in-forest-on-sunny-day-14444.mp3', label: 'Birds' },
-    { value: '/wandering-6394.mp3', label: 'Wander' },
+    { value: '/wandering.mp3', label: 'Wander' },
     { value: '/waves-53479.mp3', label: 'Waves' },
     { value: '/wind-artificial-18750.mp3', label: 'Wind' },
   ];
