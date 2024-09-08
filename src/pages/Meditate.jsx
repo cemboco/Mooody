@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import { useNavigate } from 'react-router-dom';
 import { Home, Play, Square } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -76,6 +77,9 @@ const Meditate = () => {
           — Rumi
         </p>
       </div>
+
+      {/* Vertical Divider */}
+      <Separator orientation="vertical" className="h-[10cm] self-center" />
 
       {/* Right side with meditation controls */}
       <div className="w-1/2 flex flex-col items-center justify-center p-8">
