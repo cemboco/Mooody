@@ -81,7 +81,9 @@ export const translations = {
     meditationInProgress: 'Meditation läuft...',
     backToMood: 'Zurück',
     meditationLeftSideText: 'Deine Gefühle zu hören bedeutet, dein authentisches Selbst zu ehren. Sie sind ein Kompass, der dich zu dem führt, was deine Seele nährt, und von dem wegführt, was sie erschöpft. Sie erinnern dich an deine tiefsten Wünsche, deine verborgenen Wunden und deine angeborene Fähigkeit zu wachsen. Wenn du auf deine Gefühle hörst, öffnest du die Tür zur Selbsterkenntnis, Heilung und Transformation.',
-    meditationQuote: 'Höre auf die Stille. Sie hat so viel zu sagen.'
+    meditationQuote: 'Höre auf die Stille. Sie hat so viel zu sagen.',
+    home: 'Startseite',
+    entries: 'Einträge'
   },
   en: {
     title: 'Moody',
@@ -165,6 +167,8 @@ export const translations = {
     meditationInProgress: 'Meditation in progress...',
     backToMood: 'Back to Mood',
     meditationLeftSideText: 'To hear your feelings is to honor your authentic self. They are a compass, pointing you toward what nourishes your soul and away from what drains it. They remind you of your deepest desires, your hidden wounds, and your innate capacity for growth. When you listen to your feelings, you open the door to self-awareness, healing, and transformation.',
-    meditationQuote: 'Listen to silence. It has so much to say.'
+    meditationQuote: 'Listen to silence. It has so much to say.',
+    home: 'Home',
+    entries: 'Entries'
   }
 };
