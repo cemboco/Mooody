@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
@@ -15,7 +15,6 @@ const Meditate = () => {
   const [isMeditating, setIsMeditating] = useState(false);
   const [duration, setDuration] = useState(300); // Default to 5 minutes (300 seconds)
   const [timeLeft, setTimeLeft] = useState(duration);
-  const audioRef = useRef(null);
 
   useEffect(() => {
     let timer;
@@ -25,10 +24,6 @@ const Meditate = () => {
       }, 1000);
     } else if (timeLeft === 0) {
       setIsMeditating(false);
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
     }
     return () => clearInterval(timer);
   }, [isMeditating, timeLeft]);
@@ -40,18 +35,11 @@ const Meditate = () => {
   const handleStartMeditation = () => {
     setIsMeditating(true);
     setTimeLeft(duration);
-    if (audioRef.current) {
-      audioRef.current.play();
-    }
   };
 
   const handleStopMeditation = () => {
     setIsMeditating(false);
     setTimeLeft(duration);
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
   };
 
   const handleDurationChange = (value) => {
@@ -143,7 +131,6 @@ const Meditate = () => {
           {t.backToMood}
         </Button>
       </div>
-      <audio ref={audioRef} src="/meditation.mp3" loop />
     </div>
   );
 };
