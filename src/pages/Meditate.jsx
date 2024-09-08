@@ -11,6 +11,10 @@ const Meditate = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
+  const handleBackToMood = () => {
+    navigate(-1); // This will navigate back to the previous page (SelectedMood)
+  };
+
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
@@ -28,7 +32,7 @@ const Meditate = () => {
         {/* Add meditation content or components here */}
       </div>
       <Button
-        onClick={() => navigate('/selected-mood')}
+        onClick={handleBackToMood}
         className="mt-8"
       >
         {t.backToMood || 'Back to Mood'}
