@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Home, Check, ArrowLeft, Lotus } from 'lucide-react';
+import { Home, Check, ArrowLeft, Flower2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -83,7 +83,7 @@ const SelectedMood = () => {
             onClick={handleMeditate}
             className="flex items-center bg-mooody-green hover:bg-mooody-dark-green text-white"
           >
-            <Lotus className="h-4 w-4 mr-2" />
+            <Flower2 className="h-4 w-4 mr-2" />
             {t.meditate}
           </Button>
           <Button
