@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Home } from 'lucide-react';
@@ -12,19 +12,28 @@ const ConfirmationMood = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
+  const [entries, setEntries] = useState([]);
 
   const { date, emotions, texts } = location.state || {};
 
   useEffect(() => {
     if (date && emotions && texts) {
-      const entries = JSON.parse(localStorage.getItem('moodEntries') || '{}');
+      const storedEntries = JSON.parse(localStorage.getItem('moodEntries') || '{}');
       const formattedDate = new Date(date).toISOString().split('T')[0];
-      entries[formattedDate] = emotions.map((emotion, index) => ({
+      storedEntries[formattedDate] = emotions.map((emotion, index) => ({
         emotion,
         text: texts[index]
       }));
-      localStorage.setItem('moodEntries', JSON.stringify(entries));
+      localStorage.setItem('moodEntries', JSON.stringify(storedEntries));
     }
+
+    // Fetch all entries from localStorage
+    const allEntries = JSON.parse(localStorage.getItem('moodEntries') || '{}');
+    const formattedEntries = Object.entries(allEntries).map(([date, moods]) => ({
+      date,
+      moods
+    }));
+    setEntries(formattedEntries);
   }, [date, emotions, texts]);
 
   const formatDate = (dateString) => {
@@ -44,19 +53,21 @@ const ConfirmationMood = () => {
         <Home className="h-4 w-4" />
       </Button>
       <h1 className="text-3xl font-bold mb-8">{t.entries}</h1>
-      {date && emotions && texts && (
-        <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold mb-4">{formatDate(date)}</h2>
-          {emotions.map((emotion, index) => (
-            <div key={index} className="mb-4">
-              <h3 className="text-xl font-semibold mb-2">
-                {t[emotion] || emotion}
-              </h3>
-              <p className="text-base">{texts[index]}</p>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="w-full max-w-md">
+        {entries.map(({ date, moods }) => (
+          <div key={date} className="bg-white rounded-lg shadow-md p-6 mb-4">
+            <h2 className="text-2xl font-bold mb-4">{formatDate(date)}</h2>
+            {moods.map((mood, index) => (
+              <div key={index} className="mb-4">
+                <h3 className="text-xl font-semibold mb-2">
+                  {t[mood.emotion] || mood.emotion}
+                </h3>
+                <p className="text-base">{mood.text}</p>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
       <Calendar />
       <Button
         onClick={() => navigate('/home')}
