@@ -45,6 +45,11 @@ const SelectedMood = () => {
     setUserInputs(newInputs);
   };
 
+  const handleMeditate = () => {
+    console.log('Meditate button clicked');
+    // Add meditation feature logic here
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
@@ -66,13 +71,19 @@ const SelectedMood = () => {
           placeholder={t.typeHere}
           className="w-full h-64 text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green"
         />
-        <div className="mt-8 flex items-center justify-between w-full max-w-md">
+        <div className="mt-8 flex flex-col items-center justify-between w-full max-w-md">
           <Button
             onClick={() => navigate('/mood')}
-            className="flex items-center"
+            className="flex items-center mb-4 w-full"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             {t.backToMoodSelection}
+          </Button>
+          <Button
+            onClick={handleMeditate}
+            className="w-full mb-4 bg-mooody-green hover:bg-mooody-dark-green text-white"
+          >
+            Meditate
           </Button>
           <Button
             onClick={handleSubmit}
