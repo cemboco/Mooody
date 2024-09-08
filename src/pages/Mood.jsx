@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MoodBalls from '../components/MoodBalls';
 import CustomEmotionModal from '../components/CustomEmotionModal';
 import LanguageToggle from '../components/LanguageToggle';
@@ -15,6 +15,11 @@ const Mood = () => {
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [customEmotion, setCustomEmotion] = useState(null);
+  const [fadeIn, setFadeIn] = useState(false);
+
+  useEffect(() => {
+    setFadeIn(true);
+  }, []);
 
   const handleEmotionSelect = (emotion) => {
     if (emotion === 'custom' && !customEmotion) {
@@ -33,7 +38,7 @@ const Mood = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
+    <div className={`min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden ${fadeIn ? 'fade-in' : ''}`}>
       <LanguageToggle />
       <Button
         onClick={() => navigate('/home')}
