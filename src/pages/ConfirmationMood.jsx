@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { Home, Edit2, Save } from 'lucide-react';
+import { Home, Edit2, Save, Trash2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -63,6 +63,19 @@ const ConfirmationMood = () => {
     const allEntries = JSON.parse(localStorage.getItem('moodEntries') || '{}');
     allEntries[selectedEntry.date] = updatedMoods;
     localStorage.setItem('moodEntries', JSON.stringify(allEntries));
+  };
+
+  const handleDelete = () => {
+    if (window.confirm(t.confirmDelete)) {
+      const updatedEntries = entries.filter(entry => entry.date !== selectedEntry.date);
+      setEntries(updatedEntries);
+      setIsModalOpen(false);
+
+      // Update localStorage
+      const allEntries = JSON.parse(localStorage.getItem('moodEntries') || '{}');
+      delete allEntries[selectedEntry.date];
+      localStorage.setItem('moodEntries', JSON.stringify(allEntries));
+    }
   };
 
   return (
@@ -127,10 +140,16 @@ const ConfirmationMood = () => {
                 {t.save}
               </Button>
             ) : (
-              <Button onClick={handleEdit}>
-                <Edit2 className="h-4 w-4 mr-2" />
-                {t.edit}
-              </Button>
+              <>
+                <Button onClick={handleEdit}>
+                  <Edit2 className="h-4 w-4 mr-2" />
+                  {t.edit}
+                </Button>
+                <Button onClick={handleDelete} variant="destructive">
+                  <Trash2 className="h-4 w-4 mr-2" />
+                  {t.delete}
+                </Button>
+              </>
             )}
           </DialogFooter>
         </DialogContent>
