@@ -36,6 +36,15 @@ const Meditate = () => {
     }
   }, [volume]);
 
+  useEffect(() => {
+    // Check if audio element is found
+    if (audioRef.current) {
+      console.log('Audio element found:', audioRef.current);
+    } else {
+      console.error('Audio element not found');
+    }
+  }, []);
+
   const handleBackToMood = () => {
     navigate(-1);
   };
@@ -44,10 +53,13 @@ const Meditate = () => {
     setIsMeditating(true);
     setTimeLeft(duration);
     if (audioRef.current) {
-      audioRef.current.play().catch(error => console.error('Error playing audio:', error));
-      console.log('Attempting to play audio');
+      audioRef.current.play().catch(error => {
+        console.error('Error playing audio:', error);
+        alert('Unable to play audio. Please check your browser settings and try again.');
+      });
     } else {
       console.error('Audio element not found');
+      alert('Audio element not found. Please refresh the page and try again.');
     }
   };
 
@@ -57,7 +69,6 @@ const Meditate = () => {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
-      console.log('Audio stopped');
     }
   };
 
@@ -70,7 +81,9 @@ const Meditate = () => {
   const handleVolumeChange = (value) => {
     const newVolume = value[0];
     setVolume(newVolume);
-    console.log('Volume changed to:', newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
   };
 
   const formatTime = (seconds) => {
