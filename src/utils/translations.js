@@ -79,7 +79,7 @@ export const translations = {
     startMeditation: 'Starten',
     stopMeditation: 'Stoppen',
     meditationInProgress: 'Meditation läuft...',
-    backToMood: 'Zurück zur Stimmung',
+    backToMood: 'Zurück',
     meditationLeftSideText: 'Deine Gefühle zu hören bedeutet, dein authentisches Selbst zu ehren. Sie sind ein Kompass, der dich zu dem führt, was deine Seele nährt, und von dem wegführt, was sie erschöpft. Sie erinnern dich an deine tiefsten Wünsche, deine verborgenen Wunden und deine angeborene Fähigkeit zu wachsen. Wenn du auf deine Gefühle hörst, öffnest du die Tür zur Selbsterkenntnis, Heilung und Transformation.'
   },
   en: {
