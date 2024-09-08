@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import MoodBalls from '../components/MoodBalls';
 import CustomEmotionModal from '../components/CustomEmotionModal';
 import LanguageToggle from '../components/LanguageToggle';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
-import { Home, ArrowRight, Volume2, VolumeX } from 'lucide-react';
+import { Home, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 
-const Mood = ({ isSoundOn, setIsSoundOn }) => {
+const Mood = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
@@ -16,23 +16,10 @@ const Mood = ({ isSoundOn, setIsSoundOn }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [customEmotion, setCustomEmotion] = useState(null);
   const [fadeIn, setFadeIn] = useState(false);
-  const audioRef = useRef(null);
 
   useEffect(() => {
     setFadeIn(true);
-    if (isSoundOn) {
-      audioRef.current.play();
-    }
-  }, [isSoundOn]);
-
-  const toggleSound = () => {
-    setIsSoundOn(!isSoundOn);
-    if (isSoundOn) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-  };
+  }, []);
 
   const handleEmotionSelect = (emotion) => {
     if (emotion === 'custom' && !customEmotion) {
@@ -70,14 +57,6 @@ const Mood = ({ isSoundOn, setIsSoundOn }) => {
       >
         <Home className="h-4 w-4" />
       </Button>
-      <Button
-        onClick={toggleSound}
-        className="fixed top-4 right-16 z-[60]"
-        variant="outline"
-        size="icon"
-      >
-        {isSoundOn ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
-      </Button>
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
         <h2 className={`text-xl mb-4 z-10 ${fadeIn ? 'clarify-text' : ''}`}>{t.selectUpToThreeMoods}</h2>
         <MoodBalls 
@@ -103,7 +82,6 @@ const Mood = ({ isSoundOn, setIsSoundOn }) => {
         onClose={() => setIsModalOpen(false)}
         onAdd={handleCustomEmotionAdd}
       />
-      <audio ref={audioRef} src="/padsound-meditation-21384.mp3" loop />
     </div>
   );
 };

@@ -10,36 +10,31 @@ import ConfirmationMood from './pages/ConfirmationMood';
 import Calendar from './components/Calendar';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
-import React, { useState } from 'react';
 
 const queryClient = new QueryClient();
 
-const App = () => {
-  const [isSoundOn, setIsSoundOn] = useState(true);
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        <TooltipProvider>
-          <Toaster />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn} />} />
-              <Route path="/home" element={<Index isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn} />} />
-              {navItems.map(({ to, page }) => (
-                <Route key={to} path={to} element={page} />
-              ))}
-              <Route path="/mood" element={<Mood isSoundOn={isSoundOn} setIsSoundOn={setIsSoundOn} />} />
-              <Route path="/selected-mood" element={<SelectedMood />} />
-              <Route path="/confirmation-mood" element={<ConfirmationMood />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/meditate" element={<Meditate />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </LanguageProvider>
-    </QueryClientProvider>
-  );
-};
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <LanguageProvider>
+      <TooltipProvider>
+        <Toaster />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/home" element={<Index />} />
+            {navItems.map(({ to, page }) => (
+              <Route key={to} path={to} element={page} />
+            ))}
+            <Route path="/mood" element={<Mood />} />
+            <Route path="/selected-mood" element={<SelectedMood />} />
+            <Route path="/confirmation-mood" element={<ConfirmationMood />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/meditate" element={<Meditate />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </LanguageProvider>
+  </QueryClientProvider>
+);
 
 export default App;
