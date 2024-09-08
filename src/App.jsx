@@ -8,7 +8,6 @@ import Mood from './pages/Mood';
 import SelectedMood from './pages/SelectedMood';
 import ConfirmationMood from './pages/ConfirmationMood';
 import Calendar from './components/Calendar';
-import CheckIn from './pages/CheckIn';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
 
@@ -22,7 +21,6 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/check-in" element={<CheckIn />} />
             <Route path="/home" element={<Index />} />
             {navItems.map(({ to, page }) => (
               <Route key={to} path={to} element={page} />
