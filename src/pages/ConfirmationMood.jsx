@@ -32,6 +32,11 @@ const ConfirmationMood = () => {
     return new Date(dateString).toLocaleDateString(language === 'de' ? 'de-DE' : 'en-US', options);
   };
 
+  const handleMeditate = () => {
+    // TODO: Implement meditation feature
+    console.log('Meditation feature to be implemented');
+  };
+
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-start bg-mooody-yellow text-mooody-green overflow-hidden p-4">
       <LanguageToggle />
@@ -58,12 +63,20 @@ const ConfirmationMood = () => {
         </div>
       )}
       <Calendar />
-      <Button
-        onClick={() => navigate('/home')}
-        className="mt-8"
-      >
-        {t.backToHome}
-      </Button>
+      <div className="flex space-x-4 mt-8">
+        <Button
+          onClick={() => navigate('/home')}
+          className="bg-mooody-green hover:bg-mooody-dark-green text-white"
+        >
+          {t.backToHome}
+        </Button>
+        <Button
+          onClick={handleMeditate}
+          className="bg-mooody-green hover:bg-mooody-dark-green text-white"
+        >
+          {t.meditate || 'Meditate'}
+        </Button>
+      </div>
     </div>
   );
 };
