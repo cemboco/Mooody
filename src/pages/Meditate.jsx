@@ -85,14 +85,16 @@ const Meditate = () => {
         <Home className="h-4 w-4" />
       </Button>
       
-      <div className="w-1/2 p-8 flex flex-col items-center justify-center">
-        <p className="text-lg leading-relaxed mb-4">{t.meditationLeftSideText}</p>
-        <p className="text-lg leading-relaxed italic">"{t.meditationQuote}"<br />— Rumi</p>
+      <div className="flex-1 flex items-center justify-center p-8">
+        <div className="max-w-md">
+          <p className="text-lg leading-relaxed mb-4">{t.meditationLeftSideText}</p>
+          <p className="text-lg leading-relaxed italic">"{t.meditationQuote}"<br />— Rumi</p>
+        </div>
       </div>
 
-      <Separator orientation="vertical" className="h-[10cm] bg-blue-900" />
+      <Separator orientation="vertical" className="h-[80vh] self-center bg-blue-900" />
 
-      <div className="w-1/2 flex flex-col items-center justify-center p-8">
+      <div className="flex-1 flex flex-col items-center justify-center p-8">
         <h1 className="text-4xl font-bold mb-6">{t.meditateTitle}</h1>
         <p className="text-xl mb-8">{t.meditateDescription}</p>
         <Select onValueChange={handleDurationChange} defaultValue="300">
