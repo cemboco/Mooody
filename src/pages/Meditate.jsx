@@ -79,6 +79,11 @@ const Meditate = () => {
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
+  const meditationText = {
+    en: "Meditation is a powerful practice for cultivating emotional awareness and mindfulness. By regularly meditating, individuals can develop a deeper understanding of their feelings, learn to observe them without judgment, and manage them more effectively. Here are some reasons why meditation is especially beneficial for becoming more aware of one's emotions",
+    de: "Meditation ist eine kraftvolle Praxis zur Förderung emotionaler Bewusstheit und Achtsamkeit. Durch regelmäßiges Meditieren können Individuen ein tieferes Verständnis ihrer Gefühle entwickeln, lernen, sie ohne Urteil zu beobachten und sie effektiver zu handhaben. Hier sind einige Gründe, warum Meditation besonders vorteilhaft ist, um sich seiner Emotionen bewusster zu werden"
+  };
+
   return (
     <div className="min-h-screen w-full flex bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
@@ -89,7 +94,7 @@ const Meditate = () => {
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="max-w-md">
           <p className="text-lg leading-relaxed mb-4">
-            Meditation is a powerful practice for cultivating emotional awareness and mindfulness. By regularly meditating, individuals can develop a deeper understanding of their feelings, learn to observe them without judgment, and manage them more effectively. Here are some reasons why meditation is especially beneficial for becoming more aware of one's emotions
+            {meditationText[language]}
           </p>
           <p className="text-lg leading-relaxed italic">"{t.meditationQuote}"<br />— Rumi</p>
         </div>
