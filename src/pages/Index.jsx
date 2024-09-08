@@ -34,13 +34,7 @@ const Index = () => {
         <div className="container text-center max-w-4xl relative z-10 px-4 sm:px-6 lg:px-8 mt-16 sm:mt-0">
           <h1 className="mooody-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">MOOODY</h1>
           <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8">{t.subtitle}</p>
-          <div className="flex justify-center space-x-4">
-            <Button 
-              className="bg-white hover:bg-gray-100 text-mooody-green text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-colors shadow-lg relative z-20"
-              onClick={() => navigate('/check-in')}
-            >
-              {t.beforeJumpingIn}
-            </Button>
+          <div className="flex justify-center">
             <Button 
               className="bg-mooody-green hover:bg-mooody-dark-green text-white text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-colors shadow-lg relative z-20"
               onClick={() => navigate('/mood')}
