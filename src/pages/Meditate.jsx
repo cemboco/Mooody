@@ -20,7 +20,6 @@ const Meditate = () => {
   const [selectedAudio, setSelectedAudio] = useState('/wandering.mp3');
   const audioRef = useRef(null);
   const bellAudioRef = useRef(null);
-  const [selectedBenefit, setSelectedBenefit] = useState(null);
 
   const audioOptions = [
     { value: '/birds-in-forest-on-sunny-day-14444.mp3', label: 'Birds' },
@@ -28,23 +27,6 @@ const Meditate = () => {
     { value: '/waves-53479.mp3', label: 'Waves' },
     { value: '/wind-artificial-18750.mp3', label: 'Wind' },
   ];
-
-  const meditationBenefits = {
-    en: [
-      "Promotes Mindfulness and Presence",
-      "Reduces Emotional Reactivity",
-      "Increases Emotional Regulation",
-      "Encourages Self-Compassion",
-      "Develops a Deeper Understanding of Emotions"
-    ],
-    de: [
-      "Fördert Achtsamkeit und Präsenz",
-      "Reduziert emotionale Reaktivität",
-      "Erhöht die emotionale Regulierung",
-      "Fördert Selbstmitgefühl",
-      "Entwickelt ein tieferes Verständnis von Emotionen"
-    ]
-  };
 
   useEffect(() => {
     let timer;
@@ -109,29 +91,11 @@ const Meditate = () => {
         <Home className="h-4 w-4" />
       </Button>
       
-      <div className="flex-1 flex flex-col items-center justify-center p-8">
+      <div className="flex-1 flex items-center justify-center p-8">
         <div className="max-w-md">
           <p className="text-lg leading-relaxed mb-4">
             {meditationText[language]}
           </p>
-          <ul className="list-disc pl-5 mb-4">
-            {meditationBenefits[language].map((benefit, index) => (
-              <li key={index} className="mb-2">
-                <button
-                  className="text-left hover:text-blue-600 focus:outline-none focus:text-blue-600"
-                  onClick={() => setSelectedBenefit(index)}
-                >
-                  {benefit}
-                </button>
-              </li>
-            ))}
-          </ul>
-          {selectedBenefit !== null && (
-            <p className="text-sm italic mb-4">
-              {/* Add more detailed explanations for each benefit here */}
-              {t[`meditationBenefitDetail${selectedBenefit}`]}
-            </p>
-          )}
           <p className="text-lg leading-relaxed italic">"{t.meditationQuote}"<br />— Rumi</p>
         </div>
       </div>
