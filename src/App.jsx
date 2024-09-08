@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { navItems } from "./nav-items";
 import { LanguageProvider } from './contexts/LanguageContext';
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Mood from './pages/Mood';
 import SelectedMood from './pages/SelectedMood';
 import ConfirmationMood from './pages/ConfirmationMood';
@@ -15,7 +15,6 @@ import Login from './pages/Login';
 import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import HomeButton from './components/HomeButton';
-import { useAuth } from './contexts/AuthContext';
 
 const queryClient = new QueryClient();
 
@@ -24,7 +23,7 @@ const ProtectedRoute = ({ children }) => {
   return isLoggedIn ? children : <Navigate to="/login" />;
 };
 
-const App = () => {
+const AppContent = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audio] = useState(new Audio('/padsound-meditation-21384.mp3'));
   const { login } = useAuth();
@@ -50,32 +49,38 @@ const App = () => {
   };
 
   return (
+    <BrowserRouter>
+      <VolumeControl isPlaying={isPlaying} toggleAudio={toggleAudio} />
+      <HomeButton />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/home" element={<Index />} />
+        <Route path="/login" element={<Login onLogin={login} />} />
+        {navItems.map(({ to, page }) => (
+          <Route key={to} path={to} element={page} />
+        ))}
+        <Route path="/mood" element={<Mood />} />
+        <Route path="/selected-mood" element={<SelectedMood />} />
+        <Route path="/confirmation-mood" element={
+          <ProtectedRoute>
+            <ConfirmationMood />
+          </ProtectedRoute>
+        } />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/meditate" element={<Meditate />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+const App = () => {
+  return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <LanguageProvider>
           <TooltipProvider>
             <Toaster />
-            <BrowserRouter>
-              <VolumeControl isPlaying={isPlaying} toggleAudio={toggleAudio} />
-              <HomeButton />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/home" element={<Index />} />
-                <Route path="/login" element={<Login onLogin={login} />} />
-                {navItems.map(({ to, page }) => (
-                  <Route key={to} path={to} element={page} />
-                ))}
-                <Route path="/mood" element={<Mood />} />
-                <Route path="/selected-mood" element={<SelectedMood />} />
-                <Route path="/confirmation-mood" element={
-                  <ProtectedRoute>
-                    <ConfirmationMood />
-                  </ProtectedRoute>
-                } />
-                <Route path="/calendar" element={<Calendar />} />
-                <Route path="/meditate" element={<Meditate />} />
-              </Routes>
-            </BrowserRouter>
+            <AppContent />
           </TooltipProvider>
         </LanguageProvider>
       </AuthProvider>
