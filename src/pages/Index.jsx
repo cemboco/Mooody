@@ -4,14 +4,16 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
-import { Home } from 'lucide-react';
+import { Home, LogIn } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useSupabaseAuth } from '../integrations/supabase';
 
 const Index = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const navigate = useNavigate();
   const [animate, setAnimate] = useState(false);
+  const { session } = useSupabaseAuth();
 
   useEffect(() => {
     setAnimate(true);
@@ -51,14 +53,26 @@ const Index = () => {
       `}</style>
       <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50">
         <LanguageToggle />
-        <Button
-          onClick={() => navigate('/home')}
-          variant="outline"
-          size="icon"
-          className="ml-auto"
-        >
-          <Home className="h-4 w-4" />
-        </Button>
+        <div className="flex items-center">
+          {!session && (
+            <Button
+              onClick={() => navigate('/signup')}
+              variant="outline"
+              size="sm"
+              className="mr-2"
+            >
+              <LogIn className="h-4 w-4 mr-2" />
+              {t.login}
+            </Button>
+          )}
+          <Button
+            onClick={() => navigate('/home')}
+            variant="outline"
+            size="icon"
+          >
+            <Home className="h-4 w-4" />
+          </Button>
+        </div>
       </div>
       <div className="relative w-full min-h-screen flex flex-col items-center justify-center p-4">
         <MoodBalls showText={false} showHappyText={false} />
