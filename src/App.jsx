@@ -11,8 +11,6 @@ import Calendar from './components/Calendar';
 import CheckIn from './pages/CheckIn';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
-import React from 'react';
-import WanderingSound from './components/WanderingSound';
 
 const queryClient = new QueryClient();
 
@@ -22,7 +20,6 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <BrowserRouter>
-          <WanderingSound />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/check-in" element={<CheckIn />} />
