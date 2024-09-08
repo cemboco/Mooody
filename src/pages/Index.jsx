@@ -36,8 +36,11 @@ const Index = () => {
           <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8">{t.subtitle}</p>
           <div className="flex justify-center">
             <Button 
-              className="bg-mooody-green hover:bg-mooody-dark-green text-white text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-colors shadow-lg relative z-20"
+              className="bg-mooody-green hover:bg-mooody-dark-green text-white text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
               onClick={() => navigate('/mood')}
+              style={{
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
+              }}
             >
               {t.notificationButton}
             </Button>
