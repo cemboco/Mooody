@@ -21,11 +21,13 @@ const SelectedMood = () => {
   const handleSubmit = () => {
     const currentInput = userInputs[currentEmotionIndex];
     if (currentInput && currentInput.trim()) {
-      console.log('User input:', currentInput);
+      console.log('User input:', currentInput); // Log user input to console
       
       if (currentEmotionIndex < selectedEmotions.length - 1) {
+        // Move to the next emotion
         setCurrentEmotionIndex(prevIndex => prevIndex + 1);
       } else {
+        // Navigate to ConfirmationMood with all emotions and inputs
         const currentDate = new Date().toISOString();
         navigate('/confirmation-mood', {
           state: {
