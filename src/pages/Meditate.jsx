@@ -18,6 +18,7 @@ const Meditate = () => {
   const [timeLeft, setTimeLeft] = useState(duration);
   const [volume, setVolume] = useState(0.5);
   const [selectedAudio, setSelectedAudio] = useState('/wandering.mp3');
+  const [selectedBenefit, setSelectedBenefit] = useState(null);
   const audioRef = useRef(null);
   const bellAudioRef = useRef(null);
 
@@ -26,6 +27,14 @@ const Meditate = () => {
     { value: '/wandering.mp3', label: 'Wander' },
     { value: '/waves-53479.mp3', label: 'Waves' },
     { value: '/wind-artificial-18750.mp3', label: 'Wind' },
+  ];
+
+  const meditationBenefits = [
+    { key: 'mindfulness', label: t.meditationBenefitMindfulness },
+    { key: 'emotionalReactivity', label: t.meditationBenefitEmotionalReactivity },
+    { key: 'emotionalRegulation', label: t.meditationBenefitEmotionalRegulation },
+    { key: 'selfCompassion', label: t.meditationBenefitSelfCompassion },
+    { key: 'emotionalUnderstanding', label: t.meditationBenefitEmotionalUnderstanding },
   ];
 
   useEffect(() => {
@@ -79,6 +88,10 @@ const Meditate = () => {
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
+  const handleBenefitClick = (benefit) => {
+    setSelectedBenefit(benefit === selectedBenefit ? null : benefit);
+  };
+
   return (
     <div className="min-h-screen w-full flex bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
@@ -86,10 +99,26 @@ const Meditate = () => {
         <Home className="h-4 w-4" />
       </Button>
       
-      <div className="flex-1 flex items-center justify-center p-8">
+      <div className="flex-1 flex flex-col items-center justify-center p-8 overflow-y-auto">
         <div className="max-w-md">
           <p className="text-lg leading-relaxed mb-4">{t.meditationLeftSideText}</p>
-          <p className="text-lg leading-relaxed italic">"{t.meditationQuote}"<br />— Rumi</p>
+          <ul className="list-none space-y-2">
+            {meditationBenefits.map((benefit) => (
+              <li key={benefit.key}>
+                <Button
+                  variant="link"
+                  className="text-left p-0 h-auto"
+                  onClick={() => handleBenefitClick(benefit.key)}
+                >
+                  {benefit.label}
+                </Button>
+                {selectedBenefit === benefit.key && (
+                  <p className="mt-2 text-sm">{t[`meditationBenefit${benefit.key}Description`]}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+          <p className="text-lg leading-relaxed italic mt-4">"{t.meditationQuote}"<br />— Rumi</p>
         </div>
       </div>
 
