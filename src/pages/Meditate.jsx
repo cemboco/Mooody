@@ -14,10 +14,19 @@ const Meditate = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const [isMeditating, setIsMeditating] = useState(false);
-  const [duration, setDuration] = useState(300); // Default to 5 minutes (300 seconds)
+  const [duration, setDuration] = useState(300);
   const [timeLeft, setTimeLeft] = useState(duration);
   const [volume, setVolume] = useState(0.5);
+  const [selectedAudio, setSelectedAudio] = useState('/wandering-6394.mp3');
   const audioRef = useRef(null);
+
+  const audioOptions = [
+    { value: '/birds-in-forest-on-sunny-day-14444.mp3', label: 'Birds' },
+    { value: '/lluvia-rain-110426.mp3', label: 'Rain' },
+    { value: '/wandering-6394.mp3', label: 'Wander' },
+    { value: '/waves-53479.mp3', label: 'Waves' },
+    { value: '/wind-artificial-18750.mp3', label: 'Wind' },
+  ];
 
   useEffect(() => {
     let timer;
@@ -67,6 +76,16 @@ const Meditate = () => {
     setVolume(newVolume);
     if (audioRef.current) {
       audioRef.current.volume = newVolume;
+    }
+  };
+
+  const handleAudioChange = (value) => {
+    setSelectedAudio(value);
+    if (audioRef.current) {
+      audioRef.current.src = value;
+      if (isMeditating) {
+        audioRef.current.play();
+      }
     }
   };
 
@@ -124,6 +143,20 @@ const Meditate = () => {
             </SelectContent>
           </Select>
         </div>
+        <div className="mb-4">
+          <Select onValueChange={handleAudioChange} defaultValue={selectedAudio}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select audio" />
+            </SelectTrigger>
+            <SelectContent>
+              {audioOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
         <div className="text-4xl font-bold mb-8">{formatTime(timeLeft)}</div>
         <div className="flex justify-center space-x-4 mb-8">
           <Button
@@ -163,7 +196,7 @@ const Meditate = () => {
           {t.backToMood}
         </Button>
       </div>
-      <audio ref={audioRef} src="/wandering-6394.mp3" loop />
+      <audio ref={audioRef} src={selectedAudio} loop />
     </div>
   );
 };
