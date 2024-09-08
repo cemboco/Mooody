@@ -4,7 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { useNavigate } from 'react-router-dom';
-import { Play, Square, Volume2 } from 'lucide-react';
+import { Play, Square, Volume2, Home } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -87,6 +87,14 @@ const Meditate = () => {
   return (
     <div className="min-h-screen w-full flex bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
+      <Button
+        onClick={() => navigate('/home')}
+        variant="outline"
+        size="sm"
+        className="fixed top-4 right-4 z-[60] bg-white hover:bg-black hover:text-white transition-colors"
+      >
+        <Home className="h-4 w-4" />
+      </Button>
       
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="max-w-md">
