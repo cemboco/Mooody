@@ -66,9 +66,14 @@ const Meditate = () => {
       </Button>
       
       {/* Left side content */}
-      <div className="w-1/2 p-8 flex items-center justify-center">
-        <p className="text-lg leading-relaxed">
+      <div className="w-1/2 p-8 flex flex-col items-center justify-center">
+        <p className="text-lg leading-relaxed mb-4">
           {t.meditationLeftSideText}
+        </p>
+        <p className="text-lg leading-relaxed italic">
+          "{t.meditationQuote}"
+          <br />
+          — Rumi
         </p>
       </div>
 
