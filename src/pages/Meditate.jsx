@@ -88,7 +88,9 @@ const Meditate = () => {
       
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="max-w-md">
-          <p className="text-lg leading-relaxed mb-4">{t.meditationLeftSideText}</p>
+          <p className="text-lg leading-relaxed mb-4">
+            Meditation is a powerful practice for cultivating emotional awareness and mindfulness. By regularly meditating, individuals can develop a deeper understanding of their feelings, learn to observe them without judgment, and manage them more effectively. Here are some reasons why meditation is especially beneficial for becoming more aware of one's emotions
+          </p>
           <p className="text-lg leading-relaxed italic">"{t.meditationQuote}"<br />— Rumi</p>
         </div>
       </div>
