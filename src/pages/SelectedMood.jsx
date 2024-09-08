@@ -46,8 +46,7 @@ const SelectedMood = () => {
   };
 
   const handleMeditate = () => {
-    console.log('Meditate button clicked');
-    // Add meditation feature logic here
+    navigate('/meditate');
   };
 
   return (
@@ -83,7 +82,7 @@ const SelectedMood = () => {
             onClick={handleMeditate}
             className="w-full mb-4 bg-mooody-green hover:bg-mooody-dark-green text-white"
           >
-            Meditate
+            {t.meditate || 'Meditate'}
           </Button>
           <Button
             onClick={handleSubmit}

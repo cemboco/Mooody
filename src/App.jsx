@@ -10,6 +10,7 @@ import ConfirmationMood from './pages/ConfirmationMood';
 import Calendar from './components/Calendar';
 import CheckIn from './pages/CheckIn';
 import Index from './pages/Index';
+import Meditate from './pages/Meditate';
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/selected-mood" element={<SelectedMood />} />
             <Route path="/confirmation-mood" element={<ConfirmationMood />} />
             <Route path="/calendar" element={<Calendar />} />
+            <Route path="/meditate" element={<Meditate />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
