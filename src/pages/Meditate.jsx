@@ -97,7 +97,7 @@ const Meditate = () => {
 
       <div className="flex-1 flex flex-col items-center justify-center p-8">
         <h1 className="text-4xl font-bold mb-6">{t.meditateTitle}</h1>
-        <p className="text-xl mb-8">Take a moment to breathe</p>
+        <p className="text-xl mb-8">{t.meditateDescription}</p>
         <Select onValueChange={handleDurationChange} defaultValue="300">
           <SelectTrigger className="w-[180px] mb-4">
             <SelectValue placeholder="Select duration" />
