@@ -20,7 +20,8 @@ const App = () => (
         <Toaster />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<CheckIn />} />
+            <Route path="/" element={<Index />} />
+            <Route path="/check-in" element={<CheckIn />} />
             <Route path="/home" element={<Index />} />
             {navItems.map(({ to, page }) => (
               <Route key={to} path={to} element={page} />
