@@ -1,21 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
-import { Home } from 'lucide-react';
+import { Home, Volume2, VolumeX } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const Index = () => {
+const Index = ({ isSoundOn, setIsSoundOn }) => {
   const { language } = useLanguage();
   const t = translations[language];
   const navigate = useNavigate();
   const [animate, setAnimate] = useState(false);
+  const audioRef = useRef(null);
 
   useEffect(() => {
     setAnimate(true);
-  }, []);
+    if (isSoundOn) {
+      audioRef.current.play();
+    }
+  }, [isSoundOn]);
+
+  const toggleSound = () => {
+    setIsSoundOn(!isSoundOn);
+    if (isSoundOn) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+  };
 
   const englishText = "Your feelings are more than fleeting moments of emotion; they are the whispers of your inner self, guiding you toward your truest path. In a world that often encourages us to think, analyze, and rationalize, we sometimes forget to pause and listen to the quiet voice of our hearts. But your feelings—whether they are of joy, sadness, fear, or excitement—are powerful messengers, each carrying a truth that your mind alone cannot comprehend.";
 
@@ -52,6 +65,14 @@ const Index = () => {
       <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50">
         <LanguageToggle />
         <Button
+          onClick={toggleSound}
+          variant="outline"
+          size="icon"
+          className="ml-2"
+        >
+          {isSoundOn ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+        </Button>
+        <Button
           onClick={() => navigate('/home')}
           variant="outline"
           size="icon"
@@ -87,6 +108,7 @@ const Index = () => {
           "This app does not replace professional psychological or medical advice. For serious mental health issues or crises, please consult a specialist or therapist."
         }
       </div>
+      <audio ref={audioRef} src="/padsound-meditation-21384.mp3" loop />
     </div>
   );
 };
