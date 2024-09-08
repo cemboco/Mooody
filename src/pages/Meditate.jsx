@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
 import { useNavigate } from 'react-router-dom';
-import { Home, Play, Square } from 'lucide-react';
+import { Home, Play, Square, Volume2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -14,6 +15,8 @@ const Meditate = () => {
   const [isMeditating, setIsMeditating] = useState(false);
   const [duration, setDuration] = useState(300); // Default to 5 minutes (300 seconds)
   const [timeLeft, setTimeLeft] = useState(duration);
+  const [volume, setVolume] = useState(0.5);
+  const audioRef = useRef(null);
 
   useEffect(() => {
     let timer;
@@ -22,7 +25,7 @@ const Meditate = () => {
         setTimeLeft((prevTime) => prevTime - 1);
       }, 1000);
     } else if (timeLeft === 0) {
-      setIsMeditating(false);
+      handleStopMeditation();
     }
     return () => clearInterval(timer);
   }, [isMeditating, timeLeft]);
@@ -34,17 +37,32 @@ const Meditate = () => {
   const handleStartMeditation = () => {
     setIsMeditating(true);
     setTimeLeft(duration);
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
   };
 
   const handleStopMeditation = () => {
     setIsMeditating(false);
     setTimeLeft(duration);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
   };
 
   const handleDurationChange = (value) => {
     const newDuration = parseInt(value, 10);
     setDuration(newDuration);
     setTimeLeft(newDuration);
+  };
+
+  const handleVolumeChange = (value) => {
+    const newVolume = value[0];
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
   };
 
   const formatTime = (seconds) => {
@@ -101,6 +119,16 @@ const Meditate = () => {
             {t.stopMeditation || 'Stop'}
           </Button>
         </div>
+        <div className="flex items-center justify-center space-x-2 mb-8">
+          <Volume2 className="h-4 w-4" />
+          <Slider
+            value={[volume]}
+            onValueChange={handleVolumeChange}
+            max={1}
+            step={0.01}
+            className="w-32"
+          />
+        </div>
         {isMeditating && (
           <p className="text-lg mb-8">{t.meditationInProgress || 'Meditation in progress...'}</p>
         )}
@@ -111,6 +139,10 @@ const Meditate = () => {
       >
         {t.backToMood || 'Back to Mood'}
       </Button>
+      <audio ref={audioRef} loop>
+        <source src="/path/to/zen-music.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
     </div>
   );
 };
