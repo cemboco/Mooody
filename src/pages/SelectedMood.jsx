@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Home, Check, ArrowLeft } from 'lucide-react';
+import { Check, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -53,14 +53,6 @@ const SelectedMood = () => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
-      <Button
-        onClick={() => navigate('/home')}
-        className="fixed top-4 right-4 z-[60]"
-        variant="outline"
-        size="icon"
-      >
-        <Home className="h-4 w-4" />
-      </Button>
       <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16">
         <h2 className="text-2xl font-bold mb-4 text-center">
           {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
