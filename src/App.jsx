@@ -12,6 +12,7 @@ import Index from './pages/Index';
 import Meditate from './pages/Meditate';
 import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
+import HomeButton from './components/HomeButton';
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => {
           <Toaster />
           <BrowserRouter>
             <VolumeControl isPlaying={isPlaying} toggleAudio={toggleAudio} />
+            <HomeButton />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/home" element={<Index />} />
