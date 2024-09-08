@@ -79,7 +79,9 @@ const Meditate = () => {
       </div>
 
       {/* Vertical Divider */}
-      <Separator orientation="vertical" className="h-[10cm] self-center" />
+      <div className="flex items-center">
+        <Separator orientation="vertical" className="h-[10cm] bg-blue-900" />
+      </div>
 
       {/* Right side with meditation controls */}
       <div className="w-1/2 flex flex-col items-center justify-center p-8">
