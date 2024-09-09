@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +15,22 @@ const Login = ({ onLogin }) => {
   const t = translations[language];
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        console.log('User signed in:', session.user);
+        onLogin();
+        navigate('/home');
+      }
+    });
+
+    return () => {
+      if (authListener && authListener.unsubscribe) {
+        authListener.unsubscribe();
+      }
+    };
+  }, [navigate, onLogin]);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -50,12 +66,13 @@ const Login = ({ onLogin }) => {
 
   const loginWithGoogle = async () => {
     try {
-      const { data, error } = await supabase.auth.signInWithOAuth({
+      const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
+        options: {
+          redirectTo: window.location.origin + '/home'
+        }
       });
       if (error) throw error;
-      onLogin();
-      navigate('/home');
     } catch (error) {
       console.error('Error logging in with Google:', error.message);
     }
