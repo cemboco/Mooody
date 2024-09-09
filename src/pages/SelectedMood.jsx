@@ -55,16 +55,12 @@ const SelectedMood = () => {
     navigate('/meditate');
   };
 
-  // Safely access the translation
-  const emotionTranslation = t[currentEmotion] || currentEmotion;
-  const questionText = t.whatsMakingYouFeel ? t.whatsMakingYouFeel.replace('[emotion]', emotionTranslation) : `What's making you feel ${emotionTranslation}?`;
-
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
       <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16">
         <h2 className="text-2xl font-bold mb-4 text-center">
-          {questionText}
+          {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
         </h2>
         <Textarea
           value={userInputs[currentEmotionIndex] || ''}
