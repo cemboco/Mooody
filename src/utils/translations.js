@@ -87,7 +87,11 @@ export const translations = {
     logout: 'Abmelden',
     username: 'Benutzername',
     password: 'Passwort',
-    loginButton: 'Anmelden'
+    loginButton: 'Anmelden',
+    confirmDelete: 'Möchtest du diesen Eintrag wirklich löschen?',
+    save: 'Speichern',
+    edit: 'Bearbeiten',
+    delete: 'Löschen'
   },
   en: {
     title: 'Moody',
@@ -177,6 +181,10 @@ export const translations = {
     logout: 'Logout',
     username: 'Username',
     password: 'Password',
-    loginButton: 'Login'
+    loginButton: 'Login',
+    confirmDelete: 'Are you sure you want to delete this entry?',
+    save: 'Save',
+    edit: 'Edit',
+    delete: 'Delete'
   }
 };
