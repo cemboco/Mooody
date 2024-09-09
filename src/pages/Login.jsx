@@ -5,9 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient('https://mypxifpqgzyhhecibskk.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im15cHhpZnBxZ3p5aGhlY2lic2trIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjU4MTM4ODYsImV4cCI6MjA0MTM4OTg4Nn0.6h8ABP7_V4FAap0RJOC9-QxyqDtRgwDYblmkDtLef4c');
+import { supabase } from '../utils/supabaseClient';
 
 const Login = ({ onLogin }) => {
   const navigate = useNavigate();
@@ -35,23 +33,23 @@ const Login = ({ onLogin }) => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      let { data, error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email: email,
         password: password
       });
       if (error) throw error;
       console.log('Sign up successful:', data);
-      onLogin();
-      navigate('/home');
+      alert(t.checkEmailForLink);
     } catch (error) {
       console.error('Error signing up:', error.message);
+      alert(error.message);
     }
   };
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      let { data, error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password
       });
@@ -61,6 +59,7 @@ const Login = ({ onLogin }) => {
       navigate('/home');
     } catch (error) {
       console.error('Error signing in:', error.message);
+      alert(error.message);
     }
   };
 
@@ -69,12 +68,13 @@ const Login = ({ onLogin }) => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: window.location.origin + '/home'
+          redirectTo: `${window.location.origin}/home`
         }
       });
       if (error) throw error;
     } catch (error) {
       console.error('Error logging in with Google:', error.message);
+      alert(error.message);
     }
   };
 
