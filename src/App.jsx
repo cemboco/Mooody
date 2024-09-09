@@ -1,8 +1,5 @@
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { navItems } from "./nav-items";
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Mood from './pages/Mood';
@@ -12,7 +9,6 @@ import Calendar from './components/Calendar';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
 import Login from './pages/Login';
-import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import HomeButton from './components/HomeButton';
 import { createClient } from '@supabase/supabase-js';
@@ -77,9 +73,6 @@ const AppContent = () => {
         <Route path="/" element={<Index />} />
         <Route path="/home" element={<Index />} />
         <Route path="/login" element={<Login onLogin={login} />} />
-        {navItems.map(({ to, page }) => (
-          <Route key={to} path={to} element={page} />
-        ))}
         <Route path="/mood" element={<Mood />} />
         <Route path="/selected-mood" element={<SelectedMood />} />
         <Route path="/confirmation-mood" element={
