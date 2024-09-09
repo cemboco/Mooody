@@ -5,18 +5,13 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Home } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
-import { useSupabaseAuth } from '../contexts/SupabaseAuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const HomeButton = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
-  const { user, signOut } = useSupabaseAuth();
-
-  const handleLogout = async () => {
-    await signOut();
-    navigate('/home');
-  };
+  const { isLoggedIn, logout } = useAuth();
 
   return (
     <DropdownMenu>
@@ -27,10 +22,10 @@ const HomeButton = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem onClick={() => navigate('/home')}>{t.home}</DropdownMenuItem>
-        {user ? (
+        {isLoggedIn ? (
           <>
             <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
-            <DropdownMenuItem onClick={handleLogout}>{t.logout}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => { logout(); navigate('/home'); }}>{t.logout}</DropdownMenuItem>
           </>
         ) : (
           <DropdownMenuItem onClick={() => navigate('/login')}>{t.login}</DropdownMenuItem>
