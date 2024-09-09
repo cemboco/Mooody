@@ -93,10 +93,10 @@ const ConfirmationMood = () => {
       </Button>
       <h1 className="text-3xl font-bold mb-8">{t.entries}</h1>
       <div className="w-full max-w-md">
-        {entries.map(({ date }) => (
+        {entries.map(({ date, moods }) => (
           <Button
             key={date}
-            onClick={() => handleDateClick({ date, moods: entries.find(e => e.date === date).moods })}
+            onClick={() => handleDateClick({ date, moods })}
             className="w-full mb-2 text-left justify-start"
             variant="outline"
           >

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,25 +18,30 @@ const SelectedMood = () => {
 
   const currentEmotion = selectedEmotions[currentEmotionIndex] || t.defaultMood;
 
-  const handleSubmit = () => {
-    const currentInput = userInputs[currentEmotionIndex];
-    if (currentInput && currentInput.trim()) {
-      console.log('User input:', currentInput); // Log user input to console
+  useEffect(() => {
+    const updateEntry = () => {
+      const currentDate = new Date().toISOString().split('T')[0];
+      const existingEntries = JSON.parse(localStorage.getItem('moodEntries') || '{}');
       
-      if (currentEmotionIndex < selectedEmotions.length - 1) {
-        // Move to the next emotion
-        setCurrentEmotionIndex(prevIndex => prevIndex + 1);
-      } else {
-        // Navigate to ConfirmationMood with all emotions and inputs
-        const currentDate = new Date().toISOString();
-        navigate('/confirmation-mood', {
-          state: {
-            date: currentDate,
-            emotions: selectedEmotions,
-            texts: userInputs,
-          },
-        });
-      }
+      const updatedEntries = {
+        ...existingEntries,
+        [currentDate]: selectedEmotions.map((emotion, index) => ({
+          emotion,
+          text: userInputs[index] || ''
+        }))
+      };
+
+      localStorage.setItem('moodEntries', JSON.stringify(updatedEntries));
+    };
+
+    updateEntry();
+  }, [userInputs, selectedEmotions]);
+
+  const handleSubmit = () => {
+    if (currentEmotionIndex < selectedEmotions.length - 1) {
+      setCurrentEmotionIndex(prevIndex => prevIndex + 1);
+    } else {
+      navigate('/confirmation-mood');
     }
   };
 
