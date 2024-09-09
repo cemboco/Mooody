@@ -65,13 +65,14 @@ const Login = ({ onLogin }) => {
 
   const loginWithGoogle = async () => {
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/home`
         }
       });
       if (error) throw error;
+      console.log('Google sign-in initiated:', data);
     } catch (error) {
       console.error('Error logging in with Google:', error.message);
       alert(error.message);
