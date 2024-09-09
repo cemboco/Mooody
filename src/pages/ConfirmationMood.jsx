@@ -8,8 +8,6 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import Calendar from '../components/Calendar';
-import { format, parseISO } from 'date-fns';
-import { de, enUS } from 'date-fns/locale';
 
 const ConfirmationMood = () => {
   const navigate = useNavigate();
@@ -31,8 +29,8 @@ const ConfirmationMood = () => {
   }, []);
 
   const formatDate = (dateString) => {
-    const date = parseISO(dateString);
-    return format(date, 'PPPP', { locale: language === 'de' ? de : enUS });
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(language === 'de' ? 'de-DE' : 'en-US', options);
   };
 
   const handleDateClick = (entry) => {
