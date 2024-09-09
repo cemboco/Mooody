@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import HomeButton from './components/HomeButton';
+import { createClient } from '@supabase/supabase-js';
 
 const queryClient = new QueryClient();
 
