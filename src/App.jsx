@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { navItems } from "./nav-items";
 import { LanguageProvider } from './contexts/LanguageContext';
-import { SupabaseAuthProvider, useSupabaseAuth } from './contexts/SupabaseAuthContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Mood from './pages/Mood';
 import SelectedMood from './pages/SelectedMood';
 import ConfirmationMood from './pages/ConfirmationMood';
@@ -19,19 +19,14 @@ import HomeButton from './components/HomeButton';
 const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useSupabaseAuth();
-  
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  
-  return user ? children : <Navigate to="/login" />;
+  const { isLoggedIn } = useAuth();
+  return isLoggedIn ? children : <Navigate to="/login" />;
 };
 
 const AppContent = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audio] = useState(new Audio('/padsound-meditation-21384.mp3'));
-  const { user } = useSupabaseAuth();
+  const { login } = useAuth();
 
   useEffect(() => {
     audio.loop = true;
@@ -60,7 +55,7 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/home" element={<Index />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login onLogin={login} />} />
         {navItems.map(({ to, page }) => (
           <Route key={to} path={to} element={page} />
         ))}
@@ -81,14 +76,14 @@ const AppContent = () => {
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <SupabaseAuthProvider>
+      <AuthProvider>
         <LanguageProvider>
           <TooltipProvider>
             <Toaster />
             <AppContent />
           </TooltipProvider>
         </LanguageProvider>
-      </SupabaseAuthProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 };
