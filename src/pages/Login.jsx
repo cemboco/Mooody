@@ -13,15 +13,38 @@ const Login = ({ onLogin }) => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    // In a real application, you would validate the credentials here
-    if (username && password) {
+    try {
+      let { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password
+      });
+      if (error) throw error;
+      console.log('Sign up successful:', data);
       onLogin();
       navigate('/home');
+    } catch (error) {
+      console.error('Error signing up:', error.message);
+    }
+  };
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      let { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+      if (error) throw error;
+      console.log('Sign in successful:', data);
+      onLogin();
+      navigate('/home');
+    } catch (error) {
+      console.error('Error signing in:', error.message);
     }
   };
 
@@ -43,12 +66,12 @@ const Login = ({ onLogin }) => {
       <LanguageToggle />
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
         <h1 className="text-2xl font-bold mb-6 text-center">{t.login}</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form className="space-y-4">
           <Input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder={t.username}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={t.email || "Email"}
             required
           />
           <Input
@@ -58,8 +81,11 @@ const Login = ({ onLogin }) => {
             placeholder={t.password}
             required
           />
-          <Button type="submit" className="w-full">
+          <Button onClick={handleSignIn} className="w-full">
             {t.loginButton}
+          </Button>
+          <Button onClick={handleSignUp} className="w-full">
+            {t.signUpButton || "Sign Up"}
           </Button>
         </form>
         <div className="mt-4">
