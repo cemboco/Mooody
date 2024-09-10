@@ -19,7 +19,7 @@ const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
-  return isLoggedIn ? children : <Navigate to="/home" />;
+  return isLoggedIn ? children : <Navigate to="/confirmation-mood" />;
 };
 
 const AppContent = () => {
@@ -59,11 +59,7 @@ const AppContent = () => {
         ))}
         <Route path="/mood" element={<Mood />} />
         <Route path="/selected-mood" element={<SelectedMood />} />
-        <Route path="/confirmation-mood" element={
-          <ProtectedRoute>
-            <ConfirmationMood />
-          </ProtectedRoute>
-        } />
+        <Route path="/confirmation-mood" element={<ConfirmationMood />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/meditate" element={<Meditate />} />
       </Routes>
