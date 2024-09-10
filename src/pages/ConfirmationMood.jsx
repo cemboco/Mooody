@@ -6,6 +6,7 @@ import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import Calendar from '../components/Calendar';
 import { format } from 'date-fns';
+import { de, enUS } from 'date-fns/locale'; // Import both German and English locales
 
 const ConfirmationMood = () => {
   const navigate = useNavigate();
@@ -24,6 +25,9 @@ const ConfirmationMood = () => {
     setSelectedDate(date);
   };
 
+  // Function to get the correct locale based on the language
+  const getLocale = () => language === 'de' ? de : enUS;
+
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-start bg-mooody-yellow text-mooody-green p-4 pt-16">
       <LanguageToggle />
@@ -35,7 +39,9 @@ const ConfirmationMood = () => {
         </div>
         
         <div className="w-full md:w-1/2">
-          <h2 className="text-2xl font-semibold mb-4">{t.entriesForDate} {format(selectedDate, 'PPP', { locale: language === 'de' ? de : enUS })}</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            {t.entriesForDate} {format(selectedDate, 'PPP', { locale: getLocale() })}
+          </h2>
           {entries.length > 0 ? (
             <ul className="space-y-4">
               {entries.map((entry, index) => (
