@@ -155,7 +155,7 @@ const ConfirmationMood = () => {
         </Button>
       </div>
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent>
+        <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>{selectedEntry && (t[selectedEntry.emotion] || selectedEntry.emotion)}</DialogTitle>
           </DialogHeader>
@@ -163,8 +163,9 @@ const ConfirmationMood = () => {
             value={editedText}
             onChange={(e) => setEditedText(e.target.value)}
             rows={4}
+            className="w-full mt-2"
           />
-          <DialogFooter>
+          <DialogFooter className="flex justify-between mt-4">
             <Button onClick={handleDelete} variant="destructive">{t.delete}</Button>
             <Button onClick={handleSave}>{t.save}</Button>
           </DialogFooter>
