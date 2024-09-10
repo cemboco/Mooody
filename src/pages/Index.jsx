@@ -64,7 +64,7 @@ const Index = () => {
         <MoodBalls showText={false} showHappyText={false} />
         <div className="container text-center max-w-4xl relative z-10 px-4 sm:px-6 lg:px-8 mt-16 sm:mt-0">
           <h1 className={`mooody-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 ${animate ? 'fade-in' : 'opacity-0'}`}>MOOODY</h1>
-          <p className={`text-base sm:text-lg md:text-xl mb-6 sm:mb-8 ${animate ? 'shift-from-top' : 'opacity-0'}`}>{t.subtitle}</p>
+          <p className={`font-julius text-base sm:text-lg md:text-xl mb-6 sm:mb-8 ${animate ? 'shift-from-top' : 'opacity-0'}`}>{t.subtitle}</p>
           <div className={`flex justify-center ${animate ? 'fade-in-button' : 'opacity-0'}`}>
             <Button 
               className="bg-mooody-green hover:bg-mooody-dark-green text-white text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1"
