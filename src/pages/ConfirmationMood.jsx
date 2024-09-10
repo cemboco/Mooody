@@ -81,7 +81,7 @@ const ConfirmationMood = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-start bg-mooody-yellow text-mooody-green overflow-hidden p-4">
+    <div className="min-h-screen w-full flex flex-col bg-mooody-yellow text-mooody-green overflow-x-hidden">
       <LanguageToggle />
       <Button
         onClick={() => navigate('/home')}
@@ -91,8 +91,8 @@ const ConfirmationMood = () => {
       >
         <Home className="h-4 w-4" />
       </Button>
-      <h1 className="text-3xl font-bold mb-8">{t.entries}</h1>
-      <div className="w-full max-w-md">
+      <h1 className="text-3xl font-bold mb-8 mt-16 text-center">{t.entries}</h1>
+      <div className="w-full max-w-md mx-auto px-4">
         {entries.map(({ date, moods }) => (
           <Button
             key={date}
@@ -104,16 +104,18 @@ const ConfirmationMood = () => {
           </Button>
         ))}
       </div>
-      <Calendar />
+      <div className="mt-8 w-full max-w-md mx-auto px-4">
+        <Calendar />
+      </div>
       <Button
         onClick={() => navigate('/home')}
-        className="mt-8"
+        className="mt-8 mx-auto mb-8"
       >
         {t.backToHome}
       </Button>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent>
+        <DialogContent className="sm:max-w-[425px] max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>{selectedEntry && formatDate(selectedEntry.date)}</DialogTitle>
           </DialogHeader>
@@ -137,17 +139,17 @@ const ConfirmationMood = () => {
           </DialogDescription>
           <DialogFooter>
             {isEditing ? (
-              <Button onClick={handleSave}>
+              <Button onClick={handleSave} className="w-full">
                 <Save className="h-4 w-4 mr-2" />
                 {t.save}
               </Button>
             ) : (
               <>
-                <Button onClick={handleEdit}>
+                <Button onClick={handleEdit} className="w-full mb-2">
                   <Edit2 className="h-4 w-4 mr-2" />
                   {t.edit}
                 </Button>
-                <Button onClick={handleDelete} variant="destructive">
+                <Button onClick={handleDelete} variant="destructive" className="w-full">
                   <Trash2 className="h-4 w-4 mr-2" />
                   {t.delete}
                 </Button>
