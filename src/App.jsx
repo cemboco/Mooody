@@ -11,7 +11,6 @@ import ConfirmationMood from './pages/ConfirmationMood';
 import Calendar from './components/Calendar';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
-import Login from './pages/Login';
 import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import HomeButton from './components/HomeButton';
@@ -20,7 +19,7 @@ const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
-  return isLoggedIn ? children : <Navigate to="/login" />;
+  return isLoggedIn ? children : <Navigate to="/home" />;
 };
 
 const AppContent = () => {
@@ -55,7 +54,6 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/home" element={<Index />} />
-        <Route path="/login" element={<Login onLogin={login} />} />
         {navItems.map(({ to, page }) => (
           <Route key={to} path={to} element={page} />
         ))}
