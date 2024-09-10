@@ -28,7 +28,7 @@ const HomeButton = () => {
             <DropdownMenuItem onClick={() => { logout(); navigate('/home'); }}>{t.logout}</DropdownMenuItem>
           </>
         ) : (
-          <DropdownMenuItem onClick={() => navigate('/login')}>{t.login}</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
         )}
       </DropdownMenuContent>
     </DropdownMenu>
