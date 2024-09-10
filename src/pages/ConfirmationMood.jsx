@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
@@ -15,6 +17,9 @@ const ConfirmationMood = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [entries, setEntries] = useState({});
   const [allEntries, setAllEntries] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEntry, setSelectedEntry] = useState(null);
+  const [editedText, setEditedText] = useState('');
 
   useEffect(() => {
     const storedEntries = localStorage.getItem('moodEntries');
@@ -22,7 +27,6 @@ const ConfirmationMood = () => {
       const parsedEntries = JSON.parse(storedEntries);
       setEntries(parsedEntries);
       
-      // Convert entries object to sorted array
       const sortedEntries = Object.entries(parsedEntries)
         .sort(([dateA], [dateB]) => new Date(dateB) - new Date(dateA))
         .flatMap(([date, dayEntries]) => 
@@ -40,6 +44,58 @@ const ConfirmationMood = () => {
     return language === 'de' ? de : enUS;
   };
 
+  const handleEntryClick = (entry) => {
+    setSelectedEntry(entry);
+    setEditedText(entry.text);
+    setIsModalOpen(true);
+  };
+
+  const handleSave = () => {
+    const updatedEntries = { ...entries };
+    const dateEntries = updatedEntries[selectedEntry.date];
+    const entryIndex = dateEntries.findIndex(e => e.emotion === selectedEntry.emotion && e.text === selectedEntry.text);
+    
+    if (entryIndex !== -1) {
+      dateEntries[entryIndex].text = editedText;
+      localStorage.setItem('moodEntries', JSON.stringify(updatedEntries));
+      
+      const updatedAllEntries = allEntries.map(e => 
+        e.date === selectedEntry.date && e.emotion === selectedEntry.emotion && e.text === selectedEntry.text
+          ? { ...e, text: editedText }
+          : e
+      );
+      
+      setEntries(updatedEntries);
+      setAllEntries(updatedAllEntries);
+    }
+    
+    setIsModalOpen(false);
+  };
+
+  const handleDelete = () => {
+    if (window.confirm(t.confirmDelete)) {
+      const updatedEntries = { ...entries };
+      const dateEntries = updatedEntries[selectedEntry.date];
+      const filteredEntries = dateEntries.filter(e => !(e.emotion === selectedEntry.emotion && e.text === selectedEntry.text));
+      
+      if (filteredEntries.length === 0) {
+        delete updatedEntries[selectedEntry.date];
+      } else {
+        updatedEntries[selectedEntry.date] = filteredEntries;
+      }
+      
+      localStorage.setItem('moodEntries', JSON.stringify(updatedEntries));
+      
+      const updatedAllEntries = allEntries.filter(e => 
+        !(e.date === selectedEntry.date && e.emotion === selectedEntry.emotion && e.text === selectedEntry.text)
+      );
+      
+      setEntries(updatedEntries);
+      setAllEntries(updatedAllEntries);
+      setIsModalOpen(false);
+    }
+  };
+
   const renderEntries = () => {
     const dateString = format(selectedDate, 'yyyy-MM-dd');
     const dayEntries = entries[dateString] || [];
@@ -49,7 +105,7 @@ const ConfirmationMood = () => {
         <h3 className="text-xl font-semibold mb-2">{t.entries}</h3>
         {dayEntries.length > 0 ? (
           dayEntries.map((entry, index) => (
-            <div key={index} className="mb-2 p-2 bg-white rounded shadow">
+            <div key={index} className="mb-2 p-2 bg-white rounded shadow cursor-pointer hover:bg-gray-100" onClick={() => handleEntryClick(entry)}>
               <p><strong>{t[entry.emotion] || entry.emotion}:</strong> {entry.text}</p>
             </div>
           ))
@@ -65,7 +121,7 @@ const ConfirmationMood = () => {
       <div className="mt-4 overflow-y-auto max-h-[calc(100vh-200px)]">
         <h3 className="text-xl font-semibold mb-2">{t.allEntries}</h3>
         {allEntries.map((entry, index) => (
-          <div key={index} className="mb-2 p-2 bg-white rounded shadow">
+          <div key={index} className="mb-2 p-2 bg-white rounded shadow cursor-pointer hover:bg-gray-100" onClick={() => handleEntryClick(entry)}>
             <p className="text-sm text-gray-500">{format(parseISO(entry.date), 'PP', { locale: getLocale() })}</p>
             <p><strong>{t[entry.emotion] || entry.emotion}:</strong> {entry.text}</p>
           </div>
@@ -98,6 +154,22 @@ const ConfirmationMood = () => {
           {t.backToHome}
         </Button>
       </div>
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{selectedEntry && (t[selectedEntry.emotion] || selectedEntry.emotion)}</DialogTitle>
+          </DialogHeader>
+          <Textarea
+            value={editedText}
+            onChange={(e) => setEditedText(e.target.value)}
+            rows={4}
+          />
+          <DialogFooter>
+            <Button onClick={handleDelete} variant="destructive">{t.delete}</Button>
+            <Button onClick={handleSave}>{t.save}</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
