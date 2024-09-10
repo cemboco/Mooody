@@ -90,19 +90,12 @@ const ConfirmationMood = () => {
           {renderAllEntries()}
         </div>
       </div>
-      <div className="mt-8 flex space-x-4">
+      <div className="mt-8">
         <Button
           onClick={() => navigate('/home')}
           className="bg-mooody-green hover:bg-mooody-dark-green text-white"
         >
           {t.backToHome}
-        </Button>
-        <Button
-          onClick={() => navigate('/mood')}
-          variant="outline"
-          className="border-mooody-green text-mooody-green hover:bg-mooody-green hover:text-white"
-        >
-          {t.newMoodEntry}
         </Button>
       </div>
     </div>
