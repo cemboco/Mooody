@@ -61,7 +61,6 @@ const ConfirmationMood = () => {
     setSelectedEntry({ ...selectedEntry, moods: updatedMoods });
     setIsEditing(false);
 
-    // Update localStorage
     const allEntries = JSON.parse(localStorage.getItem('moodEntries') || '{}');
     allEntries[selectedEntry.date] = updatedMoods;
     localStorage.setItem('moodEntries', JSON.stringify(allEntries));
@@ -73,7 +72,6 @@ const ConfirmationMood = () => {
       setEntries(updatedEntries);
       setIsModalOpen(false);
 
-      // Update localStorage
       const allEntries = JSON.parse(localStorage.getItem('moodEntries') || '{}');
       delete allEntries[selectedEntry.date];
       localStorage.setItem('moodEntries', JSON.stringify(allEntries));
@@ -92,7 +90,7 @@ const ConfirmationMood = () => {
         <Home className="h-4 w-4" />
       </Button>
       <h1 className="text-3xl font-bold mb-8 mt-16 text-center">{t.entries}</h1>
-      <div className="w-full max-w-md mx-auto px-4">
+      <div className="w-full max-w-md mx-auto px-4 mb-8">
         {entries.map(({ date, moods }) => (
           <Button
             key={date}
@@ -104,12 +102,12 @@ const ConfirmationMood = () => {
           </Button>
         ))}
       </div>
-      <div className="mt-8 w-full max-w-md mx-auto px-4">
+      <div className="w-full max-w-md mx-auto px-4 mb-8">
         <Calendar />
       </div>
       <Button
         onClick={() => navigate('/home')}
-        className="mt-8 mx-auto mb-8"
+        className="mx-auto mb-8"
       >
         {t.backToHome}
       </Button>
