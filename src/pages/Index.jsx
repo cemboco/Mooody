@@ -63,8 +63,8 @@ const Index = () => {
       <div className="relative w-full min-h-screen flex flex-col items-center justify-center p-4">
         <MoodBalls showText={false} showHappyText={false} />
         <div className="container text-center max-w-4xl relative z-10 px-4 sm:px-6 lg:px-8 mt-16 sm:mt-0">
-          <h1 className={`mooody-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 ${animate ? 'fade-in' : 'opacity-0'}`}>MOOODY.</h1>
-          <p className={`font-julius text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-6 sm:mb-8 font-bold ${animate ? 'shift-from-top' : 'opacity-0'}`}>{t.subtitle}</p>
+          <h1 className={`mooody-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6 ${animate ? 'fade-in' : 'opacity-0'}`}>MOOODY.</h1>
+          <p className={`font-julius text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 sm:mb-8 font-bold ${animate ? 'shift-from-top' : 'opacity-0'}`}>{t.subtitle}</p>
           <div className={`flex justify-center ${animate ? 'fade-in-button' : 'opacity-0'}`}>
             <Button 
               className="bg-mooody-green hover:bg-mooody-dark-green text-white text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1"
@@ -76,7 +76,7 @@ const Index = () => {
               {t.notificationButton}
             </Button>
           </div>
-          <p className={`text-xs sm:text-sm mt-4 sm:mt-8 mx-auto ${animate ? 'clarify-text' : 'opacity-0'}`} style={{ fontFamily: 'SUSE, sans-serif', fontSize: '14px', maxWidth: '80ch', lineHeight: '1.6' }}>
+          <p className={`text-sm sm:text-base mt-4 sm:mt-8 mx-auto ${animate ? 'clarify-text' : 'opacity-0'}`} style={{ fontFamily: 'SUSE, sans-serif', fontSize: '14px', maxWidth: '80ch', lineHeight: '1.6' }}>
             {language === 'de' ? germanText : englishText}
           </p>
         </div>
