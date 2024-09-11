@@ -65,3 +65,25 @@ Simply visit your project at [GPT Engineer](https://gptengineer.app/projects/1b9
 ## I want to use a custom domain - is that possible?
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify or GitHub pages. Visit our docs for more details: [Custom domains](https://docs.gptengineer.app/tips-tricks/custom-domain/)
+
+## Troubleshooting
+
+### Checking if a port is in use
+
+If you're having trouble accessing localhost, it might be because the port is already in use. Here's how to check:
+
+#### For Windows:
+Open Command Prompt and use the following command:
+```
+netstat -ano | findstr :<PORT>
+```
+Replace <PORT> with the port number you want to check (e.g., 3000).
+
+#### For macOS and Linux:
+Open Terminal and use the following command:
+```
+lsof -i :<PORT>
+```
+Replace <PORT> with the port number you want to check.
+
+If these commands return results, it means the port is in use. You can either stop the process using that port or configure your application to use a different port.
