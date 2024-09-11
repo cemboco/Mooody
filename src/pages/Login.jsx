@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLanguage } from '../contexts/LanguageContext';
@@ -52,9 +52,6 @@ const Login = () => {
             {t.loginButton}
           </Button>
         </form>
-        <p className="mt-4 text-center">
-          {t.noAccount} <Link to="/signup" className="text-mooody-green hover:underline">{t.signUp}</Link>
-        </p>
       </div>
     </div>
   );
