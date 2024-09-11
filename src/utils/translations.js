@@ -91,7 +91,14 @@ export const translations = {
     confirmDelete: 'Möchtest du diesen Eintrag wirklich löschen?',
     save: 'Speichern',
     edit: 'Bearbeiten',
-    delete: 'Löschen'
+    delete: 'Löschen',
+    email: 'E-Mail',
+    signUp: 'Registrieren',
+    signUpButton: 'Registrieren',
+    loading: 'Laden...',
+    checkEmailForLink: 'Bitte überprüfe deine E-Mail für den Bestätigungslink.',
+    alreadyHaveAccount: 'Hast du bereits ein Konto?',
+    dontHaveAccount: 'Noch kein Konto?'
   },
   en: {
     title: 'Moody',
@@ -185,6 +192,13 @@ export const translations = {
     confirmDelete: 'Are you sure you want to delete this entry?',
     save: 'Save',
     edit: 'Edit',
-    delete: 'Delete'
+    delete: 'Delete',
+    email: 'Email',
+    signUp: 'Sign Up',
+    signUpButton: 'Sign Up',
+    loading: 'Loading...',
+    checkEmailForLink: 'Please check your email for the confirmation link.',
+    alreadyHaveAccount: 'Already have an account?',
+    dontHaveAccount: 'Don\'t have an account?'
   }
 };

@@ -12,21 +12,34 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
 
-  const handleLogin = async (e) => {
+  const handleAuth = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
       setError(null);
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-      });
-      if (error) throw error;
-      navigate('/confirmation-mood');
+      let result;
+      if (isSignUp) {
+        result = await supabase.auth.signUp({
+          email: email,
+          password: password,
+        });
+      } else {
+        result = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password,
+        });
+      }
+      if (result.error) throw result.error;
+      if (isSignUp) {
+        setError(t.checkEmailForLink);
+      } else {
+        navigate('/confirmation-mood');
+      }
     } catch (error) {
       setError(error.message);
     } finally {
@@ -34,16 +47,21 @@ const Login = () => {
     }
   };
 
+  const toggleAuthMode = () => {
+    setIsSignUp(!isSignUp);
+    setError(null);
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green">
       <LanguageToggle />
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">{t.login}</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">{isSignUp ? t.signUp : t.login}</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleAuth} className="space-y-4">
           <Input
             type="email"
-            placeholder={t.username}
+            placeholder={t.email}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full"
@@ -56,9 +74,15 @@ const Login = () => {
             className="w-full"
           />
           <Button type="submit" className="w-full bg-mooody-green hover:bg-mooody-dark-green text-white" disabled={loading}>
-            {loading ? t.loading : t.loginButton}
+            {loading ? t.loading : (isSignUp ? t.signUpButton : t.loginButton)}
           </Button>
         </form>
+        <p className="mt-4 text-center">
+          {isSignUp ? t.alreadyHaveAccount : t.dontHaveAccount}{' '}
+          <Button variant="link" onClick={toggleAuthMode} className="p-0">
+            {isSignUp ? t.login : t.signUp}
+          </Button>
+        </p>
       </div>
     </div>
   );
