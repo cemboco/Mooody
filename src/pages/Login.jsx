@@ -11,6 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
@@ -19,14 +20,15 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const { user, error } = await supabase.auth.signIn({
+      setError(null);
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
       if (error) throw error;
       navigate('/confirmation-mood');
     } catch (error) {
-      alert(error.message);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -37,6 +39,7 @@ const Login = () => {
       <LanguageToggle />
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">{t.login}</h2>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleLogin} className="space-y-4">
           <Input
             type="email"
