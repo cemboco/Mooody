@@ -32,23 +32,6 @@ const Login = () => {
     }
   };
 
-  const handleGoogleSignUp = async () => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: 'https://mypxifpqgzyhhecibskk.supabase.co/auth/v1/callback' 
-        }
-      });
-      if (error) throw error;
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green">
       <LanguageToggle />
@@ -73,15 +56,6 @@ const Login = () => {
             {loading ? t.loading : t.loginButton}
           </Button>
         </form>
-        <div className="mt-4">
-          <Button
-            onClick={handleGoogleSignUp}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white"
-            disabled={loading}
-          >
-            {loading ? t.loading : t.signUpWithGoogle}
-          </Button>
-        </div>
       </div>
     </div>
   );
