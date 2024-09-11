@@ -11,6 +11,7 @@ import ConfirmationMood from './pages/ConfirmationMood';
 import Calendar from './components/Calendar';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
+import Login from './pages/Login';
 import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import HomeButton from './components/HomeButton';
@@ -19,7 +20,7 @@ const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
-  return isLoggedIn ? children : <Navigate to="/confirmation-mood" />;
+  return isLoggedIn ? children : <Navigate to="/login" />;
 };
 
 const AppContent = () => {
@@ -59,7 +60,15 @@ const AppContent = () => {
         ))}
         <Route path="/mood" element={<Mood />} />
         <Route path="/selected-mood" element={<SelectedMood />} />
-        <Route path="/confirmation-mood" element={<ConfirmationMood />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/confirmation-mood"
+          element={
+            <ProtectedRoute>
+              <ConfirmationMood />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/meditate" element={<Meditate />} />
       </Routes>
