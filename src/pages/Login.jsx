@@ -10,6 +10,7 @@ import { supabase } from '../utils/supabaseClient';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
@@ -17,6 +18,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const { user, error } = await supabase.auth.signIn({
         email: email,
         password: password,
@@ -25,6 +27,25 @@ const Login = () => {
       navigate('/confirmation-mood');
     } catch (error) {
       alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: 'https://mypxifpqgzyhhecibskk.supabase.co/auth/v1/callback' 
+        }
+      });
+      if (error) throw error;
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,10 +69,19 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full"
           />
-          <Button type="submit" className="w-full bg-mooody-green hover:bg-mooody-dark-green text-white">
-            {t.loginButton}
+          <Button type="submit" className="w-full bg-mooody-green hover:bg-mooody-dark-green text-white" disabled={loading}>
+            {loading ? t.loading : t.loginButton}
           </Button>
         </form>
+        <div className="mt-4">
+          <Button
+            onClick={handleGoogleSignUp}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+            disabled={loading}
+          >
+            {loading ? t.loading : t.signUpWithGoogle}
+          </Button>
+        </div>
       </div>
     </div>
   );
