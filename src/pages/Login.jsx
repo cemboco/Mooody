@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,6 +18,17 @@ const Login = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const { login } = useAuth();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        login();
+        navigate('/confirmation-mood');
+      }
+    };
+    checkSession();
+  }, [login, navigate]);
 
   const handleAuth = async (e) => {
     e.preventDefault();
@@ -40,7 +51,7 @@ const Login = () => {
       if (isSignUp) {
         setError(t.checkEmailForLink);
       } else {
-        login(); // Update the auth context
+        login();
         navigate('/confirmation-mood');
       }
     } catch (error) {
