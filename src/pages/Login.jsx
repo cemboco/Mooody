@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
-import { supabase } from '../utils/supabaseClient';
+import { supabase } from '../integrations/supabase/supabase';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
+  const { login } = useAuth();
 
   const handleAuth = async (e) => {
     e.preventDefault();
@@ -38,6 +40,7 @@ const Login = () => {
       if (isSignUp) {
         setError(t.checkEmailForLink);
       } else {
+        login(); // Update the auth context
         navigate('/confirmation-mood');
       }
     } catch (error) {
