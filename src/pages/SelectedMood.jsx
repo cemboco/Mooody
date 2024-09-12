@@ -37,6 +37,26 @@ const SelectedMood = () => {
     updateEntry();
   }, [userInputs, selectedEmotions]);
 
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js";
+    script.async = true;
+    script.setAttribute('data-name', 'bmc-button');
+    script.setAttribute('data-slug', 'mooody.space');
+    script.setAttribute('data-color', '#e5ab2e');
+    script.setAttribute('data-emoji', '☕');
+    script.setAttribute('data-font', 'Cookie');
+    script.setAttribute('data-text', 'I´d love a coffee');
+    script.setAttribute('data-outline-color', '#000000');
+    script.setAttribute('data-font-color', '#000000');
+    script.setAttribute('data-coffee-color', '#FFDD00');
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   const handleSubmit = () => {
     if (currentEmotionIndex < selectedEmotions.length - 1) {
       setCurrentEmotionIndex(prevIndex => prevIndex + 1);
@@ -90,6 +110,9 @@ const SelectedMood = () => {
             <Check className="h-6 w-6 text-white" />
           </Button>
         </div>
+      </div>
+      <div className="fixed bottom-4 right-4">
+        <div id="bmc-wbtn"></div>
       </div>
     </div>
   );
