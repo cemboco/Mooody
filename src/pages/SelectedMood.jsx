@@ -37,27 +37,6 @@ const SelectedMood = () => {
     updateEntry();
   }, [userInputs, selectedEmotions]);
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js";
-    script.setAttribute('data-name', 'bmc-button');
-    script.setAttribute('data-slug', 'mooody.space');
-    script.setAttribute('data-color', '#FFDD00');
-    script.setAttribute('data-emoji', '☕');
-    script.setAttribute('data-font', 'Cookie');
-    script.setAttribute('data-text', 'Buy me a coffee');
-    script.setAttribute('data-outline-color', '#000000');
-    script.setAttribute('data-font-color', '#000000');
-    script.setAttribute('data-coffee-color', '#ffffff');
-    script.async = true;
-
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   const handleSubmit = () => {
     if (currentEmotionIndex < selectedEmotions.length - 1) {
       setCurrentEmotionIndex(prevIndex => prevIndex + 1);
@@ -114,7 +93,7 @@ const SelectedMood = () => {
       </div>
       <div className="fixed bottom-4 right-4 z-50">
         <a href="https://www.buymeacoffee.com/mooody.space" target="_blank" rel="noopener noreferrer">
-          <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style={{ height: '60px', width: '217px' }} />
+          <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style={{ height: '40px', width: '145px' }} />
         </a>
       </div>
     </div>
