@@ -8,6 +8,6 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: true,
-    redirectTo: window.location.origin // This ensures redirection to the correct URL after email confirmation
+    redirectTo: import.meta.env.VITE_APP_URL // Use the environment variable for redirectTo
   }
 });
