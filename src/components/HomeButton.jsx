@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ChevronDown } from 'lucide-react';
+import { Home } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { useAuth } from '../contexts/AuthContext';
@@ -17,7 +17,7 @@ const HomeButton = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon" className="fixed top-4 right-4 z-[60]">
-          <ChevronDown className="h-4 w-4" />
+          <Home className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
