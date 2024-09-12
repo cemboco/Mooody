@@ -56,7 +56,7 @@ const SelectedMood = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-mooody-newBackground text-mooody-green overflow-hidden">
+    <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
       <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16">
         <h2 className="text-2xl font-bold mb-4 text-center">

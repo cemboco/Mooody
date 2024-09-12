@@ -131,7 +131,7 @@ const ConfirmationMood = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-start bg-mooody-newBackground text-mooody-green p-4">
+    <div className="min-h-screen w-full flex flex-col items-center justify-start bg-mooody-yellow text-mooody-green p-4">
       <LanguageToggle />
       <h1 className="text-3xl font-bold mb-8">{t.confirmationTitle}</h1>
       <div className="w-full max-w-6xl flex flex-col md:flex-row justify-between">

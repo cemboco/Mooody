@@ -59,8 +59,7 @@ module.exports = {
         moody: "#EED180",
         moodyText: "#7DA420",
         mooody: {
-          yellow: "#FFFFFF",
-          newBackground: "#F5F5F5", // New background color
+          yellow: "#FFFFFF", // Changed from #FCEEB5 to white
         },
       },
       borderRadius: {
