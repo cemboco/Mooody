@@ -12,6 +12,7 @@ import Calendar from './components/Calendar';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
 import Login from './pages/Login';
+import AccountSettings from './components/AccountSettings';
 import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import HomeButton from './components/HomeButton';
@@ -71,7 +72,14 @@ const AppContent = () => {
         />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/meditate" element={<Meditate />} />
-        {/* Add a catch-all route */}
+        <Route
+          path="/account-settings"
+          element={
+            <ProtectedRoute>
+              <AccountSettings />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
