@@ -3,7 +3,6 @@ export const translations = {
     title: 'Moody',
     subtitle: 'Weil "Wie geht´s?" oft nicht ausreicht.',
     notificationButton: 'Wie fühlst du dich?',
-    beforeJumpingIn: 'Bevor es losgeht',
     moodSelectorTitle: 'Wähle deine Stimmung',
     youFeelLabel: 'Du fühlst dich',
     suggestedActivityLabel: 'Vorgeschlagene Aktivität:',
@@ -64,7 +63,6 @@ export const translations = {
     selectedMoods: 'Ausgewählte Stimmungen',
     backToMoodSelection: 'Zurück zur Stimmungsauswahl',
     whatsMakingYouFeel: 'Was lässt dich [emotion] fühlen?',
-    tapAnywhereToType: 'Tippe irgendwo, um zu schreiben.',
     typeHere: 'Schreibe hier...',
     defaultMood: 'Stimmung',
     entries: 'Einträge',
@@ -78,9 +76,7 @@ export const translations = {
     minutes: 'Minuten',
     startMeditation: 'Starten',
     stopMeditation: 'Stoppen',
-    meditationInProgress: 'Meditation läuft...',
     backToMood: 'Zurück',
-    meditationLeftSideText: 'Deine Gefühle zu hören bedeutet, dein authentisches Selbst zu ehren. Sie sind ein Kompass, der dich zu dem führt, was deine Seele nährt, und von dem wegführt, was sie erschöpft. Sie erinnern dich an deine tiefsten Wünsche, deine verborgenen Wunden und deine angeborene Fähigkeit zu wachsen. Wenn du auf deine Gefühle hörst, öffnest du die Tür zur Selbsterkenntnis, Heilung und Transformation.',
     meditationQuote: 'Höre auf die Stille. Sie hat so viel zu sagen.',
     home: 'Startseite',
     login: 'Anmelden',
@@ -98,13 +94,14 @@ export const translations = {
     loading: 'Laden...',
     checkEmailForLink: 'Bitte überprüfe deine E-Mail für den Bestätigungslink.',
     alreadyHaveAccount: 'Hast du bereits ein Konto?',
-    dontHaveAccount: 'Noch kein Konto?'
+    dontHaveAccount: 'Noch kein Konto?',
+    privacyPolicy: 'Datenschutzerklärung',
+    close: 'Schließen'
   },
   en: {
     title: 'Moody',
     subtitle: 'Because "How are you?" is often not enough.',
     notificationButton: 'How are you feeling?',
-    beforeJumpingIn: 'Before jumping in',
     moodSelectorTitle: 'Choose your mood',
     youFeelLabel: 'You feel',
     suggestedActivityLabel: 'Suggested Activity:',
@@ -165,7 +162,6 @@ export const translations = {
     selectedMoods: 'Selected Moods',
     backToMoodSelection: 'Back to Mood Selection',
     whatsMakingYouFeel: "What's making you feel [emotion]?",
-    tapAnywhereToType: 'Tap anywhere to type.',
     typeHere: 'Type here...',
     defaultMood: 'Mood',
     entries: 'Entries',
@@ -179,9 +175,7 @@ export const translations = {
     minutes: 'minutes',
     startMeditation: 'Start',
     stopMeditation: 'Stop',
-    meditationInProgress: 'Meditation in progress...',
     backToMood: 'Back to Mood',
-    meditationLeftSideText: 'To hear your feelings is to honor your authentic self. They are a compass, pointing you toward what nourishes your soul and away from what drains it. They remind you of your deepest desires, your hidden wounds, and your innate capacity for growth. When you listen to your feelings, you open the door to self-awareness, healing, and transformation.',
     meditationQuote: 'Listen to silence. It has so much to say.',
     home: 'Home',
     login: 'Login',
@@ -199,6 +193,8 @@ export const translations = {
     loading: 'Loading...',
     checkEmailForLink: 'Please check your email for the confirmation link.',
     alreadyHaveAccount: 'Already have an account?',
-    dontHaveAccount: 'Don\'t have an account?'
+    dontHaveAccount: 'Don\'t have an account?',
+    privacyPolicy: 'Privacy Policy',
+    close: 'Close'
   }
 };
