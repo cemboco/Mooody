@@ -25,11 +25,12 @@ export const AuthProvider = ({ children }) => {
   const login = () => setIsLoggedIn(true);
   
   const logout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.error('Error logging out:', error);
-    } else {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
       setIsLoggedIn(false);
+    } catch (error) {
+      console.error('Error logging out:', error);
     }
   };
 
