@@ -10,7 +10,7 @@ import { useAuth } from '../contexts/AuthContext';
 const HomeButton = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
-  const t = translations[language];
+  const t = translations[language] || {};
   const { isLoggedIn, logout } = useAuth();
 
   return (
@@ -21,14 +21,14 @@ const HomeButton = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={() => navigate('/home')}>{t.home}</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => navigate('/home')}>{t.home || 'Home'}</DropdownMenuItem>
         {isLoggedIn ? (
           <>
-            <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => { logout(); navigate('/home'); }}>{t.logout}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries || 'Entries'}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => { logout(); navigate('/home'); }}>{t.logout || 'Logout'}</DropdownMenuItem>
           </>
         ) : (
-          <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries || 'Entries'}</DropdownMenuItem>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const { language } = useLanguage();
-  const t = translations[language];
+  const t = translations[language] || {};
   const navigate = useNavigate();
   const [animate, setAnimate] = useState(false);
 
@@ -64,7 +64,7 @@ const Index = () => {
         <MoodBalls showText={false} showHappyText={false} />
         <div className="container text-center max-w-4xl relative z-10 px-4 sm:px-6 lg:px-8 mt-16 sm:mt-0">
           <h1 className={`mooody-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6 ${animate ? 'fade-in' : 'opacity-0'}`}>MOOODY.</h1>
-          <p className={`font-julius text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 sm:mb-8 font-bold ${animate ? 'shift-from-top' : 'opacity-0'}`}>{t.subtitle}</p>
+          <p className={`font-julius text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 sm:mb-8 font-bold ${animate ? 'shift-from-top' : 'opacity-0'}`}>{t.subtitle || 'Because "How are you?" is often not enough.'}</p>
           <div className={`flex justify-center ${animate ? 'fade-in-button' : 'opacity-0'}`}>
             <Button 
               className="bg-mooody-green hover:bg-mooody-dark-green text-white text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1"
@@ -73,7 +73,7 @@ const Index = () => {
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
               }}
             >
-              {t.notificationButton}
+              {t.notificationButton || 'How are you feeling?'}
             </Button>
           </div>
           <p className={`text-sm sm:text-base mt-4 sm:mt-8 mx-auto ${animate ? 'clarify-text' : 'opacity-0'}`} style={{ fontFamily: 'SUSE, sans-serif', fontSize: '14px', maxWidth: '80ch', lineHeight: '1.6' }}>
