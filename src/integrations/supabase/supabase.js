@@ -8,6 +8,6 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: true,
-    redirectTo: `${import.meta.env.VITE_APP_URL}/auth/callback`
+    redirectTo: `${window.location.origin}/auth/callback`
   }
 });

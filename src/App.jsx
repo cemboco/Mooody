@@ -15,12 +15,40 @@ import Login from './pages/Login';
 import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import HomeButton from './components/HomeButton';
+import { supabase } from './integrations/supabase/supabase';
 
 const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
   return isLoggedIn ? children : <Navigate to="/login" />;
+};
+
+const AuthCallback = () => {
+  const { login } = useAuth();
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const handleAuthCallback = async () => {
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        if (data?.session) {
+          login();
+        }
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    handleAuthCallback();
+  }, [login]);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return <Navigate to="/" />;
 };
 
 const AppContent = () => {
@@ -71,6 +99,7 @@ const AppContent = () => {
         />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/meditate" element={<Meditate />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
         {/* Add a catch-all route */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
