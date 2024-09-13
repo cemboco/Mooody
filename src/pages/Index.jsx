@@ -87,6 +87,17 @@ const Index = () => {
           "This app does not replace professional psychological or medical advice. For serious mental health issues or crises, please consult a specialist or therapist."
         }
       </div>
+      <div className="fixed bottom-16 left-0 right-0 text-center p-2 z-30">
+        <Button
+          variant="outline"
+          size="sm"
+          className="bg-white text-mooody-green hover:bg-mooody-green hover:text-white transition-colors duration-300"
+        >
+          <a data-canny-link href="https://mooody.canny.io" className="no-underline">
+            {language === 'de' ? 'Feedback geben' : 'Give feedback'}
+          </a>
+        </Button>
+      </div>
     </div>
   );
 };
