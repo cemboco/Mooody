@@ -16,8 +16,12 @@ const HomeButton = () => {
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = React.useState(false);
 
   const handleLogout = async () => {
-    await logout();
-    navigate('/home');
+    try {
+      await logout();
+      navigate('/home');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   return (

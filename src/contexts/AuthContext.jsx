@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
       setIsLoggedIn(false);
     } catch (error) {
       console.error('Error logging out:', error);
+      throw error;
     }
   };
 
