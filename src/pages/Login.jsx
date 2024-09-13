@@ -134,7 +134,7 @@ const Login = () => {
         )}
         {!isSignUp && !isResetPassword && (
           <p className="mt-2 text-center">
-            <Button variant="link" onClick={toggleResetPassword} className="p-0">
+            <Button variant="link" onClick={toggleResetPassword} className="p-0 text-black">
               {t.forgotPassword}
             </Button>
           </p>
