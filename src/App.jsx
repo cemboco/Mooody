@@ -15,7 +15,6 @@ import Login from './pages/Login';
 import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import HomeButton from './components/HomeButton';
-import LanguageToggle from './components/LanguageToggle';
 
 const queryClient = new QueryClient();
 
@@ -51,7 +50,6 @@ const AppContent = () => {
 
   return (
     <BrowserRouter>
-      <LanguageToggle />
       <VolumeControl isPlaying={isPlaying} toggleAudio={toggleAudio} />
       <HomeButton />
       <Routes>
