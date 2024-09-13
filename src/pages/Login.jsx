@@ -8,6 +8,7 @@ import LanguageToggle from '../components/LanguageToggle';
 import { supabase } from '../integrations/supabase/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import MoodBalls from '../components/MoodBalls';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -95,9 +96,10 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green">
+    <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+      <MoodBalls showText={false} />
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md relative z-10">
         <h2 className="text-2xl font-bold mb-6 text-center">
           {isResetPassword ? t.resetPassword : (isSignUp ? t.signUp : t.login)}
         </h2>
