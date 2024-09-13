@@ -96,12 +96,7 @@ export const translations = {
     alreadyHaveAccount: 'Hast du bereits ein Konto?',
     dontHaveAccount: 'Noch kein Konto?',
     privacyPolicy: 'Datenschutzerklärung',
-    close: 'Schließen',
-    accountSettings: 'Kontoeinstellungen',
-    deleteAccount: 'Konto löschen',
-    deletingAccount: 'Konto wird gelöscht...',
-    confirmDeleteAccount: 'Bist du sicher, dass du dein Konto und alle damit verbundenen Daten löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.',
-    accountDeletedSuccess: 'Dein Konto wurde erfolgreich gelöscht.',
+    close: 'Schließen'
   },
   en: {
     title: 'Moody',
@@ -200,11 +195,6 @@ export const translations = {
     alreadyHaveAccount: 'Already have an account?',
     dontHaveAccount: 'Don\'t have an account?',
     privacyPolicy: 'Privacy Policy',
-    close: 'Close',
-    accountSettings: 'Account Settings',
-    deleteAccount: 'Delete Account',
-    deletingAccount: 'Deleting Account...',
-    confirmDeleteAccount: 'Are you sure you want to delete your account and all associated data? This action cannot be undone.',
-    accountDeletedSuccess: 'Your account has been successfully deleted.',
+    close: 'Close'
   }
 };

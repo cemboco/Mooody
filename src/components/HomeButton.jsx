@@ -29,17 +29,16 @@ const HomeButton = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem onClick={() => navigate('/home')}>{t.home}</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => navigate('/home')}>{t.home || 'Home'}</DropdownMenuItem>
           {isLoggedIn ? (
             <>
-              <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate('/account-settings')}>{t.accountSettings}</DropdownMenuItem>
-              <DropdownMenuItem onClick={handleLogout}>{t.logout}</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries || 'Entries'}</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout}>{t.logout || 'Logout'}</DropdownMenuItem>
             </>
           ) : (
-            <DropdownMenuItem onClick={() => navigate('/login')}>{t.login}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate('/login')}>{t.login || 'Login'}</DropdownMenuItem>
           )}
-          <DropdownMenuItem onClick={() => setIsPrivacyPolicyOpen(true)}>{t.privacyPolicy}</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setIsPrivacyPolicyOpen(true)}>{t.privacyPolicy || 'Privacy Policy'}</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <PrivacyPolicyModal isOpen={isPrivacyPolicyOpen} onClose={() => setIsPrivacyPolicyOpen(false)} />
