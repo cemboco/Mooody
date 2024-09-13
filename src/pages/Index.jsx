@@ -91,11 +91,14 @@ const Index = () => {
         <Button
           variant="outline"
           size="sm"
-          className="bg-white text-mooody-green hover:bg-mooody-green hover:text-white transition-colors duration-300"
+          className="bg-white text-mooody-green hover:bg-mooody-green hover:text-white transition-colors duration-300 group relative overflow-hidden"
         >
-          <a data-canny-link href="https://mooody.canny.io" className="no-underline">
-            {language === 'de' ? 'Feedback geben' : 'Give feedback'}
-          </a>
+          <span className="absolute inset-0 bg-mooody-green transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0"></span>
+          <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+            <a data-canny-link href="https://mooody.canny.io" className="no-underline">
+              {language === 'de' ? 'Feedback geben' : 'Give feedback'}
+            </a>
+          </span>
         </Button>
       </div>
     </div>
