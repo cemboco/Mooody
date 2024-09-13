@@ -6,6 +6,16 @@ import { useLanguage } from '../contexts/LanguageContext';
 const LanguageToggle = () => {
   const { language, toggleLanguage } = useLanguage();
 
+  const getLanguageLabel = () => {
+    switch (language) {
+      case 'de': return 'DE';
+      case 'en': return 'EN';
+      case 'fr': return 'FR';
+      case 'es': return 'ES';
+      default: return language.toUpperCase();
+    }
+  };
+
   return (
     <Button
       onClick={toggleLanguage}
@@ -14,7 +24,7 @@ const LanguageToggle = () => {
       className="fixed top-4 left-4 z-50 bg-white"
     >
       <Globe className="h-4 w-4 mr-2" />
-      {language === 'de' ? 'DE' : 'EN'}
+      {getLanguageLabel()}
     </Button>
   );
 };

@@ -9,7 +9,12 @@ export const LanguageProvider = ({ children }) => {
   });
 
   const toggleLanguage = () => {
-    setLanguage(prevLang => prevLang === 'de' ? 'en' : 'de');
+    setLanguage(prevLang => {
+      const languages = ['de', 'en', 'fr', 'es'];
+      const currentIndex = languages.indexOf(prevLang);
+      const nextIndex = (currentIndex + 1) % languages.length;
+      return languages[nextIndex];
+    });
   };
 
   useEffect(() => {
