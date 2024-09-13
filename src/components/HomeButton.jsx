@@ -13,6 +13,11 @@ const HomeButton = () => {
   const t = translations[language] || {};
   const { isLoggedIn, logout } = useAuth();
 
+  const handleLogout = async () => {
+    await logout();
+    navigate('/home');
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,10 +30,10 @@ const HomeButton = () => {
         {isLoggedIn ? (
           <>
             <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries || 'Entries'}</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => { logout(); navigate('/home'); }}>{t.logout || 'Logout'}</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>{t.logout || 'Logout'}</DropdownMenuItem>
           </>
         ) : (
-          <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries || 'Entries'}</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => navigate('/login')}>{t.login || 'Login'}</DropdownMenuItem>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

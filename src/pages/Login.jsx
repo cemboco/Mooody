@@ -20,8 +20,8 @@ const Login = () => {
   const [isResetPassword, setIsResetPassword] = useState(false);
   const navigate = useNavigate();
   const { language } = useLanguage();
-  const t = translations[language];
-  const { login } = useAuth();
+  const t = translations[language] || {};
+  const { login, isLoggedIn } = useAuth();
 
   useEffect(() => {
     const checkSession = async () => {
@@ -33,6 +33,12 @@ const Login = () => {
     };
     checkSession();
   }, [login, navigate]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/confirmation-mood');
+    }
+  }, [isLoggedIn, navigate]);
 
   const handleAuth = async (e) => {
     e.preventDefault();
@@ -94,6 +100,10 @@ const Login = () => {
     setError(null);
     setSuccessMessage(null);
   };
+
+  if (isLoggedIn) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">

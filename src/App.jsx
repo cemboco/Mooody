@@ -26,7 +26,7 @@ const ProtectedRoute = ({ children }) => {
 const AppContent = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audio] = useState(new Audio('/padsound-meditation-21384.mp3'));
-  const { login } = useAuth();
+  const { login, isLoggedIn } = useAuth();
 
   useEffect(() => {
     audio.loop = true;
