@@ -136,6 +136,11 @@ const Login = () => {
             {loading ? t.loading : (isResetPassword ? t.sendResetLink : (isSignUp ? t.signUpButton : t.loginButton))}
           </Button>
         </form>
+        {isSignUp && (
+          <p className="mt-4 text-xs text-center text-gray-600">
+            {t.agreeToTerms} <a href="/terms" className="text-mooody-green hover:underline">{t.termsAndConditions}</a> {t.and} <a href="/privacy" className="text-mooody-green hover:underline">{t.privacyPolicy}</a>
+          </p>
+        )}
         {!isResetPassword && (
           <p className="mt-4 text-center">
             {isSignUp ? t.alreadyHaveAccount : t.dontHaveAccount}{' '}

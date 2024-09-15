@@ -96,7 +96,15 @@ export const translations = {
     alreadyHaveAccount: 'Hast du bereits ein Konto?',
     dontHaveAccount: 'Noch kein Konto?',
     privacyPolicy: 'Datenschutzerklärung',
-    close: 'Schließen'
+    close: 'Schließen',
+    agreeToTerms: 'Mit der Registrierung stimmst du unseren',
+    termsAndConditions: 'Nutzungsbedingungen',
+    and: 'und der',
+    resetPassword: 'Passwort zurücksetzen',
+    sendResetLink: 'Link zum Zurücksetzen senden',
+    resetPasswordEmailSent: 'Eine E-Mail zum Zurücksetzen des Passworts wurde gesendet.',
+    forgotPassword: 'Passwort vergessen?',
+    backToLogin: 'Zurück zur Anmeldung'
   },
   en: {
     title: 'Moody',
@@ -195,6 +203,14 @@ export const translations = {
     alreadyHaveAccount: 'Already have an account?',
     dontHaveAccount: 'Don\'t have an account?',
     privacyPolicy: 'Privacy Policy',
-    close: 'Close'
+    close: 'Close',
+    agreeToTerms: 'By signing up, you agree to our',
+    termsAndConditions: 'Terms and Conditions',
+    and: 'and',
+    resetPassword: 'Reset Password',
+    sendResetLink: 'Send Reset Link',
+    resetPasswordEmailSent: 'A password reset email has been sent.',
+    forgotPassword: 'Forgot password?',
+    backToLogin: 'Back to Login'
   }
 };
