@@ -15,6 +15,8 @@ const fromSupabase = async (query) => {
 | id         | integer                  | bigint    | true     |
 | created_at | string                   | timestamp | true     |
 | user_id    | string                   | uuid      | true     |
+| mood       | integer                  |           | true     |
+| notes      | string                   | text      | false    |
 
 Note: 
 - 'id' is a Primary Key.
@@ -23,6 +25,18 @@ Note:
 
 Row Level Security is enabled on this table with the following policies:
 - Users can only select, insert, update, and delete their own entries.
+
+SQL to alter the table and enable RLS:
+
+ALTER TABLE public.mooody
+ADD COLUMN user_id UUID NOT NULL,
+ADD COLUMN mood INTEGER NOT NULL,
+ADD COLUMN notes TEXT;
+
+ALTER TABLE public.mooody ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can only access their own entries" ON public.mooody
+FOR ALL USING (auth.uid() = user_id);
 */
 
 export const useMooody = () => useQuery({
@@ -89,14 +103,3 @@ export const useCurrentUserMooody = () => {
         },
     });
 };
-
-// SQL to create the correct policy (this should be run in your database, not in this file):
-/*
-CREATE POLICY "Enable update for authenticated users based on user_id"
-ON "public"."mooody"
-AS PERMISSIVE
-FOR UPDATE
-TO authenticated
-USING (auth.uid() = user_id)
-WITH CHECK (auth.uid() = user_id);
-*/
