@@ -14,12 +14,15 @@ const fromSupabase = async (query) => {
 |------------|--------------------------|-----------|----------|
 | id         | integer                  | bigint    | true     |
 | created_at | string                   | timestamp | true     |
+| user_id    | string                   | uuid      | true     |
 
 Note: 
 - 'id' is a Primary Key.
 - 'created_at' has a default value of now().
+- 'user_id' is added to comply with Row Level Security policies.
 
-No foreign key relationships are defined for this table.
+Row Level Security is enabled on this table with the following policies:
+- Users can only select, insert, update, and delete their own entries.
 */
 
 export const useMooody = () => useQuery({
@@ -30,7 +33,10 @@ export const useMooody = () => useQuery({
 export const useAddMooody = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (newMooody) => fromSupabase(supabase.from('mooody').insert([newMooody])),
+        mutationFn: (newMooody) => fromSupabase(supabase.from('mooody').insert([{
+            ...newMooody,
+            user_id: supabase.auth.user().id // Ensure user_id is set for RLS
+        }])),
         onSuccess: () => {
             queryClient.invalidateQueries('mooody');
         },
@@ -62,3 +68,21 @@ export const useGetMooodyById = (id) => useQuery({
     queryFn: () => fromSupabase(supabase.from('mooody').select('*').eq('id', id).single()),
     enabled: !!id,
 });
+
+// New function to get the current user's ID
+const getCurrentUserId = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    return user?.id;
+};
+
+// Updated function to get mooody entries for the current user
+export const useCurrentUserMooody = () => {
+    return useQuery({
+        queryKey: ['currentUserMooody'],
+        queryFn: async () => {
+            const userId = await getCurrentUserId();
+            if (!userId) throw new Error('User not authenticated');
+            return fromSupabase(supabase.from('mooody').select('*').eq('user_id', userId));
+        },
+    });
+};
