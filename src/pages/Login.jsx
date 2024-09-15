@@ -9,6 +9,7 @@ import { supabase } from '../integrations/supabase/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import MoodBalls from '../components/MoodBalls';
+import PrivacyPolicyModal from '../components/PrivacyPolicyModal';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -18,6 +19,7 @@ const Login = () => {
   const [successMessage, setSuccessMessage] = useState(null);
   const [isSignUp, setIsSignUp] = useState(false);
   const [isResetPassword, setIsResetPassword] = useState(false);
+  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language] || {};
@@ -138,7 +140,7 @@ const Login = () => {
         </form>
         {isSignUp && (
           <p className="mt-4 text-xs text-center text-gray-600">
-            {t.agreeToTerms} <a href="/terms" className="text-mooody-green hover:underline">{t.termsAndConditions}</a> {t.and} <a href="/privacy" className="text-mooody-green hover:underline">{t.privacyPolicy}</a>
+            {t.agreeToTerms} <a href="/terms" className="text-mooody-green hover:underline">{t.termsAndConditions}</a> {t.and} <button onClick={() => setIsPrivacyPolicyOpen(true)} className="text-mooody-green hover:underline">{t.privacyPolicy}</button>
           </p>
         )}
         {!isResetPassword && (
@@ -164,6 +166,7 @@ const Login = () => {
           </p>
         )}
       </div>
+      <PrivacyPolicyModal isOpen={isPrivacyPolicyOpen} onClose={() => setIsPrivacyPolicyOpen(false)} />
     </div>
   );
 };
