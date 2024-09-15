@@ -33,10 +33,13 @@ export const useMooody = () => useQuery({
 export const useAddMooody = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (newMooody) => fromSupabase(supabase.from('mooody').insert([{
-            ...newMooody,
-            user_id: supabase.auth.user().id // Ensure user_id is set for RLS
-        }])),
+        mutationFn: async (newMooody) => {
+            const { data: { user } } = await supabase.auth.getUser();
+            return fromSupabase(supabase.from('mooody').insert([{
+                ...newMooody,
+                user_id: user.id
+            }]));
+        },
         onSuccess: () => {
             queryClient.invalidateQueries('mooody');
         },
@@ -69,7 +72,7 @@ export const useGetMooodyById = (id) => useQuery({
     enabled: !!id,
 });
 
-// New function to get the current user's ID
+// Function to get the current user's ID
 const getCurrentUserId = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     return user?.id;
@@ -86,3 +89,14 @@ export const useCurrentUserMooody = () => {
         },
     });
 };
+
+// SQL to create the correct policy (this should be run in your database, not in this file):
+/*
+CREATE POLICY "Enable update for authenticated users based on user_id"
+ON "public"."mooody"
+AS PERMISSIVE
+FOR UPDATE
+TO authenticated
+USING (auth.uid() = user_id)
+WITH CHECK (auth.uid() = user_id);
+*/
