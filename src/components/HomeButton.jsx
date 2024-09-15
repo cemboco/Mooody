@@ -5,24 +5,13 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Home } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
-import { useAuth } from '../contexts/AuthContext';
 import PrivacyPolicyModal from './PrivacyPolicyModal';
 
 const HomeButton = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language] || {};
-  const { isLoggedIn, logout } = useAuth();
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = React.useState(false);
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate('/home');
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
 
   return (
     <>
@@ -34,14 +23,7 @@ const HomeButton = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem onClick={() => navigate('/home')}>{t.home || 'Home'}</DropdownMenuItem>
-          {isLoggedIn ? (
-            <>
-              <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries || 'Entries'}</DropdownMenuItem>
-              <DropdownMenuItem onClick={handleLogout}>{t.logout || 'Logout'}</DropdownMenuItem>
-            </>
-          ) : (
-            <DropdownMenuItem onClick={() => navigate('/login')}>{t.login || 'Login'}</DropdownMenuItem>
-          )}
+          <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries || 'Entries'}</DropdownMenuItem>
           <DropdownMenuItem onClick={() => setIsPrivacyPolicyOpen(true)}>{t.privacyPolicy || 'Privacy Policy'}</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

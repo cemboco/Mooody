@@ -4,14 +4,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { navItems } from "./nav-items";
 import { LanguageProvider } from './contexts/LanguageContext';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Mood from './pages/Mood';
 import SelectedMood from './pages/SelectedMood';
 import ConfirmationMood from './pages/ConfirmationMood';
 import Calendar from './components/Calendar';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
-import Login from './pages/Login';
 import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import HomeButton from './components/HomeButton';
@@ -19,42 +17,9 @@ import { supabase } from './integrations/supabase/supabase';
 
 const queryClient = new QueryClient();
 
-const ProtectedRoute = ({ children }) => {
-  const { isLoggedIn } = useAuth();
-  return isLoggedIn ? children : <Navigate to="/login" />;
-};
-
-const AuthCallback = () => {
-  const { login } = useAuth();
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const handleAuthCallback = async () => {
-      try {
-        const { data, error } = await supabase.auth.getSession();
-        if (error) throw error;
-        if (data?.session) {
-          login();
-        }
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
-    handleAuthCallback();
-  }, [login]);
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  return <Navigate to="/" />;
-};
-
 const AppContent = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audio] = useState(new Audio('/padsound-meditation-21384.mp3'));
-  const { login, isLoggedIn } = useAuth();
 
   useEffect(() => {
     audio.loop = true;
@@ -88,18 +53,9 @@ const AppContent = () => {
         ))}
         <Route path="/mood" element={<Mood />} />
         <Route path="/selected-mood" element={<SelectedMood />} />
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/confirmation-mood"
-          element={
-            <ProtectedRoute>
-              <ConfirmationMood />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/confirmation-mood" element={<ConfirmationMood />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/meditate" element={<Meditate />} />
-        <Route path="/auth/callback" element={<AuthCallback />} />
         {/* Add a catch-all route */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
@@ -110,14 +66,12 @@ const AppContent = () => {
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <LanguageProvider>
-          <TooltipProvider>
-            <Toaster />
-            <AppContent />
-          </TooltipProvider>
-        </LanguageProvider>
-      </AuthProvider>
+      <LanguageProvider>
+        <TooltipProvider>
+          <Toaster />
+          <AppContent />
+        </TooltipProvider>
+      </LanguageProvider>
     </QueryClientProvider>
   );
 };

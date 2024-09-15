@@ -55,7 +55,7 @@ const SelectedMood = () => {
     if (currentEmotionIndex < selectedEmotions.length - 1) {
       setCurrentEmotionIndex(prevIndex => prevIndex + 1);
     } else {
-      navigate('/login');
+      navigate('/confirmation-mood');
     }
   };
 
