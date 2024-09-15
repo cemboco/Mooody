@@ -9,13 +9,11 @@ import LanguageToggle from '../components/LanguageToggle';
 import Calendar from '../components/Calendar';
 import { format, parseISO } from 'date-fns';
 import { de, enUS } from 'date-fns/locale';
-import { useAuth } from '../contexts/AuthContext';
 
 const ConfirmationMood = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
-  const { isLoggedIn } = useAuth();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [entries, setEntries] = useState({});
   const [allEntries, setAllEntries] = useState([]);
@@ -24,11 +22,6 @@ const ConfirmationMood = () => {
   const [editedText, setEditedText] = useState('');
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/login');
-      return;
-    }
-
     const storedEntries = localStorage.getItem('moodEntries');
     if (storedEntries) {
       const parsedEntries = JSON.parse(storedEntries);
@@ -41,7 +34,7 @@ const ConfirmationMood = () => {
         );
       setAllEntries(sortedEntries);
     }
-  }, [isLoggedIn, navigate]);
+  }, []);
 
   const handleDateSelect = (date) => {
     setSelectedDate(date);
