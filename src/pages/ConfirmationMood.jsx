@@ -7,6 +7,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import Calendar from '../components/Calendar';
+import MoodAnalysis from '../components/MoodAnalysis';
 import { format, parseISO } from 'date-fns';
 import { de, enUS } from 'date-fns/locale';
 
@@ -145,6 +146,9 @@ const ConfirmationMood = () => {
           </h2>
           {renderAllEntries()}
         </div>
+      </div>
+      <div className="w-full max-w-6xl mt-8">
+        <MoodAnalysis entries={entries} />
       </div>
       <div className="mt-8">
         <Button

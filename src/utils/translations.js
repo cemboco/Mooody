@@ -104,7 +104,9 @@ export const translations = {
     sendResetLink: 'Link zum Zurücksetzen senden',
     resetPasswordEmailSent: 'Eine E-Mail zum Zurücksetzen des Passworts wurde gesendet.',
     forgotPassword: 'Passwort vergessen?',
-    backToLogin: 'Zurück zur Anmeldung'
+    backToLogin: 'Zurück zur Anmeldung',
+    moodTrendsChart: 'Stimmungsverlauf',
+    moodDistributionChart: 'Stimmungsverteilung'
   },
   en: {
     title: 'Moody',
@@ -211,6 +213,8 @@ export const translations = {
     sendResetLink: 'Send Reset Link',
     resetPasswordEmailSent: 'A password reset email has been sent.',
     forgotPassword: 'Forgot password?',
-    backToLogin: 'Back to Login'
+    backToLogin: 'Back to Login',
+    moodTrendsChart: 'Mood Trends',
+    moodDistributionChart: 'Mood Distribution'
   }
 };
