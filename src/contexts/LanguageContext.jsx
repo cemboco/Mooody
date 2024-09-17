@@ -5,7 +5,7 @@ const LanguageContext = createContext();
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
     const savedLanguage = localStorage.getItem('language');
-    return savedLanguage || 'de';
+    return savedLanguage || 'en'; // Changed default to 'en'
   });
 
   const toggleLanguage = () => {
