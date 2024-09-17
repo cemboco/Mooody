@@ -63,6 +63,9 @@ const Index = () => {
       <div className="relative w-full min-h-screen flex flex-col items-center justify-center p-4">
         <MoodBalls showText={false} showHappyText={false} />
         <div className="container text-center max-w-4xl relative z-10 px-4 sm:px-6 lg:px-8 mt-16 sm:mt-0">
+          <a href="https://www.producthunt.com/posts/mooody-space?embed=true&utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-mooody&#0045;space" target="_blank" rel="noopener noreferrer" className="mb-4 inline-block">
+            <img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=489379&theme=neutral&period=daily" alt="Mooody&#0046;Space - Track&#0032;Your&#0032;Emotions&#0044;&#0032;and&#0032;Find&#0032;Balance&#0032;with&#0032;Mooody&#0046; | Product Hunt" style={{ width: '250px', height: '54px' }} width="250" height="54" />
+          </a>
           <h1 className={`mooody-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6 ${animate ? 'fade-in' : 'opacity-0'}`}>MOOODY.</h1>
           <p className={`font-julius text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 sm:mb-8 font-bold ${animate ? 'shift-from-top' : 'opacity-0'}`}>{t.subtitle || 'Because "How are you?" is often not enough.'}</p>
           <div className={`flex justify-center ${animate ? 'fade-in-button' : 'opacity-0'}`}>
