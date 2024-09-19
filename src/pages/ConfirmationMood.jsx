@@ -140,9 +140,6 @@ const ConfirmationMood = () => {
           {renderEntries()}
         </div>
         <div className="w-full md:w-1/2 md:ml-4">
-          <h2 className="text-2xl font-semibold mb-4">
-            {t.allEntries}
-          </h2>
           {renderAllEntries()}
         </div>
       </div>
