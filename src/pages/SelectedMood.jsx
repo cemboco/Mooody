@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Progress } from "@/components/ui/progress"; // Neue Importierung
 import { Check, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
@@ -69,6 +70,9 @@ const SelectedMood = () => {
     navigate('/meditate');
   };
 
+  // Berechnung des Fortschritts
+  const progress = ((currentEmotionIndex + 1) / selectedEmotions.length) * 100;
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
@@ -81,6 +85,9 @@ const SelectedMood = () => {
         <h2 className="text-2xl font-bold mb-4 text-center z-10">
           {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
         </h2>
+        {/* Fortschrittsbalken */}
+        <Progress value={progress} className="w-full mb-4 z-10" />
+        <p className="mb-4 text-sm z-10">{`${currentEmotionIndex + 1} / ${selectedEmotions.length}`}</p>
         <Textarea
           value={userInputs[currentEmotionIndex] || ''}
           onChange={handleInputChange}
