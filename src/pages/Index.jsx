@@ -15,15 +15,6 @@ const Index = () => {
     <div className="min-h-screen w-full bg-[#FFF8E7] text-[#2D3748] overflow-hidden relative flex flex-col">
       <Navbar />
       <div className="flex-grow flex flex-col justify-center items-center px-4 py-16 relative">
-        <div className="absolute top-4 left-4">
-          <a href="https://www.producthunt.com/products/mooody-space#mooody-space" target="_blank" rel="noopener noreferrer">
-            <img 
-              src="/product-of-the-day-4th.png" 
-              alt="Product of the day 4th" 
-              className="w-auto h-12"
-            />
-          </a>
-        </div>
         <div className="text-center relative z-10 max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             <span className="block">Regulate your mood,</span>
