@@ -13,28 +13,30 @@ const Index = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen w-full bg-[#FFF8E7] text-[#2D3748] overflow-hidden relative">
+    <div className="min-h-screen w-full bg-[#FFF8E7] text-[#2D3748] overflow-hidden relative flex flex-col">
       <Navbar />
-      <div className="absolute top-4 left-4">
-        <a href="https://www.producthunt.com/products/mooody-space#mooody-space" target="_blank" rel="noopener noreferrer">
-          <ProductHuntBadge />
-        </a>
-      </div>
-      <div className="container mx-auto px-4 py-16 text-center relative z-10">
-        <h1 className="text-5xl md:text-6xl font-bold mb-6">
-          <span className="block">Regulate your mood,</span>
-          <span className="block">unravel your <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500">emotions</span>.</span>
-        </h1>
-        <p className="text-xl mb-8 max-w-2xl mx-auto">
-          {t.homeDescription || "Your feelings—whether they are of joy, sadness, fear, or excitement—are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you."}
-        </p>
-        <Button
-          onClick={() => navigate('/mood')}
-          className="bg-[#FF6B6B] hover:bg-[#FF5252] text-white px-8 py-3 rounded-full text-lg"
-        >
-          {t.getStartedButton || "I'm ready to build a relationship with myself"}
-        </Button>
-        <p className="mt-4 text-sm text-gray-600">{t.tryForFree || 'Try for free - No Credit Card Required'}</p>
+      <div className="flex-grow flex flex-col justify-center items-center px-4 py-16 relative">
+        <div className="absolute top-4 left-4">
+          <a href="https://www.producthunt.com/products/mooody-space#mooody-space" target="_blank" rel="noopener noreferrer">
+            <ProductHuntBadge />
+          </a>
+        </div>
+        <div className="text-center relative z-10 max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <span className="block">Regulate your mood,</span>
+            <span className="block">unravel your <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500">emotions</span>.</span>
+          </h1>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            {t.homeDescription || "Your feelings—whether they are of joy, sadness, fear, or excitement—are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you."}
+          </p>
+          <Button
+            onClick={() => navigate('/mood')}
+            className="bg-[#FF6B6B] hover:bg-[#FF5252] text-white px-8 py-3 rounded-full text-lg"
+          >
+            {t.getStartedButton || "I'm ready to build a relationship with myself"}
+          </Button>
+          <p className="mt-4 text-sm text-gray-600">{t.tryForFree || 'Try for free - No Credit Card Required'}</p>
+        </div>
       </div>
       <div className="absolute bottom-0 left-0 right-0">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
