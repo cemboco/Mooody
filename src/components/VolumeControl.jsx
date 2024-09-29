@@ -6,11 +6,11 @@ const VolumeControl = ({ isPlaying, toggleAudio }) => {
   return (
     <Button
       onClick={toggleAudio}
-      variant="outline"
+      variant="ghost"
       size="icon"
-      className="fixed bottom-16 left-4 z-50 bg-white"
+      className="text-white hover:text-gray-200"
     >
-      {isPlaying ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+      {isPlaying ? <Volume2 className="h-6 w-6" /> : <VolumeX className="h-6 w-6" />}
     </Button>
   );
 };
