@@ -15,6 +15,7 @@ import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import HomeButton from './components/HomeButton';
 import { supabase } from './integrations/supabase/supabase';
+import Navbar from './components/Navbar';
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const AppContent = () => {
 
   return (
     <BrowserRouter>
+      <Navbar />
       <VolumeControl isPlaying={isPlaying} toggleAudio={toggleAudio} />
       <HomeButton />
       <Routes>
@@ -57,7 +59,6 @@ const AppContent = () => {
         <Route path="/confirmation-mood" element={<ConfirmationMood />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/meditate" element={<Meditate />} />
-        {/* Add a catch-all route */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

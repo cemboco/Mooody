@@ -10,12 +10,9 @@ const Navbar = () => {
   const t = translations[language];
 
   return (
-    <nav className="w-full bg-[#FFF8E7] py-4 px-6 flex justify-between items-center">
-      <div className="flex-1"></div>
-      <div className="text-center flex-1">
-        <h1 className="text-2xl font-bold text-[#2D3748]">mooody</h1>
-      </div>
-      <div className="flex items-center space-x-4 flex-1 justify-end">
+    <nav className="w-full bg-[#FFF8E7] py-4 px-6 flex flex-col items-center">
+      <img src="/header.png" alt="Header" className="w-full max-w-4xl mb-4" />
+      <div className="flex justify-between items-center w-full max-w-4xl">
         <Button
           onClick={() => navigate('/confirmation-mood')}
           variant="outline"
@@ -23,6 +20,7 @@ const Navbar = () => {
         >
           {t.goToJournal || 'Go to Journal'}
         </Button>
+        <h1 className="text-2xl font-bold text-[#2D3748]">mooody</h1>
         <Button
           onClick={toggleLanguage}
           variant="ghost"
