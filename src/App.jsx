@@ -15,7 +15,6 @@ import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import HomeButton from './components/HomeButton';
 import { supabase } from './integrations/supabase/supabase';
-import Navbar from './components/Navbar';
 
 const queryClient = new QueryClient();
 
@@ -45,7 +44,6 @@ const AppContent = () => {
 
   return (
     <BrowserRouter>
-      <Navbar />
       <VolumeControl isPlaying={isPlaying} toggleAudio={toggleAudio} />
       <HomeButton />
       <Routes>
