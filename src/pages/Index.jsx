@@ -21,7 +21,7 @@ const Index = () => {
             <span className="block">unravel your <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500">emotions</span>.</span>
           </h1>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Your feelings—whether they are of joy, sadness, fear, or excitement—are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you.
+            Your feelings, whether they are of joy, sadness, fear, or excitement, are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you.
           </p>
           <Button
             onClick={() => navigate('/mood')}
