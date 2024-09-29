@@ -16,7 +16,9 @@ const Index = () => {
     <div className="min-h-screen w-full bg-[#FFF8E7] text-[#2D3748] overflow-hidden relative">
       <Navbar />
       <div className="absolute top-4 left-4">
-        <ProductHuntBadge />
+        <a href="https://www.producthunt.com/products/mooody-space#mooody-space" target="_blank" rel="noopener noreferrer">
+          <ProductHuntBadge />
+        </a>
       </div>
       <div className="container mx-auto px-4 py-16 text-center relative z-10">
         <h1 className="text-5xl md:text-6xl font-bold mb-6">
