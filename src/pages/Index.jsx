@@ -25,7 +25,7 @@ const Index = () => {
           </p>
           <Button
             onClick={() => navigate('/mood')}
-            className="bg-[#FF6B6B] hover:bg-[#FF5252] text-white px-6 py-2 rounded-full text-lg"
+            className="bg-[#FF6B6B] hover:bg-[#FF5252] text-white px-6 py-2 rounded-full text-lg shadow-md"
           >
             {t.getStartedButton || "I'm ready to build a relationship with myself"}
           </Button>
