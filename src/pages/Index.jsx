@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import ProductHuntBadge from '../components/ProductHuntBadge';
-import LanguageToggle from '../components/LanguageToggle';
 import VolumeControl from '../components/VolumeControl';
+import Navbar from '../components/Navbar';
 
 const Index = () => {
   const { language } = useLanguage();
@@ -14,18 +14,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen w-full bg-[#FFF8E7] text-[#2D3748] overflow-hidden relative">
+      <Navbar />
       <div className="absolute top-4 left-4">
         <ProductHuntBadge />
-      </div>
-      <div className="absolute top-4 right-4 flex items-center space-x-4">
-        <Button
-          onClick={() => navigate('/confirmation-mood')}
-          variant="ghost"
-          className="text-[#2D3748] hover:text-[#4A5568]"
-        >
-          {t.goToJournal || 'Go to Journal'}
-        </Button>
-        <LanguageToggle />
       </div>
       <div className="container mx-auto px-4 py-16 text-center relative z-10">
         <h1 className="text-5xl md:text-6xl font-bold mb-6">
