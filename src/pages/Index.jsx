@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
-import ProductHuntBadge from '../components/ProductHuntBadge';
 import VolumeControl from '../components/VolumeControl';
 import Navbar from '../components/Navbar';
 
@@ -18,7 +17,11 @@ const Index = () => {
       <div className="flex-grow flex flex-col justify-center items-center px-4 py-16 relative">
         <div className="absolute top-4 left-4">
           <a href="https://www.producthunt.com/products/mooody-space#mooody-space" target="_blank" rel="noopener noreferrer">
-            <ProductHuntBadge />
+            <img 
+              src="/product-of-the-day-4th.png" 
+              alt="Product of the day 4th" 
+              className="w-auto h-12"
+            />
           </a>
         </div>
         <div className="text-center relative z-10 max-w-4xl mx-auto">
