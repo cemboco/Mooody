@@ -21,7 +21,7 @@ const Navbar = () => {
       <div className="flex items-center space-x-4 flex-1 justify-end">
         <Button
           onClick={() => navigate('/confirmation-mood')}
-          variant="ghost"
+          variant="outline"
           className="text-[#2D3748] hover:text-[#4A5568]"
         >
           {t.goToJournal || 'Go to Journal'}
