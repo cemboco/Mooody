@@ -51,8 +51,8 @@ const Index = () => {
           animation: clarify 1s ease-out forwards;
         }
         .menu-icon {
-          width: 30px;
-          height: 24px;
+          width: 28px;
+          height: 22px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -63,12 +63,6 @@ const Index = () => {
           height: 3px;
           background-color: currentColor;
           transition: all 0.3s ease;
-        }
-        .menu-icon:hover span:nth-child(1) {
-          transform: translateY(-2px);
-        }
-        .menu-icon:hover span:nth-child(3) {
-          transform: translateY(2px);
         }
       `}</style>
       <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50">
