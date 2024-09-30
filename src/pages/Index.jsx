@@ -4,7 +4,6 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
-import { Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import PrivacyPolicyModal from '../components/PrivacyPolicyModal';
@@ -51,13 +50,37 @@ const Index = () => {
         .clarify-text {
           animation: clarify 1s ease-out forwards;
         }
+        .menu-icon {
+          width: 30px;
+          height: 24px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          transition: all 0.3s ease;
+        }
+        .menu-icon span {
+          width: 100%;
+          height: 3px;
+          background-color: currentColor;
+          transition: all 0.3s ease;
+        }
+        .menu-icon:hover span:nth-child(1) {
+          transform: translateY(-2px);
+        }
+        .menu-icon:hover span:nth-child(3) {
+          transform: translateY(2px);
+        }
       `}</style>
       <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50">
         <LanguageToggle />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="ml-auto">
-              <Menu className="h-4 w-4" />
+              <div className="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
