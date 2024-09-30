@@ -22,7 +22,7 @@ const Index = () => {
   const germanText = "Deine Gefühle sind mehr als flüchtige Momente der Emotion; sie sind das Flüstern deines inneren Selbst, das dich auf deinen wahrhaftigsten Weg führt. In einer Welt, die uns oft ermutigt zu denken, zu analysieren und zu rationalisieren, vergessen wir manchmal innezuhalten und auf die leise Stimme unseres Herzens zu hören. Aber deine Gefühle – ob Freude, Traurigkeit, Angst oder Aufregung – sind mächtige Botschafter, die jeweils eine Wahrheit in sich tragen, die dein Verstand allein nicht erfassen kann.";
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-cover bg-center text-mooody-green overflow-hidden" style={{ backgroundImage: "url('/Bg.png')" }}>
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-cover bg-center text-mooody-green overflow-hidden" style={{ backgroundImage: "url('/Bg.svg')" }}>
       <style jsx>{`
         @keyframes fadeIn {
           from { opacity: 0; }
@@ -67,7 +67,7 @@ const Index = () => {
             <img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=489379&theme=neutral&period=daily" alt="Mooody&#0046;Space - Track&#0032;Your&#0032;Emotions&#0044;&#0032;and&#0032;Find&#0032;Balance&#0032;with&#0032;Mooody&#0046; | Product Hunt" style={{ width: '250px', height: '54px' }} width="250" height="54" />
           </a>
           <h1 className={`mooody-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6 ${animate ? 'fade-in' : 'opacity-0'}`}>MOOODY.</h1>
-          <div style="text-align: center; color: #020617; font-size: 20px; font-family: Bricolage Grotesque; font-weight: 500; line-height: 32px; word-wrap: break-word">m o o o d y</div>
+          <div style={{ textAlign: 'center', color: '#020617', fontSize: '20px', fontFamily: 'Bricolage Grotesque', fontWeight: 500, lineHeight: '32px', wordWrap: 'break-word' }}>m o o o d y</div>
           <p className={`font-julius text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 sm:mb-8 font-bold ${animate ? 'shift-from-top' : 'opacity-0'}`}>{t.subtitle || 'Because "How are you?" is often not enough.'}</p>
           <div className={`flex justify-center ${animate ? 'fade-in-button' : 'opacity-0'}`}>
             <Button 
