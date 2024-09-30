@@ -17,7 +17,7 @@ const HomeButton = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="icon" className="fixed top-4 right-4 z-[60]">
+          <Button variant="ghost" size="icon" className="fixed top-4 right-4 z-[60]">
             <Menu className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
