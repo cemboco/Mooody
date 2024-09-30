@@ -4,9 +4,11 @@ import CustomEmotionModal from '../components/CustomEmotionModal';
 import LanguageToggle from '../components/LanguageToggle';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
-import { Home, ArrowRight } from 'lucide-react';
+import { Menu, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import PrivacyPolicyModal from '../components/PrivacyPolicyModal';
 
 const Mood = () => {
   const navigate = useNavigate();
@@ -16,6 +18,7 @@ const Mood = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [customEmotion, setCustomEmotion] = useState(null);
   const [fadeIn, setFadeIn] = useState(false);
+  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
 
   useEffect(() => {
     setFadeIn(true);
@@ -49,14 +52,18 @@ const Mood = () => {
         }
       `}</style>
       <LanguageToggle />
-      <Button
-        onClick={() => navigate('/home')}
-        className="fixed top-4 right-4 z-[60]"
-        variant="outline"
-        size="icon"
-      >
-        <Home className="h-4 w-4" />
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon" className="fixed top-4 right-4 z-[60]">
+            <Menu className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem onClick={() => navigate('/home')}>{t.home || 'Home'}</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries || 'Entries'}</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setIsPrivacyPolicyOpen(true)}>{t.privacyPolicy || 'Privacy Policy'}</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
         <h2 className={`text-xl mb-4 z-10 ${fadeIn ? 'clarify-text' : ''}`}>{t.selectUpToThreeMoods}</h2>
         <MoodBalls 
@@ -82,6 +89,7 @@ const Mood = () => {
         onClose={() => setIsModalOpen(false)}
         onAdd={handleCustomEmotionAdd}
       />
+      <PrivacyPolicyModal isOpen={isPrivacyPolicyOpen} onClose={() => setIsPrivacyPolicyOpen(false)} />
     </div>
   );
 };

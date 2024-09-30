@@ -4,14 +4,17 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
-import { Home } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import PrivacyPolicyModal from '../components/PrivacyPolicyModal';
 
 const Index = () => {
   const { language } = useLanguage();
   const t = translations[language] || {};
   const navigate = useNavigate();
   const [animate, setAnimate] = useState(false);
+  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
 
   useEffect(() => {
     setAnimate(true);
@@ -51,14 +54,18 @@ const Index = () => {
       `}</style>
       <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50">
         <LanguageToggle />
-        <Button
-          onClick={() => navigate('/home')}
-          variant="outline"
-          size="icon"
-          className="ml-auto"
-        >
-          <Home className="h-4 w-4" />
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="ml-auto">
+              <Menu className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem onClick={() => navigate('/home')}>{t.home || 'Home'}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries || 'Entries'}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setIsPrivacyPolicyOpen(true)}>{t.privacyPolicy || 'Privacy Policy'}</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       <div className="relative w-full min-h-screen flex flex-col items-center justify-center p-4">
         <MoodBalls showText={false} showHappyText={false} />
@@ -90,6 +97,7 @@ const Index = () => {
           "This app does not replace professional psychological or medical advice. For serious mental health issues or crises, please consult a specialist or therapist."
         }
       </div>
+      <PrivacyPolicyModal isOpen={isPrivacyPolicyOpen} onClose={() => setIsPrivacyPolicyOpen(false)} />
     </div>
   );
 };
