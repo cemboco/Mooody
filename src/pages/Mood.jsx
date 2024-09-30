@@ -51,8 +51,8 @@ const Mood = () => {
           animation: clarify 1s ease-out forwards;
         }
         .menu-icon {
-          width: 30px;
-          height: 24px;
+          width: 35px;
+          height: 28px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -60,15 +60,15 @@ const Mood = () => {
         }
         .menu-icon span {
           width: 100%;
-          height: 3px;
+          height: 4px;
           background-color: currentColor;
           transition: all 0.3s ease;
         }
         .menu-icon:hover span:nth-child(1) {
-          transform: translateY(-2px);
+          transform: translateY(-3px);
         }
         .menu-icon:hover span:nth-child(3) {
-          transform: translateY(2px);
+          transform: translateY(3px);
         }
       `}</style>
       <LanguageToggle />
