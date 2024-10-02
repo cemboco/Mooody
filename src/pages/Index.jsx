@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { useLanguage } from '../contexts/LanguageContext';
-import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
 import { useNavigate } from 'react-router-dom';
@@ -9,9 +7,29 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import PrivacyPolicyModal from '../components/PrivacyPolicyModal';
 import { ArrowRight } from 'lucide-react';
 
+// Create a basic useLanguage hook
+const useLanguage = () => {
+  const [language, setLanguage] = useState('en');
+  return { language, setLanguage };
+};
+
+// Create a basic translations object
+const translations = {
+  en: {
+    home: 'Home',
+    entries: 'Entries',
+    privacyPolicy: 'Privacy Policy',
+  },
+  de: {
+    home: 'Startseite',
+    entries: 'Einträge',
+    privacyPolicy: 'Datenschutzrichtlinie',
+  },
+};
+
 const Index = () => {
   const { language } = useLanguage();
-  const t = translations[language] || {};
+  const t = translations[language] || translations.en;
   const navigate = useNavigate();
   const [animate, setAnimate] = useState(false);
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
@@ -35,9 +53,9 @@ const Index = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem onClick={() => navigate('/home')}>{t.home || 'Home'}</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries || 'Entries'}</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setIsPrivacyPolicyOpen(true)}>{t.privacyPolicy || 'Privacy Policy'}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate('/home')}>{t.home}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setIsPrivacyPolicyOpen(true)}>{t.privacyPolicy}</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
