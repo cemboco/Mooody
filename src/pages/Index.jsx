@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
-import LanguageToggle from '../components/LanguageToggle';
-import MoodBalls from '../components/MoodBalls';
+import LanguageToggle from '@/components/LanguageToggle';
+import MoodBalls from '@/components/MoodBalls';
 import { useNavigate } from 'react-router-dom';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import PrivacyPolicyModal from '../components/PrivacyPolicyModal';
+import PrivacyPolicyModal from '@/components/PrivacyPolicyModal';
 import { ArrowRight } from 'lucide-react';
 
-// Create a basic useLanguage hook
 const useLanguage = () => {
   const [language, setLanguage] = useState('en');
   return { language, setLanguage };
 };
 
-// Create a basic translations object
 const translations = {
   en: {
     home: 'Home',
@@ -53,9 +51,9 @@ const Index = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem onClick={() => navigate('/home')}>{t.home}</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setIsPrivacyPolicyOpen(true)}>{t.privacyPolicy}</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => navigate('/home')}>{t.home}</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => setIsPrivacyPolicyOpen(true)}>{t.privacyPolicy}</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -70,13 +68,17 @@ const Index = () => {
           </div>
           <div className="cta-container">
             <Button 
-              className="cta-button"
+              className="cta-button box-border flex flex-row justify-center items-center py-3 px-8 gap-2 w-[359px] h-12 bg-[#F87171] border border-[#DC2626] rounded-full shadow-[inset_0px_-4px_3.2px_rgba(0,0,0,0.25)] hover:bg-[#F87171]/90 transition-colors"
               onClick={() => navigate('/mood')}
             >
-              <span className="cta-text">I'm ready to build a relationship with myself</span>
-              <ArrowRight className="cta-arrow" />
+              <span className="cta-text font-['Geist'] font-semibold text-base leading-6 text-center tracking-[-1px] text-white">
+                I'm ready to build a relationship with myself
+              </span>
+              <ArrowRight className="cta-arrow w-4 h-4 text-white" />
             </Button>
-            <p className="cta-subtext">Try for free - No Credit Card Required.</p>
+            <p className="cta-subtext font-['Geist'] font-normal text-xs leading-4 text-center tracking-[-0.5px] text-[#020617] mt-3">
+              Try for free - No Credit Card Required.
+            </p>
           </div>
         </div>
       </div>
