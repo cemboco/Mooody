@@ -83,7 +83,7 @@
   }
 
   .menu-icon {
-    @apply w-[15px] h-[18px] flex flex-col justify-between transition-all duration-300;
+    @apply w-[10px] h-[8px] flex flex-col justify-between transition-all duration-300;
   }
 
   .menu-icon span {
