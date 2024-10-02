@@ -47,8 +47,8 @@ const Index = () => {
         <MoodBalls showText={false} showHappyText={false} />
         <div className="hero-title">
           <div className="hero-content">
-            <h1 className="hero-heading">
-              Regulate your mood, unravel your {' '}
+            <h1 className="hero-heading w-[866px] h-[152px] font-['Bricolage_Grotesque'] flex items-center text-[#334155] self-stretch">
+              Regulate your mood,<br />unravel your{' '}
               <span className="emotions-text">
                 {Array.from('emotions').map((letter, index) => (
                   <span key={index} style={{ color: emotionsColors[index % emotionsColors.length] }}>
@@ -56,7 +56,6 @@ const Index = () => {
                   </span>
                 ))}
               </span>
-              .
             </h1>
             <p className="hero-subheading">
               Your feelings - whether they are of joy, sadness, fear, or excitement - are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you.
