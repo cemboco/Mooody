@@ -82,19 +82,26 @@
   background-color: #45a049;
 }
 
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(50px, -50px); }
+  50% { transform: translate(100px, 0); }
+  75% { transform: translate(50px, 50px); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-50px, 50px); }
+  50% { transform: translate(-100px, 0); }
+  75% { transform: translate(-50px, -50px); }
+}
+
 .ball {
   position: absolute;
   border-radius: 50%;
   opacity: 0.5;
   animation: float 20s infinite ease-in-out;
   z-index: 1;
-}
-
-@keyframes float {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(50px, -50px); }
-  50% { transform: translate(100px, 0); }
-  75% { transform: translate(50px, 50px); }
 }
 
 .ball1 { width: 100px; height: 100px; top: 10%; left: 10%; background-color: #FFC300; animation-delay: -2s; }
@@ -144,15 +151,28 @@
   opacity: 0.8;
 }
 
-@keyframes float-reverse {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(-50px, 50px); }
-  50% { transform: translate(-100px, 0); }
-  75% { transform: translate(-50px, -50px); }
+.menu-icon {
+  width: 22px; /* Reduced from 24px */
+  height: 16px; /* Reduced from 18px */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
 }
 
-.ball2, .ball4, .ball6, .ball8, .ball10, .happy-ball, .floating-happy-ball, .floating-angry-ball {
-  animation-name: float-reverse;
+.menu-icon span {
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s ease;
+}
+
+.menu-icon:hover span:nth-child(1) {
+  transform: translateY(-1px); /* Adjusted from -2px */
+}
+
+.menu-icon:hover span:nth-child(3) {
+  transform: translateY(1px); /* Adjusted from 2px */
 }
 
 .check-in-title {
@@ -185,26 +205,3 @@
   }
 }
 
-.menu-icon {
-  width: 24px;
-  height: 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: all 0.3s ease;
-}
-
-.menu-icon span {
-  width: 100%;
-  height: 2px;
-  background-color: currentColor;
-  transition: all 0.3s ease;
-}
-
-.menu-icon:hover span:nth-child(1) {
-  transform: translateY(-2px);
-}
-
-.menu-icon:hover span:nth-child(3) {
-  transform: translateY(2px);
-}
