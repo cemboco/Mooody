@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Hevilla:wght@400;700&family=Julius+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hevilla:wght@400;700&family=Julius+Sans+One&family=Bricolage+Grotesque:wght@400;600&family=Hanken+Grotesk:wght@600&family=Geist&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -98,35 +98,40 @@
     @apply transform translate-y-[1px];
   }
 
-  .check-in-title {
-    @apply font-['SUSE'] text-[25px] opacity-0 transition-opacity duration-1000;
-  }
-
-  .check-in-title.fade-in {
-    @apply opacity-100;
-  }
-
-  .check-in-subtitle {
-    @apply font-['SUSE'] text-[18px];
-  }
-
-  .fade-in {
-    @apply opacity-0 animate-[fadeIn_2s_ease-in-out_forwards];
-  }
-
-  /* Hero Title */
   .hero-title {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-    gap: 24px;
-    position: absolute;
-    width: 866px;
-    height: 350px;
-    left: 287px;
-    top: 193px;
+    @apply flex flex-col justify-center items-center p-0 gap-6 absolute w-[866px] h-[350px] left-[287px] top-[193px];
+  }
+
+  .hero-content {
+    @apply flex flex-col justify-center items-center p-0 gap-5 w-[866px] h-[250px] flex-none order-0 self-stretch flex-grow-0;
+  }
+
+  .hero-heading {
+    @apply w-[866px] h-[152px] font-['Bricolage_Grotesque'] font-semibold text-[80px] leading-[76px] flex items-center text-center tracking-[-3px] text-[#334155] flex-none order-0 self-stretch flex-grow-0;
+  }
+
+  .hero-subheading {
+    @apply w-[644px] h-[78px] font-['Bricolage_Grotesque'] font-normal text-[18px] leading-[26px] text-center tracking-[-1px] text-[#64748B] flex-none order-1 flex-grow-0;
+  }
+
+  .cta-container {
+    @apply flex flex-col justify-center items-center p-0 gap-3 w-[359px] h-[76px] flex-none order-1 flex-grow-0;
+  }
+
+  .cta-button {
+    @apply box-border flex flex-row justify-center items-center py-3 px-8 gap-2 w-[359px] h-12 bg-[#F87171] border border-[#DC2626] shadow-[inset_0px_-4px_3.2px_rgba(0,0,0,0.25)] rounded-full flex-none order-0 self-stretch flex-grow-0;
+  }
+
+  .cta-text {
+    @apply w-[271px] h-6 font-['Hanken_Grotesk'] font-semibold text-base leading-6 text-center tracking-[-1px] text-white flex-none order-0 flex-grow-0;
+  }
+
+  .cta-arrow {
+    @apply w-4 h-4 flex-none order-1 flex-grow-0;
+  }
+
+  .cta-subtext {
+    @apply w-[359px] h-4 font-['Geist'] font-normal text-xs leading-4 text-center tracking-[-0.5px] text-[#020617] flex-none order-1 self-stretch flex-grow-0;
   }
 }
 
