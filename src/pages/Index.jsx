@@ -20,8 +20,6 @@ const Index = () => {
     setAnimate(true);
   }, []);
 
-  const emotionsColors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#8B00FF', '#FF00FF', '#FF1493'];
-
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-cover bg-center text-mooody-green overflow-hidden" style={{ backgroundImage: "url('/Bg.png')" }}>
       <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50">
@@ -47,24 +45,14 @@ const Index = () => {
         <MoodBalls showText={false} showHappyText={false} />
         <div className="hero-title">
           <div className="hero-content">
-            <h1 className="hero-heading">
-              Regulate your mood, unravel your{' '}
-              <span className="emotions-text">
-                {Array.from('emotions').map((letter, index) => (
-                  <span key={index} style={{ color: emotionsColors[index % emotionsColors.length] }}>
-                    {letter}
-                  </span>
-                ))}
-              </span>
-              .
-            </h1>
+            <h1 className="hero-heading">Regulate your mood, unravel your emotions.</h1>
             <p className="hero-subheading">
               Your feelings—whether they are of joy, sadness, fear, or excitement—are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you.
             </p>
           </div>
           <div className="cta-container">
             <Button 
-              className="cta-button bg-[#F87171] hover:bg-[#EF4444] text-white"
+              className="cta-button"
               onClick={() => navigate('/mood')}
             >
               <span className="cta-text">I'm ready to build a relationship with myself</span>
