@@ -48,7 +48,7 @@ const Index = () => {
         <div className="hero-title">
           <div className="hero-content">
             <h1 className="hero-heading">
-              Regulate your mood, unravel your emotions{' '}
+              Regulate your mood, unravel your {' '}
               <span className="emotions-text">
                 {Array.from('emotions').map((letter, index) => (
                   <span key={index} style={{ color: emotionsColors[index % emotionsColors.length] }}>
