@@ -59,7 +59,7 @@ const Index = () => {
               .
             </h1>
             <p className="hero-subheading">
-              Your feelings—whether they are of joy, sadness, fear, or excitement—are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you.
+              Your feelings - whether they are of joy, sadness, fear, or excitement - are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you.
             </p>
           </div>
           <div className="cta-container">
