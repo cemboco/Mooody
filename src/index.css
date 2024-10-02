@@ -113,6 +113,21 @@
   .fade-in {
     @apply opacity-0 animate-[fadeIn_2s_ease-in-out_forwards];
   }
+
+  /* Hero Title */
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 24px;
+    position: absolute;
+    width: 866px;
+    height: 350px;
+    left: 287px;
+    top: 193px;
+  }
 }
 
 @keyframes float {
