@@ -103,35 +103,35 @@
   }
 
   .hero-content {
-    @apply flex flex-col justify-center items-center p-0 gap-5 w-[866px] h-[250px] flex-none order-0 self-stretch flex-grow-0;
+    @apply flex flex-col justify-center items-center p-0 gap-5 w-[866px] h-[250px] flex-none self-stretch flex-grow-0;
   }
 
   .hero-heading {
-    @apply w-[866px] h-[152px] font-['Bricolage_Grotesque'] font-semibold text-[80px] leading-[76px] flex items-center text-center tracking-[-3px] text-[#334155] flex-none order-0 self-stretch flex-grow-0;
+    @apply w-[866px] h-[152px] font-['Bricolage_Grotesque'] font-semibold text-[80px] leading-[76px] flex items-center text-center tracking-[-3px] text-[#334155] flex-none self-stretch flex-grow-0;
   }
 
   .hero-subheading {
-    @apply w-[644px] h-[78px] font-['Bricolage_Grotesque'] font-normal text-[18px] leading-[26px] text-center tracking-[-1px] text-[#64748B] flex-none order-1 flex-grow-0;
+    @apply w-[644px] h-[78px] font-['Bricolage_Grotesque'] font-normal text-[18px] leading-[26px] text-center tracking-[-1px] text-[#64748B] flex-none flex-grow-0;
   }
 
   .cta-container {
-    @apply flex flex-col justify-center items-center p-0 gap-3 w-[359px] h-[76px] flex-none order-1 flex-grow-0;
+    @apply flex flex-col justify-center items-center p-0 gap-3 w-[359px] h-[76px] flex-none flex-grow-0;
   }
 
   .cta-button {
-    @apply box-border flex flex-row justify-center items-center py-3 px-8 gap-2 w-[359px] h-12 bg-[#F87171] border border-[#DC2626] shadow-[inset_0px_-4px_3.2px_rgba(0,0,0,0.25)] rounded-full flex-none order-0 self-stretch flex-grow-0;
+    @apply box-border flex flex-row justify-center items-center py-3 px-8 gap-2 w-[359px] h-12 bg-[#F87171] border border-[#DC2626] shadow-[inset_0px_-4px_3.2px_rgba(0,0,0,0.25)] rounded-full flex-none self-stretch flex-grow-0;
   }
 
   .cta-text {
-    @apply w-[271px] h-6 font-['Hanken_Grotesk'] font-semibold text-base leading-6 text-center tracking-[-1px] text-white flex-none order-0 flex-grow-0;
+    @apply w-[271px] h-6 font-['Hanken_Grotesk'] font-semibold text-base leading-6 text-center tracking-[-1px] text-white flex-none flex-grow-0;
   }
 
   .cta-arrow {
-    @apply w-4 h-4 flex-none order-1 flex-grow-0;
+    @apply w-4 h-4 flex-none flex-grow-0;
   }
 
   .cta-subtext {
-    @apply w-[359px] h-4 font-['Geist'] font-normal text-xs leading-4 text-center tracking-[-0.5px] text-[#020617] flex-none order-1 self-stretch flex-grow-0;
+    @apply w-[359px] h-4 font-['Geist'] font-normal text-xs leading-4 text-center tracking-[-0.5px] text-[#020617] flex-none self-stretch flex-grow-0;
   }
 }
 
@@ -208,3 +208,4 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
