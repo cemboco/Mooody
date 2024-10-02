@@ -64,7 +64,7 @@ const Index = () => {
           </div>
           <div className="cta-container">
             <Button 
-              className="cta-button bg-[#F87171] hover:bg-[#EF4444] text-white"
+              className="cta-button bg-[#F87171] hover:bg-[#EF4444] text-white rounded-full"
               onClick={() => navigate('/mood')}
             >
               <span className="cta-text">I'm ready to build a relationship with myself</span>
