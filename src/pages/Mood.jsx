@@ -86,7 +86,7 @@ const Mood = () => {
         <h1 className={`text-3xl sm:text-4xl mb-8 z-10 ${fadeIn ? 'clarify-text' : ''} font-['Bricolage_Grotesque'] text-center`}>{t.selectUpToThreeMoods}</h1>
         <MoodBalls 
           showText={true} 
-          textColor="text-black-500" 
+          textColor="text-black-600" 
           selectedEmotions={selectedEmotions}
           onEmotionSelect={handleEmotionSelect}
           onCustomEmotionClick={() => setIsModalOpen(true)}
