@@ -7,6 +7,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 const SelectedMood = () => {
   const location = useLocation();
@@ -72,45 +73,49 @@ const SelectedMood = () => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
-      <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16">
-        <MoodBalls
-          showText={false}
-          customColors={moodColors}
-          selectedEmotions={selectedEmotions}
-        />
-        <h2 className="text-2xl font-bold mb-4 text-center z-10">
-          {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
-        </h2>
-        <p className="mb-4 text-sm z-10">{`${currentEmotionIndex + 1} / ${selectedEmotions.length}`}</p>
-        <Textarea
-          value={userInputs[currentEmotionIndex] || ''}
-          onChange={handleInputChange}
-          placeholder={t.typeHere}
-          className="w-full h-64 text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green z-10"
-        />
-        <div className="mt-8 flex flex-col items-center justify-between w-full max-w-md z-10">
-          <Button
-            onClick={() => navigate('/mood')}
-            className="flex items-center mb-4 w-full"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            {t.backToMoodSelection}
-          </Button>
-          <Button
-            onClick={handleMeditate}
-            className="w-full mb-4 bg-mooody-green hover:bg-mooody-dark-green text-white"
-          >
-            {t.meditate || 'Meditate'}
-          </Button>
-          <Button
-            onClick={handleSubmit}
-            className="rounded-full w-12 h-12 flex items-center justify-center bg-mooody-green hover:bg-mooody-dark-green"
-            disabled={!userInputs[currentEmotionIndex] || !userInputs[currentEmotionIndex].trim()}
-          >
-            <Check className="h-6 w-6 text-white" />
-          </Button>
-        </div>
+      <div className="absolute top-4 right-4 z-10">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <div className="menu-icon">
+                <span className="w-full h-[2px] bg-current"></span>
+                <span className="w-full h-[2px] bg-current"></span>
+                <span className="w-full h-[2px] bg-current"></span>
+              </div>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem onClick={() => navigate('/home')}>{t.home || 'Home'}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries || 'Entries'}</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
+      <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
+        <h2 className={`text-xl mb-4 z-10`}>{t.selectUpToThreeMoods}</h2>
+        <MoodBalls 
+          showText={true} 
+          textColor="text-gray-700" 
+          selectedEmotions={selectedEmotions}
+          onEmotionSelect={handleEmotionSelect}
+          onCustomEmotionClick={() => setIsModalOpen(true)}
+          customEmotion={customEmotion}
+        />
+      </div>
+      {selectedEmotions.length > 0 && (
+        <Button
+          onClick={() => navigate('/selected-mood', { state: { selectedEmotions } })}
+          className="fixed bottom-4 right-4 z-[60] rounded-full"
+          size="icon"
+        >
+          <ArrowRight className="h-4 w-4" />
+        </Button>
+      )}
+      <CustomEmotionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAdd={handleCustomEmotionAdd}
+      />
+      <PrivacyPolicyModal isOpen={isPrivacyPolicyOpen} onClose={() => setIsPrivacyPolicyOpen(false)} />
     </div>
   );
 };
