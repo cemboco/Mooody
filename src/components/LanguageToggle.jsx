@@ -9,7 +9,7 @@ const LanguageToggle = () => {
   return (
     <Button
       onClick={toggleLanguage}
-      variant="outline"
+      variant=""
       size="sm"
       className="fixed top-4 left-4 z-50 bg-white"
     >
