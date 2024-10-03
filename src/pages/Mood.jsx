@@ -60,7 +60,7 @@ const Mood = () => {
         }
         .menu-icon span {
           width: 100%;
-          height: 3px;
+          height: 2px;
           background-color: currentColor;
           transition: all 0.3s ease;
         }
