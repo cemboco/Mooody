@@ -139,9 +139,9 @@ const ConfirmationMood = () => {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon">
               <div className="menu-icon">
-                <span className="w-full h-[2px] bg-current"></span>
-                <span className="w-full h-[2px] bg-current"></span>
-                <span className="w-full h-[2px] bg-current"></span>
+                <span></span>
+                <span></span>
+                <span></span>
               </div>
             </Button>
           </DropdownMenuTrigger>
@@ -151,7 +151,7 @@ const ConfirmationMood = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <h1 className="text-3xl font-bold mb-8">{t.confirmationTitle}</h1>
+      <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-8">{t.confirmationTitle}</h1>
       <div className="w-full max-w-6xl flex flex-col md:flex-row justify-between">
         <div className="w-full md:w-1/2 mb-8 md:mb-0 md:mr-4">
           <Calendar onDateSelect={handleDateSelect} />

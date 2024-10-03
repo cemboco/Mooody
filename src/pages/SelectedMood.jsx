@@ -78,15 +78,15 @@ const SelectedMood = () => {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon">
               <div className="menu-icon">
-                <span className="w-full h-[2px] bg-current"></span>
-                <span className="w-full h-[2px] bg-current"></span>
-                <span className="w-full h-[2px] bg-current"></span>
+                <span></span>
+                <span></span>
+                <span></span>
               </div>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem onSelect={() => navigate('/home')}>{t.home}</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate('/home')}>{t.home}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -96,7 +96,7 @@ const SelectedMood = () => {
           customColors={moodColors}
           selectedEmotions={selectedEmotions}
         />
-        <h2 className="text-2xl font-bold mb-4 text-center z-10">
+        <h2 className="text-xl md:text-2xl font-bold mb-4 text-center z-10">
           {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
         </h2>
         <p className="mb-4 text-sm z-10">{`${currentEmotionIndex + 1} / ${selectedEmotions.length}`}</p>
@@ -104,7 +104,7 @@ const SelectedMood = () => {
           value={userInputs[currentEmotionIndex] || ''}
           onChange={handleInputChange}
           placeholder={t.typeHere}
-          className="w-full h-64 text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green z-10"
+          className="w-full h-40 md:h-64 text-base md:text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green z-10"
         />
         <div className="mt-8 flex flex-col items-center justify-between w-full max-w-md z-10">
           <Button
