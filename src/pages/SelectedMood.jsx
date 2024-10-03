@@ -6,6 +6,7 @@ import { Check, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
+import MoodBalls from '../components/MoodBalls';
 
 const SelectedMood = () => {
   const location = useLocation();
