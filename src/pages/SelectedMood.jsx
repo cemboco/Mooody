@@ -109,6 +109,12 @@ const SelectedMood = () => {
             disabled={!userInputs[currentEmotionIndex] || !userInputs[currentEmotionIndex].trim()}
           >
             <Check className="h-6 w-6 text-white" />
+            <MoodBalls
+          key={location.pathname} // Add this line
+          showText={false}
+          customColors={moodColors}
+          selectedEmotions={selectedEmotions}
+        />
           </Button>
         </div>
       </div>
