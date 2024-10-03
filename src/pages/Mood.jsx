@@ -51,8 +51,8 @@ const Mood = () => {
           animation: clarify 1s ease-out forwards;
         }
         .menu-icon {
-          width: 28px;
-          height: 22px;
+          width: 20px;
+          height: 18px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -86,7 +86,7 @@ const Mood = () => {
         <h2 className={`text-xl mb-4 z-10 ${fadeIn ? 'clarify-text' : ''}`}>{t.selectUpToThreeMoods}</h2>
         <MoodBalls 
           showText={true} 
-          textColor="text-gray-700" 
+          textColor="text-black-700" 
           selectedEmotions={selectedEmotions}
           onEmotionSelect={handleEmotionSelect}
           onCustomEmotionClick={() => setIsModalOpen(true)}
