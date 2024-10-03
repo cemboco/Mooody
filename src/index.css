@@ -3,7 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -27,7 +27,7 @@
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -50,7 +50,7 @@
     --ring: 212.7 26.8% 83.9%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
@@ -90,14 +90,6 @@
     @apply w-full h-[2px] bg-current transition-all duration-300;
   }
 
-  .menu-icon:hover span:nth-child(1) {
-    @apply transform -translate-y-[1px];
-  }
-
-  .menu-icon:hover span:nth-child(3) {
-    @apply transform translate-y-[1px];
-  }
-
   .hero-title {
     @apply flex flex-col justify-center items-center p-0 gap-6 absolute w-[866px] h-[350px] left-[287px] top-[193px];
   }
@@ -134,79 +126,3 @@
     @apply w-[359px] h-4 font-['Geist'] font-normal text-xs leading-4 text-center tracking-[-0.5px] text-[#020617] flex-none self-stretch flex-grow-0;
   }
 }
-
-@keyframes float {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(50px, -50px); }
-  50% { transform: translate(100px, 0); }
-  75% { transform: translate(50px, 50px); }
-}
-
-@keyframes float-reverse {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(-50px, 50px); }
-  50% { transform: translate(-100px, 0); }
-  75% { transform: translate(-50px, -50px); }
-}
-
-.ball {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.5;
-  animation: float 20s infinite ease-in-out;
-  z-index: 1;
-}
-
-.ball1 { width: 100px; height: 100px; top: 10%; left: 10%; background-color: #FFC300; animation-delay: -2s; }
-.ball2 { width: 80px; height: 80px; top: 20%; right: 15%; background-color: #DAF7A6; animation-delay: -4s; }
-.ball3 { width: 60px; height: 60px; bottom: 15%; left: 20%; background-color: #FF5733; animation-delay: -6s; }
-.ball4 { width: 70px; height: 70px; bottom: 10%; right: 10%; background-color: #C70039; animation-delay: -8s; }
-.ball5 { width: 90px; height: 90px; top: 40%; left: 30%; background-color: #900C3F; animation-delay: -10s; }
-.ball6 { width: 110px; height: 110px; top: 20%; right: 25%; background-color: #581845; animation-delay: -12s; }
-.ball7 { width: 75px; height: 75px; bottom: 30%; left: 40%; background-color: #FF8C00; animation-delay: -14s; }
-.ball8 { width: 85px; height: 85px; top: 70%; left: 60%; background-color: #008080; animation-delay: -16s; }
-.ball9 { width: 95px; height: 95px; top: 30%; right: 40%; background-color: #4B0082; animation-delay: -18s; }
-.ball10 { width: 65px; height: 65px; bottom: 20%; right: 30%; background-color: #00CED1; animation-delay: -20s; }
-
-.happy-ball {
-  width: 105px;
-  height: 105px;
-  top: calc(10% + 110px);
-  left: 10%;
-  background-color: #FFFFFF;
-  animation-delay: -22s;
-  z-index: 0;
-}
-
-.floating-happy-ball {
-  width: 85px;
-  height: 85px;
-  top: calc(10% + 220px);
-  left: 15%;
-  background-color: #FFD700;
-  animation-delay: -24s;
-  z-index: 2;
-}
-
-.floating-angry-ball {
-  width: 75px;
-  height: 75px;
-  top: calc(5% + 180px);
-  left: 25%;
-  background-color: #FF4500;
-  animation-delay: -26s;
-  z-index: 3;
-}
-
-.ball.selected,
-.floating-happy-ball.selected,
-.floating-angry-ball.selected {
-  opacity: 0.8;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-

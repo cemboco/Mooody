@@ -7,6 +7,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 const SelectedMood = () => {
   const location = useLocation();
@@ -71,7 +72,24 @@ const SelectedMood = () => {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
-      <LanguageToggle />
+      <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50">
+        <LanguageToggle />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <div className="menu-icon">
+                <span className="w-full h-[2px] bg-current"></span>
+                <span className="w-full h-[2px] bg-current"></span>
+                <span className="w-full h-[2px] bg-current"></span>
+              </div>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem onSelect={() => navigate('/home')}>{t.home}</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16">
         <MoodBalls
           showText={false}
