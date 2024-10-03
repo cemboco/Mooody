@@ -82,8 +82,8 @@ const Mood = () => {
           <DropdownMenuItem onClick={() => setIsPrivacyPolicyOpen(true)}>{t.privacyPolicy || 'Privacy Policy'}</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
-        <h1 className={`text-xl mb-4 z-10 ${fadeIn ? 'clarify-text' : ''}`}>{t.selectUpToThreeMoods}</h1>
+      <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16">
+        <h1 className={`text-3xl sm:text-4xl mb-8 z-10 ${fadeIn ? 'clarify-text' : ''} font-['Bricolage_Grotesque'] text-center`}>{t.selectUpToThreeMoods}</h1>
         <MoodBalls 
           showText={true} 
           textColor="text-black-500" 
