@@ -71,7 +71,7 @@ const SelectedMood = () => {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-cover bg-center text-mooody-green overflow-hidden relative" style={{ backgroundImage: "url('/Bg.png')" }}>
-      <div className="absolute inset-0 bg-white opacity-80 z-0"></div>
+      <div className="absolute inset-0 bg-white opacity-40 z-0"></div>
       <LanguageToggle />
       <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16 z-10">
         <MoodBalls
