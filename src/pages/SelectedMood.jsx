@@ -7,7 +7,6 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 const SelectedMood = () => {
   const location = useLocation();
@@ -72,31 +71,14 @@ const SelectedMood = () => {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
-      <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50">
-        <LanguageToggle />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <div className="menu-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem onClick={() => navigate('/home')}>{t.home}</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+      <LanguageToggle />
       <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16">
         <MoodBalls
           showText={false}
           customColors={moodColors}
           selectedEmotions={selectedEmotions}
         />
-        <h2 className="text-xl md:text-2xl font-bold mb-4 text-center z-10">
+        <h2 className="text-2xl font-bold mb-4 text-center z-10">
           {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
         </h2>
         <p className="mb-4 text-sm z-10">{`${currentEmotionIndex + 1} / ${selectedEmotions.length}`}</p>
@@ -104,7 +86,7 @@ const SelectedMood = () => {
           value={userInputs[currentEmotionIndex] || ''}
           onChange={handleInputChange}
           placeholder={t.typeHere}
-          className="w-full h-40 md:h-64 text-base md:text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green z-10"
+          className="w-full h-64 text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green z-10"
         />
         <div className="mt-8 flex flex-col items-center justify-between w-full max-w-md z-10">
           <Button
