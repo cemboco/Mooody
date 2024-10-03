@@ -25,7 +25,7 @@ const translations = {
   },
 };
 
-const ColorfulText = ({ text }: { text: string }) => {
+const ColorfulText = ({ text }) => {
   const colors = ['text-red-500', 'text-yellow-500', 'text-green-500', 'text-blue-500', 'text-purple-500', 'text-pink-500'];
   return (
     <span>
