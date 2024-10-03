@@ -8,6 +8,7 @@ import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
 import MoodBalls from '../components/MoodBalls';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import CustomEmotionModal from '../components/CustomEmotionModal';
 
 const SelectedMood = () => {
   const location = useLocation();
@@ -17,6 +18,8 @@ const SelectedMood = () => {
   const selectedEmotions = location.state?.selectedEmotions || [];
   const [userInputs, setUserInputs] = useState(Array(selectedEmotions.length).fill(''));
   const [currentEmotionIndex, setCurrentEmotionIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [customEmotion, setCustomEmotion] = useState(null);
 
   const currentEmotion = selectedEmotions[currentEmotionIndex] || t.defaultMood;
 
@@ -70,6 +73,25 @@ const SelectedMood = () => {
     navigate('/meditate');
   };
 
+  const handleEmotionSelect = (emotion) => {
+    if (emotion === 'custom' && !customEmotion) {
+      setIsModalOpen(true);
+    } else if (selectedEmotions.includes(emotion)) {
+      const updatedEmotions = selectedEmotions.filter(e => e !== emotion);
+      navigate('/selected-mood', { state: { selectedEmotions: updatedEmotions } });
+    } else if (selectedEmotions.length < 3) {
+      const updatedEmotions = [...selectedEmotions, emotion];
+      navigate('/selected-mood', { state: { selectedEmotions: updatedEmotions } });
+    }
+  };
+
+  const handleCustomEmotionAdd = (newEmotion) => {
+    setCustomEmotion(newEmotion);
+    const updatedEmotions = [...selectedEmotions, newEmotion];
+    navigate('/selected-mood', { state: { selectedEmotions: updatedEmotions } });
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
       <LanguageToggle />
@@ -91,7 +113,7 @@ const SelectedMood = () => {
         </DropdownMenu>
       </div>
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
-        <h2 className={`text-xl mb-4 z-10`}>{t.selectUpToThreeMoods}</h2>
+        <h2 className="text-xl mb-4 z-10">{t.selectUpToThreeMoods}</h2>
         <MoodBalls 
           showText={true} 
           textColor="text-gray-700" 
@@ -100,22 +122,36 @@ const SelectedMood = () => {
           onCustomEmotionClick={() => setIsModalOpen(true)}
           customEmotion={customEmotion}
         />
+        <div className="mt-8 w-full max-w-md">
+          <h3 className="text-lg mb-2">{t.howDoYouFeel} {t[currentEmotion] || currentEmotion}?</h3>
+          <Textarea
+            value={userInputs[currentEmotionIndex] || ''}
+            onChange={handleInputChange}
+            placeholder={t.shareYourThoughts}
+            className="w-full p-2 mb-4 bg-white bg-opacity-50 rounded"
+          />
+          <div className="flex justify-between">
+            <Button onClick={() => navigate('/mood')} variant="outline">
+              <ArrowLeft className="mr-2 h-4 w-4" /> {t.back}
+            </Button>
+            <Button onClick={handleSubmit}>
+              {currentEmotionIndex < selectedEmotions.length - 1 ? t.next : t.finish} <Check className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
       </div>
-      {selectedEmotions.length > 0 && (
-        <Button
-          onClick={() => navigate('/selected-mood', { state: { selectedEmotions } })}
-          className="fixed bottom-4 right-4 z-[60] rounded-full"
-          size="icon"
-        >
-          <ArrowRight className="h-4 w-4" />
-        </Button>
-      )}
+      <Button
+        onClick={handleMeditate}
+        className="fixed bottom-4 left-4 z-[60]"
+        variant="outline"
+      >
+        {t.meditate}
+      </Button>
       <CustomEmotionModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onAdd={handleCustomEmotionAdd}
       />
-      <PrivacyPolicyModal isOpen={isPrivacyPolicyOpen} onClose={() => setIsPrivacyPolicyOpen(false)} />
     </div>
   );
 };
