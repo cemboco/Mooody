@@ -61,7 +61,10 @@ const Index = () => {
         <MoodBalls showText={false} showHappyText={false} />
         <div className="hero-title">
           <div className="hero-content">
-            <h1 className="hero-heading">Regulate your mood, unravel your emotions.</h1>
+            <h1 className="hero-heading font-['Bricolage_Grotesque'] text-[#334155] flex flex-col items-center justify-center w-full sm:w-[866px] h-[152px] text-[40px] sm:text-[80px] leading-[1.2] sm:leading-[76px] text-center tracking-[-3px] self-stretch">
+              <span>Regulate your mood,</span>
+              <span>unravel your <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">emotions</span></span>
+            </h1>
             <p className="hero-subheading">
               Your feelings—whether they are of joy, sadness, fear, or excitement—are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you.
             </p>
