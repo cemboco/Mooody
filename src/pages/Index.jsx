@@ -25,12 +25,12 @@ const translations = {
   },
 };
 
-const ColorfulText = ({ text }: { text: string }) => {
-  const colors = ['text-red-500', 'text-yellow-500', 'text-green-500', 'text-blue-500', 'text-purple-500', 'text-pink-500'];
+const ColorfulText = ({ text }) => {
+  const colors = ['#FF0000', '#FFA500', '#008000', '#0000FF', '#800080', '#FFC0CB'];
   return (
     <span>
       {text.split('').map((letter, index) => (
-        <span key={index} className={colors[index % colors.length]}>
+        <span key={index} style={{ color: colors[index % colors.length] }}>
           {letter}
         </span>
       ))}
