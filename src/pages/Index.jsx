@@ -75,7 +75,7 @@ const Index = () => {
               </span></span>
             </h1>
             <p className="hero-subheading">
-              Your feelings—whether they are of joy, sadness, fear, or excitement—are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you.
+              Your feelings - whether they are of joy, sadness, fear, or excitement - are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you.
             </p>
           </div>
           <div className="cta-container">
@@ -83,7 +83,7 @@ const Index = () => {
               className="cta-button box-border flex flex-row justify-center items-center py-3 px-8 gap-2 w-[359px] h-12 bg-[#F87171] border border-[#DC2626] rounded-full shadow-[inset_0px_-4px_3.2px_rgba(0,0,0,0.25)] hover:bg-[#F87171]/90 transition-colors"
               onClick={() => navigate('/mood')}
             >
-              <span className="cta-text font-['Geist'] font-semibold text-base leading-6 text-center tracking-[-1px] text-white">
+              <span className="cta-text font-['Bricolage_Grotesque'] font-semibold text-base leading-6 text-center tracking-[-1px] text-white">
                 I'm ready to build a relationship with myself
               </span>
               <ArrowRight className="cta-arrow w-4 h-4 text-white" />
