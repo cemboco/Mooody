@@ -83,7 +83,7 @@ const Mood = () => {
         </DropdownMenuContent>
       </DropdownMenu>
       <div className="relative w-full h-screen flex flex-col items-center justify-center p-4">
-        <h2 className={`text-xl mb-4 z-10 ${fadeIn ? 'clarify-text' : ''}`}>{t.selectUpToThreeMoods}</h2>
+        <h1 className={`text-xl mb-4 z-10 ${fadeIn ? 'clarify-text' : ''}`}>{t.selectUpToThreeMoods}</h1>
         <MoodBalls 
           showText={true} 
           textColor="text-black-500" 
