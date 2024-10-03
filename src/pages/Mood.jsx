@@ -41,7 +41,7 @@ const Mood = () => {
   };
 
   return (
-    <div className={`min-h-screen w-full flex items-center justify-center bg-cover bg-center text-mooody-green overflow-hidden ${fadeIn ? 'fade-in' : ''}`} style={{ backgroundImage: "url('/bg.png')" }}>
+    <div className={`min-h-screen w-full flex items-center justify-center bg-cover bg-center text-mooody-green overflow-hidden ${fadeIn ? 'fade-in' : ''}`} style={{ backgroundImage: "url('/Bg.png')" }}>
       <style jsx>{`
         @keyframes clarify {
           from { filter: blur(5px); opacity: 0; }
