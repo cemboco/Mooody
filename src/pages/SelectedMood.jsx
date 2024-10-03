@@ -70,25 +70,26 @@ const SelectedMood = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-mooody-yellow text-mooody-green overflow-hidden">
+    <div className="min-h-screen w-full flex items-center justify-center bg-cover bg-center text-mooody-green overflow-hidden relative" style={{ backgroundImage: "url('/Bg.png')" }}>
+      <div className="absolute inset-0 bg-white opacity-80 z-0"></div>
       <LanguageToggle />
-      <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16">
+      <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16 z-10">
         <MoodBalls
           showText={false}
           customColors={moodColors}
           selectedEmotions={selectedEmotions}
         />
-        <h2 className="text-2xl font-bold mb-4 text-center z-10">
+        <h2 className="text-2xl font-bold mb-4 text-center">
           {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
         </h2>
-        <p className="mb-4 text-sm z-10">{`${currentEmotionIndex + 1} / ${selectedEmotions.length}`}</p>
+        <p className="mb-4 text-sm">{`${currentEmotionIndex + 1} / ${selectedEmotions.length}`}</p>
         <Textarea
           value={userInputs[currentEmotionIndex] || ''}
           onChange={handleInputChange}
           placeholder={t.typeHere}
-          className="w-full h-64 text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green z-10"
+          className="w-full h-64 text-lg p-4 bg-white bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-mooody-green"
         />
-        <div className="mt-8 flex flex-col items-center justify-between w-full max-w-md z-10">
+        <div className="mt-8 flex flex-col items-center justify-between w-full max-w-md">
           <Button
             onClick={() => navigate('/mood')}
             className="flex items-center mb-4 w-full"
