@@ -9,7 +9,6 @@ import LanguageToggle from '../components/LanguageToggle';
 import Calendar from '../components/Calendar';
 import { format, parseISO } from 'date-fns';
 import { de, enUS } from 'date-fns/locale';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 const ConfirmationMood = () => {
   const navigate = useNavigate();
@@ -134,27 +133,15 @@ const ConfirmationMood = () => {
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-start bg-mooody-yellow text-mooody-green p-4">
       <LanguageToggle />
-      <div className="w-full flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">{t.confirmationTitle}</h1>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <div className="menu-icon">
-                <span className="w-full h-[2px] bg-current"></span>
-                <span className="w-full h-[2px] bg-current"></span>
-                <span className="w-full h-[2px] bg-current"></span>
-              </div>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem onSelect={() => navigate('/home')}>{t.home}</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => navigate('/mood')}>{t.newMoodEntry}</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-      <div className="w-full flex justify-between items-center mb-8">
-        <Calendar onDateSelect={handleDateSelect} />
-        {renderEntries()}
+      <h1 className="text-3xl font-bold mb-8">{t.confirmationTitle}</h1>
+      <div className="w-full max-w-6xl flex flex-col md:flex-row justify-between">
+        <div className="w-full md:w-1/2 mb-8 md:mb-0 md:mr-4">
+          <Calendar onDateSelect={handleDateSelect} />
+          {renderEntries()}
+        </div>
+        <div className="w-full md:w-1/2 md:ml-4">
+          {renderAllEntries()}
+        </div>
       </div>
       <div className="mt-8">
         <Button
