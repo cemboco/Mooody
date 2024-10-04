@@ -6,7 +6,6 @@ import { Check, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import LanguageToggle from '../components/LanguageToggle';
-import MoodBalls from '../components/MoodBalls';
 
 const SelectedMood = () => {
   const location = useLocation();
@@ -18,19 +17,6 @@ const SelectedMood = () => {
   const [currentEmotionIndex, setCurrentEmotionIndex] = useState(0);
 
   const currentEmotion = selectedEmotions[currentEmotionIndex] || t.defaultMood;
-
-  const moodColors = {
-    happy: '#FFD700',
-    sad: '#4169E1',
-    angry: '#FF4500',
-    anxious: '#9932CC',
-    tired: '#708090',
-    calm: '#20B2AA',
-    excited: '#FF69B4',
-    stressed: '#FF6347',
-    confident: '#32CD32',
-    worried: '#DDA0DD',
-  };
 
   useEffect(() => {
     const updateEntry = () => {
@@ -74,11 +60,6 @@ const SelectedMood = () => {
       <div className="absolute inset-0 bg-white opacity-40 z-0"></div>
       <LanguageToggle />
       <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16 z-10">
-        <MoodBalls
-          showText={false}
-          customColors={moodColors}
-          selectedEmotions={selectedEmotions}
-        />
         <h2 className="text-2xl font-bold mb-4 text-center">
           {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}
         </h2>
@@ -109,12 +90,6 @@ const SelectedMood = () => {
             disabled={!userInputs[currentEmotionIndex] || !userInputs[currentEmotionIndex].trim()}
           >
             <Check className="h-6 w-6 text-white" />
-            <MoodBalls
-          key={location.pathname} // Add this line
-          showText={false}
-          customColors={moodColors}
-          selectedEmotions={selectedEmotions}
-        />
           </Button>
         </div>
       </div>
