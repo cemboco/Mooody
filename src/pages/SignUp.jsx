@@ -31,7 +31,7 @@ const SignUp = () => {
         toast.error(t.emailAlreadyInUse);
       } else {
         toast.success(t.signUpSuccessful);
-        navigate('/login');
+        navigate('/'); // Redirect to home page after successful sign-up
       }
     } catch (error) {
       console.error('Sign up error:', error);
