@@ -29,7 +29,7 @@ const SignUp = () => {
       if (error) throw error;
 
       alert(t.checkEmailForLink);
-      navigate('/login');
+      navigate('/'); // Redirect to homepage after successful registration
     } catch (error) {
       setError(error.message);
     } finally {

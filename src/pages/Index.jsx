@@ -78,20 +78,26 @@ const Index = () => {
               Your feelings - whether they are of joy, sadness, fear, or excitement - are powerful messengers. Mooody provides the space you need to track and understand what those feelings are telling you.
             </p>
           </div>
-          <div className="cta-container">
-            <Button 
-              className="cta-button box-border flex flex-row justify-center items-center py-3 px-8 gap-2 w-[359px] h-12 bg-[#F87171] border border-[#DC2626] rounded-full shadow-[inset_0px_-4px_3.2px_rgba(0,0,0,0.25)] hover:bg-[#F87171]/90 transition-colors"
-              onClick={() => navigate('/mood')}
-            >
-              <span className="cta-text font-['Geist'] font-semibold text-base leading-6 text-center tracking-[-1px] text-white">
-                I'm ready to build a relationship with myself
-              </span>
-              <ArrowRight className="cta-arrow w-4 h-4 text-white" />
-            </Button>
-            <p className="cta-subtext font-['Geist'] font-normal text-xs leading-4 text-center tracking-[-0.5px] text-[#020617] mt-3">
-              Try for free - No Credit Card Required.
-            </p>
-          </div>
+        <div className="cta-container">
+          <Button 
+            className="cta-button box-border flex flex-row justify-center items-center py-3 px-8 gap-2 w-[359px] h-12 bg-[#F87171] border border-[#DC2626] rounded-full shadow-[inset_0px_-4px_3.2px_rgba(0,0,0,0.25)] hover:bg-[#F87171]/90 transition-colors"
+            onClick={() => navigate('/mood')}
+          >
+            <span className="cta-text font-['Geist'] font-semibold text-base leading-6 text-center tracking-[-1px] text-white">
+              I'm ready to build a relationship with myself
+            </span>
+            <ArrowRight className="cta-arrow w-4 h-4 text-white" />
+          </Button>
+          <p className="cta-subtext font-['Geist'] font-normal text-xs leading-4 text-center tracking-[-0.5px] text-[#020617] mt-3">
+            Try for free - No Credit Card Required.
+          </p>
+          <Button
+            className="mt-4 text-sm"
+            variant="link"
+            onClick={() => navigate('/signup')}
+          >
+            {language === 'de' ? 'Registrieren' : 'Sign Up'}
+          </Button>
         </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic z-30">
