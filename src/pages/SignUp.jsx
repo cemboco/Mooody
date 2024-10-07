@@ -5,12 +5,12 @@ import { Input } from "@/components/ui/input";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { supabase } from '../integrations/supabase/supabase';
+import { toast } from 'sonner';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
@@ -18,7 +18,6 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
 
     try {
       const { data, error } = await supabase.auth.signUp({
@@ -28,10 +27,15 @@ const SignUp = () => {
 
       if (error) throw error;
 
-      alert(t.checkEmailForLink);
-      navigate('/'); // Redirect to homepage after successful registration
+      if (data?.user?.identities?.length === 0) {
+        toast.error(t.emailAlreadyInUse);
+      } else {
+        toast.success(t.signUpSuccessful);
+        navigate('/login');
+      }
     } catch (error) {
-      setError(error.message);
+      console.error('Sign up error:', error);
+      toast.error(error.message || t.signUpError);
     } finally {
       setLoading(false);
     }
@@ -74,8 +78,6 @@ const SignUp = () => {
               />
             </div>
           </div>
-
-          {error && <div className="text-red-500 text-sm">{error}</div>}
 
           <div>
             <Button
