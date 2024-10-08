@@ -1,29 +1,40 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { language } = useLanguage();
+  const { language, toggleLanguage } = useLanguage();
   const t = translations[language];
 
   return (
     <header className="w-full bg-mooody-yellow py-2 px-4 flex justify-between items-center sticky top-0 z-50">
-      <Link to="/" className="text-2xl font-bold text-mooody-green font-sans tracking-wider">
-        M O O O D Y
-      </Link>
-      
-      <div className="flex items-center space-x-4">
+      <div className="flex-1">
         <Button
           onClick={() => navigate('/gratitude')}
           variant="outline"
           className="text-mooody-green border-mooody-green hover:bg-mooody-green hover:text-mooody-yellow rounded-full px-6 py-2"
         >
           {t.gratitudeLogTitle}
+        </Button>
+      </div>
+      
+      <Link to="/" className="flex-1 text-center">
+        <h1 className="text-2xl font-bold text-mooody-green font-sans tracking-wider">
+          mooody
+        </h1>
+      </Link>
+      
+      <div className="flex-1 flex justify-end items-center space-x-4">
+        <Button
+          onClick={toggleLanguage}
+          variant="ghost"
+          className="text-black hover:text-mooody-green lowercase"
+        >
+          {language === 'en' ? 'en' : 'de'}
         </Button>
 
         <DropdownMenu>
