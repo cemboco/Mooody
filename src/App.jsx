@@ -15,6 +15,7 @@ import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import { supabase } from './integrations/supabase/supabase';
 import { LanguageProvider } from './contexts/LanguageContext';
+import Header from './components/Header';
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const AppContent = () => {
 
   return (
     <BrowserRouter>
+      <Header />
       <VolumeControl isPlaying={isPlaying} toggleAudio={toggleAudio} />
       <Routes>
         <Route path="/" element={<Index />} />
