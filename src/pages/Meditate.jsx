@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { Play, Square, Volume2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
-import LanguageToggle from '../components/LanguageToggle';
 
 const Meditate = () => {
   const navigate = useNavigate();
@@ -86,8 +85,6 @@ const Meditate = () => {
 
   return (
     <div className="min-h-screen w-full flex bg-mooody-yellow text-mooody-green overflow-hidden">
-      <LanguageToggle />
-      
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="max-w-md">
           <p className="text-lg leading-relaxed mb-4">
