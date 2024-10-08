@@ -5,19 +5,15 @@ const LanguageContext = createContext();
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
     const savedLanguage = localStorage.getItem('language');
-    return savedLanguage || 'en'; // Changed default to 'en'
+    return savedLanguage || 'en';
   });
-
-  const toggleLanguage = () => {
-    setLanguage(prevLang => prevLang === 'de' ? 'en' : 'de');
-  };
 
   useEffect(() => {
     localStorage.setItem('language', language);
   }, [language]);
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
+    <LanguageContext.Provider value={{ language }}>
       {children}
     </LanguageContext.Provider>
   );

@@ -13,7 +13,6 @@ import Index from './pages/Index';
 import Meditate from './pages/Meditate';
 import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
-import { supabase } from './integrations/supabase/supabase';
 import { LanguageProvider } from './contexts/LanguageContext';
 import Header from './components/Header';
 

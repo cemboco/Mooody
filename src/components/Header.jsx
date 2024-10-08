@@ -7,7 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 
 const Header = () => {
   const navigate = useNavigate();
-  const { language, toggleLanguage } = useLanguage();
+  const { language } = useLanguage();
   const t = translations[language];
 
   return (
@@ -28,15 +28,7 @@ const Header = () => {
         </h1>
       </Link>
       
-      <div className="flex-1 flex justify-end items-center space-x-4">
-        <Button
-          onClick={toggleLanguage}
-          variant="ghost"
-          className="text-mooody-green hover:text-black lowercase"
-        >
-          {language === 'en' ? 'en' : 'de'}
-        </Button>
-
+      <div className="flex-1 flex justify-end items-center">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="text-black">
