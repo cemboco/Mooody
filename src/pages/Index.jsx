@@ -2,15 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import MoodBalls from '@/components/MoodBalls';
 import { useNavigate } from 'react-router-dom';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import PrivacyPolicyModal from '@/components/PrivacyPolicyModal';
 import { ArrowRight } from 'lucide-react';
-
-const translations = {
-  home: 'Home',
-  entries: 'Entries',
-  privacyPolicy: 'Privacy Policy',
-};
 
 const Index = () => {
   const navigate = useNavigate();
@@ -23,24 +16,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-cover bg-center text-mooody-green overflow-hidden" style={{ backgroundImage: "url('/Bg.png')" }}>
-      <div className="fixed top-0 left-0 right-0 flex justify-end items-center p-4 z-50">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="ml-auto">
-              <div className="menu-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem onSelect={() => navigate('/home')}>{translations.home}</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => navigate('/confirmation-mood')}>{translations.entries}</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => setIsPrivacyPolicyOpen(true)}>{translations.privacyPolicy}</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
       <div className="relative w-full min-h-screen flex flex-col items-center justify-center p-4">
         <MoodBalls showText={false} showHappyText={false} />
         <div className="hero-title">
