@@ -5,7 +5,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Check, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
-import LanguageToggle from '../components/LanguageToggle';
 
 const SelectedMood = () => {
   const location = useLocation();
@@ -58,7 +57,6 @@ const SelectedMood = () => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-cover bg-center text-mooody-green overflow-hidden relative" style={{ backgroundImage: "url('/Bg.png')" }}>
       <div className="absolute inset-0 bg-white opacity-40 z-0"></div>
-      <LanguageToggle />
       <div className="relative w-full h-screen flex flex-col items-center justify-start p-4 pt-16 z-10">
         <h2 className="text-2xl font-bold mb-4 text-center">
           {t.whatsMakingYouFeel.replace('[emotion]', t[currentEmotion] || currentEmotion)}

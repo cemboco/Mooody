@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MoodBalls from '../components/MoodBalls';
 import CustomEmotionModal from '../components/CustomEmotionModal';
-import LanguageToggle from '../components/LanguageToggle';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -65,7 +64,6 @@ const Mood = () => {
           transition: all 0.3s ease;
         }
       `}</style>
-      <LanguageToggle />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="fixed top-4 right-4 z-[60]">
