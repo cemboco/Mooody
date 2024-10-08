@@ -23,7 +23,7 @@ const Header = () => {
       </div>
       
       <Link to="/" className="flex-1 text-center">
-        <h1 className="text-2xl font-bold text-mooody-green font-sans tracking-wider">
+        <h1 className="text-2xl font-bold text-mooody-green font-['Julius_Sans_One'] uppercase tracking-wider">
           mooody
         </h1>
       </Link>
