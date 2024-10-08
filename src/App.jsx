@@ -13,6 +13,7 @@ import Meditate from './pages/Meditate';
 import { useState, useEffect } from 'react';
 import VolumeControl from './components/VolumeControl';
 import { supabase } from './integrations/supabase/supabase';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 const queryClient = new QueryClient();
 
@@ -65,8 +66,10 @@ const App = () => {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <Toaster />
-          <AppContent />
+          <LanguageProvider>
+            <Toaster />
+            <AppContent />
+          </LanguageProvider>
         </TooltipProvider>
       </QueryClientProvider>
     </React.StrictMode>
