@@ -8,6 +8,7 @@ import Mood from './pages/Mood';
 import SelectedMood from './pages/SelectedMood';
 import ConfirmationMood from './pages/ConfirmationMood';
 import Calendar from './components/Calendar';
+import GratitudeLog from './components/GratitudeLog';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
 import { useState, useEffect } from 'react';
@@ -55,6 +56,7 @@ const AppContent = () => {
         <Route path="/confirmation-mood" element={<ConfirmationMood />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/meditate" element={<Meditate />} />
+        <Route path="/gratitude" element={<GratitudeLog />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

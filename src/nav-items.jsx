@@ -1,14 +1,14 @@
-import { HomeIcon } from "lucide-react";
-import Index from "./pages/Index.jsx";
+import React from 'react';
+import Mood from './pages/Mood';
+import SelectedMood from './pages/SelectedMood';
+import ConfirmationMood from './pages/ConfirmationMood';
+import Calendar from './components/Calendar';
+import GratitudeLog from './components/GratitudeLog';
 
-/**
- * Central place for defining the navigation items. Used for navigation components and routing.
- */
 export const navItems = [
-  {
-    title: "Home",
-    to: "/",
-    icon: <HomeIcon className="h-4 w-4" />,
-    page: <Index />,
-  },
+  { to: '/mood', page: <Mood /> },
+  { to: '/selected-mood', page: <SelectedMood /> },
+  { to: '/confirmation-mood', page: <ConfirmationMood /> },
+  { to: '/calendar', page: <Calendar /> },
+  { to: '/gratitude', page: <GratitudeLog /> },
 ];

@@ -106,7 +106,10 @@ export const translations = {
     forgotPassword: 'Passwort vergessen?',
     backToLogin: 'Zurück zur Anmeldung',
     moodTrendsChart: 'Stimmungsverlauf',
-    moodDistributionChart: 'Stimmungsverteilung'
+    moodDistributionChart: 'Stimmungsverteilung',
+    gratitudeLogTitle: 'Dankbarkeitstagebuch',
+    gratitudeEntryPlaceholder: 'Wofür bist du heute dankbar?',
+    addGratitudeEntry: 'Eintrag hinzufügen',
   },
   en: {
     title: 'Moody',
@@ -215,6 +218,9 @@ export const translations = {
     forgotPassword: 'Forgot password?',
     backToLogin: 'Back to Login',
     moodTrendsChart: 'Mood Trends',
-    moodDistributionChart: 'Mood Distribution'
+    moodDistributionChart: 'Mood Distribution',
+    gratitudeLogTitle: 'Gratitude Log',
+    gratitudeEntryPlaceholder: 'What are you grateful for today?',
+    addGratitudeEntry: 'Add Entry',
   }
 };
