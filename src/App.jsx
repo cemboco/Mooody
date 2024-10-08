@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { navItems } from "./nav-items";
-import { LanguageProvider } from './contexts/LanguageContext';
 import Mood from './pages/Mood';
 import SelectedMood from './pages/SelectedMood';
 import ConfirmationMood from './pages/ConfirmationMood';
@@ -65,12 +64,10 @@ const App = () => {
   return (
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <LanguageProvider>
-          <TooltipProvider>
-            <Toaster />
-            <AppContent />
-          </TooltipProvider>
-        </LanguageProvider>
+        <TooltipProvider>
+          <Toaster />
+          <AppContent />
+        </TooltipProvider>
       </QueryClientProvider>
     </React.StrictMode>
   );

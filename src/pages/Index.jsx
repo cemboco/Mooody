@@ -1,33 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
-import LanguageToggle from '@/components/LanguageToggle';
 import MoodBalls from '@/components/MoodBalls';
 import { useNavigate } from 'react-router-dom';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import PrivacyPolicyModal from '@/components/PrivacyPolicyModal';
 import { ArrowRight } from 'lucide-react';
 
-const useLanguage = () => {
-  const [language, setLanguage] = useState('en');
-  return { language, setLanguage };
-};
-
 const translations = {
-  en: {
-    home: 'Home',
-    entries: 'Entries',
-    privacyPolicy: 'Privacy Policy',
-  },
-  de: {
-    home: 'Startseite',
-    entries: 'Einträge',
-    privacyPolicy: 'Datenschutzrichtlinie',
-  },
+  home: 'Home',
+  entries: 'Entries',
+  privacyPolicy: 'Privacy Policy',
 };
 
 const Index = () => {
-  const { language } = useLanguage();
-  const t = translations[language] || translations.en;
   const navigate = useNavigate();
   const [animate, setAnimate] = useState(false);
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
@@ -38,8 +23,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-cover bg-center text-mooody-green overflow-hidden" style={{ backgroundImage: "url('/Bg.png')" }}>
-      <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 z-50">
-        <LanguageToggle />
+      <div className="fixed top-0 left-0 right-0 flex justify-end items-center p-4 z-50">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="ml-auto">
@@ -51,9 +35,9 @@ const Index = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem onSelect={() => navigate('/home')}>{t.home}</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => setIsPrivacyPolicyOpen(true)}>{t.privacyPolicy}</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => navigate('/home')}>{translations.home}</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => navigate('/confirmation-mood')}>{translations.entries}</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => setIsPrivacyPolicyOpen(true)}>{translations.privacyPolicy}</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -95,10 +79,7 @@ const Index = () => {
         </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0 text-center p-2 bg-gray-100 text-gray-500 text-xs italic z-30">
-        {language === 'de' ? 
-          "Diese App ersetzt keine professionelle psychologische oder medizinische Beratung. Bei ernsthaften mentalen Problemen oder Krisen suchen Sie bitte einen Spezialisten oder Therapeuten auf." :
-          "This app does not replace professional psychological or medical advice. For serious mental health issues or crises, please consult a specialist or therapist."
-        }
+        This app does not replace professional psychological or medical advice. For serious mental health issues or crises, please consult a specialist or therapist.
       </div>
       <PrivacyPolicyModal isOpen={isPrivacyPolicyOpen} onClose={() => setIsPrivacyPolicyOpen(false)} />
     </div>

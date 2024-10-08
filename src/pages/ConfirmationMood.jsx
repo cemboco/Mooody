@@ -3,17 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { useLanguage } from '../contexts/LanguageContext';
-import { translations } from '../utils/translations';
-import LanguageToggle from '../components/LanguageToggle';
 import Calendar from '../components/Calendar';
 import { format, parseISO } from 'date-fns';
-import { de, enUS } from 'date-fns/locale';
+import { enUS } from 'date-fns/locale';
+
+const translations = {
+  confirmationTitle: 'Mood Confirmation',
+  entries: 'Entries',
+  noEntriesForThisDay: 'No entries for this day',
+  backToHome: 'Back to Home',
+  delete: 'Delete',
+  save: 'Save',
+  confirmDelete: 'Are you sure you want to delete this entry?'
+};
 
 const ConfirmationMood = () => {
   const navigate = useNavigate();
-  const { language } = useLanguage();
-  const t = translations[language];
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [entries, setEntries] = useState({});
   const [allEntries, setAllEntries] = useState([]);
@@ -41,7 +46,7 @@ const ConfirmationMood = () => {
   };
 
   const getLocale = () => {
-    return language === 'de' ? de : enUS;
+    return enUS;
   };
 
   const handleEntryClick = (entry) => {
@@ -73,7 +78,7 @@ const ConfirmationMood = () => {
   };
 
   const handleDelete = () => {
-    if (window.confirm(t.confirmDelete)) {
+    if (window.confirm(translations.confirmDelete)) {
       const updatedEntries = { ...entries };
       const dateEntries = updatedEntries[selectedEntry.date];
       const filteredEntries = dateEntries.filter(e => !(e.emotion === selectedEntry.emotion && e.text === selectedEntry.text));
@@ -102,15 +107,15 @@ const ConfirmationMood = () => {
 
     return (
       <div className="mt-4">
-        <h3 className="text-xl font-semibold mb-2">{t.entries}</h3>
+        <h3 className="text-xl font-semibold mb-2">{translations.entries}</h3>
         {dayEntries.length > 0 ? (
           dayEntries.map((entry, index) => (
             <div key={index} className="mb-2 p-2 bg-white rounded shadow cursor-pointer hover:bg-gray-100" onClick={() => handleEntryClick(entry)}>
-              <p><strong>{t[entry.emotion] || entry.emotion}:</strong> {entry.text}</p>
+              <p><strong>{entry.emotion}:</strong> {entry.text}</p>
             </div>
           ))
         ) : (
-          <p>{t.noEntriesForThisDay}</p>
+          <p>{translations.noEntriesForThisDay}</p>
         )}
       </div>
     );
@@ -119,11 +124,11 @@ const ConfirmationMood = () => {
   const renderAllEntries = () => {
     return (
       <div className="mt-4 overflow-y-auto max-h-[calc(100vh-200px)]">
-        <h3 className="text-xl font-semibold mb-2">{t.allEntries}</h3>
+        <h3 className="text-xl font-semibold mb-2">{translations.entries}</h3>
         {allEntries.map((entry, index) => (
           <div key={index} className="mb-2 p-2 bg-white rounded shadow cursor-pointer hover:bg-gray-100" onClick={() => handleEntryClick(entry)}>
             <p className="text-sm text-gray-500">{format(parseISO(entry.date), 'PP', { locale: getLocale() })}</p>
-            <p><strong>{t[entry.emotion] || entry.emotion}:</strong> {entry.text}</p>
+            <p><strong>{entry.emotion}:</strong> {entry.text}</p>
           </div>
         ))}
       </div>
@@ -132,8 +137,7 @@ const ConfirmationMood = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-start bg-mooody-yellow text-mooody-green p-4">
-      <LanguageToggle />
-      <h1 className="text-3xl font-bold mb-8">{t.confirmationTitle}</h1>
+      <h1 className="text-3xl font-bold mb-8">{translations.confirmationTitle}</h1>
       <div className="w-full max-w-6xl flex flex-col md:flex-row justify-between">
         <div className="w-full md:w-1/2 mb-8 md:mb-0 md:mr-4">
           <Calendar onDateSelect={handleDateSelect} />
@@ -148,13 +152,13 @@ const ConfirmationMood = () => {
           onClick={() => navigate('/home')}
           className="bg-mooody-green hover:bg-mooody-dark-green text-white"
         >
-          {t.backToHome}
+          {translations.backToHome}
         </Button>
       </div>
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>{selectedEntry && (t[selectedEntry.emotion] || selectedEntry.emotion)}</DialogTitle>
+            <DialogTitle>{selectedEntry && selectedEntry.emotion}</DialogTitle>
           </DialogHeader>
           <Textarea
             value={editedText}
@@ -163,8 +167,8 @@ const ConfirmationMood = () => {
             className="w-full mt-2"
           />
           <DialogFooter className="flex justify-between mt-4">
-            <Button onClick={handleDelete} variant="destructive">{t.delete}</Button>
-            <Button onClick={handleSave}>{t.save}</Button>
+            <Button onClick={handleDelete} variant="destructive">{translations.delete}</Button>
+            <Button onClick={handleSave}>{translations.save}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
