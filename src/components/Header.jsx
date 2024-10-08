@@ -16,14 +16,14 @@ const Header = () => {
         <Button
           onClick={() => navigate('/gratitude')}
           variant="outline"
-          className="text-mooody-green border-mooody-green hover:bg-mooody-green hover:text-mooody-yellow rounded-full px-6 py-2"
+          className="text-black border-black hover:bg-black hover:text-mooody-yellow rounded-full px-6 py-2"
         >
           {t.gratitudeLogTitle}
         </Button>
       </div>
       
       <Link to="/" className="flex-1 text-center">
-        <h1 className="text-2xl font-bold text-mooody-green font-['Julius_Sans_One'] uppercase tracking-wider">
+        <h1 className="text-2xl font-bold text-black font-['Julius_Sans_One'] tracking-wider">
           mooody
         </h1>
       </Link>
@@ -32,14 +32,14 @@ const Header = () => {
         <Button
           onClick={toggleLanguage}
           variant="ghost"
-          className="text-black hover:text-mooody-green lowercase"
+          className="text-mooody-green hover:text-black lowercase"
         >
           {language === 'en' ? 'en' : 'de'}
         </Button>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="text-mooody-green">
+            <Button variant="ghost" size="icon" className="text-black">
               <div className="menu-icon">
                 <span></span>
                 <span></span>
