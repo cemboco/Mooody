@@ -91,13 +91,6 @@ const Index = () => {
             <p className="cta-subtext font-['Geist'] font-normal text-xs leading-4 text-center tracking-[-0.5px] text-[#020617] mt-3">
               Try for free - No Credit Card Required.
             </p>
-            <Button
-              className="mt-4 text-sm"
-              variant="link"
-              onClick={() => navigate('/signup')}
-            >
-              {language === 'de' ? 'Registrieren' : 'Sign Up'}
-            </Button>
           </div>
         </div>
       </div>
