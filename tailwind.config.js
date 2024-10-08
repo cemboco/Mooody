@@ -21,6 +21,7 @@ module.exports = {
         serif: ['Times New Roman', 'serif'],
         hevilla: ['Hevilla', 'sans-serif'],
         'julius': ['Julius Sans One', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'], // Add this line for a minimalistic sans-serif font
       },
       colors: {
         border: "hsl(var(--border))",

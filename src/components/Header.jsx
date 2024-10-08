@@ -1,18 +1,21 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { language } = useLanguage();
   const t = translations[language];
 
   return (
-    <header className="w-full bg-mooody-yellow py-2 px-4 flex justify-between items-center">
-      <h1 className="text-2xl font-bold text-mooody-green">Mooody</h1>
+    <header className="w-full bg-mooody-yellow py-2 px-4 flex justify-between items-center sticky top-0 z-50">
+      <Link to="/" className="text-2xl font-bold text-mooody-green font-sans tracking-wider">
+        M O O O D Y
+      </Link>
       
       <div className="flex items-center space-x-4">
         <Button

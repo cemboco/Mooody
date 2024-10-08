@@ -3,12 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 const GratitudeLog = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const [gratitudeEntries, setGratitudeEntries] = useState([]);
   const [newEntry, setNewEntry] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedEntries = localStorage.getItem('gratitudeEntries');
@@ -28,6 +31,14 @@ const GratitudeLog = () => {
 
   return (
     <div className="p-4 max-w-md mx-auto">
+      <Button
+        onClick={() => navigate(-1)}
+        variant="ghost"
+        className="mb-4"
+      >
+        <ArrowLeft className="mr-2 h-4 w-4" />
+        {t.backButton}
+      </Button>
       <h2 className="text-2xl font-bold mb-4">{t.gratitudeLogTitle}</h2>
       <div className="mb-4">
         <Input
