@@ -37,7 +37,7 @@ const MoodBalls = ({ showText = false, selectedEmotions = [], onEmotionSelect, o
         );
       })}
       <div 
-        className="ball happy-ball flex items-center justify-center bg-white cursor-pointer"
+        className="ball happy-ball flex items-center justify-center bg-white cursor-pointer border border-gray-200 shadow-sm"
         onClick={onCustomEmotionClick}
       >
         {showText && <span className="text-black text-2xl">{customEmotion || '+'}</span>}
