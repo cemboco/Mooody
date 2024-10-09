@@ -32,7 +32,7 @@ const Header = () => {
               <DialogTitle>Choose an activity</DialogTitle>
             </DialogHeader>
             <div className="flex flex-col space-y-2 mt-4">
-              <Button onClick={() => handleLogClick('/gratitude')}>Gratitude Log</Button>
+              <Button onClick={() => handleLogClick('/gratitude')}>Gratitude</Button>
               <Button onClick={() => handleLogClick('/meditate')}>Meditation</Button>
             </div>
           </DialogContent>
