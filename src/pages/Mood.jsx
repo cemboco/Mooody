@@ -7,10 +7,12 @@ import { ArrowRight } from 'lucide-react';
 import { translations } from '../utils/translations';
 import PrivacyPolicyModal from '../components/PrivacyPolicyModal';
 import Header from '../components/Header';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Mood = () => {
   const navigate = useNavigate();
-  const t = translations['en']; // Using English translations by default
+  const { language } = useLanguage();
+  const t = translations[language];
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [customEmotion, setCustomEmotion] = useState(null);
