@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { translations } from '../utils/translations';
 import PrivacyPolicyModal from '../components/PrivacyPolicyModal';
-import Header from '../components/Header';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Mood = () => {
@@ -41,7 +40,7 @@ const Mood = () => {
 
   return (
     <div className={`min-h-screen w-full flex flex-col bg-cover bg-center text-mooody-green overflow-hidden ${fadeIn ? 'fade-in' : ''}`} style={{ backgroundImage: "url('/Bg.png')" }}>
-      <style jsx>{`
+      <style>{`
         @keyframes clarify {
           from { filter: blur(5px); opacity: 0; }
           to { filter: blur(0); opacity: 1; }
@@ -50,7 +49,6 @@ const Mood = () => {
           animation: clarify 1s ease-out forwards;
         }
       `}</style>
-      <Header />
       <div className="flex-grow flex flex-col items-center justify-start p-4 pt-16">
         <h1 className={`text-3xl sm:text-4xl mb-8 z-10 ${fadeIn ? 'clarify-text' : ''} font-['Bricolage_Grotesque'] text-center`}>{t.selectUpToThreeMoods}</h1>
         <MoodBalls 
