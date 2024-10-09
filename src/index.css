@@ -145,6 +145,13 @@
   75% { transform: translate(-50px, -50px); }
 }
 
+@keyframes float-custom {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(30px, -30px) rotate(5deg); }
+  50% { transform: translate(60px, 0) rotate(-5deg); }
+  75% { transform: translate(30px, 30px) rotate(5deg); }
+}
+
 .ball {
   position: absolute;
   border-radius: 50%;
@@ -170,7 +177,7 @@
   top: calc(10% + 110px);
   left: 10%;
   background-color: #FFFFFF;
-  animation-delay: -22s;
+  animation: float-custom 25s infinite ease-in-out;
   z-index: 0;
 }
 
@@ -180,7 +187,7 @@
   top: calc(10% + 220px);
   left: 15%;
   background-color: #FFD700;
-  animation-delay: -24s;
+  animation: float-reverse 22s infinite ease-in-out;
   z-index: 2;
 }
 
@@ -204,6 +211,3 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
-
-
