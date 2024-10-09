@@ -1,14 +1,12 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from 'react-router-dom';
-import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { language } = useLanguage();
-  const t = translations[language];
+  const t = translations['en']; // Using English translations by default
 
   return (
     <header className="w-full bg-mooody-yellow py-2 px-4 flex justify-between items-center sticky top-0 z-50">
@@ -33,9 +31,9 @@ const Header = () => {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="text-black">
               <div className="menu-icon">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span className="block w-5 h-0.5 bg-current mb-1"></span>
+                <span className="block w-5 h-0.5 bg-current mb-1"></span>
+                <span className="block w-5 h-0.5 bg-current"></span>
               </div>
             </Button>
           </DropdownMenuTrigger>
