@@ -30,34 +30,36 @@ const GratitudeLog = () => {
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto">
-      <Button
-        onClick={() => navigate(-1)}
-        variant="ghost"
-        className="mb-4"
-      >
-        <ArrowLeft className="mr-2 h-4 w-4" />
-        {t.backButton}
-      </Button>
-      <h2 className="text-2xl font-bold mb-4">{t.gratitudeLogTitle}</h2>
-      <div className="mb-4">
-        <Input
-          type="text"
-          value={newEntry}
-          onChange={(e) => setNewEntry(e.target.value)}
-          placeholder={t.gratitudeEntryPlaceholder}
-          className="mb-2"
-        />
-        <Button onClick={addEntry}>{t.addGratitudeEntry}</Button>
+    <div className="min-h-screen w-full bg-cover bg-center p-4" style={{ backgroundImage: "url('/Bg.png')" }}>
+      <div className="max-w-md mx-auto bg-white bg-opacity-90 p-6 rounded-lg shadow-lg">
+        <Button
+          onClick={() => navigate(-1)}
+          variant="ghost"
+          className="mb-4 rounded-full"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          {t.backButton}
+        </Button>
+        <h2 className="text-2xl font-bold mb-4">{t.gratitudeLogTitle}</h2>
+        <div className="mb-4">
+          <Input
+            type="text"
+            value={newEntry}
+            onChange={(e) => setNewEntry(e.target.value)}
+            placeholder={t.gratitudeEntryPlaceholder}
+            className="mb-2"
+          />
+          <Button onClick={addEntry} className="w-full rounded-full">{t.addGratitudeEntry}</Button>
+        </div>
+        <ul className="space-y-2">
+          {gratitudeEntries.map((entry, index) => (
+            <li key={index} className="bg-white p-2 rounded shadow">
+              <p>{entry.text}</p>
+              <small className="text-gray-500">{new Date(entry.date).toLocaleDateString()}</small>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className="space-y-2">
-        {gratitudeEntries.map((entry, index) => (
-          <li key={index} className="bg-white p-2 rounded shadow">
-            <p>{entry.text}</p>
-            <small className="text-gray-500">{new Date(entry.date).toLocaleDateString()}</small>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
