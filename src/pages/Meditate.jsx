@@ -130,7 +130,7 @@ const Meditate = () => {
           <Volume2 className="h-4 w-4" />
           <Slider value={[volume]} onValueChange={handleVolumeChange} max={1} step={0.01} className="w-32" />
         </div>
-        <Button onClick={() => navigate(-1)}>{t.backToMood}</Button>
+        <Button onClick={() => navigate('/mood')}>{t.backToMood}</Button>
       </div>
       <audio ref={audioRef} src={selectedAudio} loop />
       <audio ref={bellAudioRef} src="/bell-222490.mp3" />
