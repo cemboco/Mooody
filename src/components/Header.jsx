@@ -70,7 +70,6 @@ const Header = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onSelect={() => navigate('/home')}>{t.home}</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
             <DropdownMenuItem onSelect={() => navigate('/mood-profile')}>{t.moodProfile}</DropdownMenuItem>
             <DropdownMenuItem onSelect={() => navigate('/privacy-policy')}>{t.privacyPolicy}</DropdownMenuItem>
           </DropdownMenuContent>
