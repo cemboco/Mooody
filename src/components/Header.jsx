@@ -25,7 +25,7 @@ const Header = () => {
           <DialogTrigger asChild>
             <Button
               variant="outline"
-              className="text-black border-black hover:bg-mooody-green hover:text-white rounded-full px-6 py-2 mr-2"
+              className="text-black border-black hover:bg-black hover:text-mooody-yellow rounded-full px-6 py-2 mr-2"
             >
               Log
             </Button>
@@ -70,7 +70,7 @@ const Header = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onSelect={() => navigate('/home')}>{t.home}</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => navigate('/mood-profile')}>{t.moodProfile}</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => navigate('/confirmation-mood')}>{t.entries}</DropdownMenuItem>
             <DropdownMenuItem onSelect={() => navigate('/privacy-policy')}>{t.privacyPolicy}</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

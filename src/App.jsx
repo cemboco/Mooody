@@ -6,12 +6,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { navItems } from "./nav-items";
 import Mood from './pages/Mood';
 import SelectedMood from './pages/SelectedMood';
-import MoodProfile from './pages/MoodProfile';
+import ConfirmationMood from './pages/ConfirmationMood';
 import Calendar from './components/Calendar';
 import GratitudeLog from './components/GratitudeLog';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
 import Breathing from './pages/Breathing';
+import { useState, useEffect } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AudioProvider } from './contexts/AudioContext';
 import Header from './components/Header';
@@ -30,8 +31,7 @@ const AppContent = () => {
         ))}
         <Route path="/mood" element={<Mood />} />
         <Route path="/selected-mood" element={<SelectedMood />} />
-        <Route path="/mood-profile" element={<MoodProfile />} />
-        <Route path="/confirmation-mood" element={<MoodProfile />} />
+        <Route path="/confirmation-mood" element={<ConfirmationMood />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/meditate" element={<Meditate />} />
         <Route path="/gratitude" element={<GratitudeLog />} />
