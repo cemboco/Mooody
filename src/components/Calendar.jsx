@@ -1,26 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, parseISO } from 'date-fns';
 import { de, enUS } from 'date-fns/locale';
 
-const Calendar = () => {
+const Calendar = ({ onDateSelect, entries }) => {
   const { language } = useLanguage();
   const t = translations[language];
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
-  const [entries, setEntries] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    const storedEntries = localStorage.getItem('moodEntries');
-    if (storedEntries) {
-      setEntries(JSON.parse(storedEntries));
-    }
-  }, []);
 
   const handlePrevMonth = () => {
     setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() - 1, 1));
@@ -32,6 +24,7 @@ const Calendar = () => {
 
   const handleDateClick = (day) => {
     setSelectedDate(day);
+    onDateSelect(day);
     setIsModalOpen(true);
   };
 
@@ -56,17 +49,26 @@ const Calendar = () => {
         ))}
         {days.map((day, index) => {
           const dateString = format(day, 'yyyy-MM-dd');
-          const hasEntry = entries[dateString];
+          const dayEntries = entries[dateString] || [];
           const isToday = isSameDay(day, new Date());
+          const hasGratitude = dayEntries.some(entry => entry.type === 'gratitude');
+          const hasMeditation = dayEntries.some(entry => entry.type === 'meditation');
+          const hasBreathing = dayEntries.some(entry => entry.type === 'breathing');
+
           return (
             <div
               key={index}
-              className={`p-2 border cursor-pointer hover:bg-gray-100 ${
-                hasEntry ? 'bg-mooody-yellow' : ''
-              } ${isToday ? 'border-2 border-mooody-green' : ''}`}
+              className={`p-2 border cursor-pointer hover:bg-gray-100 relative ${
+                isToday ? 'border-2 border-mooody-green' : ''
+              }`}
               onClick={() => handleDateClick(day)}
             >
               {format(day, 'd')}
+              <div className="absolute bottom-0 right-0 flex">
+                {hasGratitude && <Star className="h-3 w-3 text-red-500" />}
+                {hasMeditation && <Star className="h-3 w-3 text-yellow-500" />}
+                {hasBreathing && <Star className="h-3 w-3 text-green-500" />}
+              </div>
             </div>
           );
         })}
@@ -90,6 +92,20 @@ const Calendar = () => {
         </div>
       </div>
       {renderCalendar()}
+      <div className="mt-4 flex justify-center space-x-4">
+        <div className="flex items-center">
+          <Star className="h-4 w-4 text-red-500 mr-1" />
+          <span>Gratitude</span>
+        </div>
+        <div className="flex items-center">
+          <Star className="h-4 w-4 text-yellow-500 mr-1" />
+          <span>Meditation</span>
+        </div>
+        <div className="flex items-center">
+          <Star className="h-4 w-4 text-green-500 mr-1" />
+          <span>Breathing</span>
+        </div>
+      </div>
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent>
           <DialogHeader>
