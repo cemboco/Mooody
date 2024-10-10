@@ -7,7 +7,7 @@ import { translations } from '../utils/translations';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, parseISO } from 'date-fns';
 import { de, enUS } from 'date-fns/locale';
 
-const Calendar = ({ onDateSelect, entries }) => {
+const Calendar = ({ onDateSelect, entries = {} }) => {
   const { language } = useLanguage();
   const t = translations[language];
   const [currentDate, setCurrentDate] = useState(new Date());
