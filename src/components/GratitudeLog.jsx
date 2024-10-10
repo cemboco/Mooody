@@ -4,13 +4,15 @@ import { Input } from "@/components/ui/input";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Edit, Save, X } from 'lucide-react';
 
 const GratitudeLog = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const [gratitudeEntries, setGratitudeEntries] = useState([]);
   const [newEntry, setNewEntry] = useState('');
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editText, setEditText] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +29,23 @@ const GratitudeLog = () => {
       localStorage.setItem('gratitudeEntries', JSON.stringify(updatedEntries));
       setNewEntry('');
     }
+  };
+
+  const startEditing = (index) => {
+    setEditingIndex(index);
+    setEditText(gratitudeEntries[index].text);
+  };
+
+  const saveEdit = (index) => {
+    const updatedEntries = [...gratitudeEntries];
+    updatedEntries[index].text = editText;
+    setGratitudeEntries(updatedEntries);
+    localStorage.setItem('gratitudeEntries', JSON.stringify(updatedEntries));
+    setEditingIndex(null);
+  };
+
+  const cancelEdit = () => {
+    setEditingIndex(null);
   };
 
   return (
@@ -53,9 +72,29 @@ const GratitudeLog = () => {
         </div>
         <ul className="space-y-2">
           {gratitudeEntries.map((entry, index) => (
-            <li key={index} className="bg-white p-2 rounded shadow">
-              <p>{entry.text}</p>
-              <small className="text-gray-500">{new Date(entry.date).toLocaleDateString()}</small>
+            <li key={index} className="bg-white p-2 rounded shadow flex justify-between items-center">
+              {editingIndex === index ? (
+                <>
+                  <Input
+                    type="text"
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                    className="mr-2"
+                  />
+                  <div>
+                    <Button onClick={() => saveEdit(index)} className="mr-2" size="sm"><Save className="h-4 w-4" /></Button>
+                    <Button onClick={cancelEdit} variant="outline" size="sm"><X className="h-4 w-4" /></Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <p>{entry.text}</p>
+                    <small className="text-gray-500">{new Date(entry.date).toLocaleDateString()}</small>
+                  </div>
+                  <Button onClick={() => startEditing(index)} variant="ghost" size="sm"><Edit className="h-4 w-4" /></Button>
+                </>
+              )}
             </li>
           ))}
         </ul>
