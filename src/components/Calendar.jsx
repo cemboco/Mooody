@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../utils/translations';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, parseISO } from 'date-fns';
 import { de, enUS } from 'date-fns/locale';
 
-const Calendar = ({ onDateSelect, entries }) => {
+const Calendar = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
+  const [entries, setEntries] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const storedEntries = localStorage.getItem('moodEntries');
+    if (storedEntries) {
+      setEntries(JSON.parse(storedEntries));
+    }
+  }, []);
 
   const handlePrevMonth = () => {
     setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() - 1, 1));
@@ -25,9 +33,6 @@ const Calendar = ({ onDateSelect, entries }) => {
   const handleDateClick = (day) => {
     setSelectedDate(day);
     setIsModalOpen(true);
-    if (onDateSelect) {
-      onDateSelect(day);
-    }
   };
 
   const renderCalendar = () => {
@@ -51,30 +56,17 @@ const Calendar = ({ onDateSelect, entries }) => {
         ))}
         {days.map((day, index) => {
           const dateString = format(day, 'yyyy-MM-dd');
-          const dayEntries = entries && entries[dateString] ? entries[dateString] : [];
+          const hasEntry = entries[dateString];
           const isToday = isSameDay(day, new Date());
           return (
             <div
               key={index}
               className={`p-2 border cursor-pointer hover:bg-gray-100 ${
-                dayEntries.length > 0 ? 'bg-mooody-yellow' : ''
+                hasEntry ? 'bg-mooody-yellow' : ''
               } ${isToday ? 'border-2 border-mooody-green' : ''}`}
               onClick={() => handleDateClick(day)}
             >
-              <div className="flex flex-col items-center">
-                <span>{format(day, 'd')}</span>
-                <div className="flex mt-1">
-                  {dayEntries.some(entry => entry.type === 'gratitude') && (
-                    <Star className="h-3 w-3 text-red-500 mr-1" />
-                  )}
-                  {dayEntries.some(entry => entry.type === 'meditation') && (
-                    <Star className="h-3 w-3 text-yellow-500 mr-1" />
-                  )}
-                  {dayEntries.some(entry => entry.type === 'breathing') && (
-                    <Star className="h-3 w-3 text-green-500" />
-                  )}
-                </div>
-              </div>
+              {format(day, 'd')}
             </div>
           );
         })}
@@ -106,12 +98,12 @@ const Calendar = ({ onDateSelect, entries }) => {
             </DialogTitle>
           </DialogHeader>
           <DialogDescription>
-            {selectedDate && entries && entries[format(selectedDate, 'yyyy-MM-dd')] ? (
+            {selectedDate && entries[format(selectedDate, 'yyyy-MM-dd')] ? (
               <div>
                 <h3 className="font-bold mb-2">{t.entries}</h3>
                 {entries[format(selectedDate, 'yyyy-MM-dd')].map((entry, index) => (
                   <div key={index} className="mb-2">
-                    <p><strong>{t[entry.type] || entry.type}:</strong> {entry.text}</p>
+                    <p><strong>{t[entry.emotion] || entry.emotion}:</strong> {entry.text}</p>
                   </div>
                 ))}
               </div>
