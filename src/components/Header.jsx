@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { translations } from '../utils/translations';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Volume2 } from 'lucide-react';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -17,12 +18,12 @@ const Header = () => {
 
   return (
     <header className="w-full bg-mooody-yellow py-2 px-4 flex justify-between items-center sticky top-0 z-50">
-      <div className="flex-1">
+      <div className="flex-1 flex items-center">
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogTrigger asChild>
             <Button
               variant="outline"
-              className="text-black border-black hover:bg-black hover:text-mooody-yellow rounded-full px-6 py-2"
+              className="text-black border-black hover:bg-black hover:text-mooody-yellow rounded-full px-6 py-2 mr-2"
             >
               Log
             </Button>
@@ -32,11 +33,18 @@ const Header = () => {
               <DialogTitle>Choose an activity</DialogTitle>
             </DialogHeader>
             <div className="flex flex-col space-y-2 mt-4">
-              <Button onClick={() => handleLogClick('/gratitude')}>Gratitude</Button>
-              <Button onClick={() => handleLogClick('/meditate')}>Meditation</Button>
+              <Button onClick={() => handleLogClick('/gratitude')} className="rounded-full">Gratitude</Button>
+              <Button onClick={() => handleLogClick('/meditate')} className="rounded-full">Meditation</Button>
             </div>
           </DialogContent>
         </Dialog>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="text-black"
+        >
+          <Volume2 className="h-4 w-4" />
+        </Button>
       </div>
       
       <Link to="/" className="flex-1 text-center">

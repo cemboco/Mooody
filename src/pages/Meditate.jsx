@@ -84,9 +84,9 @@ const Meditate = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex bg-mooody-yellow text-mooody-green overflow-hidden">
+    <div className="min-h-screen w-full flex bg-cover bg-center text-mooody-green overflow-hidden" style={{ backgroundImage: "url('/Bg.png')" }}>
       <div className="flex-1 flex items-center justify-center p-8">
-        <div className="max-w-md">
+        <div className="max-w-md bg-white bg-opacity-90 p-6 rounded-lg">
           <p className="text-lg leading-relaxed mb-4">
             {meditationText[language]}
           </p>
@@ -96,7 +96,7 @@ const Meditate = () => {
 
       <Separator orientation="vertical" className="h-[80vh] self-center bg-blue-900" />
 
-      <div className="flex-1 flex flex-col items-center justify-center p-8">
+      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-white bg-opacity-90 rounded-lg">
         <h1 className="text-4xl font-bold mb-6">{t.meditateTitle}</h1>
         <p className="text-xl mb-8">{t.meditateDescription}</p>
         <Select onValueChange={handleDurationChange} defaultValue="300">
@@ -122,7 +122,7 @@ const Meditate = () => {
         <div className="text-4xl font-bold mb-8">{formatTime(timeLeft)}</div>
         <Button
           onClick={handleStartStop}
-          className={`mb-8 ${isMeditating ? 'bg-red-500 hover:bg-red-600' : 'bg-mooody-green hover:bg-mooody-dark-green'} text-white`}
+          className={`mb-8 rounded-full ${isMeditating ? 'bg-red-500 hover:bg-red-600' : 'bg-mooody-green hover:bg-mooody-dark-green'} text-white`}
         >
           {isMeditating ? <><Square className="h-4 w-4 mr-2" />{t.stopMeditation}</> : <><Play className="h-4 w-4 mr-2" />{t.startMeditation}</>}
         </Button>
@@ -130,7 +130,7 @@ const Meditate = () => {
           <Volume2 className="h-4 w-4" />
           <Slider value={[volume]} onValueChange={handleVolumeChange} max={1} step={0.01} className="w-32" />
         </div>
-        <Button onClick={() => navigate('/mood')}>{t.backToMood}</Button>
+        <Button onClick={() => navigate('/mood')} className="rounded-full">{t.backToMood}</Button>
       </div>
       <audio ref={audioRef} src={selectedAudio} loop />
       <audio ref={bellAudioRef} src="/bell-222490.mp3" />
