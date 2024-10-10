@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from 'react-router-dom';
 import { translations } from '../utils/translations';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Volume2 } from 'lucide-react';
+import { Volume2, VolumeX } from 'lucide-react';
+import { AudioContext } from '../contexts/AudioContext';
 
 const Header = () => {
   const navigate = useNavigate();
   const t = translations['en']; // Using English translations by default
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isPlaying, toggleAudio } = useContext(AudioContext);
 
   const handleLogClick = (destination) => {
     setIsModalOpen(false);
@@ -35,6 +37,7 @@ const Header = () => {
             <div className="flex flex-col space-y-2 mt-4">
               <Button onClick={() => handleLogClick('/gratitude')} className="rounded-full">Gratitude</Button>
               <Button onClick={() => handleLogClick('/meditate')} className="rounded-full">Meditation</Button>
+              <Button onClick={() => handleLogClick('/breathing')} className="rounded-full">Breathing</Button>
             </div>
           </DialogContent>
         </Dialog>
@@ -42,8 +45,9 @@ const Header = () => {
           variant="ghost"
           size="icon"
           className="text-black"
+          onClick={toggleAudio}
         >
-          <Volume2 className="h-4 w-4" />
+          {isPlaying ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
         </Button>
       </div>
       

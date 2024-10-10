@@ -11,41 +11,18 @@ import Calendar from './components/Calendar';
 import GratitudeLog from './components/GratitudeLog';
 import Index from './pages/Index';
 import Meditate from './pages/Meditate';
+import Breathing from './pages/Breathing';
 import { useState, useEffect } from 'react';
-import VolumeControl from './components/VolumeControl';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { AudioProvider } from './contexts/AudioContext';
 import Header from './components/Header';
 
 const queryClient = new QueryClient();
 
 const AppContent = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [audio] = useState(new Audio('/padsound-meditation-21384.mp3'));
-
-  useEffect(() => {
-    audio.loop = true;
-    return () => {
-      audio.pause();
-      audio.currentTime = 0;
-    };
-  }, [audio]);
-
-  useEffect(() => {
-    if (isPlaying) {
-      audio.play();
-    } else {
-      audio.pause();
-    }
-  }, [isPlaying, audio]);
-
-  const toggleAudio = () => {
-    setIsPlaying(!isPlaying);
-  };
-
   return (
     <BrowserRouter>
       <Header />
-      <VolumeControl isPlaying={isPlaying} toggleAudio={toggleAudio} />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/home" element={<Index />} />
@@ -58,6 +35,7 @@ const AppContent = () => {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/meditate" element={<Meditate />} />
         <Route path="/gratitude" element={<GratitudeLog />} />
+        <Route path="/breathing" element={<Breathing />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
@@ -70,8 +48,10 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <LanguageProvider>
-            <Toaster />
-            <AppContent />
+            <AudioProvider>
+              <Toaster />
+              <AppContent />
+            </AudioProvider>
           </LanguageProvider>
         </TooltipProvider>
       </QueryClientProvider>
